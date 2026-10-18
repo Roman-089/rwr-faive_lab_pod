@@ -17,7 +17,7 @@
 # Python
 .DS_Store
 **/*.egg-info/
-**/__pycache__/
+**/__pycache__
 **/.pytest_cache/
 **/*.pyc
 **/*.pb
@@ -60,3 +60,8 @@ _build
 
 # Pre-Trained Checkpoints
 /.pretrained_checkpoints/
+__pycache__
+
+
+# examples
+examples/*
