@@ -81,7 +81,8 @@ from isaaclab.utils.assets import retrieve_file_path
 from isaaclab.utils.dict import print_dict
 # from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
 
-from isaaclab_rl.rsl_rl import RslRlBaseRunnerCfg, RslRlVecEnvWrapper, export_policy_as_jit, export_policy_as_onnx, handle_deprecated_rsl_rl_cfg
+import isaaclab_rl.rsl_rl as rsl_rl_utils
+from isaaclab_rl.rsl_rl import RslRlBaseRunnerCfg, RslRlVecEnvWrapper, export_policy_as_jit, export_policy_as_onnx
 
 import isaaclab_tasks  # noqa: F401
 from isaaclab_tasks.utils import get_checkpoint_path
@@ -99,7 +100,9 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
 
     # override configurations with non-hydra CLI arguments
     agent_cfg: RslRlBaseRunnerCfg = cli_args.update_rsl_rl_cfg(agent_cfg, args_cli)
-    agent_cfg = handle_deprecated_rsl_rl_cfg(agent_cfg, installed_version)
+    # This migration helper is available only in newer Isaac Lab releases.
+    if hasattr(rsl_rl_utils, "handle_deprecated_rsl_rl_cfg"):
+        agent_cfg = rsl_rl_utils.handle_deprecated_rsl_rl_cfg(agent_cfg, installed_version)
     env_cfg.scene.num_envs = args_cli.num_envs if args_cli.num_envs is not None else env_cfg.scene.num_envs
 
     # set the environment seed
