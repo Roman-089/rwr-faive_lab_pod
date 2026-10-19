@@ -11,6 +11,7 @@ It allows you to develop in an isolated environment, outside of the core Isaac L
 
 - Install Isaac Lab by following the [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html).
   We recommend using the conda installation as it simplifies calling Python scripts from the terminal.
+  Use Isaac Lab v2.3.2 with Isaac Sim 5.1 (Python 3.11); other versions are untested.
 
 - Clone or copy this project/repository separately from the Isaac Lab installation (i.e. outside the `IsaacLab` directory):
     1. make sure you have [Git LFS installed](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
