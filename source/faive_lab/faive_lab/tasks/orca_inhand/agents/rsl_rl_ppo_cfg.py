@@ -38,3 +38,10 @@ class PPORunnerCfgOrcaV2(RslRlOnPolicyRunnerCfg):
         desired_kl=0.01,
         max_grad_norm=1.0,
     )
+
+
+@configclass
+class PPORunnerCfgOrcaV2Cube(PPORunnerCfgOrcaV2):
+    """Subtask 2 cube task: same PPO settings, separate log folder logs/rsl_rl/orca_v2_repose_cube/."""
+
+    experiment_name = "orca_v2_repose_cube"
