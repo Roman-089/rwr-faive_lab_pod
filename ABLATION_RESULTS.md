@@ -24,6 +24,7 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | queued | | | | | | | |
 | `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | queued | | | | | | | |
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | queued | | | | | | | |
+| `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | queued | | | | | | | |
 
 ## Observations / log
