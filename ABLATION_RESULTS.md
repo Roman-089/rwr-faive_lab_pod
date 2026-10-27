@@ -43,5 +43,9 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   yet. **Decision:** the queued history / LSTM runs were re-based on B (`-asym-hist3/-asym-hist10/-asym-lstm`); the
   A-based versions (`-hist3/-hist10/-lstm`, jobs 29830927/28/30) were cancelled before starting.
 
+- 2026-10-27 17:20 — B 1520 / 585 / 0.12 at it 4190; C 1457 / 592 / 0.14 at it 2160 (C now *ahead* of B at
+  matched iterations, B was 1325 at it 2400 — the C gap at it 1500 was transient); sanity 1742 / 578 / 0.11 at it
+  2490. Evals for B / C / sanity queued with `-w ended(<train job>)` (jobs 29832523 / 29832525 / 29832526).
+
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
