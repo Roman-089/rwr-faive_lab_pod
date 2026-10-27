@@ -25,6 +25,7 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | queued | | | | | | | |
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | queued | | | | | | | |
 | `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | queued | | | | | | | |
+| `abl_B_asym_ent5e-3` | `-asym-v0` | B + entropy_coef 1e-4 → 5e-3 (hydra override) | 29833758 / A100 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | queued | | | | | | | |
 
 ## Observations / log
@@ -62,6 +63,10 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   checkpoints rotate *faster* with the test-time delay (0.6 → 1.2 RPM; per-env RPM std ~1.5, so SE ~0.2): hint that
   the late policy is jittery and a low-pass (delay) helps — worth checking action-rate / EMA alpha later.
   Videos + metrics on W&B run `ffueb4yh`. Eval pipeline (metrics, perturbed, MuJoCo videos, W&B) verified end to end.
+
+- 2026-10-27 20:25 — queued `abl_B_asym_ent5e-3`: A's eval collapses after the action std shrinks (1.5 → 0.18) while
+  the training reward stays flat; our entropy_coef 1e-4 is 100× below legged_gym's 1e-2. Hypothesis: more entropy
+  keeps exploration up and avoids the late eval drop. B's eval moved to A100 (L40S hosts full for >2 h).
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
