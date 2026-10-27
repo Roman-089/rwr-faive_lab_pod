@@ -18,7 +18,7 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status | Reward (last 100 it) | Ep. len | Drop % | RPM | RA % | DFSR % | DC |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | A `firstrun_l40s` | `orca-v2-inhand-repose-v0` | baseline | 29823035 / L40S | 10k | done (2026-10-27) | ~493 | ~395 / 640 | ~62 % | | | | |
-| B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | running | | | | | | | |
+| B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | done (2026-10-27 18:15) | ~1573 | ~588 / 640 | ~10 % | | | | |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | 5k | running | | | | | | | |
 | sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | running | | | | | | | |
 | `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | queued | | | | | | | |
