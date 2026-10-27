@@ -60,6 +60,8 @@ class DistillationRunnerCfgOrcaV2(RslRlDistillationRunnerCfg):
     max_iterations = 2000
     save_interval = 250
     experiment_name = "orca_v2_repose"
+    # train.py loads the checkpoint only for resume=True or algorithm "Distillation"; DistillationRecon needs resume
+    resume = True
     obs_groups = {"policy": ["policy"], "teacher": ["teacher"]}
     policy = RslRlDistillationStudentTeacherCfg(
         init_noise_std=0.1,
