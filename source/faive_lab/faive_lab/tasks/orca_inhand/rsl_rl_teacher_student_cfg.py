@@ -17,6 +17,7 @@ from isaaclab_rl.rsl_rl import (
 )
 
 from .agents.rsl_rl_ppo_cfg import PPORunnerCfgOrcaV2
+from .rma import RslRlDistillationRMAAlgorithmCfg, RslRlPpoActorCriticRMACfg, RslRlStudentTeacherRMACfg
 from .transformer_student import RslRlDistillationReconAlgorithmCfg, RslRlStudentTeacherTransformerCfg
 
 
@@ -122,4 +123,46 @@ class DistillationRunnerCfgOrcaV2Transformer(DistillationRunnerCfgOrcaV2):
         gradient_length=15,
         max_grad_norm=1.0,
         optimizer="adamw",
+    )
+
+
+@configclass
+class PPORunnerCfgOrcaV2RMA(PPORunnerCfgOrcaV2):
+    """RMA stage 1 (HORA): baseline PPO, actor = [policy obs, tanh(env_mlp(priv))], critic = B's privileged critic."""
+
+    obs_groups = {"policy": ["policy"], "critic": ["critic"], "priv": ["priv"]}
+    policy = RslRlPpoActorCriticRMACfg(
+        init_noise_std=1.5,
+        noise_std_type="log",
+        actor_obs_normalization=True,
+        critic_obs_normalization=True,
+        actor_hidden_dims=[512, 512, 256, 128],
+        critic_hidden_dims=[512, 512, 256, 128],
+        activation="elu",
+        priv_mlp_dims=[256, 128, 8],
+    )
+
+
+@configclass
+class DistillationRunnerCfgOrcaV2RMA(DistillationRunnerCfgOrcaV2):
+    """RMA stage 2: train the adaptation module on the stage-1 latent (pass stage 1 with --load_run / --checkpoint)."""
+
+    obs_groups = {"policy": ["policy"], "teacher": ["priv"]}
+    policy = RslRlStudentTeacherRMACfg(
+        init_noise_std=0.1,
+        noise_std_type="log",
+        student_obs_normalization=False,
+        teacher_obs_normalization=False,
+        student_hidden_dims=[512, 512, 256, 128],
+        teacher_hidden_dims=[512, 512, 256, 128],
+        activation="elu",
+        history_length=30,
+        actor_hidden_dims=[512, 512, 256, 128],
+        priv_mlp_dims=[256, 128, 8],
+    )
+    algorithm = RslRlDistillationRMAAlgorithmCfg(
+        num_learning_epochs=2,
+        learning_rate=5e-4,
+        gradient_length=15,
+        max_grad_norm=1.0,
     )

@@ -38,6 +38,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-hist10-v0", "OrcaV2ReposeAsymHist10EnvCfg"),
     ("orca-v2-inhand-repose-handgrav-v0", "OrcaV2ReposeHandGravityEnvCfg"),
     ("orca-v2-inhand-repose-wristfix-v0", "OrcaV2ReposeWristFixedEnvCfg"),
+    ("orca-v2-inhand-repose-asym-droppen-v0", "OrcaV2ReposeAsymDropPenaltyEnvCfg"),
 ):
     gym.register(
         id=_task_id,
@@ -102,3 +103,22 @@ gym.register(
         "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2LSTM",
     },
 )
+
+# Rapid Motor Adaptation (HORA): stage 1 PPO with an extrinsics encoder, stage 2 adaptation module (see rma.py).
+from .rma import register as _register_rma  # noqa: E402
+
+_register_rma()
+
+for _task_id, _env_cfg, _runner_cfg in (
+    ("orca-v2-inhand-repose-rma-teacher-v0", "OrcaV2ReposeRMATeacherEnvCfg", "PPORunnerCfgOrcaV2RMA"),
+    ("orca-v2-inhand-repose-rma-student-v0", "OrcaV2ReposeRMAStudentEnvCfg", "DistillationRunnerCfgOrcaV2RMA"),
+):
+    gym.register(
+        id=_task_id,
+        entry_point="isaaclab.envs:ManagerBasedRLEnv",
+        disable_env_checker=True,
+        kwargs={
+            "env_cfg_entry_point": f"{__name__}.orca_v2_repose_ablation_env_cfg:{_env_cfg}",
+            "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:{_runner_cfg}",
+        },
+    )

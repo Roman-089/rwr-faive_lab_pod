@@ -254,6 +254,27 @@ limit; tool exists in `scripts/motor_param_characterization/` (owner S1), needs 
 (7–9) Subtask 2: train with pose hold/delay/injection noise, run the estimator at a fixed integer rate with outlier
 rejection instead of heavy smoothing, distil vision into a history student; (10) backlash model from chirp reversals.
 
+## 13. Paper → run mapping and code availability (2026-10-28)
+
+How the Phase 1 runs trace back to the literature, and which papers publish code we can port (checked 2026-10-28).
+
+| Run / design choice | Source | Code |
+|---|---|---|
+| B asymmetric critic | Pinto et al. 2017 (1710.06542); also Faive, DeXtreme, Dactyl | – (standard) |
+| C critic + DR params | RMA / HORA (DR params as privileged info), DeXtreme critic | – |
+| hist3 vs hist10 (MLP) | HORA: MLP on long raw history collapses; Faive 5 steps; PT 10 steps | – |
+| asym-lstm, student-lstm | Dactyl 1808.00177 (LSTM 13 vs FF 3.5); LEAP GRU | – |
+| teacher → MLP-h10 / LSTM / transformer + recon | PT 2605.21330 | **not found** (arXiv lists none; an author's post mentions code + data, link unverified) |
+| **rma-teacher / rma-student** (new) | HORA 2210.04887 | **yes, MIT**: [HaozhiQi/hora](https://github.com/HaozhiQi/hora). `ProprioAdaptTConv` ported 1:1 into `tasks/orca_inhand/rma.py` (30 steps, conv 9/2-5-5, 8-d tanh latent, MSE on latent) |
+| **asym-droppen** (new) | AnyRotate 2405.07391 (termination 50), Aero Hand 2608.28578 (−100 fall) | AnyRotate: not found; Aero Hand: [TetherIA/aero-hand-open](https://github.com/TetherIA/aero-hand-open) has `sim_rl/` (MuJoCo Playground), rotation task unverified |
+| entropy 5e-3 | legged_gym default 1e-2 vs our 1e-4 | – |
+| metrics, perturbed eval | PT (metrics); Aero Hand, DeXtreme, Dactyl (delay / offset ranges) | – |
+| next: grasp-cache resets | HORA, LEAP | **yes**: HORA `gen_grasp.py` + `cache/`; [leap-hand/LEAP_Hand_Sim](https://github.com/leap-hand/LEAP_Hand_Sim) (grasp cache per cube size) |
+| later: PBT | DexPBT 2305.12127 | Isaac Lab PBT exists but **rl_games only** (we use rsl_rl) → would need porting |
+
+HORA details that matter for us (from the code): reward values in the repo are higher than the paper because the reset
+order follows legged_gym; their adaptation module's comment says 50 steps but the conv stack only fits 30.
+
 ## Run plan / log
 
 **Phase 1 (now): architecture study.** Sim2real ablations (delay, joint bias, hand gravity, fixed wrist, ...) change
@@ -273,9 +294,9 @@ Results go to `ABLATION_RESULTS.md`: RPM / RA / DFSR / DC (section 8) at the fin
 | Run | Task id | Change vs baseline | Iters | Result |
 |---|---|---|---|---|
 | A `firstrun_l40s` | `orca-v2-inhand-repose-v0` | baseline (critic = policy obs) | 10k | reward ~493 (last 100 iters), drops ~62 % |
-| B `abl_B_asym` | `orca-v2-inhand-repose-asym-v0` | critic: noise-free joints + cube pose (`TeacherObsGroupCfg`) | 5k | |
-| C `abl_C_asym_dr` | `orca-v2-inhand-repose-asym-dr-v0` | B + cube lin/ang vel + sampled DR params (mass, friction, gain scales, gravity) | 5k | |
-| sanity `sanity_nodr` | `orca-v2-inhand-repose-nodr-v0` | no physics/mount DR, no obs noise | 5k | expect higher sim reward than A (easier); not deployable |
+| B `abl_B_asym` | `orca-v2-inhand-repose-asym-v0` | critic: noise-free joints + cube pose (`TeacherObsGroupCfg`) | 5k | **5k (train, last 50 iters): reward 1573 vs A 477; drops 10 % vs A 65 %; ep. length 588 vs 374 / 640; action-rate penalty −0.76 vs A −0.28 (busier fingers, check smoothness).** Sim metrics (section 8) TBD |
+| C `abl_C_asym_dr` | `orca-v2-inhand-repose-asym-dr-v0` | B + cube lin/ang vel + sampled DR params (mass, friction, gain scales, gravity) | 5k | 5k (train, iters 4900–4999): reward 1584 vs B 1568; drops 12 % vs B 10 %; ep. length 583. Ahead of B mid-run (1390 vs 1288 @2k) but ≈ B at the end — within single-seed noise, extra critic inputs not clearly worth it |
+| sanity `sanity_nodr` | `orca-v2-inhand-repose-nodr-v0` | no physics/mount DR, no obs noise | 5k | 5k (train, iters 4900–4999): reward 1809, drops 10 %, ep. length 579 — symmetric critic learns fine without DR/noise, so A's weakness is critic + DR/noise; B recovers ~87 % of this upper bound. Not deployable |
 | | | + action delay 0–2 steps | 5k | |
 | TBD | | fixed 1-step action delay (sim) + next-tick actuation on deploy (section 6b) | 5k | |
 | | | + compliant fingertip contacts (randomized stiffness) | 5k | |

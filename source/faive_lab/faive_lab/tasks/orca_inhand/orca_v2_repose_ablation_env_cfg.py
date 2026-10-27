@@ -26,11 +26,15 @@ Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
   asym-lstm   orca-v2-inhand-repose-asym-lstm-v0     B + LSTM actor-critic
   handgrav    orca-v2-inhand-repose-handgrav-v0      gravity on the hand links
   wristfix    orca-v2-inhand-repose-wristfix-v0      wrist not actuated, held at its default (72-dim obs)
+  asym-droppen orca-v2-inhand-repose-asym-droppen-v0 B + -100 return penalty on a cube drop
+  rma-teacher orca-v2-inhand-repose-rma-teacher-v0   RMA stage 1 (HORA): B + actor sees tanh(env_mlp(cube pos, DR params))
+  rma-student orca-v2-inhand-repose-rma-student-v0   RMA stage 2: adaptation module on 30-step history (deployable)
 
 Play / replay a B or C checkpoint with the same task id: the critic's input size differs, so the checkpoint only
 loads into the matching variant.
 """
 
+from isaaclab.managers import ObservationGroupCfg as ObsGroup
 from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import SceneEntityCfg
@@ -215,3 +219,48 @@ class OrcaV2ReposeAsymHist10EnvCfg(OrcaV2ReposeAsymEnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.observations.policy.history_length = 10
+
+
+@configclass
+class OrcaV2ReposeAsymDropPenaltyEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B + explicit drop penalty (-100 return, as in Aero Hand; AnyRotate uses 50). Drops are B's main failure mode."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.object_drop = RewTerm(
+            func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
+        )
+
+
+# --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
+
+
+@configclass
+class RMAPrivObsGroupCfg(ObsGroup):
+    """Input of the RMA env encoder, as in HORA: noise-free cube position + the sampled physics parameters."""
+
+    object_pos = ObsTerm(func=mdp.root_pos_w, params={"asset_cfg": SceneEntityCfg("object")})
+    dr_params = ObsTerm(
+        func=domain_randomization_params,
+        params={"robot_cfg": SceneEntityCfg("robot"), "object_cfg": SceneEntityCfg("object")},
+    )
+    enable_corruption = False
+    concatenate_terms = True
+
+
+@configclass
+class OrcaV2ReposeRMATeacherEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """RMA stage 1: B + ``priv`` group feeding the actor's extrinsics encoder. NOT deployable."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.priv = RMAPrivObsGroupCfg()
+
+
+@configclass
+class OrcaV2ReposeRMAStudentEnvCfg(OrcaV2ReposeRMATeacherEnvCfg):
+    """RMA stage 2: policy obs stacks the last 30 steps (1.5 s, HORA's window) for the adaptation module."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 30

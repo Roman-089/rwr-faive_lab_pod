@@ -26,6 +26,9 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | running | | | | | | | |
 | `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | running | | | | | | | |
 | `abl_B_asym_ent5e-3` | `-asym-v0` | B + entropy_coef 1e-4 → 5e-3 (hydra override) | 29833758 / A100 | 5k | queued | | | | | | | |
+| `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | queued | | | | | | | |
+| `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | after s1 | 2k | planned | | | | | | | |
+| `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
 
 ## Observations / log
@@ -67,6 +70,11 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 - 2026-10-27 20:25 — queued `abl_B_asym_ent5e-3`: A's eval collapses after the action std shrinks (1.5 → 0.18) while
   the training reward stays flat; our entropy_coef 1e-4 is 100× below legged_gym's 1e-2. Hypothesis: more entropy
   keeps exploration up and avoids the late eval drop. B's eval moved to A100 (L40S hosts full for >2 h).
+
+- 2026-10-28 01:30 — literature → runs (HYPERPARAM_NOTES §13): added **RMA** (HORA's public MIT code, adaptation
+  module ported 1:1; CPU unit test: PPO trains the env encoder, stage-1 checkpoint loads into stage 2 with identical
+  teacher actions, distillation trains only the 24 k-param adaptation module) and **B + drop penalty**. Grasp-cache
+  resets next (HORA / LEAP code available).
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
