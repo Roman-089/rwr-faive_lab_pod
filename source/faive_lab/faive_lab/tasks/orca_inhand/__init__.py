@@ -34,6 +34,8 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-droppen-v0", "OrcaV2ReposeDropPenaltyEnvCfg"),
     ("orca-v2-inhand-repose-hist3-v0", "OrcaV2ReposeHist3EnvCfg"),
     ("orca-v2-inhand-repose-hist10-v0", "OrcaV2ReposeHist10EnvCfg"),
+    ("orca-v2-inhand-repose-asym-hist3-v0", "OrcaV2ReposeAsymHist3EnvCfg"),
+    ("orca-v2-inhand-repose-asym-hist10-v0", "OrcaV2ReposeAsymHist10EnvCfg"),
     ("orca-v2-inhand-repose-handgrav-v0", "OrcaV2ReposeHandGravityEnvCfg"),
     ("orca-v2-inhand-repose-wristfix-v0", "OrcaV2ReposeWristFixedEnvCfg"),
 ):
@@ -89,3 +91,14 @@ for _task_id, _env_cfg, _runner_cfg in (
             "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:{_runner_cfg}",
         },
     )
+
+# LSTM actor-critic on top of ablation B (asymmetric critic).
+gym.register(
+    id="orca-v2-inhand-repose-asym-lstm-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.orca_v2_repose_ablation_env_cfg:OrcaV2ReposeAsymEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2LSTM",
+    },
+)

@@ -21,12 +21,26 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | running | | | | | | | |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | 5k | running | | | | | | | |
 | sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | running | | | | | | | |
-| `arch_hist3` | `-hist3-v0` | MLP on 3-step obs history | 29830928 / A10 | 5k | queued | | | | | | | |
-| `arch_hist10` | `-hist10-v0` | MLP on 10-step obs history | 29830930 / A40 | 5k | queued | | | | | | | |
-| `arch_lstm` | `-lstm-v0` | LSTM actor-critic (PPO) | 29830927 / A100 | 5k | queued | | | | | | | |
+| `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | queued | | | | | | | |
+| `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | queued | | | | | | | |
+| `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | queued | | | | | | | |
 
 ## Observations / log
+
+- 2026-10-27 15:20 — **interim, matched iterations (training logs, mean of last 50 iters):**
+
+  | Run | it 1000 rew / len / drop | it 1500 | it 2400 |
+  |---|---|---|---|
+  | A baseline | 307 / 318 / 0.76 | 439 / 388 / 0.64 | 447 / 374 / 0.64 |
+  | B asym critic | 998 / 542 / 0.22 | 1148 / 561 / 0.19 | **1325 / 571 / 0.14** |
+  | C asym + DR params | 949 / 538 / 0.24 | 1058 / 551 / 0.22 | – |
+  | sanity (no DR / noise) | 1425 / 564 / 0.15 | 1585 / 576 / 0.13 | 1581 / 571 / 0.13 |
+
+  (drop = fraction of episode ends that are drops). The asymmetric critic is by far the largest effect so far: ~3×
+  reward and drops 64 % → 14 %, approaching the no-DR upper reference. C (+ cube vel + DR params) is not better than B
+  yet. **Decision:** the queued history / LSTM runs were re-based on B (`-asym-hist3/-asym-hist10/-asym-lstm`); the
+  A-based versions (`-hist3/-hist10/-lstm`, jobs 29830927/28/30) were cancelled before starting.
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.

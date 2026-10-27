@@ -21,6 +21,9 @@ Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
   droppen     orca-v2-inhand-repose-droppen-v0       -100 return penalty on a cube drop
   hist3       orca-v2-inhand-repose-hist3-v0         policy obs = last 3 steps (222-dim; deploy needs the history)
   hist10      orca-v2-inhand-repose-hist10-v0        policy obs = last 10 steps (740-dim)
+  asym-hist3  orca-v2-inhand-repose-asym-hist3-v0    B + 3-step history      (architecture study on top of B)
+  asym-hist10 orca-v2-inhand-repose-asym-hist10-v0   B + 10-step history
+  asym-lstm   orca-v2-inhand-repose-asym-lstm-v0     B + LSTM actor-critic
   handgrav    orca-v2-inhand-repose-handgrav-v0      gravity on the hand links
   wristfix    orca-v2-inhand-repose-wristfix-v0      wrist not actuated, held at its default (72-dim obs)
 
@@ -187,6 +190,27 @@ class OrcaV2ReposeTeacherHist10EnvCfg(OrcaV2ReposeTeacherEnvCfg):
 class OrcaV2ReposeHist10EnvCfg(OrcaV2ReposeEnvCfg):
     """Policy obs stacks the last 10 steps (0.5 s; PT paper's window). HORA reports plain MLPs degrade with long raw
     history, so this is the counterpart to hist3."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
+
+
+# --- Architecture variants on top of ablation B (asymmetric critic), which beat the baseline by far (ABLATION_RESULTS).
+
+
+@configclass
+class OrcaV2ReposeAsymHist3EnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B + policy obs stacks the last 3 steps."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 3
+
+
+@configclass
+class OrcaV2ReposeAsymHist10EnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B + policy obs stacks the last 10 steps."""
 
     def __post_init__(self):
         super().__post_init__()
