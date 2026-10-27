@@ -129,31 +129,32 @@ def main(env_cfg, agent_cfg):
         runner.load(ckpt)
         policy = runner.get_inference_policy(device=base.device)
         policy_nn = runner.alg.policy  # recurrent policies keep a hidden state per env
-        torch.manual_seed(args_cli.seed)
-        env.reset()
-        policy_nn.reset()
-        cmd_term.angular_vel_command[:] = 0.0
-        cmd_term.angular_vel_command[:, 2] = cmd_sign * args_cli.cmd
-        obs = env.get_observations()
+        # env buffers written during a rollout are inference tensors: reset + rollout must both run in inference mode
+        with torch.inference_mode():
+            torch.manual_seed(args_cli.seed)
+            env.reset()
+            policy_nn.reset()
+            cmd_term.angular_vel_command[:] = 0.0
+            cmd_term.angular_vel_command[:, 2] = cmd_sign * args_cli.cmd
+            obs = env.get_observations()
 
-        log = {k: [] for k in ("link_pos", "link_quat", "obj_pos", "obj_quat", "obj_angvel", "cmd_angvel",
-                               "cmd_pos", "reward", "done")}
-        for step in range(args_cli.steps):
-            with torch.inference_mode():
+            log = {k: [] for k in ("link_pos", "link_quat", "obj_pos", "obj_quat", "obj_angvel", "cmd_angvel",
+                                   "cmd_pos", "reward", "done")}
+            for step in range(args_cli.steps):
                 obs, rew, dones, _ = env.step(policy(obs))
                 policy_nn.reset(dones)
-            # re-spawned envs resample their command: pin it again (takes effect from the next obs on)
-            cmd_term.angular_vel_command[:, :2] = 0.0
-            cmd_term.angular_vel_command[:, 2] = cmd_sign * args_cli.cmd
-            log["link_pos"].append((robot.data.body_pos_w[:nv] - origins[:nv, None]).cpu().numpy())
-            log["link_quat"].append(robot.data.body_quat_w[:nv].cpu().numpy())  # wxyz
-            log["obj_pos"].append((obj.data.root_pos_w - origins).cpu().numpy())
-            log["obj_quat"].append(obj.data.root_quat_w.cpu().numpy())
-            log["obj_angvel"].append(obj.data.root_ang_vel_w.cpu().numpy())
-            log["cmd_angvel"].append(cmd_term.angular_vel_command.cpu().numpy())
-            log["cmd_pos"].append(cmd_term.pos_command.cpu().numpy())
-            log["reward"].append(rew.cpu().numpy())
-            log["done"].append(dones.cpu().numpy())
+                # re-spawned envs resample their command: pin it again (takes effect from the next obs on)
+                cmd_term.angular_vel_command[:, :2] = 0.0
+                cmd_term.angular_vel_command[:, 2] = cmd_sign * args_cli.cmd
+                log["link_pos"].append((robot.data.body_pos_w[:nv] - origins[:nv, None]).cpu().numpy())
+                log["link_quat"].append(robot.data.body_quat_w[:nv].cpu().numpy())  # wxyz
+                log["obj_pos"].append((obj.data.root_pos_w - origins).cpu().numpy())
+                log["obj_quat"].append(obj.data.root_quat_w.cpu().numpy())
+                log["obj_angvel"].append(obj.data.root_ang_vel_w.cpu().numpy())
+                log["cmd_angvel"].append(cmd_term.angular_vel_command.cpu().numpy())
+                log["cmd_pos"].append(cmd_term.pos_command.cpu().numpy())
+                log["reward"].append(rew.cpu().numpy())
+                log["done"].append(dones.cpu().numpy())
 
         data = {k: np.stack(v).astype(np.float32) for k, v in log.items()}
         m = metrics(data["obj_angvel"][..., 2], cmd_sign.cpu().numpy(), data["done"] > 0, float(base.step_dt))
