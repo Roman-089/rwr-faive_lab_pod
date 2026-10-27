@@ -177,11 +177,11 @@ noise **on** (the training distribution of the baseline), same seed.
 
 | Stage | What | Code | Status |
 |---|---|---|---|
-| 1 | Privileged teacher: PPO, actor + critic read the noise-free 81-dim `teacher` group; env also exposes the noisy 74-dim `policy` group for the student | task `orca-v2-inhand-repose-teacher-v0` (`OrcaV2ReposeTeacherEnvCfg`, `rsl_rl_teacher_student_cfg.py:PPORunnerCfgOrcaV2Teacher`) | written, smoke test |
-| 2a | MLP student on a 10-step history of the noisy policy obs (Isaac Lab `history_length=10`) | `DistillationRunner` + `StudentTeacher` (rsl_rl built-in, DAgger-style: student acts, teacher labels); config only | TODO |
-| 2b | **LSTM student** (paper: 7.0 RPM, 100 % DFSR with motor encoders) | `StudentTeacherRecurrent`, config only | TODO, preferred first student |
+| 1 | Privileged teacher: PPO, actor + critic read the noise-free 81-dim `teacher` group; env also exposes the noisy 74-dim `policy` group for the student | task `orca-v2-inhand-repose-teacher-v0` (`OrcaV2ReposeTeacherEnvCfg`, `rsl_rl_teacher_student_cfg.py:PPORunnerCfgOrcaV2Teacher`) | queued (10k iters) |
+| 2a | MLP student on a 10-step history of the noisy policy obs (Isaac Lab `history_length=10`) | task `-student-mlp-h10-v0` (`DistillationRunner` + `StudentTeacher`, DAgger-style: student acts, teacher labels) | written, needs teacher |
+| 2b | **LSTM student** (paper: 7.0 RPM, 100 % DFSR with motor encoders) | task `-student-lstm-v0` (`StudentTeacherRecurrent`) | written, needs teacher |
 | 2c | Per-episode joint position bias in the student's obs noise | custom noise term (~30 lines) | TODO |
-| 3 | Transformer student + reconstruction loss (paper's best, 9.3 RPM) | new module + `Distillation` subclass + recon obs group (~300 lines) | only if 2b looks good |
+| 3 | Transformer student + reconstruction loss (paper's best, 9.3 RPM) | task `-student-pt-v0`: `transformer_student.py` (CLS token over 10 per-step tokens, 3 layers / 4 heads / d 256 / FF 1024; recon targets = first 37 dims of the teacher obs) | written, CPU unit-tested, needs teacher |
 | 4 | Export | TorchScript wrapper that holds the history buffer / LSTM state inside `policy.pt` → still one 74-dim obs per call, **deploy node unchanged** | TODO |
 
 Notes:

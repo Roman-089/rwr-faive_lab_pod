@@ -69,10 +69,16 @@ gym.register(
     },
 )
 
+# Transformer student classes must be visible to rsl_rl's DistillationRunner (it resolves class names with eval).
+from .transformer_student import register as _register_transformer_student  # noqa: E402
+
+_register_transformer_student()
+
 # Students distilled from the teacher (pass the teacher with --load_run / --checkpoint).
 for _task_id, _env_cfg, _runner_cfg in (
     ("orca-v2-inhand-repose-student-mlp-h10-v0", "OrcaV2ReposeTeacherHist10EnvCfg", "DistillationRunnerCfgOrcaV2"),
     ("orca-v2-inhand-repose-student-lstm-v0", "OrcaV2ReposeTeacherEnvCfg", "DistillationRunnerCfgOrcaV2LSTM"),
+    ("orca-v2-inhand-repose-student-pt-v0", "OrcaV2ReposeTeacherHist10EnvCfg", "DistillationRunnerCfgOrcaV2Transformer"),
 ):
     gym.register(
         id=_task_id,

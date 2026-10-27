@@ -55,7 +55,7 @@ import gymnasium as gym
 import numpy as np
 import torch
 
-from rsl_rl.runners import OnPolicyRunner
+from rsl_rl.runners import DistillationRunner, OnPolicyRunner
 
 from isaaclab.utils.assets import retrieve_file_path
 from isaaclab_rl.rsl_rl import RslRlVecEnvWrapper
@@ -121,7 +121,8 @@ def main(env_cfg, agent_cfg):
         print(f"[eval] could not read object size ({e}), using 45 mm")
         size = np.float32(0.045)
 
-    runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
+    runner_class = DistillationRunner if agent_cfg.class_name == "DistillationRunner" else OnPolicyRunner
+    runner = runner_class(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     results_path = None
     for ckpt in args_cli.checkpoints:
         ckpt = retrieve_file_path(ckpt)

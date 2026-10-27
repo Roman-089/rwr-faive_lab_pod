@@ -17,6 +17,7 @@ from isaaclab_rl.rsl_rl import (
 )
 
 from .agents.rsl_rl_ppo_cfg import PPORunnerCfgOrcaV2
+from .transformer_student import RslRlDistillationReconAlgorithmCfg, RslRlStudentTeacherTransformerCfg
 
 
 @configclass
@@ -93,4 +94,30 @@ class DistillationRunnerCfgOrcaV2LSTM(DistillationRunnerCfgOrcaV2):
         rnn_hidden_dim=256,
         rnn_num_layers=1,
         teacher_recurrent=False,
+    )
+
+
+@configclass
+class DistillationRunnerCfgOrcaV2Transformer(DistillationRunnerCfgOrcaV2):
+    """Student = transformer over a 10-step history + reconstruction loss (PT paper: 9.3 RPM with motor encoders).
+
+    Paper: 3 layers, 4 heads, d_model 256, FF 1024; recon weights 0.5 cube pos / 0.3 joint pos / 0.2 joint vel. The
+    paper distils offline with lr 1e-5; this is online (DAgger-style) with a higher lr.
+    """
+
+    policy = RslRlStudentTeacherTransformerCfg(
+        init_noise_std=0.1,
+        noise_std_type="log",
+        student_obs_normalization=True,
+        teacher_obs_normalization=True,
+        student_hidden_dims=[256],  # unused (the transformer replaces the MLP student)
+        teacher_hidden_dims=[512, 512, 256, 128],
+        activation="elu",
+    )
+    algorithm = RslRlDistillationReconAlgorithmCfg(
+        num_learning_epochs=2,
+        learning_rate=1e-4,
+        gradient_length=15,
+        max_grad_norm=1.0,
+        optimizer="adamw",
     )
