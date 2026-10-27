@@ -17,7 +17,7 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status | Reward (last 100 it) | Ep. len | Drop % | RPM | RA % | DFSR % | DC |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| A `firstrun_l40s` | `orca-v2-inhand-repose-v0` | baseline | 29823035 / L40S | 10k | done (2026-10-27) | ~493 | ~395 / 640 | ~62 % | | | | |
+| A `firstrun_l40s` | `orca-v2-inhand-repose-v0` | baseline | 29823035 / L40S | 10k | done (2026-10-27) | ~493 | ~395 / 640 | ~62 % | 0.61 / 1.16 (best 1.37 / 1.62 @4500) | 11.6 / 14.6 (19.1 / 19.0) | 22 / 20 (33 / 25) | 1.8 / 2.2 (1.3 / 2.0) |
 | B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | done (2026-10-27 18:15) | ~1573 | ~588 / 640 | ~10 % | | | | |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | 5k | running | | | | | | | |
 | sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | running | | | | | | | |
@@ -46,6 +46,22 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 - 2026-10-27 17:20 — B 1520 / 585 / 0.12 at it 4190; C 1457 / 592 / 0.14 at it 2160 (C now *ahead* of B at
   matched iterations, B was 1325 at it 2400 — the C gap at it 1500 was transient); sanity 1742 / 578 / 0.11 at it
   2490. Evals for B / C / sanity queued with `-w ended(<train job>)` (jobs 29832523 / 29832525 / 29832526).
+
+- 2026-10-27 19:45 — **first eval (A, baseline)**, nominal / perturbed, 64 envs × 60 s, |cmd| 1.5 rad/s:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 2500 | 1.25 / 1.31 | 17.4 / 17.3 | 36 / 12.5 | 1.6 / 2.7 |
+  | 4500 | **1.37 / 1.62** | **19.1 / 19.0** | 33 / 25 | 1.3 / 2.0 |
+  | 6250 | 0.65 / 1.29 | 12.6 / 15.4 | 14 / 14 | 2.1 / 2.9 |
+  | 8000 | 0.72 / 1.15 | 10.7 / 13.7 | 12.5 / 4.7 | 2.0 / 3.2 |
+  | 9999 | 0.61 / 1.16 | 11.6 / 14.6 | 22 / 20 | 1.8 / 2.2 |
+
+  A's eval performance *drops* after it ~4.5k while the training reward plateaus (action std collapses to 0.18) →
+  report the best checkpoint per run, not only the last. Far below the PT paper's Proprio-PPO (3.83 RPM). Late
+  checkpoints rotate *faster* with the test-time delay (0.6 → 1.2 RPM; per-env RPM std ~1.5, so SE ~0.2): hint that
+  the late policy is jittery and a low-pass (delay) helps — worth checking action-rate / EMA alpha later.
+  Videos + metrics on W&B run `ffueb4yh`. Eval pipeline (metrics, perturbed, MuJoCo videos, W&B) verified end to end.
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
