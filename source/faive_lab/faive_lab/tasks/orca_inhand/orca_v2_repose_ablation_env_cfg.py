@@ -20,6 +20,7 @@ Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
   jointbias   orca-v2-inhand-repose-jointbias-v0     per-episode joint-position obs offset U(+-0.05 rad)
   droppen     orca-v2-inhand-repose-droppen-v0       -100 return penalty on a cube drop
   hist3       orca-v2-inhand-repose-hist3-v0         policy obs = last 3 steps (222-dim; deploy needs the history)
+  hist10      orca-v2-inhand-repose-hist10-v0        policy obs = last 10 steps (740-dim)
   handgrav    orca-v2-inhand-repose-handgrav-v0      gravity on the hand links
   wristfix    orca-v2-inhand-repose-wristfix-v0      wrist not actuated, held at its default (72-dim obs)
 
@@ -171,3 +172,22 @@ class OrcaV2ReposeWristFixedEnvCfg(OrcaV2ReposeEnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.actions.joint_pos.joint_names = ["(?!right_wrist).*"]
+
+
+@configclass
+class OrcaV2ReposeTeacherHist10EnvCfg(OrcaV2ReposeTeacherEnvCfg):
+    """Teacher env whose noisy ``policy`` group stacks the last 10 steps (0.5 s): input of the MLP-h10 student."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
+
+
+@configclass
+class OrcaV2ReposeHist10EnvCfg(OrcaV2ReposeEnvCfg):
+    """Policy obs stacks the last 10 steps (0.5 s; PT paper's window). HORA reports plain MLPs degrade with long raw
+    history, so this is the counterpart to hist3."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10

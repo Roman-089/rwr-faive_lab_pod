@@ -8,7 +8,13 @@ S0); PPO settings are the baseline's."""
 
 from isaaclab.utils import configclass
 
-from isaaclab_rl.rsl_rl import RslRlPpoActorCriticRecurrentCfg
+from isaaclab_rl.rsl_rl import (
+    RslRlDistillationAlgorithmCfg,
+    RslRlDistillationRunnerCfg,
+    RslRlDistillationStudentTeacherCfg,
+    RslRlDistillationStudentTeacherRecurrentCfg,
+    RslRlPpoActorCriticRecurrentCfg,
+)
 
 from .agents.rsl_rl_ppo_cfg import PPORunnerCfgOrcaV2
 
@@ -38,4 +44,53 @@ class PPORunnerCfgOrcaV2LSTM(PPORunnerCfgOrcaV2):
         rnn_type="lstm",
         rnn_hidden_dim=256,
         rnn_num_layers=1,
+    )
+
+
+@configclass
+class DistillationRunnerCfgOrcaV2(RslRlDistillationRunnerCfg):
+    """Teacher -> student distillation (DAgger-style: the student acts, the frozen teacher labels every state).
+
+    The teacher checkpoint is given with ``--load_run <teacher run dir name> --checkpoint model_X.pt``.
+    Student = MLP on the env's noisy ``policy`` group (use the -h10 task id for a 10-step history).
+    """
+
+    num_steps_per_env = 24
+    max_iterations = 2000
+    save_interval = 250
+    experiment_name = "orca_v2_repose"
+    obs_groups = {"policy": ["policy"], "teacher": ["teacher"]}
+    policy = RslRlDistillationStudentTeacherCfg(
+        init_noise_std=0.1,
+        noise_std_type="log",
+        student_obs_normalization=True,
+        teacher_obs_normalization=True,
+        student_hidden_dims=[512, 512, 256, 128],
+        teacher_hidden_dims=[512, 512, 256, 128],
+        activation="elu",
+    )
+    algorithm = RslRlDistillationAlgorithmCfg(
+        num_learning_epochs=2,
+        learning_rate=5e-4,
+        gradient_length=15,
+        max_grad_norm=1.0,
+    )
+
+
+@configclass
+class DistillationRunnerCfgOrcaV2LSTM(DistillationRunnerCfgOrcaV2):
+    """Student = LSTM (256, 1 layer) + MLP on the single noisy ``policy`` observation (paper: 7.0 RPM, motor encoders)."""
+
+    policy = RslRlDistillationStudentTeacherRecurrentCfg(
+        init_noise_std=0.1,
+        noise_std_type="log",
+        student_obs_normalization=True,
+        teacher_obs_normalization=True,
+        student_hidden_dims=[512, 256, 128],
+        teacher_hidden_dims=[512, 512, 256, 128],
+        activation="elu",
+        rnn_type="lstm",
+        rnn_hidden_dim=256,
+        rnn_num_layers=1,
+        teacher_recurrent=False,
     )

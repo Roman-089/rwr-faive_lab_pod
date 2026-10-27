@@ -33,6 +33,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-jointbias-v0", "OrcaV2ReposeJointBiasEnvCfg"),
     ("orca-v2-inhand-repose-droppen-v0", "OrcaV2ReposeDropPenaltyEnvCfg"),
     ("orca-v2-inhand-repose-hist3-v0", "OrcaV2ReposeHist3EnvCfg"),
+    ("orca-v2-inhand-repose-hist10-v0", "OrcaV2ReposeHist10EnvCfg"),
     ("orca-v2-inhand-repose-handgrav-v0", "OrcaV2ReposeHandGravityEnvCfg"),
     ("orca-v2-inhand-repose-wristfix-v0", "OrcaV2ReposeWristFixedEnvCfg"),
 ):
@@ -67,3 +68,18 @@ gym.register(
         "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2LSTM",
     },
 )
+
+# Students distilled from the teacher (pass the teacher with --load_run / --checkpoint).
+for _task_id, _env_cfg, _runner_cfg in (
+    ("orca-v2-inhand-repose-student-mlp-h10-v0", "OrcaV2ReposeTeacherHist10EnvCfg", "DistillationRunnerCfgOrcaV2"),
+    ("orca-v2-inhand-repose-student-lstm-v0", "OrcaV2ReposeTeacherEnvCfg", "DistillationRunnerCfgOrcaV2LSTM"),
+):
+    gym.register(
+        id=_task_id,
+        entry_point="isaaclab.envs:ManagerBasedRLEnv",
+        disable_env_checker=True,
+        kwargs={
+            "env_cfg_entry_point": f"{__name__}.orca_v2_repose_ablation_env_cfg:{_env_cfg}",
+            "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:{_runner_cfg}",
+        },
+    )

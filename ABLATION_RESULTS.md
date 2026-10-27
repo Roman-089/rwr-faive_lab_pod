@@ -21,7 +21,12 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | running | | | | | | | |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | 5k | running | | | | | | | |
 | sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | running | | | | | | | |
+| `arch_hist3` | `-hist3-v0` | MLP on 3-step obs history | 29830928 / A10 | 5k | queued | | | | | | | |
+| `arch_hist10` | `-hist10-v0` | MLP on 10-step obs history | 29830930 / A40 | 5k | queued | | | | | | | |
+| `arch_lstm` | `-lstm-v0` | LSTM actor-critic (PPO) | 29830927 / A100 | 5k | queued | | | | | | | |
+| `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | queued | | | | | | | |
 
 ## Observations / log
 
+- 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
