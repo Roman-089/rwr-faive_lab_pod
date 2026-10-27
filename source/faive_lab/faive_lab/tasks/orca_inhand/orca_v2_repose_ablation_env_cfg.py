@@ -16,7 +16,7 @@ baseline; tell runs apart with ``--run_name``.
   teacher     orca-v2-inhand-repose-teacher-v0       privileged teacher (actor + critic see teacher obs), for distillation
 
 Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
-  delay       orca-v2-inhand-repose-delay-v0         joint targets applied 1-2 policy steps late (per episode)
+  delay       orca-v2-inhand-repose-delay-v0         joint targets 50-100 ms late (6-12 substeps, per episode)
   jointbias   orca-v2-inhand-repose-jointbias-v0     per-episode joint-position obs offset U(+-0.05 rad)
   droppen     orca-v2-inhand-repose-droppen-v0       -100 return penalty on a cube drop
   hist3       orca-v2-inhand-repose-hist3-v0         policy obs = last 3 steps (222-dim; deploy needs the history)
@@ -107,7 +107,10 @@ class OrcaV2ReposeTeacherEnvCfg(OrcaV2ReposeEnvCfg):
 
 @configclass
 class OrcaV2ReposeDelayEnvCfg(OrcaV2ReposeEnvCfg):
-    """Joint targets reach the robot 1-2 policy steps (50-100 ms) late, sampled per episode."""
+    """Joint targets reach the joints 50-100 ms late (6-12 physics substeps), sampled per episode.
+
+    Matches next-tick actuation on deploy (1 policy step) + 0-50 ms servo / bus lag (HYPERPARAM_NOTES 6b).
+    """
 
     def __post_init__(self):
         super().__post_init__()
@@ -117,7 +120,7 @@ class OrcaV2ReposeDelayEnvCfg(OrcaV2ReposeEnvCfg):
             joint_names=a.joint_names,
             alpha=a.alpha,
             rescale_to_limits=a.rescale_to_limits,
-            delay_steps_range=(1, 2),
+            delay_substeps_range=(6, 12),
         )
 
 

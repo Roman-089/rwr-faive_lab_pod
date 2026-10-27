@@ -10,9 +10,12 @@ Metrics (HYPERPARAM_NOTES §8): RPM, rotation accuracy (RA), drop-free success r
 fixed eval setting; mean episode reward and episode length from training logs for reference only (not comparable
 across variants with different rewards / noise).
 
+Phase 1 = architecture study on the baseline env (see HYPERPARAM_NOTES "Run plan"). Each run: nominal eval and
+perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset), columns "nominal / perturbed".
+
 ## Runs
 
-| Run | Task id | Change vs baseline | Job / GPU | Iters | Status | Reward (last 100 it) | Ep. len | Drop % | RPM | RA | DFSR | DC |
+| Run | Task id | Change vs baseline | Job / GPU | Iters | Status | Reward (last 100 it) | Ep. len | Drop % | RPM | RA % | DFSR % | DC |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | A `firstrun_l40s` | `orca-v2-inhand-repose-v0` | baseline | 29823035 / L40S | 10k | done (2026-10-27) | ~493 | ~395 / 640 | ~62 % | | | | |
 | B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | running | | | | | | | |

@@ -256,6 +256,14 @@ rejection instead of heavy smoothing, distil vision into a history student; (10)
 
 ## Run plan / log
 
+**Phase 1 (now): architecture study.** Sim2real ablations (delay, joint bias, hand gravity, fixed wrist, ...) change
+the training distribution and can only be judged on hardware, so they are registered but parked. Phase 1 compares
+architectures that change what the policy can do in sim, all on the **baseline env (A)**:
+MLP (A) · asymmetric critic (B) · critic + DR params (C) · MLP on 3-step history (hist3) · LSTM actor-critic (lstm) ·
+privileged teacher → distilled students (MLP-h10, LSTM, transformer + recon). Each run is scored twice
+(`ABLATION_RESULTS.md`): nominal eval, and **perturbed eval** = same policy with 50–100 ms action delay and ±0.05 rad
+joint obs offset at test time only (`eval_policy.py --perturb`) as a sim proxy for robustness to unmodeled effects.
+
 Variants are task ids (flags, no worktrees), defined in `tasks/orca_inhand/orca_v2_repose_ablation_env_cfg.py`.
 Same seed (42), 8192 envs and PPO cfg as the baseline; compare B/C/sanity with A **at the same iteration** (A's
 curve to 5k is in W&B). Submit with `train_job_ablation.sh` (TASK / RUN_NAME / ITERS env vars).

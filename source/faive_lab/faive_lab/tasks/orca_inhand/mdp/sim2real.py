@@ -23,7 +23,11 @@ if TYPE_CHECKING:
 
 
 class DelayedEMAJointPositionToLimitsAction(EMAJointPositionToLimitsAction):
-    """EMA joint position action whose targets reach the robot ``k`` policy steps late (k sampled per episode).
+    """EMA joint position action whose targets reach the joints ``d`` physics substeps late (d sampled per episode).
+
+    The delay has physics-step resolution (8.3 ms at 120 Hz), so it also covers servo lag below one policy step
+    (Aero Hand: sim servo 10-40 ms too fast). The target applied at substep ``s`` (0..decimation-1) after the policy
+    step is the one produced ``ceil((d - s) / decimation)`` policy steps ago.
 
     The EMA chain and ``_prev_applied_actions`` (read by the ``last_joint_pos_cmd`` observation) stay those of the
     command the policy *produced*, as on the real robot; only the target sent to the joints is delayed.
@@ -33,20 +37,21 @@ class DelayedEMAJointPositionToLimitsAction(EMAJointPositionToLimitsAction):
 
     def __init__(self, cfg: DelayedEMAJointPositionToLimitsActionCfg, env: ManagerBasedEnv):
         super().__init__(cfg, env)
-        lo, hi = cfg.delay_steps_range
-        self._max_delay = hi
+        self._decimation = env.cfg.decimation
+        lo, hi = cfg.delay_substeps_range
         # FIFO of produced targets, newest at index 0
-        self._target_buffer = torch.zeros(hi + 1, self.num_envs, self.action_dim, device=self.device)
+        n_buf = -(-hi // self._decimation) + 1
+        self._target_buffer = torch.zeros(n_buf, self.num_envs, self.action_dim, device=self.device)
         self._delay = torch.randint(lo, hi + 1, (self.num_envs,), device=self.device)
         self._env_idx = torch.arange(self.num_envs, device=self.device)
-        self._delayed_targets = torch.zeros_like(self.processed_actions)
+        self._substep = 0
 
     def reset(self, env_ids: Sequence[int] | None = None) -> None:
         super().reset(env_ids)
         ids = slice(None) if env_ids is None else env_ids
-        # until k commands have been produced, the joints hold their reset position
+        # until the first command arrives, the joints hold their reset position
         self._target_buffer[:, ids] = self._prev_applied_actions[ids]
-        lo, hi = self.cfg.delay_steps_range
+        lo, hi = self.cfg.delay_substeps_range
         n = self.num_envs if env_ids is None else len(env_ids)
         self._delay[ids] = torch.randint(lo, hi + 1, (n,), device=self.device)
 
@@ -54,18 +59,20 @@ class DelayedEMAJointPositionToLimitsAction(EMAJointPositionToLimitsAction):
         super().process_actions(actions)
         self._target_buffer = torch.roll(self._target_buffer, 1, dims=0)
         self._target_buffer[0] = self._processed_actions
-        self._delayed_targets[:] = self._target_buffer[self._delay, self._env_idx]
+        self._substep = 0
 
     def apply_actions(self):
-        self._asset.set_joint_position_target(self._delayed_targets, joint_ids=self._joint_ids)
+        age = torch.clamp(self._delay - self._substep + self._decimation - 1, min=0) // self._decimation
+        self._asset.set_joint_position_target(self._target_buffer[age, self._env_idx], joint_ids=self._joint_ids)
+        self._substep += 1
 
 
 @configclass
 class DelayedEMAJointPositionToLimitsActionCfg(EMAJointPositionToLimitsActionCfg):
     class_type: type = DelayedEMAJointPositionToLimitsAction
 
-    delay_steps_range: tuple[int, int] = MISSING
-    """Inclusive range of the per-episode delay in policy steps (1 step = 50 ms at 20 Hz)."""
+    delay_substeps_range: tuple[int, int] = MISSING
+    """Inclusive range of the per-episode delay in physics substeps (8.3 ms at 120 Hz; 6 substeps = 1 policy step)."""
 
 
 class joint_pos_limit_normalized_biased(ManagerTermBase):

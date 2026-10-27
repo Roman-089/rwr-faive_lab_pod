@@ -56,3 +56,14 @@ gym.register(
         "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2Teacher",
     },
 )
+
+# Recurrent (LSTM) actor-critic on the baseline env.
+gym.register(
+    id="orca-v2-inhand-repose-lstm-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.orca_v2_repose_env_cfg:OrcaV2ReposeEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2LSTM",
+    },
+)
