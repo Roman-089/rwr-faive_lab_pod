@@ -10,7 +10,8 @@ Full table: `OWNERSHIP.md` in [rwr-fast/rwr-fast](https://github.com/rwr-fast/rw
 | `tasks/orca_inhand/mdp/`, `agents/` | S0 (E only adds new files/classes) | – |
 | `scripts/motor_param_characterization/` | S1 | – |
 | `source/faive_lab/faive_lab/assets/orca_v2_fast.py` (QDD actuators) | X – Task X | – |
-| `tasks/fast_screw/` | X – Task X, reuses Task 1 actions/obs/DR | `fast-screw-v0`, `fast-screw-60hz-v0`, `fast-screw-play-v0` → logs `fast_screw/` |
+| `tasks/fast_screw/` (world.py = geometry for sim AND CAD) | X – Task X, reuses Task 1 actions/obs/DR | `fast-screw-v0` (blind), `fast-screw-privileged-v0`, `fast-screw-60hz-v0`, `fast-screw-play-v0` → logs `fast_screw/` |
+| `scripts/fast_world/export_cad.py` | X | exports the fixture STEP/STL to `rwr-fast/taskx/cad/screw_world/` |
 
 Train the cube task: `python scripts/rsl_rl/train.py --task=orca-v2-inhand-repose-cube-v0 --headless --num_envs 8192 --logger wandb`
 PRs: target **rwr-fast/rwr_faive_lab**, not srl-ethz. Course updates: `git fetch upstream && git merge upstream/main`.
