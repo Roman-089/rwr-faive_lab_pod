@@ -228,6 +228,32 @@ alternative to the transformer student; (8) delta actions; (9) finite-difference
 (10) runtime-tunable action scale / grasp offset on deploy. Our 45 mm cube is near HORA's failure size (<40 mm):
 randomize scale ×0.9–1.1 and friction wider (0.3–3.0).
 
+## 12. Literature review: actuation, sensing, vision (subagent, 2026-10-27; PDFs read in full unless noted)
+
+| Paper | Takeaway for us |
+|---|---|
+| SERNF 2602.09580 (ETH SRL, ORCA, **45 mm cube**) | distilled sim student "fragile – most trajectories fail before a full rotation"; needed 105 min real online RL → 6.25 RPM. No latency modelling in the teacher. Stiffness ×0.75–1.5, damping ×0.3–3.0 log-uniform. Vision: Mask R-CNN keypoints → PnP-RANSAC → Kalman, 16 Hz |
+| ORCA 2504.04259 | no joint sensors; linear motor→joint map from auto-calibration; latency <0.2 s, slack adds latency |
+| Faive 2308.02453 | joint readings ×0.5 at deploy improved real performance (tendon stretch); missing actuator sysid named as the main gap |
+| Aero Hand 2608.28578 | sim actuator 10–40 ms faster than hardware (rise 90 vs 120 ms); open-loop replay of sim actions on hardware localised the gap |
+| Hwangbo 1901.08652 | actuator net needs torque labels → **not possible for us** (no torque, no joint sensor) |
+| Tan 1804.10332 | latency 15–19 ms; without actuator model or latency, controllers fail on hardware |
+| OpenAI 1808.00177 | 1-step (80 ms) delay w.p. 0.5 per actuator; tendon backlash model; LSTM median 13 vs FF 3.5 |
+| DeXtreme 2210.13702 | pose at 15 Hz locked to policy rate; ADR: pose refresh 1–6 steps, pose delay, action latency 0–1.5 steps, random pose injection p~U(0,0.3); stiffness ×0.3–3.5; smoothing only if no added latency |
+| Visual Dexterity 2211.11744 | CMA-ES sysid of stiffness, damping **and velocity limit** from steps + sines |
+| LEAP UHAS 2607.03570 | servo **velocity limits** had to be added and randomized |
+| 2603.15789 | chirp + CMA-ES over friction, armature, **delay**: joint RMSE ~7° → <2° |
+| 2502.20396 | sysid quality predicts real success (best-MSE 8/10, worst 0/10) |
+| 2410.08650 | Stribeck + load-dependent friction beats Coulomb-viscous for Dynamixel |
+
+Actionable, in order: (1) sim-in-loop actuator sysid from v2 chirps (Kp, Kd, armature, friction, delay, velocity
+limit; tool exists in `scripts/motor_param_characterization/` (owner S1), needs v2 recordings at 20 Hz);
+(2) delay at **physics-substep** granularity (0–6 substeps of 8.3 ms) on top of policy-step delay;
+(3) servo velocity / slew limit on targets; (4) history encoder (see §9); (5) motor-side obs model
+(q + τ/k_tendon, k randomized — untested idea), keep Faive's ×0.5 as a deploy knob; (6) sweep EMA α at deploy;
+(7–9) Subtask 2: train with pose hold/delay/injection noise, run the estimator at a fixed integer rate with outlier
+rejection instead of heavy smoothing, distil vision into a history student; (10) backlash model from chirp reversals.
+
 ## Run plan / log
 
 Variants are task ids (flags, no worktrees), defined in `tasks/orca_inhand/orca_v2_repose_ablation_env_cfg.py`.
