@@ -32,6 +32,9 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `abl_C_asym_dr_seed1` | `-asym-dr-v0` | C, seed 1 (is C > B real?) | 29838635 / A10 | 5k | queued | | | | | | | |
 | `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | queued | | | | | | | |
 | `abl_B_rotsoft` | `-asym-rotsoft-v0` | B, magnitude kernel σ 0.2 → 0.75, weights mag 30 → 60 / dir 60 → 30 | 29838451 / A100 | 5k | queued | | | | | | | |
+| `student_mlp_h10` | `-student-mlp-h10-v0` | distill teacher → MLP on 10-step noisy proprio history (PT paper's MLP student) | 29839014 / A100 | 2k | queued after teacher | | | | | | | |
+| `student_lstm` | `-student-lstm-v0` | distill teacher → LSTM student | 29839015 / A40 | 2k | queued after teacher | | | | | | | |
+| `student_pt` | `-student-pt-v0` | distill teacher → transformer on 10-step history + reconstruction loss (PT paper) | 29839013 / L40S | 2k | queued after teacher | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
 
 ## Observations / log
