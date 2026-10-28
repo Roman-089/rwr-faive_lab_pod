@@ -50,6 +50,7 @@ from isaaclab.utils import configclass
 
 from . import mdp, rewards_ablation
 from .actions_ablation import RelativeJointPositionToLimitsActionCfg
+from .commands_ablation import FixedDirectionRotationCommandCfg
 from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
 from .orca_v2_repose_env_cfg import ObservationsCfg, OrcaV2ReposeEnvCfg
@@ -266,6 +267,41 @@ class OrcaV2ReposeAsymRotLinEnvCfg(OrcaV2ReposeAsymEnvCfg):
         self.rewards.angular_velocity_magnitude = None
         self.rewards.rotation_progress = RewTerm(
             func=rewards_ablation.rotation_progress_clipped, weight=90.0, params={**cmd, "min_vel": -0.5}
+        )
+        self.rewards.off_axis_angular_velocity = RewTerm(
+            func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
+        )
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B for the demo metric (fast, long, no drop): always +z at 1.5 rad/s, reward linear in speed with no upper clip.
+
+    +z is the faster direction in 11 of 12 evaluated policies (per-direction eval, 2026-10-28). Rotation terms as in
+    -rotlin (weight 90, off-axis -5) but unclipped, so speed above 1.5 rad/s keeps paying. Deploy: goal_ang_vel=1.5,
+    goal_flip_period_s=0. Eval: scripts/eval/eval_policy.py commands +z only for "-onedir" tasks.
+    """
+
+    def __post_init__(self):
+        super().__post_init__()
+        c = self.commands.continuous_rotation
+        self.commands.continuous_rotation = FixedDirectionRotationCommandCfg(
+            asset_name=c.asset_name,
+            init_pos_offset=c.init_pos_offset,
+            angular_vel_range=c.angular_vel_range,
+            angular_vel_magnitude_threshold=c.angular_vel_magnitude_threshold,
+            angular_vel_direction_threshold=c.angular_vel_direction_threshold,
+            position_success_threshold=c.position_success_threshold,
+            resampling_time_range=c.resampling_time_range,
+            direction=1.0,
+        )
+        cmd = {"command_name": "continuous_rotation", "object_cfg": SceneEntityCfg("object")}
+        self.rewards.angular_velocity_direction = None
+        self.rewards.angular_velocity_magnitude = None
+        self.rewards.rotation_progress = RewTerm(
+            func=rewards_ablation.rotation_progress_linear,
+            weight=90.0,
+            params={**cmd, "ref_speed": 1.5, "min_vel": -0.5},
         )
         self.rewards.off_axis_angular_velocity = RewTerm(
             func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd

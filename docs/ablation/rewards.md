@@ -114,6 +114,34 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
   (direction 60 > magnitude 30, narrow σ 0.2) only avoided the hack by making speed nearly irrelevant.
 - The training reward of a reward variant says nothing about rotation: always judge by eval.
 
+## One direction, max speed (`-asym-onedir-v0`)
+
+The task statement grades only the live demo: "more points if the hand turns the cube fast and for a long time without a
+drop" (RWR26_Task1.pdf §2). Neither the commanded speed nor the direction switches are graded, and HORA / LEAP /
+RotateIt all train one direction with a speed reward. Our policies are also slower (≤ 0.78 rad/s) than the slowest
+training command (0.9 rad/s), so speed tracking never mattered in practice.
+
+- **Direction:** +z. From the saved nominal rollouts (all 64 envs, sign alternating), +z is faster in 11 of 12 policies:
+
+  | Policy | +z RPM | −z RPM |
+  |---|---|---|
+  | `abl_B_asym_ent5e-3` | 7.94 | 6.71 |
+  | `teacher` | 7.65 | 7.24 |
+  | `arch_rma_s1` / `s2` | 8.04 / 7.71 | 4.92 / 4.70 |
+  | `abl_B_asym` / `seed1` | 6.34 / 6.80 | 4.98 / 3.66 |
+  | `abl_C_asym_dr` | 6.29 | 5.86 |
+  | `arch_asym_hist3` / `hist10` | 6.60 / 4.69 | 4.06 / 5.33 |
+  | `arch_asym_lstm` | 5.83 | 4.41 |
+  | `sanity_nodr` | 11.27 | 9.82 |
+
+- **Command:** `commands_ablation.FixedDirectionRotationCommand`, always +1.5 rad/s about z. The observation layout is
+  unchanged; deploy with `goal_ang_vel:=1.5 goal_flip_period_s:=0`.
+- **Reward:** `rewards_ablation.rotation_progress_linear` = max(ω·k, −0.5) / 1.5, weight 90, **no upper clip** (speed
+  above 1.5 rad/s keeps paying); off-axis −5; the rest as B. The drop termination / penalty is what stops the policy
+  from flinging the cube; if drops rise, add HORA's clip at a high value or the drop penalty.
+- **Base:** B (asymmetric critic, DR, single-observation MLP) + entropy 5e-3, the best deployable policy so far and
+  exportable without the history wrapper. Run `abl_B_onedir_ent5e-3`; eval commands +z in every env.
+
 ## Next steps / open questions
 
 - `rotsoft` is out; `rotlin` (axis-projected, clipped) is the remaining candidate. The winner of the reward wave (B or `-rotlin`, decided by eval) is the base of the next architecture

@@ -36,3 +36,4 @@ full entries live in the linked topic files.
 | 2026-10-28 | hist10 eval: no speed gain (5.01 RPM), most robust under perturbation; history = robustness, not speed | [history](history_and_memory.md) |
 | 2026-10-28 | student_pt (transformer, gradient_length 15) ran out of memory on the L40S at 8192 envs; rerun with 4096 envs | [teacher-student](teacher_student.md) |
 | 2026-10-28 | speed-tracking sweep queued (does RPM follow the commanded speed?) for ent5e-3 and the teacher | [eval protocol](eval_protocol.md) |
+| 2026-10-28 | grading = live demo speed + duration without drop → one-direction (+z, faster in 11/12 policies) max-speed run queued | [rewards](rewards.md) |

@@ -45,13 +45,14 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `arch_asym_lstm` | [history](history_and_memory.md) | `-asym-lstm-v0` | B + LSTM actor-critic | 29831098 / A100 | done | 5.12 / 6.15 | 63.9 / 63.2 | 91 / 59 | 0.09 / 0.70 |
 | `teacher` | [teacher-student](teacher_student.md) | `-teacher-v0` | privileged teacher (not deployable), 10k | 29830926 / L40S | done | 7.44 / 7.63 | 81.4 / 74.4 | 94 / 73 | 0.06 / 0.31 |
 | `teacher_cont18k` | [teacher-student](teacher_student.md) | `-teacher-v0` | teacher resumed from model_9999, +8k | 29840146 / 29840147 | cancelled (2026-10-28 16:25, superseded by `teacher_ent5e-3`) | | | | |
-| `teacher_ent5e-3` | [teacher-student](teacher_student.md) | `-teacher-v0` | privileged teacher, entropy_coef 5e-3, 10k | 29842059 / L40S (+ A100 dup 29842060) | queued | | | | |
+| `teacher_ent5e-3` | [teacher-student](teacher_student.md) | `-teacher-v0` | privileged teacher, entropy_coef 5e-3, 10k | 29842059 / L40S | running | | | | |
 | `student_mlp_h10` | [teacher-student](teacher_student.md) | `-student-mlp-h10-v0` | distill → MLP on 10-step history | 29839014 / A100 | queued | | | | |
 | `student_lstm` | [teacher-student](teacher_student.md) | `-student-lstm-v0` | distill → LSTM | 29839015 / A40 | queued | | | | |
 | `student_pt` | [teacher-student](teacher_student.md) | `-student-pt-v0` | distill → transformer + recon loss | 29839013 / L40S | queued | | | | |
 | `arch_rma_s1` | [RMA](rma.md) | `-rma-teacher-v0` | B + RMA extrinsics encoder (not deployable) | 29835277 / L40S | done | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
 | `arch_rma_s2` | [RMA](rma.md) | `-rma-student-v0` | RMA adaptation module, 30-step history, 2k | 29837730 / L40S | done | 6.20 / 6.71 (best 6.29 / 6.35 @1500) | 72.3 / 68.0 | 83 / 78 | 0.25 / 0.38 |
-| `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | queued | | | | |
+| `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | running | | | | |
+| `abl_B_onedir_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-v0` | B + ent 5e-3, +z only at 1.5 rad/s, unclipped linear speed reward (demo metric) | 29845346 / L40S (+ A100 dup 29845345) | queued | | | | |
 | `abl_B_rotsoft` | [rewards](rewards.md) | `-asym-rotsoft-v0` | B, magnitude σ 0.75, mag 60 / dir 30 | 29838451 / A100 | done — **reward hack** (wobbles, doesn't rotate) | −0.02 / −0.01 | 6.8 / 5.8 | 92 / 77 | 0.09 / 0.34 |
 | `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | queued | | | | |
 | `abl_B_asym_ent5e-3` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 5e-3 | 29833758 / A100 | done | **7.33 / 7.31** | 78.6 / 69.8 | 88 / 55 | 0.12 / 0.75 |

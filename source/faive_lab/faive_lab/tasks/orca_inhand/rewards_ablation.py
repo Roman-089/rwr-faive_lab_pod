@@ -56,3 +56,18 @@ def off_axis_angular_velocity_l1(
     axis, _ = _target_axis(env, command_name)
     w = _get_numeric_root_ang_vel(env, object_cfg)
     return torch.abs(w - (w * axis).sum(-1, keepdim=True) * axis).sum(-1)
+
+
+def rotation_progress_linear(
+    env: ManagerBasedRLEnv,
+    command_name: str,
+    object_cfg: SceneEntityCfg = SceneEntityCfg("object"),
+    ref_speed: float = 1.5,
+    min_vel: float = -0.5,
+) -> torch.Tensor:
+    """max(w . k, min_vel) / ref_speed: linear in the speed about the target axis with NO upper clip ("as fast as
+    possible"); ``ref_speed`` only sets the scale (1 at ref_speed). Unlike HORA's clip, overspeed keeps paying, so the
+    drop termination / penalty is what keeps the policy from flinging the cube."""
+    axis, _ = _target_axis(env, command_name)
+    w_axis = (_get_numeric_root_ang_vel(env, object_cfg) * axis).sum(-1)
+    return torch.clamp(w_axis, min=min_vel) / ref_speed

@@ -1,7 +1,8 @@
 """Evaluate checkpoints with the ORCA PT paper's metrics (arXiv 2605.21330) and record rollouts for videos.
 
 One Isaac Sim start for several checkpoints of one run. Fixed eval setting (docs/ablation/eval_protocol.md): the
-task's own DR and observation noise, |command| = --cmd rad/s about z with the sign alternating over envs, no command
+task's own DR and observation noise, |command| = --cmd rad/s about z with the sign alternating over envs (+z only
+for the one-direction "-onedir" tasks), no command
 resampling, --steps control steps (1200 = 60 s at 20 Hz) without time-out; a dropped cube re-spawns and the
 drop is counted.
 
@@ -115,6 +116,8 @@ def main(env_cfg, agent_cfg):
     cmd_term = base.command_manager.get_term("continuous_rotation")
     n, nv = args_cli.num_envs, min(args_cli.video_envs, args_cli.num_envs)
     cmd_sign = torch.where(torch.arange(n, device=base.device) % 2 == 0, 1.0, -1.0)
+    if "-onedir" in args_cli.task:  # trained on +z only (orca_v2_repose_ablation_env_cfg.OrcaV2ReposeAsymOneDirEnvCfg)
+        cmd_sign = torch.ones_like(cmd_sign)
 
     meshes = export_meshes(robot.root_physx_view.link_paths[0])
     try:
