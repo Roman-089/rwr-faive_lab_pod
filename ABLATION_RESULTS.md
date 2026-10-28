@@ -76,6 +76,11 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   teacher actions, distillation trains only the 24 k-param adaptation module) and **B + drop penalty**. Grasp-cache
   resets next (HORA / LEAP code available).
 
+- 2026-10-28 02:00 — **drop timing (A, model_9999, nominal eval, 116 drops):** time since spawn 0–2 s 12 %, 2–5 s 15 %,
+  5–10 s 16 %, 10–20 s 23 %, 20–40 s 22 %, 40–61 s 12 %. Drops happen throughout the episode, not mainly while the cube
+  settles after the reset, so **grasp-cache resets (HORA/LEAP) are deprioritized** (they target initial-grasp
+  failures); drop penalty and entropy runs address sustained-grip drops. Re-check on B's rollout once its eval runs.
+
 - 2026-10-28 01:50 — **storage:** home quota 25.6 of 30 GB. `hpc/prune_storage.sh` keeps finished runs to their 5
   eval checkpoints (+ any already scored), drops redundant eval rollouts and synced local W&B logs; runs after every
   eval. First pass freed 1.06 GB. New runs save every 500 iters. **Bug found and fixed:** `eval_run.sh` sorted
