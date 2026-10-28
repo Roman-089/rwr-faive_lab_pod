@@ -60,14 +60,15 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | queued | | | | |
 | rotlin + drop penalty | [rewards](rewards.md) | – | rotlin + −200 drop weight (−10 return) | – | planned | | | | |
 | position / velocity reward | [rewards](rewards.md) | – | position σ 0.05, weight 5, + cube lin-vel penalty | – | planned | | | | |
-| `alpha05` | [action space](action_space.md) | – | EMA α 0.2 → 0.5 | – | planned | | | | |
-| `relact` | [action space](action_space.md) | – | relative joint targets | – | planned | | | | |
+| `abl_B_asym_ent5e-3_alpha05` | [action space](action_space.md) | `-asym-v0` + `env.actions.joint_pos.alpha=0.5` | B + ent 5e-3, EMA α 0.2 → 0.5 | 29845613 / L40S | queued | | | | |
+| `abl_B_asym_ent5e-3_relact` | [action space](action_space.md) | `-asym-relact-v0` | B + ent 5e-3, relative joint targets (delta 0.1 half-range / step) | 29845614 / A10 | queued | | | | |
 | `big` | [PPO / capacity](ppo_and_capacity.md) | – | MLP 1024-1024-512-256 | – | planned | | | | |
 | `student_mlp_h10_ft` | [student fine-tune](student_finetune.md) | `-student-mlp-h10-ft-v0` (fallback `-student-mlp-h10-res-v0`) | PPO fine-tuning of the MLP-h10 student: teacher critic, 150-iter critic warm-up, kickstarting β 1 → 0 | – | implemented + CPU-tested; launch after `student_mlp_h10` | | | | |
 | fixed-delay run | [sim2real](sim2real.md#fixed-action-delay-sim--deploy) | – | fixed 1-step action delay + next-tick actuation (Phase 2) | – | planned | | | | |
+| `acthold` | [sim2real](sim2real.md#random-action-holding) | `-asym-acthold-v0` | B + random action holding (TeleDexter's action masking): joint targets not updated w.p. p ~ U(0, 0.1) per step (lost / late servo packet); obs = command sent; with the fixed delay in Phase 2 | – | implemented + CPU-tested; Phase 2 | | | | |
 
 Cancelled before starting (2026-10-27): A-based `-hist3` / `-hist10` / `-lstm` (29830927 / 28 / 30). Registered but
-parked sim2real tasks (`-delay`, `-jointbias`, `-handgrav`, `-wristfix`, `-droppen`, `-hist3`): [sim2real](sim2real.md#registered--planned-sim2real-runs-parked).
+parked sim2real tasks (`-delay`, `-jointbias`, `-handgrav`, `-wristfix`, `-droppen`, `-hist3`, `-asym-acthold`): [sim2real](sim2real.md#registered--planned-sim2real-runs-parked).
 Training rewards, episode lengths and drop rates per run are in the topic files.
 
 ## Topic files

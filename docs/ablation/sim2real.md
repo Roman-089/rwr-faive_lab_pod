@@ -7,6 +7,17 @@ distribution and can only be judged on hardware, so they are registered but park
 a fixed, enforced action delay matched in sim** (see [Fixed action delay](#fixed-action-delay-sim--deploy),
 `DelayedEMAJointPositionToLimitsActionCfg`). The sanity runs (no DR) are here too because they measure what DR costs.
 
+## Phase 2 checklist (reminder: do these once sim2real starts)
+
+The user parked sim2real on 2026-10-28 and asked to be reminded of these experiments when Phase 2 starts:
+
+1. **Fixed action delay**, matched in sim and enforced on deploy: the agreed first Phase 2 run
+   ([below](#fixed-action-delay-sim--deploy)).
+2. **Random action holding** (`-asym-acthold-v0`, [below](#random-action-holding)): implemented + CPU-tested, not run.
+   Combine with the delay run.
+3. **Actuator network** after arXiv 2603.04351 / Hwangbo 1901.08652: [actuator_net.md](actuator_net.md). Retrain on S1's
+   new ORCA v2 chirps first; the existing chirps are from the v1b hand.
+
 ## Question / hypothesis
 
 What does the real hand have that the sim lacks, and which of these gaps matter? Close the biggest ones (latency,
@@ -109,6 +120,89 @@ Steps:
 2. Add `action_delay_steps` (fixed / per-episode random) to the action term as a new ablation task id.
 3. When `rwr_faive_system` is released: next-tick actuation in the policy node (a few lines).
 
+## Random action holding
+
+**Status: implemented + CPU-tested, NOT run.** Queued for Phase 2, to be combined with the fixed action-delay run
+(below). Task `orca-v2-inhand-repose-asym-acthold-v0` (`OrcaV2ReposeAsymActHoldEnvCfg`, on top of B); action term
+`HoldingEMAJointPositionToLimitsActionCfg` in `tasks/orca_inhand/actions_ablation.py`. Deploy: unchanged.
+
+**Model.** On the real hand the policy node computes the EMA target every 50 ms and sends it to the servos over the bus.
+If the packet is lost, corrupted or late, the servos keep the previous target, and the node does not know. In sim, each
+env samples p ~ U(0, `hold_prob_max`) per episode. Each policy step, with probability p, the target applied to the
+joints (for all 6 substeps) stays the previously applied one. The command the policy sees is the one the node sent, as on
+deploy: the EMA state `_prev_applied_actions` (= `last_joint_pos_cmd`) and `last_action` update as usual. Only
+`processed_actions`, which `apply_actions` writes to the joints, is held. The policy can notice a hold only through
+`joint_pos` / `joint_vel`. After a hold, the next applied target is the current EMA state. On reset, the held target is
+the reset joint position (= the parent's reset EMA state). `hold_prob_max = 0` runs the parent's code path without
+random draws, so it reproduces the parent bit for bit (tested).
+
+| Knob | Default | Meaning / why |
+|---|---|---|
+| `hold_prob_max` | 0.1 | p ~ U(0, 0.1) per env and episode: on average 5 % of steps are stale, at most 10 %, and some episodes are almost clean. Same order as TeleDexter's stale joint-steps (our estimate below). Re-fit once real loss / late rates are logged on deploy |
+| `hold_steps_range` | (1, 1) | hold length in policy steps, per event. A lost or late packet costs one tick, then the next command overwrites it. Longer holds (node stalls, TeleDexter's 1–10-step freezes) are a knob, e.g. (1, 3) |
+| `per_joint` | False | all 17 joints held together, because one sync-write packet carries every servo's target. `True` holds each joint independently (per-servo writes / TeleDexter's desynchronized joints) |
+
+With EMA α 0.2 the target moves only 20 % of the way per step, so a single 50 ms hold is a mild perturbation. If the
+run shows no effect on the perturbed eval or on hardware, try bursts and `per_joint` next.
+
+**Paper basis.** TeleDexter (Li et al., "Towards Human-level Dexterous Teleoperation",
+[arXiv 2607.11481](https://arxiv.org/abs/2607.11481), §3.1, App. C.3 / C.7 / C.8, Tab. 5;
+[project page](https://bigai-dex.github.io/blog/teledexter/)) calls it *random action masking*:
+ã_t = m_t ⊙ a_t + (1 − m_t) ⊙ ã_{t−1}, so masked DoFs keep their previous command.
+- Mechanism (C.8): at each env step, if no mask is active, a new one starts with p_mask = 0.15. It freezes
+  n_m = 3 DoFs (drawn uniformly without replacement, of 16 on LEAP / 22 on SharpaWave) for d ~ U{1, d_max} control steps.
+  d_max is ramped from 1 to 10 by their curriculum (C.3, done within the first 2·10⁹ env steps). Masks refresh
+  asynchronously across ~62K envs. From these numbers (our estimate, not in the paper), ~2–3 % of joint-steps are stale
+  at the start of the curriculum and ~6–9 % at the end.
+- Motivation: the policy should not overfit to "the perfectly synchronized actuation of simulation". The real failure
+  modes they name are "motor lag, backlash, occasional missed commands on the SharpaWave SDK".
+- Evidence is real-world only (Tab. 5, success rate / tracking %, with vs without masking): HammerUse 66.7 / 86.7 vs
+  33.3 / 57.1, ScrewdriverUse 73.3 / 86.7 vs 0.0 / 36.0, CuboidReorient 80.0 / 86.7 vs 26.7 / 51.1. They call it "the
+  single most impactful sim-to-real intervention we tested". It is combined with their DR (C.7), which includes
+  observation latency (2-frame queue, sampled w.p. 0.5) and joint position noise σ 0.1.
+- Not stated in the paper: the sim control rate (60 Hz reference motion, 30 Hz teleoperation). Also not stated: whether
+  the observed "previous low-level command" ã_{t−1} is the masked or the unmasked command (the notation suggests
+  masked), and how masking interacts with their residual action (a^cmd_t = clip(a^cmd_{t−1} + 0.1·deadzone(a_t)), C.1).
+  There is no sim ablation and no sweep of p_mask / n_m.
+
+**Differences from TeleDexter, and why.**
+1. Whole hand by default instead of 3 joints, because our failure model is a lost bus packet.
+2. The observation is the command the node sent, not the held one, because the deployed node cannot know about a lost
+   packet. If TeleDexter's obs is the masked command, it tells the sim policy which joints are stale; the real policy
+   never has that information.
+3. No curriculum: holds are single steps, and the per-episode U(0, p_max) already mixes clean and perturbed episodes.
+
+Related precedent: Dactyl delays each actuator by 1 step with probability 0.5 per episode (see above).
+
+**Phase 2 plan.** Combine holding with the fixed action delay:
+`class _(DelayedEMAJointPositionToLimitsAction, HoldingEMAJointPositionToLimitsAction)`, plus a cfg inheriting both cfgs.
+The MRO is Delayed → Holding → EMA, so the held target enters the delay FIFO. This is CPU-tested, but no task id is
+registered yet. Run the fixed-delay task vs fixed-delay + holding with the same seed. To fit `hold_prob_max`, log in the
+policy node how often a command misses its tick, and count servo-write errors.
+
+**Eval caveat.** `scripts/eval/eval_policy.py` evaluates a task with its own action term, so the nominal eval of an
+`-acthold` checkpoint runs *with* holding (harder than every other run's nominal). `--perturb` replaces the action term
+with the delay term, which drops the holding. For comparable numbers, evaluate `-acthold` checkpoints on `-asym-v0`
+(same observations and critic, only the action term differs), and on `-asym-acthold-v0` for robustness to holds.
+
+**Verification (CPU, isaaclab stubbed).** Test:
+`/tmp/claude-322334/-zhome-b3-e-222334/e98b2254-0dd6-46ce-be5a-af9ce9954bee/scratchpad/holdtest/test_acthold.py`.
+It runs against the **real** Isaac Lab `joint_actions_to_limits.py` (the parent) and the real `configclass`, with a
+stand-in articulation that tracks its targets with a first-order lag. Results:
+- p_max 0 is bit-identical to `EMAJointPositionToLimitsAction` (60 steps × 6 substeps, partial resets) and consumes no
+  random numbers.
+- p = 1 keeps the applied target at the reset pose on every substep, while `_prev_applied_actions` equals the parent's
+  EMA state.
+- p = 1 / p = 0 envs side by side are independent. Joints are held together, or independently with `per_joint`.
+- The hold rate is 0.0501 for mean p 0.0502 (4096 envs × 200 steps; per-env rate vs p: slope 1.00). With fixed p, the
+  rate is 0.2999 for 0.3 and 0.0497 for 0.05. Bursts U{1..3} at p 0.1 give 0.180 (theory 0.182).
+- Reset sets the EMA state and the held target to the joint position, clears the counters, resamples p in [0, 0.1] and
+  leaves the other envs untouched.
+- Composition with the delay term works as described above.
+- Three deliberate bugs (no reset of the held target, EMA held too, RNG draws at p 0) are each caught.
+
+Not verified: env construction in Isaac Sim (the env cfg is checked statically only) and training behaviour.
+
 ## Runs
 
 ### Sanity runs (no DR)
@@ -143,6 +237,7 @@ Task ids from `orca_v2_repose_ablation_env_cfg.py`, single change vs the baselin
 | wave 2 | `-handgrav-v0` | gravity on hand links | 5k | registered, parked |
 | wave 2 | `-wristfix-v0` | wrist not actuated (72-dim obs) | 5k | registered, parked |
 | fixed-delay run (first Phase 2 run) | TBD | fixed 1-step action delay (sim) + next-tick actuation on deploy (`DelayedEMAJointPositionToLimitsActionCfg`) | 5k | planned |
+| Phase 2, with the fixed delay | `-asym-acthold-v0` | **on B**: [random action holding](#random-action-holding): joint targets not updated w.p. p ~ U(0, 0.1) per step | 5k | implemented + CPU-tested; Phase 2 |
 | TBD | | + action delay 0–2 steps | 5k | TBD |
 | TBD | | + compliant fingertip contacts (randomized stiffness) | 5k | TBD |
 | TBD | | + per-episode joint position bias in obs noise | 5k | TBD |
@@ -177,3 +272,5 @@ Task ids from `orca_v2_repose_ablation_env_cfg.py`, single change vs the baselin
 - `ent5e-3_on_nodr` result (mirror of `sanity_nodr_on_dr`).
 - Phase 2: fixed-delay run first; measure the inherent delay from chirps; confirm the demo cube size; fork
   `rwr_faive_system` once released.
+- Phase 2: fixed delay + [random action holding](#random-action-holding) (implemented, not run); log the real
+  missed-command rate in the policy node to fit `hold_prob_max`.

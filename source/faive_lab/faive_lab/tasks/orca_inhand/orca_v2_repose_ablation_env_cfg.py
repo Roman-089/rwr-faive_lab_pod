@@ -30,6 +30,8 @@ Sim2real wave (single change each vs the baseline; see docs/ablation/):
   asym-droppen orca-v2-inhand-repose-asym-droppen-v0 B + -100 return penalty on a cube drop
   rma-teacher orca-v2-inhand-repose-rma-teacher-v0   RMA stage 1 (HORA): B + actor sees tanh(env_mlp(cube pos, DR params))
   rma-student orca-v2-inhand-repose-rma-student-v0   RMA stage 2: adaptation module on 30-step history (deployable)
+  asym-acthold orca-v2-inhand-repose-asym-acthold-v0 B + random action holding: joint targets not updated w.p.
+                                                     p ~ U(0, 0.1) per step (lost / late servo packet; Phase 2)
 
 Reward wave (on top of B; docs/ablation/rewards.md, terms in rewards_ablation.py):
   asym-rotlin  orca-v2-inhand-repose-asym-rotlin-v0  direction + magnitude terms -> 90 * clipped linear progress
@@ -49,7 +51,7 @@ from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils import configclass
 
 from . import mdp, rewards_ablation
-from .actions_ablation import RelativeJointPositionToLimitsActionCfg
+from .actions_ablation import HoldingEMAJointPositionToLimitsActionCfg, RelativeJointPositionToLimitsActionCfg
 from .commands_ablation import FixedDirectionRotationCommandCfg
 from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
@@ -364,3 +366,26 @@ class OrcaV2ReposeRMAStudentEnvCfg(OrcaV2ReposeRMATeacherEnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.observations.policy.history_length = 30
+
+
+# --- Sim2real on top of B (Phase 2, docs/ablation/sim2real.md).
+
+
+@configclass
+class OrcaV2ReposeAsymActHoldEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B with random action holding (TeleDexter's action masking, arXiv 2607.11481): per episode p ~ U(0, 0.1); each
+    policy step w.p. p the joint targets are not updated (lost / late servo packet), while ``last_joint_pos_cmd`` still
+    shows the command the policy sent. Deploy: unchanged."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        a = self.actions.joint_pos
+        self.actions.joint_pos = HoldingEMAJointPositionToLimitsActionCfg(
+            asset_name=a.asset_name,
+            joint_names=a.joint_names,
+            alpha=a.alpha,
+            rescale_to_limits=a.rescale_to_limits,
+            hold_prob_max=0.1,
+            hold_steps_range=(1, 1),
+            per_joint=False,
+        )
