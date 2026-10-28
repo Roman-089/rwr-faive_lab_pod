@@ -29,6 +29,7 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | done (2026-10-28 07:30) | ~1629 | | ~10 % | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
 | `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | 29837730 / L40S | 2k | queued | | | | | | | |
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued | | | | | | | |
+| `abl_C_asym_dr_seed1` | `-asym-dr-v0` | C, seed 1 (is C > B real?) | 29838635 / A10 | 5k | queued | | | | | | | |
 | `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | queued | | | | | | | |
 | `abl_B_rotsoft` | `-asym-rotsoft-v0` | B, magnitude kernel σ 0.2 → 0.75, weights mag 30 → 60 / dir 60 → 30 | 29838451 / A100 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
