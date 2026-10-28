@@ -21,13 +21,13 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | done (2026-10-27 18:15) | ~1573 | ~588 / 640 | ~10 % | 5.66 / 6.55 | 66.3 / 62.0 | 86 / 52 | 0.20 / 0.98 |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | 5k | done (2026-10-27 22:35) | ~1583 | ~582 / 640 | ~12 % | 6.08 / 6.40 (best 6.19 / 6.77 @4000) | 72.2 / 63.2 | 84 / 69 | 0.20 / 0.44 |
 | sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | done (2026-10-27 22:45) | ~1793 | ~574 / 640 | ~10 % | 10.55 / 10.59 | 85.8 / 85.7 | 83 / 69 | 0.19 / 0.47 |
-| `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | running | | | | | | | |
+| `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | done (2026-10-28 14:25) | ~1663 | | ~14 % | 5.33 / 5.82 | 64.0 / 58.1 | 83 / 66 | 0.20 / 0.59 |
 | `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | queued | | | | | | | |
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | done (2026-10-28 06:40) | ~1437 | | ~13 % | 5.12 / 6.15 | 63.9 / 63.2 | 91 / 59 | 0.09 / 0.70 |
 | `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | done (2026-10-28 06:40) | ~1568 | | ~12 % | 5.23 / 5.92 (best 5.48 / 6.16 @2000) | 62.6 / 61.1 | 91 / 55 | 0.11 / 0.86 |
 | `abl_B_asym_ent5e-3` | `-asym-v0` | B + entropy_coef 1e-4 → 5e-3 (hydra override) | 29833758 / A100 | 5k | running | | | | | | | |
 | `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | done (2026-10-28 07:30) | ~1629 | | ~10 % | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
-| `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | 29837730 / L40S | 2k | queued | | | | | | | |
+| `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | 29837730 / L40S | 2k | running | | | | | | | |
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued | | | | | | | |
 | `abl_C_asym_dr_seed1` | `-asym-dr-v0` | C, seed 1 (is C > B real?) | 29838635 / A10 | 5k | queued | | | | | | | |
 | `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | queued | | | | | | | |
@@ -174,6 +174,11 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   (DC 0.31 vs 0.6–1.0). It is **still improving steeply at 10k** (6.1 → 7.4 RPM over the last 2k iters) — slower
   start than B (4.0 vs 4.3 RPM at 2k), but no plateau. Students distill from model_9999; a longer teacher (15–20k,
   resumed from 9999) is a cheap upgrade if the students track it. Ceiling for the students: ~7.4 RPM.
+
+- 2026-10-28 14:30 — **asym hist3 eval:** 5.33 / 5.82 RPM, RA 64.0 / 58.1 %, DFSR 83 / 66 %, DC 0.20 / 0.59 — **≈ B
+  nominal** (B two-seed mean 5.45 RPM, RA 64 %), somewhat **more robust under perturbation** (DC 0.59 vs B 0.86 / 0.98,
+  DFSR 66 vs 52 / 55 %; single seed). A 3-step history does not raise speed; it may help with the unmodeled delay,
+  as expected for a policy that can see its recent commands vs joint response. hist10 pending.
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
