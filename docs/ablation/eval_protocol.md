@@ -65,3 +65,17 @@ an eval queued with `-w ended(<train job>)`).
 Originally planned implementation: `hpc/replay/record_rollout.py` already logs cube quat, angular velocity, command and
 dones per step; add `hpc/eval_metrics.py` that turns a recording into these four numbers (+ `--steps 1200`, fixed
 command, more envs). Eval pipeline (metrics, perturbed, MuJoCo videos, W&B) verified end to end on 2026-10-27 (A).
+
+## Speed-tracking check
+
+Does the policy follow the commanded speed, or just rotate as fast as it can in the commanded direction? Our best
+policies average ~0.78 rad/s (7.4 RPM), below the slowest training command (0.9 rad/s), so the magnitude reward may act
+as plain "go faster". `hpc/speed_sweep_job.sh` evaluates one checkpoint (nominal, 60 s, 64 envs) at
+|cmd| = 0.3 / 0.6 / 0.9 / 1.2 / 2.0 rad/s → `<run>/eval/metrics_cmd<c>.json` (1.5 = the standard `metrics.json`).
+Flat RPM over cmd = speed command ignored → a wider or curriculum speed range (e.g. 0.3–1.5) is the next reward/command
+ablation; RPM rising with cmd = the policy tracks speed and the training range matters.
+
+| Checkpoint | 0.3 | 0.6 | 0.9 | 1.2 | 1.5 | 2.0 |
+|---|---|---|---|---|---|---|
+| `abl_B_asym_ent5e-3` model_4999 (job 29845227) | | | | | 7.33 | |
+| `teacher` model_9999 (job 29845228) | | | | | 7.44 | |

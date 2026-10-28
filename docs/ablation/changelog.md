@@ -35,3 +35,4 @@ full entries live in the linked topic files.
 | 2026-10-28 | rotsoft = reward hack (‖ω‖ any axis pays; ~0 RPM); RMA stage 2 = 6.20 RPM (96 % of stage 1) | [rewards](rewards.md), [RMA](rma.md) |
 | 2026-10-28 | hist10 eval: no speed gain (5.01 RPM), most robust under perturbation; history = robustness, not speed | [history](history_and_memory.md) |
 | 2026-10-28 | student_pt (transformer, gradient_length 15) ran out of memory on the L40S at 8192 envs; rerun with 4096 envs | [teacher-student](teacher_student.md) |
+| 2026-10-28 | speed-tracking sweep queued (does RPM follow the commanded speed?) for ent5e-3 and the teacher | [eval protocol](eval_protocol.md) |
