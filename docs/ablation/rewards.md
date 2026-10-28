@@ -74,7 +74,7 @@ Terms in `rewards_ablation.py`. Drop penalty: `is_terminated_term` on `object_dr
 |---|---|---|---|---|---|
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued |
 | `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | queued |
-| `abl_B_rotsoft` | `-asym-rotsoft-v0` | B, magnitude kernel σ 0.2 → 0.75, weights mag 30 → 60 / dir 60 → 30 | 29838451 / A100 | 5k | queued |
+| `abl_B_rotsoft` | `-asym-rotsoft-v0` | B, magnitude kernel σ 0.2 → 0.75, weights mag 30 → 60 / dir 60 → 30 | 29838451 / A100 | 5k | done (2026-10-28 17:05) — **failed: reward hack** |
 | planned: rotlin + drop penalty | – | ablation 4 above (−200 weight / −10 return) | – | 5k | planned |
 | planned: position / velocity variant | – | ablation 3 above | – | 5k | planned |
 | parked (wave 2) | `-droppen-v0` | −100 return on drop, on the baseline A | – | 5k | registered, parked ([sim2real](sim2real.md)) |
@@ -82,7 +82,17 @@ Terms in `rewards_ablation.py`. Drop penalty: `is_terminated_term` on `object_dr
 
 ## Results
 
-None yet (all reward runs queued / running).
+**`abl_B_rotsoft`** (nominal / perturbed): the policy does not rotate the cube.
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 0.03 / −0.03 | 7.8 / 7.1 | 88 / 75 | 0.12 / 0.30 |
+| 2000 | 0.17 / 0.14 | 11.1 / 7.0 | 97 / 73 | 0.03 / 0.47 |
+| 3000 | −0.02 / 0.09 | 6.7 / 7.8 | 94 / 78 | 0.06 / 0.27 |
+| 4000 | −0.06 / 0.06 | 7.5 / 7.5 | 92 / 72 | 0.09 / 0.36 |
+| 4999 | −0.02 / −0.01 | 6.8 / 5.8 | 92 / 77 | 0.09 / 0.34 |
+
+Training reward was high (~1480, drops 8 %), so the policy found a better-paying behaviour than rotating.
 
 ### Log
 
@@ -96,11 +106,17 @@ None yet (all reward runs queued / running).
 
 ## Conclusions so far
 
-- Diagnosis only (see above); no reward run has been evaluated yet.
+- **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).
+  The magnitude term rewards ‖ω‖ — the norm of the full 3-D angular velocity, **any axis and either sign** — and the
+  direction term only the cosine. With the magnitude weight (60) above the direction weight (30) and a wide kernel
+  (σ 0.75), wobbling / oscillating the cube in place pays more than rotating it about +z / −z. Lesson: a speed term must
+  be measured *along the commanded axis and sign* (as `rotlin`'s ω·k is), never as ‖ω‖. The baseline weighting
+  (direction 60 > magnitude 30, narrow σ 0.2) only avoided the hack by making speed nearly irrelevant.
+- The training reward of a reward variant says nothing about rotation: always judge by eval.
 
 ## Next steps / open questions
 
-- The winner of the reward wave (B, `-rotlin` or `-rotsoft`, decided by eval) is the base of the next architecture
+- `rotsoft` is out; `rotlin` (axis-projected, clipped) is the remaining candidate. The winner of the reward wave (B or `-rotlin`, decided by eval) is the base of the next architecture
   candidates ([action space](action_space.md), [PPO and capacity](ppo_and_capacity.md)).
 - Then rotlin + drop penalty, position / velocity variant, HORA work / torque penalties if rotlin is jerky.
 - Re-check drop timing on B's rollout.
