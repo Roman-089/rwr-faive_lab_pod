@@ -29,6 +29,8 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | done (2026-10-28 07:30) | ~1629 | | ~10 % | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
 | `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | 29837730 / L40S | 2k | queued | | | | | | | |
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued | | | | | | | |
+| `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | queued | | | | | | | |
+| `abl_B_rotsoft` | `-asym-rotsoft-v0` | B, magnitude kernel σ 0.2 → 0.75, weights mag 30 → 60 / dir 60 → 30 | 29838451 / A100 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
 
 ## Observations / log
@@ -142,6 +144,10 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   B seed 1 (5.23), although its training reward is clearly higher (1629 vs ~1570). **Knowing the physics parameters
   explicitly buys little**, so the remaining gap to the no-DR reference (10.6 RPM) is not mainly about identifying the
   DR sample — more likely obs noise and the harder dynamics themselves. Stage 2 can at best recover these ~6.5 RPM.
+
+- 2026-10-28 09:30 — **reward review** (HYPERPARAM_NOTES §14): our direction term pays the same for any speed and the
+  magnitude kernel is ~0 at our policies' speed, so speed is barely rewarded; the literature rewards speed linearly and
+  clips it. Queued `abl_B_rotlin` (linear clipped progress) and `abl_B_rotsoft` (reweighted current terms).
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.

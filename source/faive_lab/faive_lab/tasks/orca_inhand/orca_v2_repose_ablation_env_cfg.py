@@ -30,6 +30,12 @@ Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
   rma-teacher orca-v2-inhand-repose-rma-teacher-v0   RMA stage 1 (HORA): B + actor sees tanh(env_mlp(cube pos, DR params))
   rma-student orca-v2-inhand-repose-rma-student-v0   RMA stage 2: adaptation module on 30-step history (deployable)
 
+Reward wave (on top of B; HYPERPARAM_NOTES.md section 14, terms in rewards_ablation.py):
+  asym-rotlin  orca-v2-inhand-repose-asym-rotlin-v0  direction + magnitude terms -> 90 * clipped linear progress
+                                                     about the target axis (HORA/LEAP/DLR 2024) - 5 * off-axis |w|
+  asym-rotsoft orca-v2-inhand-repose-asym-rotsoft-v0 same terms, reweighted: magnitude sigma 0.2 -> 0.75, weight 30 -> 60;
+                                                     direction 60 -> 30
+
 Play / replay a B or C checkpoint with the same task id: the critic's input size differs, so the checkpoint only
 loads into the matching variant.
 """
@@ -40,7 +46,7 @@ from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils import configclass
 
-from . import mdp
+from . import mdp, rewards_ablation
 from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
 from .orca_v2_repose_env_cfg import ObservationsCfg, OrcaV2ReposeEnvCfg
@@ -230,6 +236,38 @@ class OrcaV2ReposeAsymDropPenaltyEnvCfg(OrcaV2ReposeAsymEnvCfg):
         self.rewards.object_drop = RewTerm(
             func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
         )
+
+
+@configclass
+class OrcaV2ReposeAsymRotLinEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B with a rotation reward linear in the speed about the target axis, clipped at the command (+ off-axis penalty).
+
+    Baseline: direction 60 (speed-independent cosine) + magnitude 30 * exp(-|err| / 0.2), which is ~0.4 at our policies'
+    6 RPM vs the commanded 14 RPM, so speed is barely rewarded. 90 = the same total weight; the max is unchanged.
+    """
+
+    def __post_init__(self):
+        super().__post_init__()
+        cmd = {"command_name": "continuous_rotation", "object_cfg": SceneEntityCfg("object")}
+        self.rewards.angular_velocity_direction = None
+        self.rewards.angular_velocity_magnitude = None
+        self.rewards.rotation_progress = RewTerm(
+            func=rewards_ablation.rotation_progress_clipped, weight=90.0, params={**cmd, "min_vel": -0.5}
+        )
+        self.rewards.off_axis_angular_velocity = RewTerm(
+            func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
+        )
+
+
+@configclass
+class OrcaV2ReposeAsymRotSoftEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B with the baseline's rotation terms reweighted toward speed: wider magnitude kernel, more weight on it."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.angular_velocity_magnitude.params["sigma"] = 0.75
+        self.rewards.angular_velocity_magnitude.weight = 60.0
+        self.rewards.angular_velocity_direction.weight = 30.0
 
 
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
