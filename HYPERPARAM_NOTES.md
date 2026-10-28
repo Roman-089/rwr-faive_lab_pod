@@ -313,6 +313,20 @@ slower and safer, not faster.
 
 Training rewards of these variants are not comparable with B's; compare by eval (RPM / RA / DFSR).
 
+## 15. Next architecture candidates (agreed 2026-10-28, queue after the reward runs)
+
+Base = the winner of the reward wave (B, `-rotlin` or `-rotsoft`, decided by eval). Single change each:
+
+| Run | Change | Why |
+|---|---|---|
+| `alpha05` | EMA α 0.2 → 0.5 | α 0.2 at 20 Hz is a ~5-step (≈250 ms) time constant on joint targets; may cap gaiting speed |
+| `relact` | relative joint targets (q_target = q_target,prev + s·a, HORA/LEAP) | small, fast finger motions are easy to express |
+| `big` | actor/critic MLP 512-512-256-128 → 1024-1024-512-256 | capacity; SimBa (2410.09754) / BRO: larger normalized nets help PPO |
+| student fine-tune | PPO fine-tuning of the best distilled student | close the gap to the teacher; known to be unstable at the start → check existing code / stabilizers first (critic warm-up, KL-to-teacher anneal) |
+
+Order: decide after the reward evals; `alpha05` / `relact` change the action handling that the policy node must mirror
+(allowed: we fork `rwr_faive_system`).
+
 ## Run plan / log
 
 **Phase 1 (now): architecture + reward study** (decided 2026-10-28: find the best architecture and reward first, then iterate on sim2real; a fixed, enforced action delay matched in sim — section 6b, `DelayedEMAJointPositionToLimitsActionCfg` — is the first Phase 2 run).
