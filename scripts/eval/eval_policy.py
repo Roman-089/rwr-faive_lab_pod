@@ -19,7 +19,8 @@ Usage:
     python scripts/eval/eval_policy.py --task orca-v2-inhand-repose-v0 --headless \
         --checkpoints logs/rsl_rl/orca_v2_repose/<run>/model_1000.pt .../model_4999.pt
 Output: <run>/eval/<ckpt>.npz (first --video_envs envs, for scripts/replay/render_rollout.py) and
-<run>/eval/metrics.json (all checkpoints evaluated so far); with --perturb: *_perturbed.npz, metrics_perturbed.json.
+<run>/eval/metrics.json (all checkpoints evaluated so far); with --perturb: *_perturbed.npz, metrics_perturbed.json;
+with --cmd other than 1.5: *_cmd<cmd>.npz, metrics_cmd<cmd>.json.
 """
 
 import argparse
@@ -95,9 +96,10 @@ def main(env_cfg, agent_cfg):
     # one trial = one episode: no time-out inside the trial, no command resampling
     env_cfg.episode_length_s = (args_cli.steps + 10) * env_cfg.sim.dt * env_cfg.decimation
     env_cfg.commands.continuous_rotation.resampling_time_range = (1e6, 1e6)
-    suffix = ""
+    # non-default command speeds get their own outputs (speed-tracking check)
+    suffix = "" if args_cli.cmd == 1.5 else f"_cmd{args_cli.cmd:g}"
     if args_cli.perturb:
-        suffix = "_perturbed"
+        suffix += "_perturbed"
         a = env_cfg.actions.joint_pos
         env_cfg.actions.joint_pos = DelayedEMAJointPositionToLimitsActionCfg(
             asset_name=a.asset_name, joint_names=a.joint_names, alpha=a.alpha,
