@@ -26,8 +26,8 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | done (2026-10-28 06:40) | ~1437 | | ~13 % | 5.12 / 6.15 | 63.9 / 63.2 | 91 / 59 | 0.09 / 0.70 |
 | `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | done (2026-10-28 06:40) | ~1568 | | ~12 % | 5.23 / 5.92 (best 5.48 / 6.16 @2000) | 62.6 / 61.1 | 91 / 55 | 0.11 / 0.86 |
 | `abl_B_asym_ent5e-3` | `-asym-v0` | B + entropy_coef 1e-4 → 5e-3 (hydra override) | 29833758 / A100 | 5k | queued | | | | | | | |
-| `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | running | | | | | | | |
-| `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | after s1 | 2k | planned | | | | | | | |
+| `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | done (2026-10-28 07:30) | ~1629 | | ~10 % | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
+| `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | 29837730 / L40S | 2k | queued | | | | | | | |
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
 
@@ -136,6 +136,12 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   outputs were saved); `train_job_ablation.sh` now kills leftovers in its own process group and exits 0. Jobs submitted
   before the fix are caught by the watcher (`[prune]` line in the log while still RUN) and killed by hand; job
   dependencies use `ended()` rather than `done()` since a killed job ends as EXIT.
+
+- 2026-10-28 07:35 — **RMA stage 1 eval** (actor sees cube pos + DR params through an 8-d latent; upper bound for the
+  deployable stage 2): 6.48 / 6.63 RPM, RA 74.5 / 69.3 %, DFSR 89 / 66 %. Only ~+0.4 RPM over C (6.08) and +1.3 over
+  B seed 1 (5.23), although its training reward is clearly higher (1629 vs ~1570). **Knowing the physics parameters
+  explicitly buys little**, so the remaining gap to the no-DR reference (10.6 RPM) is not mainly about identifying the
+  DR sample — more likely obs noise and the harder dynamics themselves. Stage 2 can at best recover these ~6.5 RPM.
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
