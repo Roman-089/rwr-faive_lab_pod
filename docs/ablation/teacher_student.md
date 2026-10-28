@@ -114,3 +114,9 @@ to be unstable at the start → check existing code / stabilizers first (critic 
   LR 1e-4 fixed (or adaptive with desired_kl 0.003–0.005 and a clamped max), clip 0.1; + β·‖μ_student − μ_teacher‖²
   annealed 1 → 0 over ~1k iters; log RPM of the deterministic policy, MSE to teacher, explained variance; roll back if RPM
   drops > 20 %. Fallback: residual PPO on the frozen student.
+
+- **2026-10-28 16:25** — `teacher_cont18k` cancelled before it started: the entropy run (B + entropy 5e-3: 7.33 RPM vs
+  B 5.45, [PPO / capacity](ppo_and_capacity.md)) shows our entropy 1e-4 suppresses exploration, and the teacher was
+  trained with 1e-4. Replaced by a fresh 10k teacher with entropy 5e-3 (`teacher_ent5e-3`, jobs 29842059 L40S /
+  29842060 A100 dup). The students queued from the 1e-4 teacher stay queued (they test distillation itself); if the
+  new teacher is better, the best student recipe is re-distilled from it.

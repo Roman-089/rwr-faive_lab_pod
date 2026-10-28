@@ -30,3 +30,4 @@ full entries live in the linked topic files.
 | 2026-10-28 | Student PPO fine-tuning review (existing code, stabilizers) | [teacher-student](teacher_student.md#student-ppo-fine-tuning-background-from-the-old-notes-15) |
 | 2026-10-28 | Docs restructured from `HYPERPARAM_NOTES.md` / `ABLATION_RESULTS.md` into `docs/ablation/` | [index](README.md) |
 | 2026-10-28 | Entropy 5e-3 eval: 7.33 RPM (B 5.45); replicate + 1e-2 queued | [PPO / capacity](ppo_and_capacity.md) |
+| 2026-10-28 | teacher_cont18k cancelled → fresh teacher with entropy 5e-3 queued; entropy runs moved to the front of the A100 queue | [teacher-student](teacher_student.md) |
