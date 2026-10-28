@@ -130,5 +130,12 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   Eval note: `train_job_ablation.sh` already ends with `hpc/eval_run.sh`, so separately queued evals for runs submitted
   with it are redundant (cancelled 29836987 / 29836988 / 29837304).
 
+- 2026-10-28 07:30 — **jobs hung after finishing:** B seed 1 and asym LSTM wrote their last output (eval, videos, W&B,
+  prune) at 06:14 / 05:58 but stayed RUN for over an hour, holding an L40S and an A100. LSF showed one leftover 3-thread
+  64 MB process in each job's process group (most likely an orphaned W&B service from `train.py`). Both killed (all
+  outputs were saved); `train_job_ablation.sh` now kills leftovers in its own process group and exits 0. Jobs submitted
+  before the fix are caught by the watcher (`[prune]` line in the log while still RUN) and killed by hand; job
+  dependencies use `ended()` rather than `done()` since a killed job ends as EXIT.
+
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
