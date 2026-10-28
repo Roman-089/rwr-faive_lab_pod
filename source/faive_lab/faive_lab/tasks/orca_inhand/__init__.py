@@ -124,3 +124,23 @@ for _task_id, _env_cfg, _runner_cfg in (
             "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:{_runner_cfg}",
         },
     )
+
+# PPO fine-tuning of the distilled MLP-h10 student (student_finetune.py): pass the student with --resume True
+# --load_run <student run> --checkpoint model_X.pt; the teacher comes from agent.policy.teacher_checkpoint.
+from .student_finetune import register as _register_student_finetune  # noqa: E402
+
+_register_student_finetune()
+
+for _task_id, _runner_cfg in (
+    ("orca-v2-inhand-repose-student-mlp-h10-ft-v0", "PPORunnerCfgOrcaV2StudentFinetune"),
+    ("orca-v2-inhand-repose-student-mlp-h10-res-v0", "PPORunnerCfgOrcaV2StudentResidual"),
+):
+    gym.register(
+        id=_task_id,
+        entry_point="isaaclab.envs:ManagerBasedRLEnv",
+        disable_env_checker=True,
+        kwargs={
+            "env_cfg_entry_point": f"{__name__}.orca_v2_repose_ablation_env_cfg:OrcaV2ReposeTeacherHist10EnvCfg",
+            "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:{_runner_cfg}",
+        },
+    )
