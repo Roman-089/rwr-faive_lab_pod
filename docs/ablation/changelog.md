@@ -39,3 +39,4 @@ full entries live in the linked topic files.
 | 2026-10-28 | grading = live demo speed + duration without drop → one-direction (+z, faster in 11/12 policies) max-speed run queued | [rewards](rewards.md) |
 | 2026-10-28 | drop timing: half of eval drops are reset artifacts in the first 0.35–0.65 s; <3 % RPM cost, sim-only → grasp cache deprioritized | [eval protocol](eval_protocol.md) |
 | 2026-10-28 | Random action holding (TeleDexter's action masking, arXiv 2607.11481) implemented + CPU-tested as `-asym-acthold-v0`: p ~ U(0, 0.1) per episode, whole hand, obs = command sent; not run, queued for Phase 2 with the fixed delay | [sim2real](sim2real.md#random-action-holding) |
+| 2026-10-29 | Actuator net (arXiv 2603.04351 / Hwangbo 2019) implemented + CPU-tested as `-asym-actnet-v0`: delay + play + τ + bounded learned target correction on the implicit PD; v1→v1b held-out RMSE 2.20° → 1.38°; needs v2 chirps, Phase 2 | [actuator net](actuator_net.md) |

@@ -66,6 +66,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `student_mlp_h10_ft` | [student fine-tune](student_finetune.md) | `-student-mlp-h10-ft-v0` (fallback `-student-mlp-h10-res-v0`) | PPO fine-tuning of the MLP-h10 student: teacher critic, 150-iter critic warm-up, kickstarting β 1 → 0 | – | implemented + CPU-tested; launch after `student_mlp_h10` | | | | |
 | fixed-delay run | [sim2real](sim2real.md#fixed-action-delay-sim--deploy) | – | fixed 1-step action delay + next-tick actuation (Phase 2) | – | planned | | | | |
 | `acthold` | [sim2real](sim2real.md#random-action-holding) | `-asym-acthold-v0` | B + random action holding (TeleDexter's action masking): joint targets not updated w.p. p ~ U(0, 0.1) per step (lost / late servo packet); obs = command sent; with the fixed delay in Phase 2 | – | implemented + CPU-tested; Phase 2 | | | | |
+| `actnet` | [actuator net](actuator_net.md) | `-asym-actnet-v0` | B + chirp-fitted servo model (delay, play, τ, learned target correction; arXiv 2603.04351 / Hwangbo 2019). Offline on v1b chirps: position RMSE 2.20° → 1.38°, phase error 18.6° → 8.0° vs the current PD | – | implemented + CPU-tested; retrain on v2 chirps, Phase 2 | | | | |
 
 Cancelled before starting (2026-10-27): A-based `-hist3` / `-hist10` / `-lstm` (29830927 / 28 / 30). Registered but
 parked sim2real tasks (`-delay`, `-jointbias`, `-handgrav`, `-wristfix`, `-droppen`, `-hist3`, `-asym-acthold`): [sim2real](sim2real.md#registered--planned-sim2real-runs-parked).
@@ -84,6 +85,7 @@ Training rewards, episode lengths and drop rates per run are in the topic files.
 | [rewards.md](rewards.md) | reward literature, diagnosis, rotlin, rotsoft, drop penalty, planned variants |
 | [ppo_and_capacity.md](ppo_and_capacity.md) | entropy run, bigger network, PPO hyperparameter ideas |
 | [action_space.md](action_space.md) | EMA α, relative actions, control frequency |
+| [actuator_net.md](actuator_net.md) | Phase 2: learned servo model from chirp recordings (delay, play, τ, residual net); offline results, retraining on v2 chirps |
 | [sim2real.md](sim2real.md) | Phase 2 (parked): delay, joint bias, gravity, wrist, DR ranges, actuator models, sanity runs, deploy facts |
 | [literature.md](literature.md) | PT paper takeaways, general literature reviews, paper → run mapping, code availability |
 | [infrastructure.md](infrastructure.md) | DTU LSF queues, limits, quota / pruning, hanging jobs, submit scripts |

@@ -1,0 +1,2 @@
+# in-sample Bode plots of the deployed fit; regenerate with train.py --deploy
+results/*/train/*.png

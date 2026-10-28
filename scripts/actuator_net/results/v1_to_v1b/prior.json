@@ -1,0 +1,82 @@
+{
+ "index_abd": {
+  "delay_steps": 4,
+  "tau": 0.02987214327622679,
+  "play": 0.045378560551852576,
+  "rmse_deg": 1.2802376747131348,
+  "stiffness": 9.7,
+  "damping": 0.2897597897793998,
+  "friction": 0.039,
+  "inertia": 6.362e-05
+ },
+ "index_mcp": {
+  "delay_steps": 4,
+  "tau": 0.03588639525118838,
+  "play": 0.03316125578789226,
+  "rmse_deg": 0.7741725444793701,
+  "stiffness": 11.8,
+  "damping": 0.4234594639640229,
+  "friction": 0.003,
+  "inertia": 3.266e-05
+ },
+ "index_pip": {
+  "delay_steps": 4,
+  "tau": 0.02987214327622679,
+  "play": 0.04886921905584123,
+  "rmse_deg": 1.4341471195220947,
+  "stiffness": 14.4,
+  "damping": 0.4301588631776658,
+  "friction": 0.00035,
+  "inertia": 4.799e-06
+ },
+ "thumb_abd": {
+  "delay_steps": 4,
+  "tau": 0.024865828336042523,
+  "play": 0.03316125578789226,
+  "rmse_deg": 1.0314782857894897,
+  "stiffness": 15.0,
+  "damping": 0.37298742504063787,
+  "friction": 0.0155,
+  "inertia": 5.192e-05
+ },
+ "thumb_cmc": {
+  "delay_steps": 5,
+  "tau": 0.019303889890581592,
+  "play": 0.05759586531581287,
+  "rmse_deg": 1.2869250774383545,
+  "stiffness": 14.1,
+  "damping": 0.27218484745720045,
+  "friction": 0.0,
+  "inertia": 6.747e-05
+ },
+ "thumb_dip": {
+  "delay_steps": 5,
+  "tau": 0.01707454702356861,
+  "play": 0.0471238898038469,
+  "rmse_deg": 0.937180757522583,
+  "stiffness": 3.5,
+  "damping": 0.05976091458249014,
+  "friction": 0.0,
+  "inertia": 1.766e-06
+ },
+ "thumb_mcp": {
+  "delay_steps": 3,
+  "tau": 0.019130133313077342,
+  "play": 0.054105206811824215,
+  "rmse_deg": 1.8994537591934204,
+  "stiffness": 3.5,
+  "damping": 0.0669554665957707,
+  "friction": 0.0,
+  "inertia": 1.651e-05
+ },
+ "wrist": {
+  "delay_steps": 6,
+  "tau": 0.021433189417614497,
+  "play": 0.0,
+  "rmse_deg": 0.8548252582550049,
+  "stiffness": 12.0,
+  "damping": 0.257198273011374,
+  "friction": 0.105,
+  "inertia": 0.001484
+ }
+}

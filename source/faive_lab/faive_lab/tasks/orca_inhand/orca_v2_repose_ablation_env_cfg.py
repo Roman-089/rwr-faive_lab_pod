@@ -32,6 +32,8 @@ Sim2real wave (single change each vs the baseline; see docs/ablation/):
   rma-student orca-v2-inhand-repose-rma-student-v0   RMA stage 2: adaptation module on 30-step history (deployable)
   asym-acthold orca-v2-inhand-repose-asym-acthold-v0 B + random action holding: joint targets not updated w.p.
                                                      p ~ U(0, 0.1) per step (lost / late servo packet; Phase 2)
+  asym-actnet  orca-v2-inhand-repose-asym-actnet-v0  B + chirp-fitted servo model (delay, play, tau, learned target
+                                                     correction) on all joints (actuator_net.py; Phase 2)
 
 Reward wave (on top of B; docs/ablation/rewards.md, terms in rewards_ablation.py):
   asym-rotlin  orca-v2-inhand-repose-asym-rotlin-v0  direction + magnitude terms -> 90 * clipped linear progress
@@ -52,6 +54,7 @@ from isaaclab.utils import configclass
 
 from . import mdp, rewards_ablation
 from .actions_ablation import HoldingEMAJointPositionToLimitsActionCfg, RelativeJointPositionToLimitsActionCfg
+from .actuator_net import servo_net_actuators
 from .commands_ablation import FixedDirectionRotationCommandCfg
 from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
@@ -389,3 +392,15 @@ class OrcaV2ReposeAsymActHoldEnvCfg(OrcaV2ReposeAsymEnvCfg):
             hold_steps_range=(1, 1),
             per_joint=False,
         )
+
+
+@configclass
+class OrcaV2ReposeAsymActNetEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B with the chirp-fitted servo model on all 17 joints (actuator_net.py, docs/ablation/actuator_net.md): per joint
+    type command delay + servo play + PD time constant + bounded learned target correction on the implicit PD drive.
+    Stiffness / effort limit / friction stay orca_v2.py's. Policy obs unchanged. Not to be stacked with -delay (the
+    servo delay is already in the actuator)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.scene.robot.actuators = servo_net_actuators(self.scene.robot.actuators["fingers"])
