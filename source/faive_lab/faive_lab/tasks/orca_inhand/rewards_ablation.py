@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-"""Reward terms for the reward ablations in ``orca_v2_repose_ablation_env_cfg.py`` (HYPERPARAM_NOTES.md section 14).
+"""Reward terms for the reward ablations in ``orca_v2_repose_ablation_env_cfg.py`` (docs/ablation/rewards.md).
 
 The baseline rewards rotation with a speed-independent direction cosine (weight 60) and a magnitude kernel
 exp(-|err| / 0.2) that is ~0 far below the commanded speed. The literature (HORA, LEAP, RotateIt, AnyRotate, DLR) uses

@@ -15,7 +15,7 @@ baseline; tell runs apart with ``--run_name``.
   sanity      orca-v2-inhand-repose-nodr-v0          baseline without domain randomization and observation noise
   teacher     orca-v2-inhand-repose-teacher-v0       privileged teacher (actor + critic see teacher obs), for distillation
 
-Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
+Sim2real wave (single change each vs the baseline; see docs/ablation/):
   delay       orca-v2-inhand-repose-delay-v0         joint targets 50-100 ms late (6-12 substeps, per episode)
   jointbias   orca-v2-inhand-repose-jointbias-v0     per-episode joint-position obs offset U(+-0.05 rad)
   droppen     orca-v2-inhand-repose-droppen-v0       -100 return penalty on a cube drop
@@ -30,7 +30,7 @@ Sim2real wave (single change each vs the baseline; see HYPERPARAM_NOTES.md):
   rma-teacher orca-v2-inhand-repose-rma-teacher-v0   RMA stage 1 (HORA): B + actor sees tanh(env_mlp(cube pos, DR params))
   rma-student orca-v2-inhand-repose-rma-student-v0   RMA stage 2: adaptation module on 30-step history (deployable)
 
-Reward wave (on top of B; HYPERPARAM_NOTES.md section 14, terms in rewards_ablation.py):
+Reward wave (on top of B; docs/ablation/rewards.md, terms in rewards_ablation.py):
   asym-rotlin  orca-v2-inhand-repose-asym-rotlin-v0  direction + magnitude terms -> 90 * clipped linear progress
                                                      about the target axis (HORA/LEAP/DLR 2024) - 5 * off-axis |w|
   asym-rotsoft orca-v2-inhand-repose-asym-rotsoft-v0 same terms, reweighted: magnitude sigma 0.2 -> 0.75, weight 30 -> 60;
@@ -123,7 +123,7 @@ class OrcaV2ReposeTeacherEnvCfg(OrcaV2ReposeEnvCfg):
 class OrcaV2ReposeDelayEnvCfg(OrcaV2ReposeEnvCfg):
     """Joint targets reach the joints 50-100 ms late (6-12 physics substeps), sampled per episode.
 
-    Matches next-tick actuation on deploy (1 policy step) + 0-50 ms servo / bus lag (HYPERPARAM_NOTES 6b).
+    Matches next-tick actuation on deploy (1 policy step) + 0-50 ms servo / bus lag (docs/ablation/sim2real.md, fixed action delay).
     """
 
     def __post_init__(self):
@@ -206,7 +206,7 @@ class OrcaV2ReposeHist10EnvCfg(OrcaV2ReposeEnvCfg):
         self.observations.policy.history_length = 10
 
 
-# --- Architecture variants on top of ablation B (asymmetric critic), which beat the baseline by far (ABLATION_RESULTS).
+# --- Architecture variants on top of ablation B (asymmetric critic), which beat the baseline by far (docs/ablation/asymmetric_critic.md).
 
 
 @configclass

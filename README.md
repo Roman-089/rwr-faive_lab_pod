@@ -73,6 +73,7 @@ python scripts/rsl_rl/play.py --task=orca-v2-inhand-repose-v0 --num_envs 16
 | Custom observation / reward / command functions | `source/faive_lab/faive_lab/tasks/orca_inhand/mdp/` |
 | PPO hyperparameters | `source/faive_lab/faive_lab/tasks/orca_inhand/agents/rsl_rl_ppo_cfg.py` |
 | ORCA v2 joint parameters | `source/faive_lab/faive_lab/assets/orca_v2.py` |
+| Ablation study (runs, results, plans) | `docs/ablation/README.md` |
 
 
 ## Set up IDE (Optional)

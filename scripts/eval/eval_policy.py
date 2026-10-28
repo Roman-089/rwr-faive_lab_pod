@@ -1,6 +1,6 @@
 """Evaluate checkpoints with the ORCA PT paper's metrics (arXiv 2605.21330) and record rollouts for videos.
 
-One Isaac Sim start for several checkpoints of one run. Fixed eval setting (HYPERPARAM_NOTES.md section 8): the
+One Isaac Sim start for several checkpoints of one run. Fixed eval setting (docs/ablation/eval_protocol.md): the
 task's own DR and observation noise, |command| = --cmd rad/s about z with the sign alternating over envs, no command
 resampling, --steps control steps (1200 = 60 s at 20 Hz) without time-out; a dropped cube re-spawns and the
 drop is counted.
