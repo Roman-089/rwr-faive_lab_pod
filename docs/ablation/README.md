@@ -58,7 +58,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `alpha05` | [action space](action_space.md) | – | EMA α 0.2 → 0.5 | – | planned | | | | |
 | `relact` | [action space](action_space.md) | – | relative joint targets | – | planned | | | | |
 | `big` | [PPO / capacity](ppo_and_capacity.md) | – | MLP 1024-1024-512-256 | – | planned | | | | |
-| student fine-tune | [student fine-tune](student_finetune.md) | – | PPO fine-tuning of the best student | – | planned | | | | |
+| `student_mlp_h10_ft` | [student fine-tune](student_finetune.md) | `-student-mlp-h10-ft-v0` (fallback `-student-mlp-h10-res-v0`) | PPO fine-tuning of the MLP-h10 student: teacher critic, 150-iter critic warm-up, kickstarting β 1 → 0 | – | implemented + CPU-tested; launch after `student_mlp_h10` | | | | |
 | fixed-delay run | [sim2real](sim2real.md#fixed-action-delay-sim--deploy) | – | fixed 1-step action delay + next-tick actuation (Phase 2) | – | planned | | | | |
 
 Cancelled before starting (2026-10-27): A-based `-hist3` / `-hist10` / `-lstm` (29830927 / 28 / 30). Registered but
