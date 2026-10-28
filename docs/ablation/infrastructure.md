@@ -66,3 +66,12 @@ DTU HPC uses **LSF** (`bsub`), conda env `rwr` (Isaac Lab 2.3.2 / Isaac Sim 5.1,
 `train_job_ablation.sh` already ends with `hpc/eval_run.sh`, so separately queued evals for runs submitted with it are
 redundant (cancelled 29836987 / 29836988 / 29837304, 2026-10-28 06:45). Earlier, evals for B / C / sanity were queued
 with `-w ended(<train job>)` (jobs 29832523 / 29832525 / 29832526, 2026-10-27 17:20).
+
+## Remote GPU: MicroAGI RTX 6000 Pro (2026-10-28)
+
+Course-provided instances (RTX 6000 Pro Blackwell 96 GB, 48 vCPU, 180 GB RAM; 1 GPU per person, 8 per group, no
+GPU-hour limit; reachable only over Cloudflare WARP). Uses the platform's Isaac Lab 2.3.2 image, so no Isaac Sim
+install. Pull-based queue: [`scripts/remote/`](../../scripts/remote/README.md) — runs listed in
+`scripts/remote/queue.txt`, status and eval metrics pushed to branch `remote-results`. Run names end in `_r6k`.
+Livestreaming the sim over WebRTC also works there (platform docs), and the newer driver should allow RTX rendering
+and training videos, which crash on DTU.

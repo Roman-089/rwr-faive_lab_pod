@@ -1,0 +1,6 @@
+# Run queue for the RTX 6000 Pro instance (scripts/remote/run_queue.sh). One run per line:
+#   RUN_NAME TASK ITERS [extra train.py args ...]
+# A run starts once (its status is kept in logs/remote_state/ on the instance); results land on branch remote-results.
+# Names end in _r6k so they never collide with the DTU copies of the same experiment.
+abl_B_asym_ent5e-3_seed1_r6k orca-v2-inhand-repose-asym-v0 5000 --seed 1 agent.algorithm.entropy_coef=0.005
+abl_B_asym_ent1e-2_r6k orca-v2-inhand-repose-asym-v0 5000 agent.algorithm.entropy_coef=0.01
