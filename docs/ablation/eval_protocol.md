@@ -79,3 +79,21 @@ ablation; RPM rising with cmd = the policy tracks speed and the training range m
 |---|---|---|---|---|---|---|
 | `abl_B_asym_ent5e-3` model_4999 (job 29845227) | | | | | 7.33 | |
 | `teacher` model_9999 (job 29845228) | | | | | 7.44 | |
+
+## Drop timing: are better starting grasps needed? (2026-10-28, `scripts/eval/drop_timing.py`, CPU)
+
+Nominal rollouts of 10 policies (B, B seed1, ent5e-3, C, teacher, RMA s1/s2, hist3/10, LSTM; 64 envs × 60 s each):
+
+- **Half the drops are reset artifacts.** 51 of 99 drops come within 5 s of a (re)spawn, most at steps 7–13 (0.35–0.65 s):
+  the cube slides off before the EMA-filtered fingers (~250 ms time constant) can close. Drop rate in the first second
+  ≈ 2.7 per env-minute vs ≈ 0.1 in steady state (> 20×). Overall 6.9 % of spawns drop within 5 s.
+- **They barely cost speed:** spin-up + early respawns cost 0.2–2.6 % of the rotation (RPM).
+- **They dominate the drop-free rate of the best policies:** ent5e-3 has 6 of its 8 drops within 5 s of spawn (teacher
+  3 of 4); without them, its DFSR would be ~97 % instead of 88 %. Steady-state drops of ent5e-3 / teacher: ~0.03 per
+  env-minute.
+- **Not relevant on the real hand:** a demo starts once, from a cube a person places in the hand, not from the sim's
+  "cube dropped onto randomized fingers" reset.
+
+**Verdict:** a grasp cache (HORA / LEAP) would mostly fix a sim-only failure. It is not where speed or real-robot
+endurance is lost; deprioritized. Cheaper: report a steady-state DFSR (ignoring drops in the first ~1 s after a spawn)
+so the sim metric matches the demo, and revisit a gentler reset only if training-time drops stay high.
