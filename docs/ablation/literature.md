@@ -113,6 +113,18 @@ limit; tool exists in `scripts/motor_param_characterization/` (owner S1), needs 
 integer rate with outlier rejection instead of heavy smoothing, distil vision into a history student; (10) backlash
 model from chirp reversals.
 
+## Search 2026-10-28 (late): newer sim2real / actuator papers
+
+Abstract-level reads only (full papers not checked); none has public code.
+
+| Paper | What it adds for us | Use |
+|---|---|---|
+| Tendon force modeling for sim2real (2603.04351) | Transformer predicts servo tendon force from command history (within 3 % of max force); in a GPU sim it cuts the sim-to-real gap by 41 % and improves real fingertip tracking by 50 % | Beyond the linear joint fit: a learned actuator model (cf. Hwangbo 1901.08652) trained on S1's chirp recordings |
+| DexScrew (2512.02011, Berkeley, Qi = HORA) | RL in a deliberately simplified sim still bootstraps contact-rich skills; real-world data / touch closes the gap | Supports "fit the important dynamics, randomize the rest" |
+| ADEPT (2608.19182, NVIDIA) | Fine-tuning a pretrained dexterous policy with plain RL erodes it; BC distillation + critic warm-up + conservative updates keep it | Same recipe as our student fine-tune ([student_finetune](student_finetune.md)) |
+| TeleDexter (2607.11481) | Random action masking + DR named as enablers of zero-shot transfer | Cheap sim2real DR: randomly hold the previous joint target (missed control steps) |
+| WM-Craftnet (2609.07002, CoRL 2026) | World-model latent (proprio + depth + touch) as recurrent context for an asymmetric actor-critic; reconstruction supervision | Same idea as the PT recon head; needs depth / touch for the rest |
+
 ## Paper → run mapping and code availability
 
 How the Phase 1 runs trace back to the literature, and which papers publish code we can port (checked 2026-10-28).
