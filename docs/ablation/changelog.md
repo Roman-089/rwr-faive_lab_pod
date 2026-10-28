@@ -33,3 +33,4 @@ full entries live in the linked topic files.
 | 2026-10-28 | teacher_cont18k cancelled → fresh teacher with entropy 5e-3 queued; entropy runs moved to the front of the A100 queue | [teacher-student](teacher_student.md) |
 | 2026-10-28 | No-DR policy on DR task: 3.32 RPM → DR training is necessary; mirror eval queued (new `-asym-nodr-v0`) | [sim2real](sim2real.md) |
 | 2026-10-28 | rotsoft = reward hack (‖ω‖ any axis pays; ~0 RPM); RMA stage 2 = 6.20 RPM (96 % of stage 1) | [rewards](rewards.md), [RMA](rma.md) |
+| 2026-10-28 | hist10 eval: no speed gain (5.01 RPM), most robust under perturbation; history = robustness, not speed | [history](history_and_memory.md) |

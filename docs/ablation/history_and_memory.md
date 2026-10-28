@@ -31,7 +31,7 @@ Reward = mean of last 100 iters.
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status (old log) | Reward | Drop % |
 |---|---|---|---|---|---|---|---|
 | `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | done (2026-10-28 14:25) | ~1663 | ~14 % |
-| `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | queued | | |
+| `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | done (2026-10-28 17:55) | | |
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | done (2026-10-28 06:40) | ~1437 | ~13 % |
 
 Cancelled (2026-10-27 15:20, before starting): A-based `-hist3` / `-hist10` / `-lstm` (jobs 29830927 / 29830928 /
@@ -45,7 +45,8 @@ Cancelled (2026-10-27 15:20, before starting): A-based `-hist3` / `-hist10` / `-
 | B (two-seed mean RPM 5.45) seed 42 / seed 1 | 5.66 / 6.55 · 5.23 / 5.92 | 66.3 / 62.0 · 62.6 / 61.1 | 86 / 52 · 91 / 55 | 0.20 / 0.98 · 0.11 / 0.86 |
 | asym hist3 | 5.33 / 5.82 | 64.0 / 58.1 | 83 / 66 | 0.20 / 0.59 |
 | asym LSTM | 5.12 / 6.15 | 63.9 / 63.2 | 91 / 59 | 0.09 / 0.70 |
-| asym hist10 | pending | | | |
+| asym hist10 | 5.01 / 5.72 | 68.8 / 67.6 | 88 / **70** | 0.14 / **0.44** |
+| asym hist10 by ckpt 1000 / 2000 / 3000 / 4000 / 4999 (nominal RPM) | 3.74 · 4.64 · 5.04 · 4.98 · 5.01 | 49.8 · 61.9 · 66.8 · 67.8 · 68.8 | | |
 
 ### Log
 
@@ -57,13 +58,22 @@ Cancelled (2026-10-27 15:20, before starting): A-based `-hist3` / `-hist10` / `-
   DFSR 66 vs 52 / 55 %; single seed). A 3-step history does not raise speed; it may help with the unmodeled delay,
   as expected for a policy that can see its recent commands vs joint response. hist10 pending.
 
+- **2026-10-28 17:55 — asym hist10 eval:** 5.01 / 5.72 RPM, RA 68.8 / 67.6 %, DFSR 88 / 70 %, DC 0.14 / 0.44. Highest
+  training reward of the B family (~1603) but no faster than B in eval; the most robust under perturbation so far.
+
 ## Conclusions so far
 
-- Neither a 3-step history nor an LSTM actor-critic raises speed over B at 5k iters.
-- Both look somewhat more robust under perturbation (fewer drops), single seed each.
+- **History / memory does not raise speed** over B at 5k iters (hist3 5.33, hist10 5.01, LSTM 5.12 vs B 5.45 RPM).
+- **It does raise robustness to the unmodeled delay + offset, increasingly with window length:** perturbed DFSR / DC
+  B 52–55 % / 0.86–0.98 → hist3 66 % / 0.59 → hist10 70 % / 0.44 (LSTM 59 % / 0.70). Single seed each, but monotonic.
+  Consistent with the PT paper (history matters for motor-only sensing) and with HORA's caution only on speed.
+- Training reward is not predictive of eval speed here (hist10 has the highest training reward, lowest nominal RPM).
+- Implication: for deployment, history is worth its cost (needs the history kept inside the exported policy); for
+  speed, look at entropy / reward / action space instead.
 
 ## Next steps / open questions
 
-- hist10 eval (HORA predicts MLP + long raw history degrades; PT says 10 steps help behind a better encoder).
+- ~~hist10 eval~~ done. Combine history with the new base (entropy 5e-3) once the replicate confirms it: speed from
+  entropy, robustness from history.
 - History behind a distilled student instead of PPO from scratch: [teacher-student](teacher_student.md), [RMA](rma.md).
 - History must be initialized the same way at reset in sim (Isaac Lab fills the buffer with the first obs) and on deploy.
