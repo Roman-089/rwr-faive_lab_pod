@@ -20,7 +20,7 @@ so the deployed policy sees motor-encoder proprio only (74-dim obs at 20 Hz).
 The asymmetric critic is the only large architectural effect: A's best checkpoint reaches 1.37 RPM, B 5.45 RPM (two-seed
 mean) with ~3× the rotation accuracy and drop-free rate. C (+ cube velocity + DR params in the critic) adds a small,
 not yet conclusive +0.4 RPM; RMA stage 1 (6.48 RPM) shows that knowing the DR sample buys little. A 3-step history and an
-LSTM actor-critic match B nominally and drop less under perturbation. The privileged teacher is the best policy so far
+LSTM actor-critic match B nominally and drop less under perturbation. **Raising the entropy coefficient 1e-4 → 5e-3 gives a deployable policy at 7.33 RPM / RA 79 %** (single seed), the teacher's level. The privileged teacher was the best policy before that
 (7.44 RPM, 94 % drop-free) and still improving at 10k, which sets the ceiling for the students. The no-DR sanity run
 reaches 10.55 RPM, so DR + obs noise cost about half the speed; the reward review suggests speed is barely rewarded
 (~6 of 14.3 RPM commanded). Every policy rotates faster but drops 3–8× more under the perturbed eval.
@@ -52,7 +52,9 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | queued | | | | |
 | `abl_B_rotsoft` | [rewards](rewards.md) | `-asym-rotsoft-v0` | B, magnitude σ 0.75, mag 60 / dir 30 | 29838451 / A100 | running | | | | |
 | `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | queued | | | | |
-| `abl_B_asym_ent5e-3` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 5e-3 | 29833758 / A100 | running | | | | |
+| `abl_B_asym_ent5e-3` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 5e-3 | 29833758 / A100 | done | **7.33 / 7.31** | 78.6 / 69.8 | 88 / 55 | 0.12 / 0.75 |
+| `abl_B_asym_ent5e-3_seed1` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | ent5e-3, seed 1 | 29841912 / A100 | queued | | | | |
+| `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | queued | | | | |
 | rotlin + drop penalty | [rewards](rewards.md) | – | rotlin + −200 drop weight (−10 return) | – | planned | | | | |
 | position / velocity reward | [rewards](rewards.md) | – | position σ 0.05, weight 5, + cube lin-vel penalty | – | planned | | | | |
 | `alpha05` | [action space](action_space.md) | – | EMA α 0.2 → 0.5 | – | planned | | | | |

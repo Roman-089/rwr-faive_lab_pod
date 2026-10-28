@@ -29,3 +29,4 @@ full entries live in the linked topic files.
 | 2026-10-28 | Next architecture candidates agreed (alpha05, relact, big, student fine-tune) | [action space](action_space.md), [PPO](ppo_and_capacity.md), [teacher-student](teacher_student.md) |
 | 2026-10-28 | Student PPO fine-tuning review (existing code, stabilizers) | [teacher-student](teacher_student.md#student-ppo-fine-tuning-background-from-the-old-notes-15) |
 | 2026-10-28 | Docs restructured from `HYPERPARAM_NOTES.md` / `ABLATION_RESULTS.md` into `docs/ablation/` | [index](README.md) |
+| 2026-10-28 | Entropy 5e-3 eval: 7.33 RPM (B 5.45); replicate + 1e-2 queued | [PPO / capacity](ppo_and_capacity.md) |
