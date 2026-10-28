@@ -34,6 +34,7 @@ Sim2real wave (single change each vs the baseline; see docs/ablation/):
 Reward wave (on top of B; docs/ablation/rewards.md, terms in rewards_ablation.py):
   asym-rotlin  orca-v2-inhand-repose-asym-rotlin-v0  direction + magnitude terms -> 90 * clipped linear progress
                                                      about the target axis (HORA/LEAP/DLR 2024) - 5 * off-axis |w|
+  asym-relact  orca-v2-inhand-repose-asym-relact-v0  B with relative joint targets (+-10 % of the half-range per step, no EMA)
   asym-rotsoft orca-v2-inhand-repose-asym-rotsoft-v0 same terms, reweighted: magnitude sigma 0.2 -> 0.75, weight 30 -> 60;
                                                      direction 60 -> 30
 
@@ -48,6 +49,7 @@ from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils import configclass
 
 from . import mdp, rewards_ablation
+from .actions_ablation import RelativeJointPositionToLimitsActionCfg
 from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
 from .orca_v2_repose_env_cfg import ObservationsCfg, OrcaV2ReposeEnvCfg
@@ -279,6 +281,19 @@ class OrcaV2ReposeAsymRotSoftEnvCfg(OrcaV2ReposeAsymEnvCfg):
         self.rewards.angular_velocity_magnitude.params["sigma"] = 0.75
         self.rewards.angular_velocity_magnitude.weight = 60.0
         self.rewards.angular_velocity_direction.weight = 30.0
+
+
+@configclass
+class OrcaV2ReposeAsymRelActEnvCfg(OrcaV2ReposeAsymEnvCfg):
+    """B with relative joint targets (HORA / LEAP): the action moves the previous target by a bounded delta instead of
+    setting an absolute target behind EMA alpha 0.2. Deploy: the policy node must apply the same update."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        a = self.actions.joint_pos
+        self.actions.joint_pos = RelativeJointPositionToLimitsActionCfg(
+            asset_name=a.asset_name, joint_names=a.joint_names, rescale_to_limits=a.rescale_to_limits, delta_scale=0.1
+        )
 
 
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
