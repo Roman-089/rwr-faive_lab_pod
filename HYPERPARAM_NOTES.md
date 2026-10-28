@@ -327,6 +327,21 @@ Base = the winner of the reward wave (B, `-rotlin` or `-rotsoft`, decided by eva
 Order: decide after the reward evals; `alpha05` / `relact` change the action handling that the policy node must mirror
 (allowed: we fork `rwr_faive_system`).
 
+**Student PPO fine-tuning: existing code and stabilizers** (subagent review 2026-10-28; [code] = checked in rsl_rl 3.1.2):
+- No off-the-shelf "distill → PPO fine-tune" in rsl_rl / Isaac Lab [code]. Closest public code: TGRL (Improbable-AI/tgrl,
+  RL + adaptive teacher-KL, teacher with privileged obs), DPPO (irom-princeton/dppo, critic warm-up, clamped std, low actor
+  LR), residual PPO on a frozen policy (ResiP, Policy Decorator). Hora, Visual Dexterity, Extreme Parkour, DeXtreme stop
+  at distillation. Wołczyk et al. (ICML 2024): early fine-tuning *forgets* skills in states not yet revisited; BC/KL
+  regularization to the teacher (kickstarting) was the most reliable fix.
+- Collapse causes specific to rsl_rl [code]: the distillation loss uses `act_inference` (mean only), so the student's std
+  is never trained and PPO starts at `init_noise_std`; the adaptive LR schedule multiplies the LR by 1.5 whenever
+  KL < desired_kl / 2, up to 1e-2; the critic starts random, and advantage normalization amplifies its noise.
+- Recipe if we do it: actor ← student weights (`student.*` → `actor.*`, normalizer too), critic ← the teacher's trained
+  privileged critic; actor frozen for 100–200 iters while the critic adapts; std = teacher's final std, entropy 0;
+  LR 1e-4 fixed (or adaptive with desired_kl 0.003–0.005 and a clamped max), clip 0.1; + β·‖μ_student − μ_teacher‖²
+  annealed 1 → 0 over ~1k iters; log RPM of the deterministic policy, MSE to teacher, explained variance; roll back if RPM
+  drops > 20 %. Fallback: residual PPO on the frozen student.
+
 ## Run plan / log
 
 **Phase 1 (now): architecture + reward study** (decided 2026-10-28: find the best architecture and reward first, then iterate on sim2real; a fixed, enforced action delay matched in sim — section 6b, `DelayedEMAJointPositionToLimitsActionCfg` — is the first Phase 2 run).
