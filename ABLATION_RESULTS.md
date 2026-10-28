@@ -35,7 +35,7 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | `student_mlp_h10` | `-student-mlp-h10-v0` | distill teacher → MLP on 10-step noisy proprio history (PT paper's MLP student) | 29839014 / A100 | 2k | queued after teacher | | | | | | | |
 | `student_lstm` | `-student-lstm-v0` | distill teacher → LSTM student | 29839015 / A40 | 2k | queued after teacher | | | | | | | |
 | `student_pt` | `-student-pt-v0` | distill teacher → transformer on 10-step history + reconstruction loss (PT paper) | 29839013 / L40S | 2k | queued after teacher | | | | | | | |
-| `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
+| `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | done (2026-10-28 12:15) | ~1736 | | ~6 % | 7.44 / 7.63 | 81.4 / 74.4 | 94 / 73 | 0.06 / 0.31 |
 
 ## Observations / log
 
@@ -158,6 +158,21 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   **C is +0.4 RPM / +6 pp RA over B at matched seed, about 2× the seed spread**: a small, plausible gain from DR params
   + cube velocity in the critic, not yet conclusive (one C seed). RMA stage 1 (6.48) is ~+0.8 over B. The asymmetric
   critic itself (A 1.4 → B 5.5) remains the only large architectural effect so far.
+
+- 2026-10-28 12:20 — **privileged teacher eval** (actor sees noise-free joints + cube pose; not deployable):
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 2000 | 4.00 / 4.99 | 46.7 / 47.0 | 89 / 69 | 0.16 / 0.89 |
+  | 4000 | 3.81 / 4.59 | 45.1 / 47.7 | 84 / 61 | 0.22 / 1.58 |
+  | 6000 | 4.40 / 4.60 | 50.4 / 46.9 | 83 / 53 | 0.19 / 1.66 |
+  | 8000 | 6.09 / 6.58 | 72.5 / 68.8 | 92 / 80 | 0.09 / 0.22 |
+  | 9999 | **7.44 / 7.63** | **81.4 / 74.4** | **94 / 73** | **0.06 / 0.31** |
+
+  Best policy so far on every metric (vs RMA s1 6.48, C 6.08, B 5.45) and the most robust under perturbation
+  (DC 0.31 vs 0.6–1.0). It is **still improving steeply at 10k** (6.1 → 7.4 RPM over the last 2k iters) — slower
+  start than B (4.0 vs 4.3 RPM at 2k), but no plateau. Students distill from model_9999; a longer teacher (15–20k,
+  resumed from 9999) is a cheap upgrade if the students track it. Ceiling for the students: ~7.4 RPM.
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
