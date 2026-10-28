@@ -20,13 +20,13 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
 | A `firstrun_l40s` | `orca-v2-inhand-repose-v0` | baseline | 29823035 / L40S | 10k | done (2026-10-27) | ~493 | ~395 / 640 | ~62 % | 0.61 / 1.16 (best 1.37 / 1.62 @4500) | 11.6 / 14.6 (19.1 / 19.0) | 22 / 20 (33 / 25) | 1.8 / 2.2 (1.3 / 2.0) |
 | B `abl_B_asym` | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | 5k | done (2026-10-27 18:15) | ~1573 | ~588 / 640 | ~10 % | | | | |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | 5k | done (2026-10-27 22:35) | ~1583 | ~582 / 640 | ~12 % | | | | |
-| sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | done (2026-10-27 22:45) | ~1793 | ~574 / 640 | ~10 % | | | | |
-| `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | queued | | | | | | | |
+| sanity `sanity_nodr` | `-nodr-v0` | no DR, no obs noise | 29829724 / A10 | 5k | done (2026-10-27 22:45) | ~1793 | ~574 / 640 | ~10 % | 10.55 / 10.59 | 85.8 / 85.7 | 83 / 69 | 0.19 / 0.47 |
+| `arch_asym_hist3` | `-asym-hist3-v0` | B + MLP on 3-step obs history | 29831099 / A10 | 5k | running | | | | | | | |
 | `arch_asym_hist10` | `-asym-hist10-v0` | B + MLP on 10-step obs history | 29831100 / A40 | 5k | queued | | | | | | | |
 | `arch_asym_lstm` | `-asym-lstm-v0` | B + LSTM actor-critic (PPO) | 29831098 / A100 | 5k | running | | | | | | | |
 | `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | running | | | | | | | |
 | `abl_B_asym_ent5e-3` | `-asym-v0` | B + entropy_coef 1e-4 → 5e-3 (hydra override) | 29833758 / A100 | 5k | queued | | | | | | | |
-| `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | queued | | | | | | | |
+| `arch_rma_s1` | `-rma-teacher-v0` | B + RMA extrinsics encoder in the actor (HORA stage 1; not deployable) | 29835277 / L40S | 5k | running | | | | | | | |
 | `arch_rma_s2` | `-rma-student-v0` | RMA stage 2: adaptation module on 30-step history (deployable) | after s1 | 2k | planned | | | | | | | |
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued | | | | | | | |
 | `teacher` | `-teacher-v0` | privileged teacher (sim only) | 29830926 / L40S | 10k | running (started 2026-10-27 23:55) | | | | | | | |
@@ -87,6 +87,22 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   checkpoints as text (the run-dir underscores broke `sort -t_ -k2 -n`), so a 5k run's "last" checkpoint would have
   been `model_750.pt`; now `sort -V`. A's eval was not invalidated (it scored 2500/4500/6250/8000/9999 instead of
   evenly spaced ones, last = 9999); B/C/sanity evals had not started yet.
+
+- 2026-10-28 04:00 — **sanity eval (no DR / no noise, evaluated on its own no-DR task)**, nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 8.92 / 9.09 | 76.6 / 75.1 | 86 / 64 | 0.14 / 0.55 |
+  | 2000 | 9.32 / 9.41 | 77.8 / 78.0 | 72 / 67 | 0.34 / 0.52 |
+  | 3000 | 9.85 / 9.25 | 82.6 / 76.6 | 89 / 66 | 0.11 / 0.53 |
+  | 4000 | 9.43 / 9.62 | 80.2 / 77.5 | 88 / 53 | 0.14 / 0.75 |
+  | 4999 | **10.55 / 10.59** | **85.8 / 85.7** | 83 / 69 | 0.19 / 0.47 |
+
+  |cmd| 1.5 rad/s = 14.3 RPM, so the policy tracks ~74 % of the commanded speed; the perturbation (delay + joint
+  offset) does not slow it but roughly triples drops. ~8× A's best RPM — but **not comparable to A** (evaluated without
+  DR / noise). It is the upper reference for what the reward / action space allow; the gap to it is what DR + obs
+  noise cost. To separate "DR makes the task harder" from "DR makes learning harder", the sanity `model_4999` is also
+  evaluated on the DR task (`sanity_nodr_on_dr`, job 29836428).
 
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
