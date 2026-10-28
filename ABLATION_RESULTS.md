@@ -76,5 +76,12 @@ perturbed eval (test-time 50–100 ms action delay + ±0.05 rad joint obs offset
   teacher actions, distillation trains only the 24 k-param adaptation module) and **B + drop penalty**. Grasp-cache
   resets next (HORA / LEAP code available).
 
+- 2026-10-28 01:50 — **storage:** home quota 25.6 of 30 GB. `hpc/prune_storage.sh` keeps finished runs to their 5
+  eval checkpoints (+ any already scored), drops redundant eval rollouts and synced local W&B logs; runs after every
+  eval. First pass freed 1.06 GB. New runs save every 500 iters. **Bug found and fixed:** `eval_run.sh` sorted
+  checkpoints as text (the run-dir underscores broke `sort -t_ -k2 -n`), so a 5k run's "last" checkpoint would have
+  been `model_750.pt`; now `sort -V`. A's eval was not invalidated (it scored 2500/4500/6250/8000/9999 instead of
+  evenly spaced ones, last = 9999); B/C/sanity evals had not started yet.
+
 - 2026-10-27: gpuv100 cannot run our stack (torch has no sm_70 kernels) → 4 usable queues: gpua100, gpua40, gpua10, gpul40s.
 - 2026-10-27: A plateaus at reward ~490–510 from iter ~4k; action noise std collapses to 0.18.
