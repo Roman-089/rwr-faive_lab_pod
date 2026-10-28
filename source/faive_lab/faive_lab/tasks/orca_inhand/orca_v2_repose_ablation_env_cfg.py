@@ -13,6 +13,7 @@ baseline; tell runs apart with ``--run_name``.
   ablation B  orca-v2-inhand-repose-asym-v0          + critic group: noise-free joints + cube pose
   ablation C  orca-v2-inhand-repose-asym-dr-v0       B + cube lin/ang velocity + sampled DR parameters (DeXtreme-style)
   sanity      orca-v2-inhand-repose-nodr-v0          baseline without domain randomization and observation noise
+  asym-nodr   orca-v2-inhand-repose-asym-nodr-v0     sanity env + B's critic group (to evaluate B-family checkpoints without DR)
   teacher     orca-v2-inhand-repose-teacher-v0       privileged teacher (actor + critic see teacher obs), for distillation
 
 Sim2real wave (single change each vs the baseline; see docs/ablation/):
@@ -103,6 +104,16 @@ class OrcaV2ReposeNoDREnvCfg(OrcaV2ReposeEnvCfg):
         ):
             setattr(self.events, term, None)
         self.observations.policy.enable_corruption = False
+
+
+@configclass
+class OrcaV2ReposeAsymNoDREnvCfg(OrcaV2ReposeNoDREnvCfg):
+    """Sanity env with B's critic group, so B-family checkpoints (81-dim critic) load: evaluate DR-trained policies
+    without DR / obs noise (the mirror of evaluating ``sanity_nodr`` with DR)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.critic = ObservationsCfg.TeacherObsGroupCfg()
 
 
 @configclass

@@ -29,6 +29,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-v0", "OrcaV2ReposeAsymEnvCfg"),
     ("orca-v2-inhand-repose-asym-dr-v0", "OrcaV2ReposeAsymDREnvCfg"),
     ("orca-v2-inhand-repose-nodr-v0", "OrcaV2ReposeNoDREnvCfg"),
+    ("orca-v2-inhand-repose-asym-nodr-v0", "OrcaV2ReposeAsymNoDREnvCfg"),
     ("orca-v2-inhand-repose-delay-v0", "OrcaV2ReposeDelayEnvCfg"),
     ("orca-v2-inhand-repose-jointbias-v0", "OrcaV2ReposeJointBiasEnvCfg"),
     ("orca-v2-inhand-repose-droppen-v0", "OrcaV2ReposeDropPenaltyEnvCfg"),
