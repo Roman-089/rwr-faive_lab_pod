@@ -116,7 +116,8 @@ Steps:
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status (old log) | Reward | Ep. len | Drop % |
 |---|---|---|---|---|---|---|---|---|
 | sanity `sanity_nodr` | `-nodr-v0` | no physics/mount DR, no obs noise (not deployable) | 29829724 / A10 | 5k | done (2026-10-27 22:45) | ~1793 | ~574 / 640 | ~10 % |
-| `sanity_nodr_on_dr` | eval only | sanity `model_4999` evaluated on the DR task | 29836428 | – | queued | | | |
+| `sanity_nodr_on_dr` | eval only | sanity `model_4999` evaluated on the DR task | 29836428 / A10 | – | done (2026-10-28 17:05): **3.32 / 4.97 RPM, RA 35.6 / 43.2 %, DFSR 55 / 42 %, DC 0.86 / 1.48** (nominal / perturbed) | | | |
+| `ent5e-3_on_nodr` | eval only | `abl_B_asym_ent5e-3` `model_4999` evaluated without DR (`-asym-nodr-v0`, new eval variant) | 29842299 / A10 | – | queued | | | |
 
 Run-plan summary: 5k (train, iters 4900–4999): reward 1809, drops 10 %, ep. length 579 — symmetric critic learns fine
 without DR/noise, so A's weakness is critic + DR/noise; B recovers ~87 % of this upper bound.
@@ -166,10 +167,13 @@ Task ids from `orca_v2_repose_ablation_env_cfg.py`, single change vs the baselin
 ## Conclusions so far
 
 - DR + obs noise cost about half the speed (10.55 vs ~5.5–6.5 RPM); not mainly a system-identification problem.
+- **DR in training is necessary** (2026-10-28 17:05): the no-DR policy collapses on the DR task (10.55 → 3.32 RPM,
+  RA 86 → 36 %, drops 0.19 → 0.86 per trial), clearly below every DR-trained policy there (B 5.45, ent5e-3 7.33). The
+  mirror eval (best DR-trained policy on the no-DR task, queued) tells how much DR costs at test time vs in learning.
 - The perturbed eval (delay + offset) roughly triples drops for every policy, but does not slow it down.
 
 ## Next steps / open questions
 
-- `sanity_nodr_on_dr` result.
+- `ent5e-3_on_nodr` result (mirror of `sanity_nodr_on_dr`).
 - Phase 2: fixed-delay run first; measure the inherent delay from chirps; confirm the demo cube size; fork
   `rwr_faive_system` once released.
