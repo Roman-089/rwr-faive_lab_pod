@@ -315,7 +315,9 @@ Training rewards of these variants are not comparable with B's; compare by eval 
 
 ## Run plan / log
 
-**Phase 1 (now): architecture study.** Sim2real ablations (delay, joint bias, hand gravity, fixed wrist, ...) change
+**Phase 1 (now): architecture + reward study** (decided 2026-10-28: find the best architecture and reward first, then iterate on sim2real; a fixed, enforced action delay matched in sim — section 6b, `DelayedEMAJointPositionToLimitsActionCfg` — is the first Phase 2 run).
+
+**Architecture study.** Sim2real ablations (delay, joint bias, hand gravity, fixed wrist, ...) change
 the training distribution and can only be judged on hardware, so they are registered but parked. Phase 1 compares
 architectures that change what the policy can do in sim, all on the **baseline env (A)**:
 MLP (A) · asymmetric critic (B) · critic + DR params (C) · MLP on 3-step history (hist3) · LSTM actor-critic (lstm) ·
