@@ -117,6 +117,9 @@ Students distill from the teacher's `model_9999`.
 
 - Student evals MLP-h10 / LSTM pending; PT done (tracks the teacher at 93 %).
 - Re-distill `student_pt` from `teacher_ent5e-3` if that teacher beats 7.44 RPM.
+- **rotlin pipeline** (2026-10-29): rotlin beats every old-reward policy incl. the teacher (10.4 vs 7.4 RPM), so the
+  students should learn from a rotlin teacher: `teacher_rotlin` (`-teacher-rotlin-v0`, queued) → `-student-pt-rotlin-v0` /
+  `-student-mlp-h10-rotlin-v0`.
 - Re-distill from `teacher_cont18k` if it improves further.
 - Stage 2c (per-episode joint bias) is TODO. Stage 4 (export with the history inside the module) is done on CPU:
   [export.md](export.md), `scripts/export/export_history_policy.py` → `exported/policy_history.pt`; in-sim check pending.
