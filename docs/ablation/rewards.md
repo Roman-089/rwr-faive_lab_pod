@@ -157,9 +157,12 @@ training command (0.9 rad/s), so speed tracking never mattered in practice.
 
 - **Command:** `commands_ablation.FixedDirectionRotationCommand`, always +1.5 rad/s about z. The observation layout is
   unchanged; deploy with `goal_ang_vel:=1.5 goal_flip_period_s:=0`.
-- **Reward:** `rewards_ablation.rotation_progress_linear` = max(ω·k, −0.5) / 1.5, weight 90, **no upper clip** (speed
-  above 1.5 rad/s keeps paying); off-axis −5; the rest as B. The drop termination / penalty is what stops the policy
-  from flinging the cube; if drops rise, add HORA's clip at a high value or the drop penalty.
+- **Reward:** `rewards_ablation.rotation_progress_linear` = clip(ω·k, −0.5, 3.0) / 1.5, weight 90; off-axis −5; the
+  rest as B. Clipped at 3 rad/s (2× the command, ~3× our best speed), so speed above 1.5 rad/s keeps paying.
+- **The unclipped version was a reward hack** (`abl_B_onedir_ent5e-3`, killed 2026-10-29 at it 272): 99.9 % of
+  episodes ended in a drop after ~45 steps (2.2 s) with the cube spinning at ~30 rad/s while it fell (magnitude error
+  29 rad/s). A short fling paid more than holding the cube; the drop termination alone did not stop it. HORA's clip
+  exists for this reason. Rerun with the 3 rad/s clip as `abl_B_onedir_clip3_ent5e-3`.
 - **Base:** B (asymmetric critic, DR, single-observation MLP) + entropy 5e-3, the best deployable policy so far and
   exportable without the history wrapper. Run `abl_B_onedir_ent5e-3`; eval commands +z in every env.
 
