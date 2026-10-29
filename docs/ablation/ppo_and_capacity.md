@@ -80,6 +80,20 @@ vs B (2 seeds, last ckpt) 5.45 RPM / RA 64 % / DFSR 88 %, and the privileged tea
   The two entropy seeds differ by 1.6 RPM, more than the gain, so the effect is likely positive but not established.
   Seed 1 also lacks seed 0's steady improvement (flat at ~5.6 from 1000 on).
 
+- **2026-10-29 09:15 — entropy 1e-2** (`abl_B_asym_ent1e-2`, seed 0), nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 5.47 / 6.34 | 57.6 / 54.8 | 42 / 28 | 1.23 / 2.41 |
+  | 2000 | 6.69 / 6.81 | 73.4 / 66.7 | 80 / 53 | 0.27 / 0.75 |
+  | 3000 | 6.84 / 7.30 | 76.2 / 70.0 | 88 / 63 | 0.20 / 0.56 |
+  | 4000 | **7.69** / 7.65 | 78.5 / 71.4 | 84 / 63 | 0.19 / 0.64 |
+  | 4999 | 7.60 / 7.47 | 79.4 / 69.7 | 75 / 48 | 0.30 / 0.88 |
+
+  Entropy sweep on B at 5k (nominal RPM / DFSR): 1e-4 5.45 / 88 % (2 seeds), 5e-3 6.54 / 88 % (2 seeds), 1e-2 7.60 /
+  75 % (1 seed). Speed rises with entropy, and at 1e-2 drops rise too. Within seed noise (±0.7 RPM) for the 5e-3 vs
+  1e-2 step; `abl_B_rotlin_ent1e-2` repeats the comparison on the rotlin reward.
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;

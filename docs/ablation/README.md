@@ -58,6 +58,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_rotlin_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-v0` | rotlin + entropy 5e-3 (the two winners combined; new base candidate) | 29845926 / L40S (+ A100 dup 29845927) | queued | | | | |
 | `abl_B_rotlin_droppen_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-droppen-v0` | rotlin + ent 5e-3 + drop penalty −100 return (rotlin drops more than B) | 29845937 / A40 | queued | | | | |
 | `abl_B_rotlin_ent5e-3_offaxis15` | [rewards](rewards.md) | `-asym-rotlin-v0` + `env.rewards.off_axis_angular_velocity.weight=-15.0` | rotlin + ent 5e-3, off-axis penalty −5 → −15 (rotlin wobbles 2× more than B) | 29846126 / A10 | queued | | | | |
+| `abl_B_rotlin_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-rotlin-v0` | rotlin + entropy 1e-2 (entropy trade-off on the new reward) | 29846596 / A10 | queued | | | | |
 | `abl_B_rotlin_ent5e-3_big` | [PPO / capacity](ppo_and_capacity.md) | `-asym-rotlin-v0` + actor / critic `[1024,1024,512,256]` | rotlin + ent 5e-3, 4× wider MLPs | 29846127 / A40 | queued | | | | |
 | `abl_B_onedir_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-v0` (unclipped) | B + ent 5e-3, +z only at 1.5 rad/s, unclipped linear speed reward | 29845346 / L40S | **killed at it 272: reward hack** (flings the cube, 99.9 % drops) | | | | |
 | `abl_B_onedir_clip3_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-v0` | as above, speed reward clipped at 3 rad/s (demo metric) | 29846083 / L40S (+ A100 dup 29846084) | queued | | | | |
@@ -65,7 +66,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | running | | | | |
 | `abl_B_asym_ent5e-3` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 5e-3 | 29833758 / A100 | done | **7.33 / 7.31** | 78.6 / 69.8 | 88 / 55 | 0.12 / 0.75 |
 | `abl_B_asym_ent5e-3_seed1` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | ent5e-3, seed 1 | 29841912 / A100 | done | 5.74 / 5.45 | 69.9 / 59.0 | 88 / 56 | 0.13 / 0.55 |
-| `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | queued | | | | |
+| `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | done | 7.60 / 7.47 (best 7.69 / 7.65 @4000) | 79.4 / 69.7 | 75 / 48 | 0.30 / 0.88 |
 | rotlin + drop penalty | [rewards](rewards.md) | – | rotlin + −200 drop weight (−10 return) | – | planned | | | | |
 | position / velocity reward | [rewards](rewards.md) | – | position σ 0.05, weight 5, + cube lin-vel penalty | – | planned | | | | |
 | `abl_B_rotlin_ent5e-3_alpha05` | [action space](action_space.md) | `-asym-rotlin-v0` + `env.actions.joint_pos.alpha=0.5` | rotlin + ent 5e-3, EMA α 0.2 → 0.5 (moved onto rotlin; the B-reward version 29845613 was cancelled before starting) | 29845928 / L40S | queued | | | | |

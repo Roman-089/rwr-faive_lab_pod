@@ -53,3 +53,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | queued on rotlin + ent 5e-3: off-axis penalty −15 (A10) and the 1024-1024-512-256 network (A40) | [rewards](rewards.md), [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-29 | relact fails without grasp-cache resets: the relative target starts at the open reset pose, the cube drops within 6 steps, no learning (killed at it 96) | [action space](action_space.md) |
 | 2026-10-29 | teacher_ent5e-3: 7.96 RPM (best 8.16) vs 7.44, and 8 RPM already at 4k iterations (old teacher 3.8) → rotlin teacher rerun with entropy 5e-3 for 6k iterations | [teacher-student](teacher_student.md) |
+| 2026-10-29 | entropy 1e-2: 7.60 RPM but DFSR 75 % (5e-3: 6.54 / 88 %, 1e-4: 5.45 / 88 %): speed rises with entropy, drops too at 1e-2; rotlin + ent 1e-2 queued | [PPO / capacity](ppo_and_capacity.md) |
