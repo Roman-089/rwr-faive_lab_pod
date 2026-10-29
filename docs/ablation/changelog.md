@@ -46,3 +46,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | C seed 1: 4.60 RPM → two-seed means C 5.34 vs B 5.45: DR params in the critic give nothing; seed spread ±0.7 RPM | [asym critic](asymmetric_critic.md) |
 | 2026-10-29 | teacher-student pipeline on the rotlin reward: `-teacher-rotlin-v0` (queued, 10k), `-student-pt-rotlin-v0`, `-student-mlp-h10-rotlin-v0`; `scripts/check_env_cfgs.py` instantiates env cfgs on CPU before jobs start | [teacher-student](teacher_student.md) |
 | 2026-10-29 | Export verified in sim (student_pt, 64 envs × 1000 steps, ~830 resets): rebuilt history == env obs on every step; exported == CPU policy exactly; GPU vs CPU arithmetic 3e-2 | [export](export.md) |
+| 2026-10-29 | entropy replicate: seed 1 5.74 RPM (seed 0 7.33) → ent 5e-3 mean 6.54 vs B 5.45: likely positive, not established (seed spread 1.6 RPM) | [PPO / capacity](ppo_and_capacity.md) |

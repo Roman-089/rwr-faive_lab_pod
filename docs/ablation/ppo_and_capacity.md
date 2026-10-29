@@ -38,7 +38,7 @@ entropy 1e-4, clip 0.2, init_noise_std 1.5. Actor / critic MLP [512, 512, 256, 1
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status (old log) |
 |---|---|---|---|---|---|
 | `abl_B_asym_ent5e-3` | `-asym-v0` | B + entropy_coef 1e-4 → 5e-3 (hydra override) | 29833758 / A100 | 5k | done (2026-10-28 16:05) |
-| `abl_B_asym_ent5e-3_seed1` | `-asym-v0` | same, seed 1 (replicate) | 29841912 / A100 | 5k | queued |
+| `abl_B_asym_ent5e-3_seed1` | `-asym-v0` | same, seed 1 (replicate) | 29841912 / A100 | 5k | done (2026-10-29 06:50) |
 | `abl_B_asym_ent1e-2` | `-asym-v0` | B + entropy_coef 1e-2 (legged_gym default) | 29841914 / A100 | 5k | queued |
 | `big` (planned) | on the reward-wave winner | actor/critic MLP 512-512-256-128 → 1024-1024-512-256 | – | – | planned |
 
@@ -66,10 +66,25 @@ vs B (2 seeds, last ckpt) 5.45 RPM / RA 64 % / DFSR 88 %, and the privileged tea
 - **2026-10-28 (§15, agreed)** — `big` is one of the next architecture candidates, queued after the reward runs on the
   winner of the reward wave.
 
+- **2026-10-29 06:50 — the entropy replicate (seed 1) is much weaker than seed 0** (nominal / perturbed):
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 5.77 / 5.86 | 62.4 / 53.0 | 77 / 50 | 0.31 / 0.80 |
+  | 2000 | 5.74 / 5.47 | 67.1 / 56.4 | 86 / 52 | 0.17 / 0.78 |
+  | 3000 | 5.51 / 5.64 | 65.1 / 60.0 | 83 / 66 | 0.25 / 0.55 |
+  | 4000 | 5.54 / 5.61 | 64.7 / 55.8 | 73 / 63 | 0.38 / 0.80 |
+  | 4999 | 5.74 / 5.45 | 69.9 / 59.0 | 88 / 56 | 0.13 / 0.55 |
+
+  Two-seed means at 5k: **ent 5e-3 6.54 RPM (7.33 / 5.74) vs B 5.45 (5.66 / 5.23)**: +1.1 RPM, RA +7 pp, same DFSR.
+  The two entropy seeds differ by 1.6 RPM, more than the gain, so the effect is likely positive but not established.
+  Seed 1 also lacks seed 0's steady improvement (flat at ~5.6 from 1000 on).
+
 ## Conclusions so far
 
-- **Entropy 1e-4 → 5e-3 is the second large effect after the asymmetric critic: +1.9 RPM (5.45 → 7.33), RA 64 → 79 %,
-  same drop-free rate** — a deployable policy at the privileged teacher's level (single seed; replicate queued). It
+- **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;
+  seed 0 alone looked like +1.9 RPM. Probably positive, not established; it stays in the queued rotlin runs (no seed was
+  worse than B), and `rotlin_ent5e-3` vs `rotlin` (10.41) is the next data point. It
   already beats B's final checkpoint at it 1000 (6.13) and improves monotonically, i.e. no late degradation (cf. A).
 - Its *training* reward is much lower than B's (~970 vs ~1570) because training reward is measured with the
   stochastic policy, whose noise std grew to 2.8 (vs 0.18 for A): training reward is not a usable comparison across
@@ -80,7 +95,7 @@ vs B (2 seeds, last ckpt) 5.45 RPM / RA 64 % / DFSR 88 %, and the privileged tea
 ## Next steps / open questions
 
 - ~~Entropy run eval: does it remove the late-checkpoint degradation seen in A?~~ Yes (monotonic to 7.33 RPM).
-- Replicate (seed 1) and 1e-2 queued. If it holds, **B + entropy 5e-3 (or 1e-2) becomes the base** for the reward,
+- Replicate done (+1.1 RPM mean, high seed spread); 1e-2 still running. Tentatively **entropy 5e-3 is in the base** for the reward,
   action-space and capacity runs, and the teacher / students should be retrained with it (the teacher used 1e-4).
 - Std 2.8 on actions in [-1, 1] means exploration actions mostly saturate: check whether a state-independent std
   this large is optimal or whether a smaller max std / annealed entropy does better.
