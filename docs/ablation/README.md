@@ -59,8 +59,8 @@ Status as of 2026-10-29 ~10:00. Eval = nominal / perturbed at the last checkpoin
 | `teacher` | [teacher-student](teacher_student.md) | `-teacher-v0` | privileged teacher (not deployable), 10k | 29830926 / L40S | done | 7.44 / 7.63 | 81.4 / 74.4 | 94 / 73 | 0.06 / 0.31 |
 | `teacher_cont18k` | [teacher-student](teacher_student.md) | `-teacher-v0` | teacher resumed from model_9999, +8k | 29840146 / 29840147 | cancelled (2026-10-28 16:25, superseded by `teacher_ent5e-3`) | | | | |
 | `teacher_ent5e-3` | [teacher-student](teacher_student.md) | `-teacher-v0` | privileged teacher, entropy_coef 5e-3, 10k | 29842059 / L40S | done | 7.96 / 7.31 (best 8.16 @8000) | 79.5 / 68.1 | 88 / 72 | 0.13 / 0.44 |
-| `teacher_rotlin_ent5e-3` | [teacher-student](teacher_student.md) | `-teacher-rotlin-v0` | privileged teacher on the rotlin reward, entropy 5e-3, 6k (replaces `teacher_rotlin` 29845965, cancelled before starting) | 29846543 / L40S | queued | | | | |
-| `student_pt_rotlin` | [teacher-student](teacher_student.md) | `-student-pt-rotlin-v0` | transformer student distilled from `teacher_rotlin_ent5e-3` (4096 envs) | – | planned (after the teacher) | | | | |
+| `teacher_rotlin_ent5e-3` | [teacher-student](teacher_student.md) | `-teacher-rotlin-v0` | privileged teacher on the rotlin reward, entropy 5e-3, 6k (replaces `teacher_rotlin` 29845965, cancelled before starting) | 29846543 / L40S | running | | | | |
+| `student_pt_rotlin` | [teacher-student](teacher_student.md) | `-student-pt-rotlin-v0` | transformer student distilled from `teacher_rotlin_ent5e-3` model_5999 (4096 envs, 2k) | 29848449 / L40S, starts when the teacher job is done | queued | | | | |
 | `student_mlp_h10` | [teacher-student](teacher_student.md) | `-student-mlp-h10-v0` | distill → MLP on 10-step history | 29839014 / A100 | queued | | | | |
 | `student_lstm` | [teacher-student](teacher_student.md) | `-student-lstm-v0` | distill → LSTM | 29839015 / A40 | queued | | | | |
 | `student_pt` | [teacher-student](teacher_student.md) | `-student-pt-v0` | distill → transformer + recon loss (4096 envs) | 29845112 / L40S | done | 6.89 / 7.52 | 75.2 / 71.3 | **95** / 66 | **0.05** / 0.56 |
