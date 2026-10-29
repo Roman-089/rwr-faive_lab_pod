@@ -118,7 +118,8 @@ Students distill from the teacher's `model_9999`.
 - Student evals MLP-h10 / LSTM pending; PT done (tracks the teacher at 93 %).
 - Re-distill `student_pt` from `teacher_ent5e-3` if that teacher beats 7.44 RPM.
 - Re-distill from `teacher_cont18k` if it improves further.
-- Stage 2c (per-episode joint bias) and stage 4 (export with history inside `policy.pt`) are TODO.
+- Stage 2c (per-episode joint bias) is TODO. Stage 4 (export with the history inside the module) is done on CPU:
+  [export.md](export.md), `scripts/export/export_history_policy.py` → `exported/policy_history.pt`; in-sim check pending.
 - PPO fine-tuning of the best distilled student: planned, see [student_finetune.md](student_finetune.md) and the
   background below.
 
