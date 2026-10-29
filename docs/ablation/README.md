@@ -51,7 +51,8 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `student_pt` | [teacher-student](teacher_student.md) | `-student-pt-v0` | distill → transformer + recon loss (4096 envs) | 29845112 / L40S | done | 6.89 / 7.52 | 75.2 / 71.3 | **95** / 66 | **0.05** / 0.56 |
 | `arch_rma_s1` | [RMA](rma.md) | `-rma-teacher-v0` | B + RMA extrinsics encoder (not deployable) | 29835277 / L40S | done | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
 | `arch_rma_s2` | [RMA](rma.md) | `-rma-student-v0` | RMA adaptation module, 30-step history, 2k | 29837730 / L40S | done | 6.20 / 6.71 (best 6.29 / 6.35 @1500) | 72.3 / 68.0 | 83 / 78 | 0.25 / 0.38 |
-| `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | running | | | | |
+| `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | done | **10.41** / 11.07 | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
+| `abl_B_rotlin_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-v0` | rotlin + entropy 5e-3 (the two winners combined; new base candidate) | 29845926 / L40S (+ A100 dup 29845927) | queued | | | | |
 | `abl_B_onedir_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-v0` | B + ent 5e-3, +z only at 1.5 rad/s, unclipped linear speed reward (demo metric) | 29845346 / L40S (+ A100 dup 29845345) | queued | | | | |
 | `abl_B_rotsoft` | [rewards](rewards.md) | `-asym-rotsoft-v0` | B, magnitude σ 0.75, mag 60 / dir 30 | 29838451 / A100 | done — **reward hack** (wobbles, doesn't rotate) | −0.02 / −0.01 | 6.8 / 5.8 | 92 / 77 | 0.09 / 0.34 |
 | `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | queued | | | | |
@@ -60,8 +61,8 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | queued | | | | |
 | rotlin + drop penalty | [rewards](rewards.md) | – | rotlin + −200 drop weight (−10 return) | – | planned | | | | |
 | position / velocity reward | [rewards](rewards.md) | – | position σ 0.05, weight 5, + cube lin-vel penalty | – | planned | | | | |
-| `abl_B_asym_ent5e-3_alpha05` | [action space](action_space.md) | `-asym-v0` + `env.actions.joint_pos.alpha=0.5` | B + ent 5e-3, EMA α 0.2 → 0.5 | 29845613 / L40S | queued | | | | |
-| `abl_B_asym_ent5e-3_relact` | [action space](action_space.md) | `-asym-relact-v0` | B + ent 5e-3, relative joint targets (delta 0.1 half-range / step) | 29845614 / A10 | queued | | | | |
+| `abl_B_rotlin_ent5e-3_alpha05` | [action space](action_space.md) | `-asym-rotlin-v0` + `env.actions.joint_pos.alpha=0.5` | rotlin + ent 5e-3, EMA α 0.2 → 0.5 (moved onto rotlin; the B-reward version 29845613 was cancelled before starting) | 29845928 / L40S | queued | | | | |
+| `abl_B_rotlin_ent5e-3_relact` | [action space](action_space.md) | `-asym-rotlin-relact-v0` | rotlin + ent 5e-3, relative joint targets (delta 0.1 half-range / step; the B-reward version 29845614 was cancelled before starting) | 29845929 / A10 | queued | | | | |
 | `big` | [PPO / capacity](ppo_and_capacity.md) | – | MLP 1024-1024-512-256 | – | planned | | | | |
 | `student_mlp_h10_ft` | [student fine-tune](student_finetune.md) | `-student-mlp-h10-ft-v0` (fallback `-student-mlp-h10-res-v0`) | PPO fine-tuning of the MLP-h10 student: teacher critic, 150-iter critic warm-up, kickstarting β 1 → 0 | – | implemented + CPU-tested; launch after `student_mlp_h10` | | | | |
 | fixed-delay run | [sim2real](sim2real.md#fixed-action-delay-sim--deploy) | – | fixed 1-step action delay + next-tick actuation (Phase 2) | – | planned | | | | |

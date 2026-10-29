@@ -43,6 +43,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-rotlin-v0", "OrcaV2ReposeAsymRotLinEnvCfg"),
     ("orca-v2-inhand-repose-asym-rotsoft-v0", "OrcaV2ReposeAsymRotSoftEnvCfg"),
     ("orca-v2-inhand-repose-asym-relact-v0", "OrcaV2ReposeAsymRelActEnvCfg"),
+    ("orca-v2-inhand-repose-asym-rotlin-relact-v0", "OrcaV2ReposeAsymRotLinRelActEnvCfg"),
     ("orca-v2-inhand-repose-asym-acthold-v0", "OrcaV2ReposeAsymActHoldEnvCfg"),
     ("orca-v2-inhand-repose-asym-actnet-v0", "OrcaV2ReposeAsymActNetEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-v0", "OrcaV2ReposeAsymOneDirEnvCfg"),

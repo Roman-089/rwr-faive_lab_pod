@@ -337,6 +337,18 @@ class OrcaV2ReposeAsymRelActEnvCfg(OrcaV2ReposeAsymEnvCfg):
         )
 
 
+
+@configclass
+class OrcaV2ReposeAsymRotLinRelActEnvCfg(OrcaV2ReposeAsymRotLinEnvCfg):
+    """-rotlin (the reward-wave winner, 10.4 RPM) with relative joint targets as in -relact."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        a = self.actions.joint_pos
+        self.actions.joint_pos = RelativeJointPositionToLimitsActionCfg(
+            asset_name=a.asset_name, joint_names=a.joint_names, rescale_to_limits=a.rescale_to_limits, delta_scale=0.1
+        )
+
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
 
 

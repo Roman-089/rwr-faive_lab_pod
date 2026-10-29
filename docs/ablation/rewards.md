@@ -73,7 +73,7 @@ Terms in `rewards_ablation.py`. Drop penalty: `is_terminated_term` on `object_dr
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status (old log) |
 |---|---|---|---|---|---|
 | `abl_B_droppen` | `-asym-droppen-v0` | B + −100 return on drop (AnyRotate / Aero Hand) | 29835278 / A40 | 5k | queued |
-| `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | queued |
+| `abl_B_rotlin` | `-asym-rotlin-v0` | B, rotation reward linear in speed, clipped at the command (HORA/LEAP/DLR 2024) + off-axis penalty | 29838450 / L40S | 5k | done (2026-10-29 03:30) |
 | `abl_B_rotsoft` | `-asym-rotsoft-v0` | B, magnitude kernel σ 0.2 → 0.75, weights mag 30 → 60 / dir 60 → 30 | 29838451 / A100 | 5k | done (2026-10-28 17:05) — **failed: reward hack** |
 | planned: rotlin + drop penalty | – | ablation 4 above (−200 weight / −10 return) | – | 5k | planned |
 | planned: position / velocity variant | – | ablation 3 above | – | 5k | planned |
@@ -103,6 +103,27 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
 - **2026-10-28 09:30 — reward review** (literature table above): our direction term pays the same for any speed and the
   magnitude kernel is ~0 at our policies' speed, so speed is barely rewarded; the literature rewards speed linearly and
   clips it. Queued `abl_B_rotlin` (linear clipped progress) and `abl_B_rotsoft` (reweighted current terms).
+
+- **2026-10-29 03:30 — `rotlin` wins the reward wave by a wide margin** (nominal / perturbed):
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 5.18 / 6.16 | 45.5 / 41.7 | 88 / 53 | 0.20 / 1.06 |
+  | 2000 | 7.63 / 8.92 | 57.1 / 54.5 | 73 / 39 | 0.34 / 1.13 |
+  | 3000 | 9.55 / 10.32 | 70.5 / 62.5 | 78 / 39 | 0.28 / 1.03 |
+  | 4000 | 9.79 / 11.49 | 70.9 / 65.8 | 78 / 33 | 0.27 / 1.52 |
+  | 4999 | **10.41 / 11.07** | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
+
+  - **+91 % RPM over B with the same everything else** (10.41 vs 5.45), +42 % over the best entropy run (7.33) and above
+    the privileged teacher (7.44); still rising at 5k. The speed term finally pays for speed: mean ω_z in the commanded
+    direction 1.09 rad/s (ent5e-3: 0.77), i.e. 73 % of the 1.5 rad/s command.
+  - **Costs:** more drops (DFSR 84 % vs 88 %, DC 0.22 vs 0.12) and much less robust to untrained delay / joint offsets
+    (perturbed DFSR 44 % vs 55 %, DC 1.09 vs 0.75). The cube also wobbles more: mean off-axis |ω_xy| 2.15 rad/s vs
+    1.12, so the off-axis weight (−5) is too low to keep the rotation clean. Drop timing: 14 drops, 10 of them within
+    5 s of spawn (reset artifacts, as for the others).
+  - Direction: here −z is faster (1.18 vs 1.00 rad/s), unlike 11 of the 12 earlier policies (all on the old reward).
+    The direction preference depends on the policy, not only on the hand; `-onedir` keeps +z.
+  - Training reward is not comparable to B's (different terms).
 
 ## Conclusions so far
 
@@ -144,8 +165,10 @@ training command (0.9 rad/s), so speed tracking never mattered in practice.
 
 ## Next steps / open questions
 
-- `rotsoft` is out; `rotlin` (axis-projected, clipped) is the remaining candidate. The winner of the reward wave (B or `-rotlin`, decided by eval) is the base of the next architecture
-  candidates ([action space](action_space.md), [PPO and capacity](ppo_and_capacity.md)).
+- **`rotlin` is the new reward base.** Queued 2026-10-29: `abl_B_rotlin_ent5e-3` (+ entropy 5e-3), and the action-space
+  runs moved onto it (`_alpha05`, `_relact`). The one-direction run (`-onedir`) already uses the unclipped version.
+- Next on rotlin: a higher off-axis weight (−15) against the wobble; the teacher-student pipeline re-run with a rotlin
+  teacher (the current teacher and students use the old reward).
 - Then rotlin + drop penalty, position / velocity variant, HORA work / torque penalties if rotlin is jerky.
 - Re-check drop timing on B's rollout.
 - Grasp-cache resets (HORA `gen_grasp.py` + `cache/`; LEAP_Hand_Sim grasp cache per cube size): deprioritized, see log.
