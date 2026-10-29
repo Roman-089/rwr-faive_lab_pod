@@ -3,6 +3,9 @@
 [Index](README.md) · related: [eval protocol](eval_protocol.md), [export](export.md), [sim2real](sim2real.md),
 [actuator net](actuator_net.md)
 
+> **Role (user decision, 2026-10-29):** sim2sim results are informational. Design decisions for new ablations are
+> based solely on the Isaac eval ([eval protocol](eval_protocol.md)); the harness stays the interface / pre-deploy check.
+
 ## Purpose
 
 Run the exported policies (`policy_history.pt`, the file the robot loads) in MuJoCo on the CPU, with the observation /

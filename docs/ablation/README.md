@@ -35,8 +35,9 @@ so the deployed policy sees motor-encoder proprio only (74-dim obs at 20 Hz).
 - **Sim2sim in MuJoCo** ([sim2sim](sim2sim.md), CPU, USD-derived hand model, Isaac-identical interface, 47 tests):
   no interface bug; every policy grips and turns the cube the commanded way, but at **48–73 % of its Isaac speed for
   the MLPs** (rotlin 5.39, ent5e-3 5.38, droppen 4.39 RPM, 32 trials) and **~40 % for `student_pt`** (2.79 RPM, drops
-  mid-trial). **rotlin's Isaac lead disappears in MuJoCo**: part of its speed may rely on PhysX-specific contact
-  (MuJoCo's cube torsional friction alone can halve RPM). MuJoCo is not reality either; the real hand decides.
+  mid-trial). rotlin's Isaac lead disappears in MuJoCo (MuJoCo's cube torsional friction alone can halve RPM).
+  **Decision rule (2026-10-29): MuJoCo results are informational only; design decisions for new ablations are based
+  solely on the Isaac eval.** The real hand decides deployability.
 
 **Deployable?** Every `abl_*` run, `arch_asym_*`, `arch_rma_s2` and every `student_*` is deployable: the actor sees only
 the 74 proprioceptive observations the real hand has (students / history policies via `scripts/export/
