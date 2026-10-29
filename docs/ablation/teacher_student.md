@@ -54,10 +54,10 @@ Related ablation ideas from the paper:
 | Run | Task id | Change vs baseline | Job / GPU | Iters | Status (old log) | Reward | Drop % |
 |---|---|---|---|---|---|---|---|
 | `teacher` | `-teacher-v0` | privileged teacher: `TeacherObsGroupCfg` as **actor + critic** input (sim only, not deployable) | 29830926 / L40S | 10k | done (2026-10-28 12:15) | ~1736 | ~6 % |
-| `teacher_cont18k` | `-teacher-v0` | teacher resumed from model_9999 for 8k more iters (still improving at 10k) | 29840146 / L40S (+ A100 dup 29840147) | +8k | queued | | |
+| `teacher_cont18k` | `-teacher-v0` | teacher resumed from model_9999 for 8k more iters (still improving at 10k) | 29840146 / L40S (+ A100 dup 29840147) | +8k | cancelled (superseded by `teacher_ent5e-3`) | | |
 | `student_mlp_h10` | `-student-mlp-h10-v0` | distill teacher → MLP on 10-step noisy proprio history (PT paper's MLP student) | 29839014 / A100 | 2k | queued after teacher | | |
 | `student_lstm` | `-student-lstm-v0` | distill teacher → LSTM student on noisy policy obs (stage 2b) | 29839015 / A40 | 2k | queued after teacher | | |
-| `student_pt` | `-student-pt-v0` | distill teacher → transformer on 10-step motor-proprio history + reconstruction loss (stage 3; old plan: 6k steps) | 29839013 / L40S | 2k | queued after teacher | | |
+| `student_pt` | `-student-pt-v0` | distill teacher → transformer on 10-step motor-proprio history + reconstruction loss (stage 3; old plan: 6k steps); **4096 envs** (8192 ran out of memory on the L40S, job 29839013) | 29845112 / L40S | 2k | done (2026-10-29 01:00) | ~1740 | ~10 % |
 | (TBD) | | + per-episode joint position bias in obs noise (stage 2c) | | 5k | TBD | | |
 
 Students distill from the teacher's `model_9999`.
@@ -82,14 +82,41 @@ Students distill from the teacher's `model_9999`.
   start than B (4.0 vs 4.3 RPM at 2k), but no plateau. Students distill from model_9999; a longer teacher (15–20k,
   resumed from 9999) is a cheap upgrade if the students track it (→ `teacher_cont18k`). Ceiling for the students: ~7.4 RPM.
 
+- **2026-10-29 01:00 — transformer student `student_pt`** (deployable: 10-step noisy motor proprio only), nominal /
+  perturbed; distilled from `teacher` model_9999 with 4096 envs:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 500 | 5.99 / 7.28 | 69.8 / 71.4 | 89 / 70 | 0.11 / 0.42 |
+  | 1000 | 6.80 / 7.23 | 76.2 / 69.7 | 91 / 78 | 0.09 / 0.31 |
+  | 1500 | 6.47 / 7.63 | 71.6 / 73.4 | 94 / 66 | 0.08 / 0.47 |
+  | 1999 | **6.89 / 7.52** | **75.2 / 71.3** | **95 / 66** | **0.05 / 0.56** |
+
+  Compared at the last checkpoint (nominal / perturbed):
+
+  | Policy | RPM | DFSR % | DC |
+  |---|---|---|---|
+  | `teacher` (privileged) | 7.44 / 7.63 | 94 / 73 | 0.06 / 0.31 |
+  | **`student_pt`** | 6.89 / 7.52 | **95** / 66 | **0.05** / 0.56 |
+  | `abl_B_asym_ent5e-3` (best plain MLP) | 7.33 / 7.31 | 88 / 55 | 0.12 / 0.75 |
+  | `arch_rma_s2` | 6.20 / 6.71 | 83 / 78 | 0.25 / 0.38 |
+  | `arch_asym_hist10` | 5.01 / 5.72 | 88 / 70 | 0.14 / 0.44 |
+
+  The student keeps 93 % of the teacher's speed and matches its drop-free rate (95 %, the best of any deployable
+  policy). It is 0.4 RPM slower than ent5e-3 nominally, but drops less and is faster and more robust than it under the
+  perturbed eval (7.5 vs 7.3 RPM, DFSR 66 vs 55 %). Drop timing: like the others, most of its drops are reset artifacts.
+  RPM plateaus after 1000 iterations while the behavior loss still falls (0.12): the teacher, not the distillation length,
+  limits it. Needs the history-in-`policy.pt` export to deploy.
+
 ## Conclusions so far
 
 - The privileged teacher (7.44 RPM, 94 % DFSR) is the best policy so far and still improving at 10k.
-- Student results pending.
+- Transformer student = 93 % of the teacher's RPM, best drop-free rate of any deployable policy (95 %); a better teacher (`teacher_ent5e-3`) is the obvious next step.
 
 ## Next steps / open questions
 
-- Student evals (MLP-h10 / LSTM / PT); do they track the teacher?
+- Student evals MLP-h10 / LSTM pending; PT done (tracks the teacher at 93 %).
+- Re-distill `student_pt` from `teacher_ent5e-3` if that teacher beats 7.44 RPM.
 - Re-distill from `teacher_cont18k` if it improves further.
 - Stage 2c (per-episode joint bias) and stage 4 (export with history inside `policy.pt`) are TODO.
 - PPO fine-tuning of the best distilled student: planned, see [student_finetune.md](student_finetune.md) and the
