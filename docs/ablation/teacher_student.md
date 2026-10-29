@@ -123,6 +123,20 @@ Students distill from the teacher's `model_9999`.
   5e-3 for 6k iterations (`teacher_rotlin_ent5e-3`). `student_pt` is not re-distilled from this teacher: the rotlin
   teacher is the one to distill from.
 
+- **2026-10-29 19:10 — rotlin teacher (`teacher_rotlin_ent5e-3`)**, nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 9.67 / 9.40 | 70.9 / 59.2 | 91 / 38 | 0.16 / 1.61 |
+  | 2000 | 9.95 / 10.16 | 73.2 / 67.1 | 81 / 63 | 0.25 / 0.67 |
+  | 3500 | 10.70 / 10.42 | 77.9 / 67.1 | 84 / 55 | 0.17 / 0.80 |
+  | 4500 | 11.27 / 10.73 | 79.8 / 67.5 | 88 / 58 | 0.14 / 0.67 |
+  | 5999 | **11.85** / 10.52 | **83.2** / 67.2 | **95** / 69 | **0.05** / 0.56 |
+
+  Best policy so far on every nominal metric and still improving at 6k: faster than any deployable policy (rotlin
+  10.41) and as drop-free as the best student (95 %). The transformer / LSTM / MLP-h10 students distill from
+  model_5999 (jobs 29848449 / 29850539 / 29850540).
+
 ## Conclusions so far
 
 - The privileged teacher (7.44 RPM, 94 % DFSR) is the best policy so far and still improving at 10k.
