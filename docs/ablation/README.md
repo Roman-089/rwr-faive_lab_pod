@@ -15,19 +15,31 @@ so the deployed policy sees motor-encoder proprio only (74-dim obs at 20 Hz).
   hardware. The first Phase 2 run is a **fixed, enforced action delay** matched in sim and on deploy
   ([sim2real](sim2real.md#fixed-action-delay-sim--deploy), `DelayedEMAJointPositionToLimitsActionCfg`).
 
-## Key results so far
+## Key results so far (2026-10-29 10:00)
 
-The asymmetric critic is the only large architectural effect: A's best checkpoint reaches 1.37 RPM, B 5.45 RPM (two-seed
-mean) with ~3× the rotation accuracy and drop-free rate. C (+ cube velocity + DR params in the critic) adds a small,
-not yet conclusive +0.4 RPM; RMA stage 1 (6.48 RPM) shows that knowing the DR sample buys little. A 3-step history and an
-LSTM actor-critic match B nominally and drop less under perturbation. **Raising the entropy coefficient 1e-4 → 5e-3 gives a deployable policy at 7.33 RPM / RA 79 %** (single seed), the teacher's level. The privileged teacher was the best policy before that
-(7.44 RPM, 94 % drop-free) and still improving at 10k, which sets the ceiling for the students. The no-DR sanity run
-reaches 10.55 RPM, so DR + obs noise cost about half the speed; the reward review suggests speed is barely rewarded
-(~6 of 14.3 RPM commanded). Every policy rotates faster but drops 3–8× more under the perturbed eval.
+- **Reward is the largest lever:** a rotation reward linear in the speed about the commanded axis (`rotlin`, as in
+  HORA / LEAP) gives **10.41 RPM** vs 5.45 for the same setup with the old reward (+91 %), and was still improving at
+  5k. Costs: 84 % drop-free (B 88 %), weaker under the perturbed eval (44 vs ~55 % drop-free), 2× the off-axis wobble.
+- **Asymmetric critic** (privileged critic, deployable actor): A 1.37 → B 5.45 RPM (two seeds). Extra critic inputs (C:
+  cube velocity, DR parameters) add nothing (5.34, two seeds). Seed spread is ~±0.7 RPM.
+- **Entropy** 1e-4 → 5e-3 → 1e-2: 5.45 → 6.54 (two seeds) → 7.60 RPM (one seed); drops rise at 1e-2. It also makes the
+  privileged teacher learn ~2.5× faster (8 RPM at 4k iterations).
+- **History / memory** (hist3, hist10, LSTM, RMA): no speed gain, mainly robustness. The **transformer student**
+  (`student_pt`) keeps 93 % of the teacher's speed (6.89 RPM) with the best drop-free rate of any deployable policy
+  (95 %); its export with the history inside `policy_history.pt` is verified in sim ([export](export.md)).
+- **Failed / ruled out:** `rotsoft` and an unclipped speed reward (both reward hacks), relative joint targets without
+  grasp-cache resets, C. The policies ignore the commanded speed, so the demo target is one direction at max speed.
+- Domain randomization: the no-DR policy reaches 10.55 RPM but collapses to 3.3 with DR; a DR-trained policy loses only
+  ~15 % when tested without DR, so most of the DR cost is a more conservative gait.
+
+**Deployable?** Every `abl_*` run, `arch_asym_*`, `arch_rma_s2` and every `student_*` is deployable: the actor sees only
+the 74 proprioceptive observations the real hand has (students / history policies via `scripts/export/
+export_history_policy.py`); privileged information goes only into the critic, which is not exported. `teacher*` and
+`arch_rma_s1` are NOT deployable: their actor reads the cube pose and noise-free joints.
 
 ## All runs
 
-Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoint ([eval protocol](eval_protocol.md));
+Status as of 2026-10-29 ~10:00. Eval = nominal / perturbed at the last checkpoint ([eval protocol](eval_protocol.md));
 "best" = best checkpoint if better. Task ids are `orca-v2-inhand-repose<suffix>`.
 
 | Run | Thread | Task id | Change vs baseline | Job / GPU | Status | RPM | RA % | DFSR % | DC |
@@ -55,6 +67,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `arch_rma_s1` | [RMA](rma.md) | `-rma-teacher-v0` | B + RMA extrinsics encoder (not deployable) | 29835277 / L40S | done | 6.48 / 6.63 (best 6.55 / 7.03 @4000) | 74.5 / 69.3 | 89 / 66 | 0.16 / 0.61 |
 | `arch_rma_s2` | [RMA](rma.md) | `-rma-student-v0` | RMA adaptation module, 30-step history, 2k | 29837730 / L40S | done | 6.20 / 6.71 (best 6.29 / 6.35 @1500) | 72.3 / 68.0 | 83 / 78 | 0.25 / 0.38 |
 | `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | done | **10.41** / 11.07 | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
+| `abl_B_rotlin_cont10k` | [rewards](rewards.md) | `-asym-rotlin-v0` + `--resume` from `abl_B_rotlin` model_4999 | rotlin trained to 10k (still improving at 5k) | 29846685 / A100 | queued | | | | |
 | `abl_B_rotlin_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-v0` | rotlin + entropy 5e-3 (the two winners combined; new base candidate) | 29845926 / L40S (+ A100 dup 29845927) | queued | | | | |
 | `abl_B_rotlin_droppen_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-droppen-v0` | rotlin + ent 5e-3 + drop penalty −100 return (rotlin drops more than B) | 29845937 / A40 | queued | | | | |
 | `abl_B_rotlin_ent5e-3_offaxis15` | [rewards](rewards.md) | `-asym-rotlin-v0` + `env.rewards.off_axis_angular_velocity.weight=-15.0` | rotlin + ent 5e-3, off-axis penalty −5 → −15 (rotlin wobbles 2× more than B) | 29846126 / A10 | queued | | | | |
