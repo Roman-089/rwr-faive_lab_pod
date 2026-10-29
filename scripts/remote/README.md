@@ -11,6 +11,13 @@ so it **pulls** work from this repo and **pushes** results to the branch `remote
 | `eval_run.sh` | same end-of-training eval as DTU (metrics, perturbed eval, MuJoCo videos, W&B) |
 | `queue.txt` | the runs to do; add a line and push to queue one |
 
+## Access
+
+The pod has a private address on the MicroAGI cluster. As of 2026-10-29 the team reaches it from inside the ETH
+network through the SRL gateway (`ssh rwr-gpu` = ProxyJump via `rwr_team4@srl-dsk-004.ethz.ch`, keys from the team
+instructions; WARP is not needed). DTU cannot reach it, which is fine: the queue below only needs the pod's outbound
+access to GitHub and W&B. The pod keeps running after you log out; its address changes when it restarts.
+
 ## One-time setup
 
 1. Platform page: add your SSH public key; start an instance with **GPU rtx6000 ×1** and

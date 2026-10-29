@@ -2,5 +2,11 @@
 #   RUN_NAME TASK ITERS [extra train.py args ...]
 # A run starts once (its status is kept in logs/remote_state/ on the instance); results land on branch remote-results.
 # Names end in _r6k so they never collide with the DTU copies of the same experiment.
-abl_B_asym_ent5e-3_seed1_r6k orca-v2-inhand-repose-asym-v0 5000 --seed 1 agent.algorithm.entropy_coef=0.005
-abl_B_asym_ent1e-2_r6k orca-v2-inhand-repose-asym-v0 5000 agent.algorithm.entropy_coef=0.01
+# 2026-10-29: the two entropy runs that were here finished on DTU. Priorities now (the first SLOTS lines run first):
+# second seed of the headline result, the demo candidate, then rotlin variants that wait for DTU GPUs. When one of these
+# starts here, its DTU copy is cancelled.
+abl_B_rotlin_seed1_r6k orca-v2-inhand-repose-asym-rotlin-v0 5000 --seed 1
+abl_B_onedir_droppen_ent5e-3_r6k orca-v2-inhand-repose-asym-onedir-droppen-v0 5000 agent.algorithm.entropy_coef=0.005
+abl_B_droppen_seed1_r6k orca-v2-inhand-repose-asym-droppen-v0 5000 --seed 1
+abl_B_rotlin_ent5e-3_alpha05_r6k orca-v2-inhand-repose-asym-rotlin-v0 5000 agent.algorithm.entropy_coef=0.005 env.actions.joint_pos.alpha=0.5
+abl_B_rotlin_ent1e-2_r6k orca-v2-inhand-repose-asym-rotlin-v0 5000 agent.algorithm.entropy_coef=0.01
