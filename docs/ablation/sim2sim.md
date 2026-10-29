@@ -20,7 +20,54 @@ node runs unchanged ([plan below](#plan-fake-ros-hand-driver)).
 
 ## Results (2026-10-29)
 
-RESULTS_TABLE
+Eval protocol as Isaac's ([eval protocol](eval_protocol.md)): |cmd| 1.5 rad/s about z, sign alternating, 60 s
+trials, respawn after a drop, obs noise on. MuJoCo **nominal** = centers of Isaac's DR ranges, 32 trials;
+**+ Isaac DR** = Isaac's DR terms sampled per trial, 16 trials. Isaac = the nominal eval in the [README](README.md)
+table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node, one core, ~12 s per trial (student
+~16 s).
+
+| Policy (checkpoint) | Isaac RPM (+z / −z) | Isaac RA / DFSR / DC | MuJoCo nominal RPM ± SE (+z / −z) | RA / DFSR / DC | MuJoCo + Isaac DR RPM ± SE (+z / −z) | RA / DFSR / DC | MuJoCo / Isaac RPM (nominal / DR) |
+|---|---|---|---|---|---|---|---|
+| `abl_B_rotlin` (model_4999) | **10.41** (9.53 / 11.30) | 74 / 84 / 0.22 | **5.39** ± 0.23 (4.29 / 6.50) | 64 / 88 / 0.16 | **5.04** ± 0.59 (3.40 / 6.67) | 61 / 94 / 0.06 | 0.52 / 0.48 |
+| `abl_B_droppen` (model_4999) | **7.94** (7.34 / 8.53) | 80 / 83 / 0.27 | **4.39** ± 0.16 (5.14 / 3.63) | 87 / 88 / 0.12 | **4.79** ± 0.36 (5.19 / 4.39) | 88 / 100 / 0.00 | 0.55 / 0.60 |
+| `abl_B_asym_ent5e-3` (model_4999) | **7.33** (7.94 / 6.71) | 79 / 88 / 0.12 | **5.38** ± 0.27 (6.77 / 3.99) | 86 / 81 / 0.19 | **4.99** ± 0.38 (6.02 / 3.96) | 85 / 100 / 0.00 | 0.73 / 0.68 |
+| `student_pt` (model_1999) | **6.89** (7.44 / 6.33) | 75 / 95 / 0.05 | **2.79** ± 0.21 (3.69 / 1.89) | 57 / 72 / 0.38 | **2.68** ± 0.41 (3.93 / 1.43) | 55 / 88 / 0.31 | 0.41 / 0.39 |
+
+Cube height while held (mean z), Isaac → MuJoCo: rotlin −49.1 → −48.1 mm, droppen −26.7 → −24.3, ent5e-3 −27.3 →
+−25.5, student_pt −27.4 → **−36.3** mm. Drops within 5 s of a (re)spawn (reset artifacts, see
+[eval protocol](eval_protocol.md#drop-timing-are-better-starting-grasps-needed-2026-10-28-scriptsevaldrop_timingpy-cpu)),
+MuJoCo nominal: 4 of 5 (rotlin), 4 of 4 (droppen), 5 of 6 (ent5e-3), but only 6 of 12 for student_pt. With DR,
+student_pt's 5 drops all come later than 5 s.
+
+**Reading:**
+
+- **No interface bug.** All four policies grasp the cube and turn it in the commanded direction, with RA 55–88 %.
+  The joint-level gait matches Isaac's (check iv). The consistency checks below found no mismatch in joint order,
+  signs, limits, scales, EMA, timing or history handling.
+- **The expected engine gap.** MLP policies keep 48–73 % of their Isaac speed, the transformer student ~40 %. Isaac's
+  DR switched on in MuJoCo changes RPM by ≤ 0.4 (within SE) and lowers drops. The gap is not a missing randomization;
+  it comes from the contact model (sensitivity table below: the cube's torsional friction alone moves RPM by 2×).
+- **Ranking changes.** Isaac: rotlin ≫ droppen > ent5e-3 > student_pt. MuJoCo nominal: rotlin ≈ ent5e-3 (5.4) >
+  droppen (4.4) ≫ student_pt. With DR the three MLPs tie (4.8–5.0, within SE).
+  - **rotlin's +42 % speed over ent5e-3 does not carry over.** It keeps the least of its speed among the MLPs, has the
+    lowest RA (61–64 %) and the most off-axis wobble (1.28 vs 0.49–0.90 rad/s). It holds the cube deep in the hand
+    (−48 mm) and seems to use a PhysX-specific gait.
+  - **droppen and ent5e-3 transfer best.** RA 85–88 % (higher than in Isaac) and 100 % drop-free with DR.
+  - Direction preference holds for ent5e-3 (+z faster) and rotlin (−z faster), and flips for droppen.
+- **student_pt is the worst in MuJoCo** (2.7–2.8 RPM, RA 55–57 %), while the README ranks it the best deployable
+  policy by drop-free rate (95 %). It holds the cube 9 mm lower than in Isaac. It is the only policy with many
+  steady-state drops, and its gait differs most (wrist std 14.5° vs 5.2° in Isaac). The harness drives its history
+  exactly as specified (test: `flat_history()` == the last 10 harness obs, filled at reset). So the likely reason is
+  that the transformer reads PhysX-specific contact signatures from the joint history, and they change with the
+  engine. Before choosing it over a B-family MLP for the hardware demo, weigh this against its Isaac numbers.
+
+The relative ranking from one engine to the other is the useful signal, not absolute numbers. Neither engine is the
+real hand.
+
+MP4s (first 2 trials, 20 s each, nominal):
+`logs/rsl_rl/orca_v2_repose/{2026-10-28_21-11-45_abl_B_rotlin,2026-10-28_22-01-33_student_pt}/sim2sim/sim2sim_drnone_2trials_20s.mp4`.
+Per-trial numbers: `<run>/sim2sim/metrics_dr{none,isaac}.json`, rollouts `rollout_*.npz` (`logs/` is gitignored).
+64-trial runs: `scripts/sim2sim/sim2sim_job.sh` (CPU queue `hpc`, ~25 min, not submitted).
 
 ## Design
 
@@ -56,8 +103,10 @@ bit for bit (tested) and different policies see the same spawns.
 ## Model sources and fixes
 
 **Vendor model.** [orcahand/orcahand_description](https://github.com/orcahand/orcahand_description), MIT license,
-commit `b9b349a` (2026-07-31). The v2 model is `v2/` (`v2/scene_right.xml` → `v2/models/mjcf/orcahand_right{,_body}.mjcf`);
-`v1/` is the legacy hand. The top-level `assets/mjcf/scene.xml` has the 50 mm cube. Used here only as an independent
+commit `b9b349a` (2026-07-31). Per its README, the v2 hand ("newer Fusion360 export") is `v2/`
+(`v2/scene_right.xml` → `v2/models/mjcf/orcahand_right{,_body}.mjcf`) and `v1/` is the legacy hand. The top-level
+`assets/mjcf/` holds meshes (`right/` with `collision/` + `visual/`), `options.xml` and the `scene.xml` with the 50 mm
+cube, but no hand MJCF. Used here only as an independent
 kinematics check, from a shallow, blobless, sparse clone in a scratch dir. The v2 right-hand STLs are 59 MB, too big
 for the repo, and the harness does not need them:
 
@@ -131,7 +180,7 @@ clamped at `forcerange`**. A clamped finger joint (I ≈ 5e-6 kg m²) then integ
 between its limits. PhysX keeps the drive implicit inside the clamp. An armature of 2·d·dt (dt = MuJoCo step)
 bounds the velocity change of one clamped step to F / (2d), inside the damping band, so the clamp engages smoothly. It
 adds a 2·dt = 1.7 ms mechanical lag to a 70–140 ms first-order joint response (chirp check: invisible). The real
-servo's reflected rotor inertia is far larger anyway. Doubling it changes RPM within noise (sensitivity table).
+servo's reflected rotor inertia is probably larger (not measured). Doubling it changes RPM within noise (sensitivity table).
 
 **Sensitivity to MuJoCo-only choices** (`abl_B_rotlin`, 8 trials × 60 s, nominal physics, ± = SE over trials; first
 sweep with the cube at condim 3, before the DexCube torsional friction was found):
@@ -197,7 +246,7 @@ axis. MuJoCo is then posed there, with the root at Isaac's (roll-randomized) roo
   angles; a PhysX joint-zero offset would show here as a limit violation, and there is none).
 
 **(iii) Interface** (CPU tests, `/tmp/claude-322334/-zhome-b3-e-222334/e98b2254-0dd6-46ce-be5a-af9ce9954bee/scratchpad/sim2simtest/test_sim2sim.py`,
-output `test_output.txt`, not in the repo): **46 / 46 pass.**
+`run_tests.sh`, output `test_output.txt`, not in the repo): **47 / 47 pass.**
 
 - EMA action processing equals **Isaac Lab's real `EMAJointPositionToLimitsAction`** (imported with stubbed bases, as
   the action-holding test does) over 200 steps with 3 resets: targets within 3e-7 rad, `last_joint_pos_cmd` =
@@ -216,10 +265,13 @@ output `test_output.txt`, not in the repo): **46 / 46 pass.**
 - Cube angular velocity is world-frame (= `mj_objectVelocity`, ≠ MuJoCo's body-frame free-joint qvel).
 - Hand API joint / actuator order, gravity compensation, reset distribution and Isaac's Euler convention all match.
   A trial with DR and noise is deterministic.
+- History policy (`student_pt`): over two episodes, the module's `flat_history()` equals the last 10 observations the
+  harness fed it, term-major, oldest first, filled with copies of the first obs after `reset()`.
 
 **(iv) Closed loop: same gait.** The joint angles Isaac's eval rollout recovers (4 envs) are compared with MuJoCo's
 (32 trials), first 2 s after the spawn skipped (`abl_B_rotlin`, script `gait_compare.py` in the scratch test dir). Per
-joint, means agree within 0–7° except index_pip (10°) and ring_mcp (12°), and spreads within a few degrees. Mean joint speed is 1.05 vs 1.23 rad/s.
+joint, means agree within 0–7° except index_pip (10°) and ring_mcp (12°), and spreads within a few degrees. Mean
+joint speed is 1.05 vs 1.23 rad/s.
 The cube is held at the same height (−48.1 vs −49.1 mm; the other policies hold it at −27 mm in Isaac). So the policy
 sees in-distribution observations and moves the fingers as in Isaac. The speed gap is in how the finger motion
 transfers to the cube (contact dynamics), not in the interface.
@@ -255,9 +307,11 @@ called at every (re)spawn, as the deploy contract says.
 - Numerical armature (above); Coulomb instead of static-only joint friction; one hand friction per trial; no gravity DR.
 - Trials run sequentially, one env each: 32 trials give an SE of ~0.3 RPM, same order as Isaac's 64-env eval (0.2).
 - The harness copies the task constants. A cfg change must be mirrored in `orca_task.py`; the CPU test fails on a
-  mismatch of the checked constants. Ablation variants with a different action term (`-relact`, `-delay`,
-  `-acthold`) or obs (`-jointbias`, `-wristfix`) are rejected or not modeled. The EMA α / class is checked from the
-  export JSON.
+  mismatch of the checked constants. The export JSON is checked: dims 74 / 17, EMA α 0.2, rescale to limits.
+  `-relact` (other action term) and `-wristfix` (16 actions) are rejected. `-delay` / `-acthold` (EMA subclasses) run
+  with a warning, without their training-time delay / holding, as the deploy node would run them. `-jointbias` runs
+  without its training-time bias. Changed reward or command ranges (`-onedir`: +z only, read from the task id) need
+  nothing else.
 
 ## How to run
 
@@ -265,11 +319,12 @@ called at every (re)spawn, as the deploy contract says.
 source ~/rwr_faive_lab/activate_rwr.sh                # conda env rwr: torch, mujoco 3.17, imageio; CPU is enough
 # 1. export (once per run; CPU, ~10 s)
 python scripts/export/export_history_policy.py --run logs/rsl_rl/orca_v2_repose/<run>
-# 2. sim2sim eval: ~10 s per 60 s trial (MLP) on one core; --dr isaac for Isaac's DR; --video for an MP4 (EGL)
+# 2. sim2sim eval: ~12 s per 60 s trial (MLP, student ~16 s) on one core; --dr isaac for Isaac's DR; --video: MP4 (EGL)
 python scripts/sim2sim/run_sim2sim.py --policy logs/rsl_rl/orca_v2_repose/<run> --trials 32 [--dr isaac] \
     [--video sim2sim.mp4 --video_trials 2]
 #    -> <run>/sim2sim/metrics_dr{none,isaac}.json (per-trial numbers, settings), rollout_*.npz
-# 3. 64 trials x 4 policies x {nominal, DR} as a CPU job (edit RUNS in the script; not submitted yet)
+# 3. 64 trials x 4 policies x {nominal, DR} as a CPU job, ~30 min (edit RUNS in the script; not submitted yet;
+#    overwrites the 32 / 16-trial metrics_dr*.json from the login node)
 bsub < scripts/sim2sim/sim2sim_job.sh
 # consistency checks (CPU, ~1.5 min / seconds)
 python scripts/sim2sim/consistency_checks.py joints

@@ -158,6 +158,23 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
   "crashed" between the end of training and the eval upload: Isaac Sim closes the process before wandb's own shutdown,
   and the eval's upload then reopens and finishes the run (all completed runs went through this state).
 
+- **2026-10-29 15:20 — rotlin + entropy 5e-3 + drop penalty** (`abl_B_rotlin_droppen_ent5e-3`), nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 7.54 / 8.08 | 64.8 / 59.1 | 89 / 58 | 0.13 / 0.61 |
+  | 2000 | 8.37 / 9.02 | 69.9 / 65.4 | 92 / 69 | 0.11 / 0.56 |
+  | 3000 | 8.03 / 8.39 | 69.7 / 62.9 | 89 / 69 | 0.22 / 0.73 |
+  | 4000 | 8.09 / 8.61 | 69.8 / 63.5 | 88 / 48 | 0.16 / 0.86 |
+  | 4999 | 8.29 / 8.17 | 70.8 / 60.8 | 89 / 44 | 0.17 / 0.92 |
+
+  On rotlin the drop penalty **trades speed for safety** (vs `rotlin_ent5e-3`: −1.2 RPM, +8 pp drop-free nominal, 0.17
+  vs 0.27 drops per trial), unlike on the old reward, where it gave both (+2.5 RPM). Plausibly the old reward barely paid
+  for speed, so a firmer grasp was free speed there, while rotlin already pushes speed and the penalty now pulls toward
+  caution. It does **not** help under the perturbed eval (44 % drop-free, vs 58 % without it). One seed each; the
+  1.2 RPM gap is at the edge of seed noise. For the demo (long without a drop) the trade may still be worth it; the
+  real hand decides.
+
 ## Conclusions so far
 
 - **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).

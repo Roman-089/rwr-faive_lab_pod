@@ -69,7 +69,7 @@ Status as of 2026-10-29 ~10:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | done | **10.41** / 11.07 | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
 | `abl_B_rotlin_cont10k` | [rewards](rewards.md) | `-asym-rotlin-v0` + `--resume` from `abl_B_rotlin` model_4999 | rotlin trained to 10k (still improving at 5k) | 29846685 / A100 | queued | | | | |
 | `abl_B_rotlin_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-v0` | rotlin + entropy 5e-3 | 29845927 / A100 | done | 9.50 / 10.43 | 76.1 / 70.8 | 81 / 58 | 0.27 / 1.00 |
-| `abl_B_rotlin_droppen_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-droppen-v0` | rotlin + ent 5e-3 + drop penalty −100 return (rotlin drops more than B) | 29845937 / A40 | queued | | | | |
+| `abl_B_rotlin_droppen_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-droppen-v0` | rotlin + ent 5e-3 + drop penalty −100 return | 29845937 / A40 | done | 8.29 / 8.17 (best 8.37 @2000) | 70.8 / 60.8 | **89** / 44 | 0.17 / 0.92 |
 | `abl_B_rotlin_ent5e-3_offaxis15` | [rewards](rewards.md) | `-asym-rotlin-v0` + `env.rewards.off_axis_angular_velocity.weight=-15.0` | rotlin + ent 5e-3, off-axis penalty −5 → −15 (rotlin wobbles 2× more than B) | 29846126 / A10 | queued | | | | |
 | `abl_B_rotlin_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-rotlin-v0` | rotlin + entropy 1e-2 (entropy trade-off on the new reward) | 29846596 / A10 | queued | | | | |
 | `abl_B_rotlin_ent5e-3_big` | [PPO / capacity](ppo_and_capacity.md) | `-asym-rotlin-v0` + actor / critic `[1024,1024,512,256]` | rotlin + ent 5e-3, 4× wider MLPs | 29846127 / A40 | queued | | | | |
