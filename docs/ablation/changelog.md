@@ -52,3 +52,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | speed sweep (ent5e-3): RPM 6.7–7.3 for commands 0.6–2.0 rad/s, i.e. the policy ignores the commanded speed; the speed term only meant "faster" | [eval protocol](eval_protocol.md) |
 | 2026-10-29 | queued on rotlin + ent 5e-3: off-axis penalty −15 (A10) and the 1024-1024-512-256 network (A40) | [rewards](rewards.md), [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-29 | relact fails without grasp-cache resets: the relative target starts at the open reset pose, the cube drops within 6 steps, no learning (killed at it 96) | [action space](action_space.md) |
+| 2026-10-29 | teacher_ent5e-3: 7.96 RPM (best 8.16) vs 7.44, and 8 RPM already at 4k iterations (old teacher 3.8) → rotlin teacher rerun with entropy 5e-3 for 6k iterations | [teacher-student](teacher_student.md) |

@@ -108,6 +108,21 @@ Students distill from the teacher's `model_9999`.
   RPM plateaus after 1000 iterations while the behavior loss still falls (0.12): the teacher, not the distillation length,
   limits it. Needs the history-in-`policy.pt` export to deploy.
 
+- **2026-10-29 09:05 — teacher with entropy 5e-3 (`teacher_ent5e-3`)**, nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 2000 | 6.54 / 6.39 | 69.9 / 62.2 | 88 / 73 | 0.14 / 0.36 |
+  | 4000 | 7.99 / 7.51 | 77.2 / 66.3 | 89 / 63 | 0.13 / 0.69 |
+  | 6000 | 7.86 / 7.36 | 78.2 / 69.8 | 95 / 69 | 0.05 / 0.50 |
+  | 8000 | **8.16** / 7.51 | 80.5 / 67.1 | 92 / 59 | 0.08 / 0.69 |
+  | 9999 | 7.96 / 7.31 | 79.5 / 68.1 | 88 / 72 | 0.13 / 0.44 |
+
+  Final +0.5 RPM over the entropy-1e-4 teacher (7.44; one seed each, within seed noise), but it **learns ~2.5× faster**:
+  8 RPM at 4000 iterations, where the old teacher had 3.8 and needed all 10k. So the rotlin teacher is run with entropy
+  5e-3 for 6k iterations (`teacher_rotlin_ent5e-3`). `student_pt` is not re-distilled from this teacher: the rotlin
+  teacher is the one to distill from.
+
 ## Conclusions so far
 
 - The privileged teacher (7.44 RPM, 94 % DFSR) is the best policy so far and still improving at 10k.
