@@ -384,6 +384,18 @@ class OrcaV2ReposeAsymRotLinDropPenEnvCfg(OrcaV2ReposeAsymRotLinEnvCfg):
             func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
         )
 
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenEnvCfg(OrcaV2ReposeAsymOneDirEnvCfg):
+    """-onedir (+z, speed reward clipped at 3 rad/s) + the -droppen drop penalty (-100 return): -onedir plateaus at ~50 %
+    of episodes ending in a drop while the speed reward keeps rising."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.object_drop = RewTerm(
+            func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
+        )
+
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
 
 
