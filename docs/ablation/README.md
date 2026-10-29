@@ -53,9 +53,10 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `arch_rma_s2` | [RMA](rma.md) | `-rma-student-v0` | RMA adaptation module, 30-step history, 2k | 29837730 / L40S | done | 6.20 / 6.71 (best 6.29 / 6.35 @1500) | 72.3 / 68.0 | 83 / 78 | 0.25 / 0.38 |
 | `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | done | **10.41** / 11.07 | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
 | `abl_B_rotlin_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-v0` | rotlin + entropy 5e-3 (the two winners combined; new base candidate) | 29845926 / L40S (+ A100 dup 29845927) | queued | | | | |
+| `abl_B_rotlin_droppen_ent5e-3` | [rewards](rewards.md) | `-asym-rotlin-droppen-v0` | rotlin + ent 5e-3 + drop penalty −100 return (rotlin drops more than B) | 29845937 / A40 | queued | | | | |
 | `abl_B_onedir_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-v0` | B + ent 5e-3, +z only at 1.5 rad/s, unclipped linear speed reward (demo metric) | 29845346 / L40S (+ A100 dup 29845345) | queued | | | | |
 | `abl_B_rotsoft` | [rewards](rewards.md) | `-asym-rotsoft-v0` | B, magnitude σ 0.75, mag 60 / dir 30 | 29838451 / A100 | done — **reward hack** (wobbles, doesn't rotate) | −0.02 / −0.01 | 6.8 / 5.8 | 92 / 77 | 0.09 / 0.34 |
-| `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | queued | | | | |
+| `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | running | | | | |
 | `abl_B_asym_ent5e-3` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 5e-3 | 29833758 / A100 | done | **7.33 / 7.31** | 78.6 / 69.8 | 88 / 55 | 0.12 / 0.75 |
 | `abl_B_asym_ent5e-3_seed1` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | ent5e-3, seed 1 | 29841912 / A100 | queued | | | | |
 | `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | queued | | | | |

@@ -349,6 +349,17 @@ class OrcaV2ReposeAsymRotLinRelActEnvCfg(OrcaV2ReposeAsymRotLinEnvCfg):
             asset_name=a.asset_name, joint_names=a.joint_names, rescale_to_limits=a.rescale_to_limits, delta_scale=0.1
         )
 
+
+@configclass
+class OrcaV2ReposeAsymRotLinDropPenEnvCfg(OrcaV2ReposeAsymRotLinEnvCfg):
+    """-rotlin + the -droppen drop penalty (-100 return): rotlin turns faster but drops more than B (DFSR 84 vs 88 %)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.object_drop = RewTerm(
+            func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
+        )
+
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
 
 
