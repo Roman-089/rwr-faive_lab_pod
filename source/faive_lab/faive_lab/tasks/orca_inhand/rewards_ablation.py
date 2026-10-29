@@ -64,10 +64,13 @@ def rotation_progress_linear(
     object_cfg: SceneEntityCfg = SceneEntityCfg("object"),
     ref_speed: float = 1.5,
     min_vel: float = -0.5,
+    max_vel: float | None = None,
 ) -> torch.Tensor:
-    """max(w . k, min_vel) / ref_speed: linear in the speed about the target axis with NO upper clip ("as fast as
-    possible"); ``ref_speed`` only sets the scale (1 at ref_speed). Unlike HORA's clip, overspeed keeps paying, so the
-    drop termination / penalty is what keeps the policy from flinging the cube."""
+    """clip(w . k, min_vel, max_vel) / ref_speed: linear in the speed about the target axis, independent of the commanded
+    speed ("as fast as possible" up to ``max_vel``); ``ref_speed`` only sets the scale (1 at ref_speed).
+
+    ``max_vel=None`` (no upper clip) is exploited: the policy flings the cube, which spins at ~30 rad/s while it falls,
+    and the short burst pays more than holding it (run 2026-10-29: 99.9 % drops, episodes of 2 s). Use a finite clip."""
     axis, _ = _target_axis(env, command_name)
     w_axis = (_get_numeric_root_ang_vel(env, object_cfg) * axis).sum(-1)
-    return torch.clamp(w_axis, min=min_vel) / ref_speed
+    return torch.clamp(w_axis, min=min_vel, max=max_vel) / ref_speed

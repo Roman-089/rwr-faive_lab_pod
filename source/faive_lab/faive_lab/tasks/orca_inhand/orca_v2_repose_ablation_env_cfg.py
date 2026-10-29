@@ -303,11 +303,12 @@ class OrcaV2ReposeTeacherRotLinHist10EnvCfg(OrcaV2ReposeTeacherRotLinEnvCfg):
 
 @configclass
 class OrcaV2ReposeAsymOneDirEnvCfg(OrcaV2ReposeAsymEnvCfg):
-    """B for the demo metric (fast, long, no drop): always +z at 1.5 rad/s, reward linear in speed with no upper clip.
+    """B for the demo metric (fast, long, no drop): always +z at 1.5 rad/s, reward linear in speed clipped at 3 rad/s.
 
     +z is the faster direction in 11 of 12 evaluated policies (per-direction eval, 2026-10-28). Rotation terms as in
-    -rotlin (weight 90, off-axis -5) but unclipped, so speed above 1.5 rad/s keeps paying. Deploy: goal_ang_vel=1.5,
-    goal_flip_period_s=0. Eval: scripts/eval/eval_policy.py commands +z only for "-onedir" tasks.
+    -rotlin (weight 90, off-axis -5) but clipped at 3 rad/s (2x the command, ~3x our best speed) instead of the command,
+    so speed above 1.5 rad/s keeps paying. Unclipped, the policy flung the cube (see rotation_progress_linear).
+    Deploy: goal_ang_vel=1.5, goal_flip_period_s=0. Eval: scripts/eval/eval_policy.py commands +z only for "-onedir".
     """
 
     def __post_init__(self):
@@ -329,7 +330,7 @@ class OrcaV2ReposeAsymOneDirEnvCfg(OrcaV2ReposeAsymEnvCfg):
         self.rewards.rotation_progress = RewTerm(
             func=rewards_ablation.rotation_progress_linear,
             weight=90.0,
-            params={**cmd, "ref_speed": 1.5, "min_vel": -0.5},
+            params={**cmd, "ref_speed": 1.5, "min_vel": -0.5, "max_vel": 3.0},
         )
         self.rewards.off_axis_angular_velocity = RewTerm(
             func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
