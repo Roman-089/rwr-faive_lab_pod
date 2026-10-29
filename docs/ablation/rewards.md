@@ -175,6 +175,14 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
   1.2 RPM gap is at the edge of seed noise. For the demo (long without a drop) the trade may still be worth it; the
   real hand decides.
 
+- **2026-10-29 15:50 — off-axis penalty −15 kills the rotation** (`abl_B_rotlin_ent5e-3_offaxis15`): 0.19 RPM at 5k
+  (RA 37 %, 91 % drop-free), every checkpoint below 0.3 RPM. The cube wobbles much less (mean off-axis |ω_xy| 0.39 vs
+  1.74 rad/s with −5), because the policy just holds it: turning the cube always creates some off-axis angular velocity
+  (contact switches, finite-difference ω), so at −15 that cost outweighs rotlin's reward (≤ 90 · 1 per step) and holding
+  still is the safer optimum. Training logs looked healthy (long episodes, few drops), which is exactly what a holding
+  policy produces: **check the rotation reward / commanded-axis speed in training, not only drops and episode length**.
+  Keep −5; if wobble needs reducing, try −8 to −10 or penalize only off-axis speed above a dead band.
+
 ## Conclusions so far
 
 - **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).
