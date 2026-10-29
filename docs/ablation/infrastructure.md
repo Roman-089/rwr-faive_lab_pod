@@ -75,3 +75,12 @@ install. Pull-based queue: [`scripts/remote/`](../../scripts/remote/README.md) â
 `scripts/remote/queue.txt`, status and eval metrics pushed to branch `remote-results`. Run names end in `_r6k`.
 Livestreaming the sim over WebRTC also works there (platform docs), and the newer driver should allow RTX rendering
 and training videos, which crash on DTU.
+
+## RTX 6000 pod: throughput (2026-10-29)
+
+Measured by the pod worker (8192 envs per run): 2 runs at ~5 s/it each, GPU ~80 % "util" but only ~200 of 600 W and
+17 of 97 GB; a 3rd run added +3 % total and slowed the others by 30 %. The work is many small PhysX / torch kernels;
+without CUDA MPS the GPU time-slices between process contexts, so kernels of different runs never overlap. Plan: start
+the MPS daemon so new runs are MPS clients (the running ones finish unchanged), then re-test 3-4 runs per GPU; in
+parallel a 16384-env run (`abl_B_rotlin_ent5e-3_env16k_r6k`) tests bigger batches per run.
+
