@@ -35,6 +35,13 @@ table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node
 | `abl_B_droppen` (model_4999) | **7.94** (7.34 / 8.53) | 80 / 83 / 0.27 | **4.39** ± 0.16 (5.14 / 3.63) | 87 / 88 / 0.12 | **4.79** ± 0.36 (5.19 / 4.39) | 88 / 100 / 0.00 | 0.55 / 0.60 |
 | `abl_B_asym_ent5e-3` (model_4999) | **7.33** (7.94 / 6.71) | 79 / 88 / 0.12 | **5.38** ± 0.27 (6.77 / 3.99) | 86 / 81 / 0.19 | **4.99** ± 0.38 (6.02 / 3.96) | 85 / 100 / 0.00 | 0.73 / 0.68 |
 | `student_pt` (model_1999) | **6.89** (7.44 / 6.33) | 75 / 95 / 0.05 | **2.79** ± 0.21 (3.69 / 1.89) | 57 / 72 / 0.38 | **2.68** ± 0.41 (3.93 / 1.43) | 55 / 88 / 0.31 | 0.41 / 0.39 |
+| `abl_B_rotlin_ent5e-3` (model_4999) | **9.50** | 76 / 81 / 0.27 | **4.00** (64 trials) | 62 / 77 / 0.27 | **3.89** (64) | 60 / 83 / 0.19 | 0.42 / 0.41 |
+| `abl_B_onedir_clip3_ent5e-3` (model_4999, +z only) | **15.19** | 79 / 44 / 1.30 | **5.42** (64) | 64 / 31 / 1.31 | **5.47** (64) | 58 / 17 / 1.83 | 0.36 / 0.36 |
+| `abl_B_rotlin_droppen_ent5e-3` (model_4999) | **8.29** | 71 / 89 / 0.17 | **4.77** (64) | 72 / 92 / 0.08 | **4.44** (64) | 67 / 92 / 0.08 | 0.58 / 0.54 |
+
+Rows added 2026-10-29 23:10 (job 29851207, CPU queue `hpc`, 64 trials each; informational, decisions use Isaac). The
+fastest Isaac policy (onedir, 15.2 RPM) keeps only 36 % of its speed and drops most; the drop-penalty run keeps the
+highest share among the rotlin variants (0.58) and is 92 % drop-free in MuJoCo too.
 
 Cube height while held (mean z), Isaac → MuJoCo: rotlin −49.1 → −48.1 mm, droppen −26.7 → −24.3, ent5e-3 −27.3 →
 −25.5, student_pt −27.4 → **−36.3** mm. Drops within 5 s of a (re)spawn (reset artifacts, see
