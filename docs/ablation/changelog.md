@@ -67,3 +67,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | student_lstm crashed when loading the MLP teacher (rsl_rl 3.1.2 sizes a non-recurrent teacher for the RNN output); fixed in `student_recurrent.py` (CPU test: teacher actions identical). Student comparison (transformer / LSTM / MLP-h10) moved onto the rotlin teacher, all three start after it | [teacher-student](teacher_student.md) |
 | 2026-10-29 | rotlin teacher: **11.85 RPM, 95 % drop-free** (best so far, still improving at 6k); three students queued on it | [teacher-student](teacher_student.md) |
 | 2026-10-29 | rotlin + ent 1e-2 killed at it 640 (action std grows to 3, 95 % drops, no learning); its A10 slot gets a copy of rotlin_cont10k | [PPO / capacity](ppo_and_capacity.md) |
+| 2026-10-29 | alpha05 on rotlin killed at it 224 (4-step episodes: the start noise knocks the cube off); retry with init_noise_std 0.5 queued; cont10k running on A10 | [action space](action_space.md) |

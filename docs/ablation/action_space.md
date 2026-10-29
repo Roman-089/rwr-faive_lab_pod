@@ -51,6 +51,12 @@ applied at the same point in the chain in sim and deploy.
   cube falls, and short episodes give no learning signal. HORA and LEAP use relative targets **together with
   grasp-cache resets** (episodes start from a stable grasp), which we do not have.
 
+- **2026-10-29 19:45 — `alpha05` (α 0.5) cannot learn from our start either** (killed at it 224): episodes of 4 steps,
+  100 % drops from it 25 on. With the faster filter, the initial exploration noise (std 1.5) moves the fingers so fast
+  that the cube is knocked off within 0.2 s, so there is no signal. Retry with init_noise_std 0.5
+  (`abl_B_rotlin_ent5e-3_alpha05_std05`). Like `relact`, it points at the reset: a grasp-cache start would make
+  action-space changes testable.
+
 ## Conclusions so far
 
 - None yet; the perturbed-eval speed-up is the main hint that action filtering matters.
