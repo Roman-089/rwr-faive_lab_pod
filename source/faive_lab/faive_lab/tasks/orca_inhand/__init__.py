@@ -86,6 +86,9 @@ gym.register(
 from .transformer_student import register as _register_transformer_student  # noqa: E402
 
 _register_transformer_student()
+from .student_recurrent import register as _register_student_recurrent  # noqa: E402
+
+_register_student_recurrent()
 
 # Students distilled from the teacher (pass the teacher with --load_run / --checkpoint).
 for _task_id, _env_cfg, _runner_cfg in (
@@ -98,6 +101,7 @@ for _task_id, _env_cfg, _runner_cfg in (
      "DistillationRunnerCfgOrcaV2Transformer"),
     ("orca-v2-inhand-repose-student-mlp-h10-rotlin-v0", "OrcaV2ReposeTeacherRotLinHist10EnvCfg",
      "DistillationRunnerCfgOrcaV2"),
+    ("orca-v2-inhand-repose-student-lstm-rotlin-v0", "OrcaV2ReposeTeacherRotLinEnvCfg", "DistillationRunnerCfgOrcaV2LSTM"),
 ):
     gym.register(
         id=_task_id,

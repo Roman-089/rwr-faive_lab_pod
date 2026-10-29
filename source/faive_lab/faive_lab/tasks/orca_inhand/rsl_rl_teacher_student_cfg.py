@@ -91,6 +91,7 @@ class DistillationRunnerCfgOrcaV2LSTM(DistillationRunnerCfgOrcaV2):
     """Student = LSTM (256, 1 layer) + MLP on the single noisy ``policy`` observation (paper: 7.0 RPM, motor encoders)."""
 
     policy = RslRlDistillationStudentTeacherRecurrentCfg(
+        class_name="StudentTeacherRecurrentMLPTeacher",  # student_recurrent.py: rsl_rl 3.1.2 mis-sizes an MLP teacher
         init_noise_std=0.1,
         noise_std_type="log",
         student_obs_normalization=True,
