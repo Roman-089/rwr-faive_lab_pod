@@ -91,6 +91,12 @@ for _task_id, _env_cfg, _runner_cfg in (
     ("orca-v2-inhand-repose-student-mlp-h10-v0", "OrcaV2ReposeTeacherHist10EnvCfg", "DistillationRunnerCfgOrcaV2"),
     ("orca-v2-inhand-repose-student-lstm-v0", "OrcaV2ReposeTeacherEnvCfg", "DistillationRunnerCfgOrcaV2LSTM"),
     ("orca-v2-inhand-repose-student-pt-v0", "OrcaV2ReposeTeacherHist10EnvCfg", "DistillationRunnerCfgOrcaV2Transformer"),
+    # the same pipeline on the -rotlin reward (teacher: PPO on the privileged group, as -teacher-v0)
+    ("orca-v2-inhand-repose-teacher-rotlin-v0", "OrcaV2ReposeTeacherRotLinEnvCfg", "PPORunnerCfgOrcaV2Teacher"),
+    ("orca-v2-inhand-repose-student-pt-rotlin-v0", "OrcaV2ReposeTeacherRotLinHist10EnvCfg",
+     "DistillationRunnerCfgOrcaV2Transformer"),
+    ("orca-v2-inhand-repose-student-mlp-h10-rotlin-v0", "OrcaV2ReposeTeacherRotLinHist10EnvCfg",
+     "DistillationRunnerCfgOrcaV2"),
 ):
     gym.register(
         id=_task_id,

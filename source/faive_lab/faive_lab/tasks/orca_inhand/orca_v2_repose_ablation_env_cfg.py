@@ -267,15 +267,38 @@ class OrcaV2ReposeAsymRotLinEnvCfg(OrcaV2ReposeAsymEnvCfg):
 
     def __post_init__(self):
         super().__post_init__()
-        cmd = {"command_name": "continuous_rotation", "object_cfg": SceneEntityCfg("object")}
-        self.rewards.angular_velocity_direction = None
-        self.rewards.angular_velocity_magnitude = None
-        self.rewards.rotation_progress = RewTerm(
-            func=rewards_ablation.rotation_progress_clipped, weight=90.0, params={**cmd, "min_vel": -0.5}
-        )
-        self.rewards.off_axis_angular_velocity = RewTerm(
-            func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
-        )
+        use_rotlin_reward(self)
+
+
+def use_rotlin_reward(env_cfg: OrcaV2ReposeEnvCfg):
+    """Replace the direction + magnitude terms by -rotlin's clipped linear progress (90) and off-axis penalty (-5)."""
+    cmd = {"command_name": "continuous_rotation", "object_cfg": SceneEntityCfg("object")}
+    env_cfg.rewards.angular_velocity_direction = None
+    env_cfg.rewards.angular_velocity_magnitude = None
+    env_cfg.rewards.rotation_progress = RewTerm(
+        func=rewards_ablation.rotation_progress_clipped, weight=90.0, params={**cmd, "min_vel": -0.5}
+    )
+    env_cfg.rewards.off_axis_angular_velocity = RewTerm(
+        func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
+    )
+
+
+@configclass
+class OrcaV2ReposeTeacherRotLinEnvCfg(OrcaV2ReposeTeacherEnvCfg):
+    """Privileged teacher on the -rotlin reward (the reward-wave winner), for re-distilling the students."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        use_rotlin_reward(self)
+
+
+@configclass
+class OrcaV2ReposeTeacherRotLinHist10EnvCfg(OrcaV2ReposeTeacherRotLinEnvCfg):
+    """-teacher-rotlin env with the 10-step noisy ``policy`` history: input of the MLP-h10 / transformer students."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
 
 
 @configclass
