@@ -224,6 +224,23 @@ training command (0.9 rad/s), so speed tracking never mattered in practice.
 - **Base:** B (asymmetric critic, DR, single-observation MLP) + entropy 5e-3, the best deployable policy so far and
   exportable without the history wrapper. Run `abl_B_onedir_ent5e-3`; eval commands +z in every env.
 
+### Result: `abl_B_onedir_clip3_ent5e-3` (2026-10-29 17:50), nominal / perturbed, +z only
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | **15.67** / 14.26 | 81.1 / 69.2 | 42 / 13 | 1.20 / 4.45 |
+| 2000 | 14.90 / 13.69 | 79.0 / 66.9 | 44 / 22 | 1.50 / 3.55 |
+| 3000 | 14.55 / 13.17 | 77.0 / 65.4 | 41 / 14 | 1.34 / 4.06 |
+| 4000 | 15.17 / 14.59 | 79.7 / 69.5 | 52 / 22 | 1.00 / 3.27 |
+| 4999 | 15.19 / 13.97 | 79.2 / 65.9 | 44 / 9 | 1.30 / 4.83 |
+
+The fastest policy so far by far: 15.2 RPM, i.e. 1.59 rad/s about +z (above the 1.5 rad/s command; rotlin 1.09), with
+the speed reward clipped at 3 rad/s instead of at the command. But it drops: 44 % drop-free and 1.3 drops per minute
+(rotlin 84 % / 0.22), and almost always under the perturbed eval (9 % drop-free, 4.8 drops). The cube also tumbles
+more (off-axis |ω_xy| 3.0 vs 2.2 rad/s). RPM counts through drops (respawn), so a fast-but-droppy policy scores well on
+RPM and badly on the demo's "long without a drop". The drop-penalty version (`abl_B_onedir_droppen_ent5e-3`, running)
+is the direct fix; a lower clip (2 rad/s) is the other knob.
+
 ## Next steps / open questions
 
 - **`rotlin` is the new reward base.** Queued 2026-10-29: `abl_B_rotlin_ent5e-3` (+ entropy 5e-3), and the action-space

@@ -62,3 +62,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | rotlin + ent 5e-3 + drop penalty: 8.29 RPM / 89 % drop-free (without penalty 9.50 / 81 %): on rotlin the penalty trades speed for safety; no gain under perturbation | [rewards](rewards.md) |
 | 2026-10-29 | sim2sim harness (MuJoCo, CPU): no interface bug; MLPs keep 48–73 % of their Isaac speed and tie (rotlin 5.39 ≈ ent5e-3 5.38 RPM), student_pt only ~40 %; reset distribution note corrected; deploy needs Isaac's articulation joint order and raw last_action | [sim2sim](sim2sim.md) |
 | 2026-10-29 | off-axis −15 on rotlin: the policy stops rotating (0.19 RPM, holds the cube still); keep −5; monitor the rotation reward in training | [rewards](rewards.md) |
+| 2026-10-29 | onedir (+z, speed reward clipped at 3 rad/s): **15.2 RPM** (1.59 rad/s) but only 44 % drop-free (1.3 drops/min; perturbed 9 %); onedir + drop penalty running | [rewards](rewards.md) |
