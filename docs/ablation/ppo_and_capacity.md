@@ -94,6 +94,10 @@ vs B (2 seeds, last ckpt) 5.45 RPM / RA 64 % / DFSR 88 %, and the privileged tea
   75 % (1 seed). Speed rises with entropy, and at 1e-2 drops rise too. Within seed noise (±0.7 RPM) for the 5e-3 vs
   1e-2 step; `abl_B_rotlin_ent1e-2` repeats the comparison on the rotlin reward.
 
+- **2026-10-29 19:20 — rotlin + entropy 1e-2 does not learn** (killed at it 640): the action noise std keeps growing
+  (1.8 → 3.0), episodes stay at ~200 steps with 95 % drops. On the old reward the same entropy was at 450 steps / 40 % drops
+  by it 600. With rotlin, 1e-2 is too much exploration; 5e-3 works (rotlin_ent5e-3: 9.50 RPM).
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;
