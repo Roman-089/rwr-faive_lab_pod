@@ -84,3 +84,9 @@ without CUDA MPS the GPU time-slices between process contexts, so kernels of dif
 the MPS daemon so new runs are MPS clients (the running ones finish unchanged), then re-test 3-4 runs per GPU; in
 parallel a 16384-env run (`abl_B_rotlin_ent5e-3_env16k_r6k`) tests bigger batches per run.
 
+2026-10-29 ~22:10: switching to MPS now (user's go). The two seeds are stopped at their model_2000 checkpoints and
+resumed under MPS for the remaining 3000 iterations (`*_resume_r6k`), next to a 3rd run (onedir clip2). Math: at
+0.357 it/s total and ~6100 iterations left, restarting from scratch would need MPS to give >1.64x total throughput to
+break even, resuming from model_2000 only ~1.08x. Rule: keep 3 runs if total >= 1.25x and no run > ~8 s/it (then try
+4), fall back to 2 runs below 1.1x, drop MPS if Isaac Sim fails to start under it.
+
