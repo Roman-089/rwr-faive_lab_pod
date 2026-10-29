@@ -121,8 +121,8 @@ Students distill from the teacher's `model_9999`.
   students should learn from a rotlin teacher: `teacher_rotlin` (`-teacher-rotlin-v0`, queued) → `-student-pt-rotlin-v0` /
   `-student-mlp-h10-rotlin-v0`.
 - Re-distill from `teacher_cont18k` if it improves further.
-- Stage 2c (per-episode joint bias) is TODO. Stage 4 (export with the history inside the module) is done on CPU:
-  [export.md](export.md), `scripts/export/export_history_policy.py` → `exported/policy_history.pt`; in-sim check pending.
+- Stage 2c (per-episode joint bias) is TODO. Stage 4 (export with the history inside the module) is done and verified in sim:
+  [export.md](export.md), `scripts/export/export_history_policy.py` → `exported/policy_history.pt`.
 - PPO fine-tuning of the best distilled student: planned, see [student_finetune.md](student_finetune.md) and the
   background below.
 

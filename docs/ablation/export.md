@@ -170,7 +170,7 @@ later episodes are off by up to 4.9 (`arch_asym_lstm`); the state is also batch 
 `arch_asym_lstm` with `export_history_policy.py`.** That gives `LSTMPolicy` / `GRUPolicy` with the same API, the state
 kept per env, and `reset()` zeroing it like rsl_rl's `Memory.reset(dones)`.
 
-## Verify in sim on a GPU (not run yet)
+## Verify in sim on a GPU
 
 `scripts/export/verify_export_in_sim.py` runs the run's task in Isaac Sim (its own noise and DR). Episodes are
 shortened to `--episode_s 4` and their start is staggered, so time-outs and drops reset envs at many different steps.
@@ -192,6 +192,21 @@ python scripts/export/verify_export_in_sim.py --run logs/rsl_rl/orca_v2_repose/2
 It prints `OK` / `FAILED` (exit code 0 / 1) and writes `<run>/exported/verify_in_sim.json`. The task and checkpoint
 come from the export's JSON. `--drive exported` steps the env with the exported module's actions instead of the
 original policy's.
+
+### Result for `student_pt` (job 29845853, A10, 2026-10-29 05:50)
+
+`hpc/verify_export_job.sh` ran `verify_export_in_sim.py` twice (64 envs × 1000 steps, 4 s episodes):
+
+| `--drive` | env resets | flat history == env `policy` obs | max \|Δa\| exported vs CPU policy | vs runner policy on GPU |
+|---|---|---|---|---|
+| `policy` | 830 | yes, 0 mismatching steps | 0 (also 0 in the first 10 steps after a reset) | 3.2e-2 |
+| `exported` | 841 | yes, 0 mismatching steps | 0 | 3.0e-2 |
+
+The history the module rebuilds from single-step observations is identical to what the live env feeds the policy,
+through ~830 resets, so layout, fill-at-reset and term order are right. The exported module reproduces the policy
+bit for bit on CPU. The remaining 3e-2 (max over ~1M action values) is the same transformer computed on GPU vs CPU;
+the inputs are identical, so this is arithmetic, not the export. It is below the student's own action noise during
+distillation (std 0.1), and it is what any CPU deployment of this network will see.
 
 ## Files
 

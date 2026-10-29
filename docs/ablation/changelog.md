@@ -45,3 +45,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | **rotlin wins**: 10.41 / 11.07 RPM nominal / perturbed (B 5.45, ent5e-3 7.33, teacher 7.44), DFSR 84 %, but less robust under perturbation and more off-axis wobble. alpha05 / relact moved onto rotlin + ent 5e-3; rotlin + ent 5e-3 queued | [rewards](rewards.md) |
 | 2026-10-29 | C seed 1: 4.60 RPM → two-seed means C 5.34 vs B 5.45: DR params in the critic give nothing; seed spread ±0.7 RPM | [asym critic](asymmetric_critic.md) |
 | 2026-10-29 | teacher-student pipeline on the rotlin reward: `-teacher-rotlin-v0` (queued, 10k), `-student-pt-rotlin-v0`, `-student-mlp-h10-rotlin-v0`; `scripts/check_env_cfgs.py` instantiates env cfgs on CPU before jobs start | [teacher-student](teacher_student.md) |
+| 2026-10-29 | Export verified in sim (student_pt, 64 envs × 1000 steps, ~830 resets): rebuilt history == env obs on every step; exported == CPU policy exactly; GPU vs CPU arithmetic 3e-2 | [export](export.md) |
