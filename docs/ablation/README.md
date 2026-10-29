@@ -77,7 +77,7 @@ Status as of 2026-10-29 ~10:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_B_onedir_clip3_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-v0` | as above, speed reward clipped at 3 rad/s (demo metric) | 29846083 / L40S (+ A100 dup 29846084) | running | | | | |
 | `abl_B_onedir_droppen_ent5e-3` | [rewards](rewards.md) | `-asym-onedir-droppen-v0` | onedir (clip 3 rad/s) + drop penalty −100 return (onedir plateaus at ~50 % drops in training) | 29848008 / L40S | queued | | | | |
 | `abl_B_rotsoft` | [rewards](rewards.md) | `-asym-rotsoft-v0` | B, magnitude σ 0.75, mag 60 / dir 30 | 29838451 / A100 | done — **reward hack** (wobbles, doesn't rotate) | −0.02 / −0.01 | 6.8 / 5.8 | 92 / 77 | 0.09 / 0.34 |
-| `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | running | | | | |
+| `abl_B_droppen` | [rewards](rewards.md) | `-asym-droppen-v0` | B + −100 return on drop | 29835278 / A40 | done | **7.94** / 8.36 (best 8.34 / 8.23 @3000) | 80.0 / 77.2 | 83 / 61 (best 94 @3000) | 0.27 / 0.55 |
 | `abl_B_asym_ent5e-3` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 5e-3 | 29833758 / A100 | done | **7.33 / 7.31** | 78.6 / 69.8 | 88 / 55 | 0.12 / 0.75 |
 | `abl_B_asym_ent5e-3_seed1` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | ent5e-3, seed 1 | 29841912 / A100 | done | 5.74 / 5.45 | 69.9 / 59.0 | 88 / 56 | 0.13 / 0.55 |
 | `abl_B_asym_ent1e-2` | [PPO / capacity](ppo_and_capacity.md) | `-asym-v0` | B + entropy_coef 1e-2 | 29841914 / A100 | done | 7.60 / 7.47 (best 7.69 / 7.65 @4000) | 79.4 / 69.7 | 75 / 48 | 0.30 / 0.88 |

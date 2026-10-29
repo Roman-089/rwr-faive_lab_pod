@@ -56,3 +56,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | entropy 1e-2: 7.60 RPM but DFSR 75 % (5e-3: 6.54 / 88 %, 1e-4: 5.45 / 88 %): speed rises with entropy, drops too at 1e-2; rotlin + ent 1e-2 queued | [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-29 | queued `abl_B_rotlin_cont10k` (resume rotlin to 10k); README key results rewritten + deployability legend | [README](README.md) |
 | 2026-10-29 | onedir_clip3 learns but plateaus at ~50 % of episodes ending in a drop (it 400–1000): queued onedir + drop penalty (`-asym-onedir-droppen-v0`) | [rewards](rewards.md) |
+| 2026-10-29 | **drop penalty on B: 7.94 RPM (best 8.34 @3000 with 94 % drop-free) vs 5.45**: faster and more robust; rotlin / onedir + drop penalty running / queued | [rewards](rewards.md) |

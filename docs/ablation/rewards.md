@@ -125,6 +125,23 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
     The direction preference depends on the policy, not only on the hand; `-onedir` keeps +z.
   - Training reward is not comparable to B's (different terms).
 
+- **2026-10-29 13:45 — the drop penalty makes B faster, not only safer** (`abl_B_droppen`, entropy 1e-4, one seed),
+  nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 5.85 / 6.43 | 64.8 / 62.6 | 75 / 69 | 0.33 / 0.42 |
+  | 2000 | 7.05 / 6.98 | 75.8 / 69.1 | 86 / 67 | 0.17 / 0.47 |
+  | 3000 | **8.34** / 8.23 | **82.6** / 72.7 | **94** / 63 | **0.08** / 0.53 |
+  | 4000 | 7.82 / 7.75 | 79.8 / 74.3 | 91 / 63 | 0.14 / 0.45 |
+  | 4999 | 7.94 / 8.36 | 80.0 / 77.2 | 83 / 61 | 0.27 / 0.55 |
+
+  vs B (5.45 RPM, 88 % DFSR, two seeds): **+2.5 RPM** (+2.9 at the best checkpoint, which is also 94 % drop-free), well
+  beyond the ±0.7 RPM seed spread, and more robust under the perturbed eval (61 vs ~53 % DFSR, 8.4 vs ~6.2 RPM). The
+  penalty only adds −100 to the return of a dropped episode, yet the policy ends up both firmer and faster:
+  presumably a value function that sees drops as costly favours a secure grasp, which then supports a faster gait.
+  The rotlin and onedir variants with the drop penalty are running / queued.
+
 ## Conclusions so far
 
 - **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).
