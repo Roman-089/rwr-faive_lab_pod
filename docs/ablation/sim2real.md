@@ -17,6 +17,13 @@ The user parked sim2real on 2026-10-28 and asked to be reminded of these experim
    Combine with the delay run.
 3. **Actuator network** after arXiv 2603.04351 / Hwangbo 1901.08652: [actuator_net.md](actuator_net.md). Retrain on S1's
    new ORCA v2 chirps first; the existing chirps are from the v1b hand.
+4. **Sim2sim in MuJoCo before the hardware** ([sim2sim.md](sim2sim.md), harness being built 2026-10-29): run the exported
+   policy on CPU in MuJoCo with the ORCA v2 MJCF (`orcahand/orcahand_description`) as a stand-in for the real hand.
+   Step 1 (now): MuJoCo task + obs builder identical to Isaac's 74-dim observation, scored with our eval metrics; checks
+   that Isaac and MuJoCo move a joint the same way for the same command. Step 2 (when `rwr_faive_system` is released):
+   wrap MuJoCo as a fake ROS hand driver so the course's policy node runs unchanged end to end (joint order, limits, obs
+   scales, EMA, 20 Hz timing, `policy_history.pt` + `reset()`). Catches interface bugs and PhysX-specific exploits;
+   MuJoCo is not reality (no backlash / delay unless the actuator-net findings are added).
 
 ## Question / hypothesis
 
