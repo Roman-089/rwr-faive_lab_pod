@@ -36,7 +36,7 @@ Training columns: reward = mean of last 100 iters.
 | B `abl_B_asym` | `-asym-v0` | critic: noise-free joints + cube pose (`TeacherObsGroupCfg`) | 29829722 / L40S | 5k | done (2026-10-27 18:15) | ~1573 | ~588 / 640 | ~10 % |
 | C `abl_C_asym_dr` | `-asym-dr-v0` | B + cube lin/ang vel + sampled DR params (mass, friction, gain scales, gravity) | 29829723 / A40 | 5k | done (2026-10-27 22:35) | ~1583 | ~582 / 640 | ~12 % |
 | `abl_B_asym_seed1` | `-asym-v0` | B, seed 1 (replicate of the main effect) | 29832230 / L40S | 5k | done (2026-10-28 06:40) | ~1568 | | ~12 % |
-| `abl_C_asym_dr_seed1` | `-asym-dr-v0` | C, seed 1 (is C > B real?) | 29838635 / A10 | 5k | queued | | | |
+| `abl_C_asym_dr_seed1` | `-asym-dr-v0` | C, seed 1 (is C > B real?) | 29838635 / A10 | 5k | done (2026-10-29 04:40) | ~1317 | | ~15 % |
 
 Run-plan summaries (training logs):
 - A: reward ~493 (last 100 iters), drops ~62 %.
@@ -126,15 +126,27 @@ Run-plan summaries (training logs):
   + cube velocity in the critic, not yet conclusive (one C seed). RMA stage 1 (6.48) is ~+0.8 over B ([RMA](rma.md)).
   The asymmetric critic itself (A 1.4 → B 5.5) remains the only large architectural effect so far.
 
+- **2026-10-29 04:40 — C seed 1 does not replicate C's lead** (nominal / perturbed):
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 3000 | 4.66 / 5.46 | 58.1 / 58.8 | 77 / 61 | 0.34 / 0.53 |
+  | 4000 | 4.29 / 5.20 | 56.1 / 57.5 | 86 / 61 | 0.22 / 0.56 |
+  | 4999 | 4.60 / 5.68 | 58.7 / 59.4 | 88 / 59 | 0.16 / 0.61 |
+
+  Two-seed means at 5k: **C 5.34 RPM (6.08 / 4.60), B 5.45 (5.66 / 5.23)**. C's extra critic inputs (cube velocity,
+  DR parameters) give no gain; the earlier +0.6 RPM was seed noise. Seed spread is ~±0.7 RPM, so single-seed
+  differences below ~1.5 RPM are not conclusive.
+
 ## Conclusions so far
 
 - Asymmetric critic: A 1.4 (best) → B 5.45 RPM (two-seed mean), the only large architectural effect so far. B is the
   base of the history, LSTM, RMA, reward and entropy runs.
-- C vs B: +0.4 RPM / +6 pp RA at matched seed, ~2× the seed spread; not conclusive with one C seed.
+- **C = B** (two-seed means 5.34 vs 5.45 RPM): the DR parameters and cube velocity in the critic do not help. B stays
+  the base (simpler critic).
 - A is the weak baseline: eval peaks at it ~4.5k and then degrades as action std collapses.
 
 ## Next steps / open questions
 
-- `abl_C_asym_dr_seed1` decides whether C > B is real.
 - Whether the late-checkpoint degradation of A also appears in B/C (B seed 1 best was @2000: 5.48 / 6.16).
 - B's action-rate penalty (−0.76 vs −0.28) → check smoothness on hardware.

@@ -36,7 +36,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | B `abl_B_asym` | [asym critic](asymmetric_critic.md) | `-asym-v0` | asymmetric critic (teacher obs) | 29829722 / L40S | done | 5.66 / 6.55 | 66.3 / 62.0 | 86 / 52 | 0.20 / 0.98 |
 | C `abl_C_asym_dr` | [asym critic](asymmetric_critic.md) | `-asym-dr-v0` | B + cube vel + DR params in critic | 29829723 / A40 | done | 6.08 / 6.40 (best 6.19 / 6.77 @4000) | 72.2 / 63.2 | 84 / 69 | 0.20 / 0.44 |
 | `abl_B_asym_seed1` | [asym critic](asymmetric_critic.md) | `-asym-v0` | B, seed 1 | 29832230 / L40S | done | 5.23 / 5.92 (best 5.48 / 6.16 @2000) | 62.6 / 61.1 | 91 / 55 | 0.11 / 0.86 |
-| `abl_C_asym_dr_seed1` | [asym critic](asymmetric_critic.md) | `-asym-dr-v0` | C, seed 1 | 29838635 / A10 | queued | | | | |
+| `abl_C_asym_dr_seed1` | [asym critic](asymmetric_critic.md) | `-asym-dr-v0` | C, seed 1 | 29838635 / A10 | done | 4.60 / 5.68 | 58.7 / 59.4 | 88 / 59 | 0.16 / 0.61 |
 | sanity `sanity_nodr` | [sim2real](sim2real.md#sanity-runs-no-dr) | `-nodr-v0` | no DR, no obs noise (own no-DR eval) | 29829724 / A10 | done | 10.55 / 10.59 | 85.8 / 85.7 | 83 / 69 | 0.19 / 0.47 |
 | `eval_sanity_nodr_on_dr` | [sim2real](sim2real.md#sanity-runs-no-dr) | eval on `-v0` | sanity `model_4999` evaluated with DR | 29836428 | done | 3.32 / 4.97 | 35.6 / 43.2 | 55 / 42 | 0.86 / 1.48 |
 | `ent5e-3_on_nodr` | [sim2real](sim2real.md#sanity-runs-no-dr) | eval on `-asym-nodr-v0` | ent5e-3 `model_4999` evaluated without DR | 29842299 / A10 | queued | | | | |
