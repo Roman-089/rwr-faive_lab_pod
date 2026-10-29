@@ -51,3 +51,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | ent5e-3 evaluated without DR: 8.58 RPM (7.33 with DR): DR at test time costs ~15 %; most of the gap to the no-DR-trained policy (10.55) is the conservative gait learned under DR | [sim2real](sim2real.md#sanity-runs-no-dr) |
 | 2026-10-29 | speed sweep (ent5e-3): RPM 6.7–7.3 for commands 0.6–2.0 rad/s, i.e. the policy ignores the commanded speed; the speed term only meant "faster" | [eval protocol](eval_protocol.md) |
 | 2026-10-29 | queued on rotlin + ent 5e-3: off-axis penalty −15 (A10) and the 1024-1024-512-256 network (A40) | [rewards](rewards.md), [PPO / capacity](ppo_and_capacity.md) |
+| 2026-10-29 | relact fails without grasp-cache resets: the relative target starts at the open reset pose, the cube drops within 6 steps, no learning (killed at it 96) | [action space](action_space.md) |

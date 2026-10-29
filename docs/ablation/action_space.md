@@ -35,8 +35,8 @@ Base = the winner of the reward wave (B, `-rotlin` or `-rotsoft`, decided by eva
 
 | Run | Change | Why | Status |
 |---|---|---|---|
-| `alpha05` | EMA α 0.2 → 0.5 | α 0.2 at 20 Hz is a ~5-step (≈250 ms) time constant on joint targets; may cap gaiting speed | planned |
-| `relact` | relative joint targets (q_target = q_target,prev + s·a, HORA/LEAP) | small, fast finger motions are easy to express | planned |
+| `alpha05` | EMA α 0.2 → 0.5 | α 0.2 at 20 Hz is a ~5-step (≈250 ms) time constant on joint targets; may cap gaiting speed | queued on rotlin + ent 5e-3 (`abl_B_rotlin_ent5e-3_alpha05`, 29845928 / L40S) |
+| `relact` | relative joint targets (q_target = q_target,prev + s·a, HORA/LEAP) | small, fast finger motions are easy to express | **failed / killed** at it 96 on rotlin + ent 5e-3 (29845929 / A10) |
 
 Order: decide after the reward evals; `alpha05` / `relact` change the action handling that the policy node must mirror
 (allowed: we fork `rwr_faive_system`, see [sim2real](sim2real.md#deploy-repo-facts-task-pdf)). EMA smoothing must be
@@ -44,7 +44,12 @@ applied at the same point in the chain in sim and deploy.
 
 ## Results
 
-None yet.
+- **2026-10-29 08:40 — `relact` cannot learn from our reset** (`abl_B_rotlin_ent5e-3_relact`, killed at it 96):
+  mean episode length fell from 9 to 6 steps (0.3 s), 99.98 % of episodes ended in a drop; the absolute-target rotlin
+  run had 60 steps at it 20 and 369 at it 50. Cause: the relative target starts at the reset joint pose (hand near
+  open, ±20 % of the limits) and moves at most 10 % of the half-range per step, so the hand cannot close before the
+  cube falls, and short episodes give no learning signal. HORA and LEAP use relative targets **together with
+  grasp-cache resets** (episodes start from a stable grasp), which we do not have.
 
 ## Conclusions so far
 
@@ -52,5 +57,7 @@ None yet.
 
 ## Next steps / open questions
 
-- Run `alpha05` / `relact` on the reward-wave winner.
+- `alpha05` queued on rotlin + ent 5e-3.
+- `relact` only with grasp-cache resets (HORA `gen_grasp.py`, LEAP_Hand_Sim cache) or a reset that starts the
+  relative target at a closed grasp pose; a larger `delta_scale` (e.g. 0.3) is the cheap alternative to try first.
 - Spin-command curriculum (start slow, increase): not scheduled.
