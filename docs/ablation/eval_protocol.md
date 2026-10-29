@@ -77,8 +77,14 @@ ablation; RPM rising with cmd = the policy tracks speed and the training range m
 
 | Checkpoint | 0.3 | 0.6 | 0.9 | 1.2 | 1.5 | 2.0 |
 |---|---|---|---|---|---|---|
-| `abl_B_asym_ent5e-3` model_4999 (job 29845227) | | | | | 7.33 | |
+| `abl_B_asym_ent5e-3` model_4999 (job 29845227) | 5.11 | 6.66 | 6.80 | 6.92 | 7.33 | 7.25 |
 | `teacher` model_9999 (job 29845228) | | | | | 7.44 | |
+
+(Commanded speeds in RPM: 2.9 / 5.7 / 8.6 / 11.5 / 14.3 / 19.1.) **`ent5e-3` ignores the commanded speed**: from 0.6 to
+2.0 rad/s its RPM stays at 6.7–7.3 while the command changes by 3.3×; it rotates as fast as it can in the commanded
+direction. At 0.3 rad/s (below the training range 0.9–1.5) it still turns at 5.1 RPM, 1.8× the command, and becomes
+less reliable (RA 53 %, DFSR 72 %). So speed tracking never mattered: the speed term only ever said "faster", which
+supports the one-direction max-speed setup (`-onedir`) for the demo, and a wider command range would not help.
 
 ## Drop timing: are better starting grasps needed? (2026-10-28, `scripts/eval/drop_timing.py`, CPU)
 
