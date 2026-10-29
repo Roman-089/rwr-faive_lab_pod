@@ -90,3 +90,10 @@ resumed under MPS for the remaining 3000 iterations (`*_resume_r6k`), next to a 
 break even, resuming from model_2000 only ~1.08x. Rule: keep 3 runs if total >= 1.25x and no run > ~8 s/it (then try
 4), fall back to 2 runs below 1.1x, drop MPS if Isaac Sim fails to start under it.
 
+**MPS result (21:07Z): 3 runs at 4.72 / 4.30 / 4.67 s/it = 0.658 it/s total, 1.84x the 2-run non-MPS 0.357 it/s;**
+each run is faster than either run of the old pair. GPU 89-98 % util, 255-300 W, 25 GB. The resumes started correctly
+at iteration 2000 (`*_resume_r6k`; adaptive LR restarts at its initial value, optimizer state is restored). Rule from
+here: add MPS runs while each adds >= ~10 % total it/s and the priority runs slow by <= ~20 %. MPS needs
+`nvidia-cuda-mps-control -d` (pipe/log in /tmp/mps-balazsph, re-start after a pod restart) and the exports in
+~/isaac-env/bin/activate. Not applicable on DTU (one exclusive GPU per job).
+

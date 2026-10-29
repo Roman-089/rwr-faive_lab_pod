@@ -68,3 +68,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | rotlin teacher: **11.85 RPM, 95 % drop-free** (best so far, still improving at 6k); three students queued on it | [teacher-student](teacher_student.md) |
 | 2026-10-29 | rotlin + ent 1e-2 killed at it 640 (action std grows to 3, 95 % drops, no learning); its A10 slot gets a copy of rotlin_cont10k | [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-29 | alpha05 on rotlin killed at it 224 (4-step episodes: the start noise knocks the cube off); retry with init_noise_std 0.5 queued; cont10k running on A10 | [action space](action_space.md) |
+| 2026-10-29 | pod on CUDA MPS: 3 runs at 0.658 it/s total = **1.84x** the 2-run non-MPS throughput, each run faster; seeds resumed from model_2000; a 4th run (16384 envs) being added | [infrastructure](infrastructure.md) |
