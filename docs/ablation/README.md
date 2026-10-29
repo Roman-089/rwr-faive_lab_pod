@@ -32,6 +32,12 @@ so the deployed policy sees motor-encoder proprio only (74-dim obs at 20 Hz).
 - Domain randomization: the no-DR policy reaches 10.55 RPM but collapses to 3.3 with DR; a DR-trained policy loses only
   ~15 % when tested without DR, so most of the DR cost is a more conservative gait.
 
+- **Sim2sim in MuJoCo** ([sim2sim](sim2sim.md), CPU, USD-derived hand model, Isaac-identical interface, 47 tests):
+  no interface bug; every policy grips and turns the cube the commanded way, but at **48–73 % of its Isaac speed for
+  the MLPs** (rotlin 5.39, ent5e-3 5.38, droppen 4.39 RPM, 32 trials) and **~40 % for `student_pt`** (2.79 RPM, drops
+  mid-trial). **rotlin's Isaac lead disappears in MuJoCo**: part of its speed may rely on PhysX-specific contact
+  (MuJoCo's cube torsional friction alone can halve RPM). MuJoCo is not reality either; the real hand decides.
+
 **Deployable?** Every `abl_*` run, `arch_asym_*`, `arch_rma_s2` and every `student_*` is deployable: the actor sees only
 the 74 proprioceptive observations the real hand has (students / history policies via `scripts/export/
 export_history_policy.py`); privileged information goes only into the critic, which is not exported. `teacher*` and

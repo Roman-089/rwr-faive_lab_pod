@@ -56,6 +56,12 @@ The real hand will have all of these, so these are the first sim2real gaps to cl
   `rwr_faive_system` was not released yet when these notes were written ("TBA").
 - Chirp recorder: `experiments/orca/chirp.py` in `rwr_faive_system` (20 s, 0.1–5 Hz, ±10°, 20 Hz → 400 samples).
 
+- **Joint order of the policy** (found by the sim2sim work, [sim2sim](sim2sim.md#findings-for-the-policy-node--deploy)):
+  Isaac's articulation order (wrist, the four abd, thumb_cmc, the four mcp, thumb_abd, the four pip, thumb_mcp,
+  thumb_dip), **not** the order listed in `orca_v2.py`; the export JSON does not record it yet. The policy node must
+  map joints in this order.
+- **`last_action` must be the raw policy output**, not clipped: 58 % of rotlin's actions lie outside [−1, 1].
+
 ## Actuator and observation models
 
 | Idea | Where | Values to try |
@@ -88,7 +94,7 @@ torque-speed saturation); Dactyl: each actuator 1-step delayed w.p. 0.5 per epis
 | Cube friction | 0.3–1.0 | match real cube material |
 | Cube size | fixed 45 mm | ±5 % if the real cube differs |
 | External force/torque pushes on cube | none | small random impulses → recovery behaviour |
-| Initial joint positions | effectively none (`reset_robot_joints` scales 0 by 0.2) | ±0.1–0.2 rad around default |
+| Initial joint positions | U(0.2·lower, 0.2·upper) around the default pose (`reset_joints_within_limits_range`, operation `scale`; corrected 2026-10-29, the earlier note "effectively none" was wrong) | keep; match how the cube is placed on the real hand |
 | Scene gravity noise | gaussian **mean −0.1**, std 0.1 (params are (mean, std), likely a typo) | mean 0, std 0.1 or uniform ±0.1 |
 | Fingertip softness | **not modeled**: rigid links, (likely) convex-hull colliders, PhysX hard contacts; only high friction 0.8–2.0, restitution 0 as a proxy | PhysX compliant contacts on the finger/fingertip material: `RigidBodyMaterialCfg(compliant_contact_stiffness=…, compliant_contact_damping=…)`, randomize stiffness per env; tune to real pad compliance (no full soft-body sim, too slow at 8192 envs) |
 

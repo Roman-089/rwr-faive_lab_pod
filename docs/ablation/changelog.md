@@ -60,3 +60,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | Phase 2 checklist + sim2sim in MuJoCo (CPU): harness being built by a subagent; step 2 = fake ROS hand driver for the course's policy node | [sim2real](sim2real.md) |
 | 2026-10-29 | rotlin + ent 5e-3: 9.50 / 10.43 RPM (rotlin 10.41 / 11.07): no extra speed, but 8.9 RPM already at 1k and 58 vs 44 % drop-free under perturbation; confirms rotlin's ~10 RPM level | [rewards](rewards.md) |
 | 2026-10-29 | rotlin + ent 5e-3 + drop penalty: 8.29 RPM / 89 % drop-free (without penalty 9.50 / 81 %): on rotlin the penalty trades speed for safety; no gain under perturbation | [rewards](rewards.md) |
+| 2026-10-29 | sim2sim harness (MuJoCo, CPU): no interface bug; MLPs keep 48–73 % of their Isaac speed and tie (rotlin 5.39 ≈ ent5e-3 5.38 RPM), student_pt only ~40 %; reset distribution note corrected; deploy needs Isaac's articulation joint order and raw last_action | [sim2sim](sim2sim.md) |
