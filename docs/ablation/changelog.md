@@ -58,3 +58,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | onedir_clip3 learns but plateaus at ~50 % of episodes ending in a drop (it 400–1000): queued onedir + drop penalty (`-asym-onedir-droppen-v0`) | [rewards](rewards.md) |
 | 2026-10-29 | **drop penalty on B: 7.94 RPM (best 8.34 @3000 with 94 % drop-free) vs 5.45**: faster and more robust; rotlin / onedir + drop penalty running / queued | [rewards](rewards.md) |
 | 2026-10-29 | Phase 2 checklist + sim2sim in MuJoCo (CPU): harness being built by a subagent; step 2 = fake ROS hand driver for the course's policy node | [sim2real](sim2real.md) |
+| 2026-10-29 | rotlin + ent 5e-3: 9.50 / 10.43 RPM (rotlin 10.41 / 11.07): no extra speed, but 8.9 RPM already at 1k and 58 vs 44 % drop-free under perturbation; confirms rotlin's ~10 RPM level | [rewards](rewards.md) |

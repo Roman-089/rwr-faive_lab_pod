@@ -142,6 +142,22 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
   presumably a value function that sees drops as costly favours a secure grasp, which then supports a faster gait.
   The rotlin and onedir variants with the drop penalty are running / queued.
 
+- **2026-10-29 14:50 — rotlin + entropy 5e-3** (`abl_B_rotlin_ent5e-3`), nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 8.90 / 9.62 | 69.4 / 62.9 | 72 / 44 | 0.39 / 1.70 |
+  | 2000 | 9.32 / 9.34 | 70.6 / 61.6 | 75 / 31 | 0.31 / 1.69 |
+  | 3000 | 8.99 / 9.88 | 71.7 / 64.3 | 81 / 48 | 0.22 / 1.05 |
+  | 4000 | 9.34 / 9.92 | 73.6 / 66.8 | 83 / 61 | 0.27 / 0.67 |
+  | 4999 | 9.50 / 10.43 | 76.1 / 70.8 | 81 / 58 | 0.27 / 1.00 |
+
+  Entropy does not add speed on rotlin (9.50 vs 10.41 RPM at 5k, one seed each, within ~1.5 RPM of seed noise), but it
+  learns much faster (8.9 vs 5.2 RPM at 1000 iterations) and holds up better under the perturbed eval (58 vs 44 %
+  drop-free). It also confirms rotlin's level with a second, independent run (~9.5–10.4 RPM). W&B showed the run as
+  "crashed" between the end of training and the eval upload: Isaac Sim closes the process before wandb's own shutdown,
+  and the eval's upload then reopens and finishes the run (all completed runs went through this state).
+
 ## Conclusions so far
 
 - **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).
