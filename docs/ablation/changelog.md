@@ -63,3 +63,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | sim2sim harness (MuJoCo, CPU): no interface bug; MLPs keep 48–73 % of their Isaac speed and tie (rotlin 5.39 ≈ ent5e-3 5.38 RPM), student_pt only ~40 %; reset distribution note corrected; deploy needs Isaac's articulation joint order and raw last_action | [sim2sim](sim2sim.md) |
 | 2026-10-29 | off-axis −15 on rotlin: the policy stops rotating (0.19 RPM, holds the cube still); keep −5; monitor the rotation reward in training | [rewards](rewards.md) |
 | 2026-10-29 | onedir (+z, speed reward clipped at 3 rad/s): **15.2 RPM** (1.59 rad/s) but only 44 % drop-free (1.3 drops/min; perturbed 9 %); onedir + drop penalty running | [rewards](rewards.md) |
+| 2026-10-29 | RTX 6000 pod online (Claude worker `rtx6000`, Isaac Sim 5.1 / Isaac Lab 2.3.2 installed in a venv, Vulkan via the EGL ICD): rotlin seed 1 and droppen seed 1 running at ~5 s/it with 2 runs on the GPU | [infrastructure](infrastructure.md) |
