@@ -39,6 +39,7 @@ Status as of 2026-10-28 ~15:00. Eval = nominal / perturbed at the last checkpoin
 | `abl_C_asym_dr_seed1` | [asym critic](asymmetric_critic.md) | `-asym-dr-v0` | C, seed 1 | 29838635 / A10 | done | 4.60 / 5.68 | 58.7 / 59.4 | 88 / 59 | 0.16 / 0.61 |
 | sanity `sanity_nodr` | [sim2real](sim2real.md#sanity-runs-no-dr) | `-nodr-v0` | no DR, no obs noise (own no-DR eval) | 29829724 / A10 | done | 10.55 / 10.59 | 85.8 / 85.7 | 83 / 69 | 0.19 / 0.47 |
 | `eval_sanity_nodr_on_dr` | [sim2real](sim2real.md#sanity-runs-no-dr) | eval on `-v0` | sanity `model_4999` evaluated with DR | 29836428 | done | 3.32 / 4.97 | 35.6 / 43.2 | 55 / 42 | 0.86 / 1.48 |
+| `eval_abl_B_asym_ent5e-3_on_nodr` | [sim2real](sim2real.md#sanity-runs-no-dr) | eval on `-asym-nodr-v0` | ent5e-3 `model_4999` evaluated without DR | 29842299 | done | 8.58 / 8.07 | 87.8 / 79.7 | 95 / 84 | 0.05 / 0.23 |
 | `ent5e-3_on_nodr` | [sim2real](sim2real.md#sanity-runs-no-dr) | eval on `-asym-nodr-v0` | ent5e-3 `model_4999` evaluated without DR | 29842299 / A10 | queued | | | | |
 | `arch_asym_hist3` | [history](history_and_memory.md) | `-asym-hist3-v0` | B + MLP on 3-step history | 29831099 / A10 | done | 5.33 / 5.82 | 64.0 / 58.1 | 83 / 66 | 0.20 / 0.59 |
 | `arch_asym_hist10` | [history](history_and_memory.md) | `-asym-hist10-v0` | B + MLP on 10-step history | 29831100 / A40 | done | 5.01 / 5.72 | 68.8 / 67.6 | 88 / 70 | 0.14 / 0.44 |

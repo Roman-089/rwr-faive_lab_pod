@@ -211,7 +211,13 @@ Not verified: env construction in Isaac Sim (the env cfg is checked statically o
 |---|---|---|---|---|---|---|---|---|
 | sanity `sanity_nodr` | `-nodr-v0` | no physics/mount DR, no obs noise (not deployable) | 29829724 / A10 | 5k | done (2026-10-27 22:45) | ~1793 | ~574 / 640 | ~10 % |
 | `sanity_nodr_on_dr` | eval only | sanity `model_4999` evaluated on the DR task | 29836428 / A10 | – | done (2026-10-28 17:05): **3.32 / 4.97 RPM, RA 35.6 / 43.2 %, DFSR 55 / 42 %, DC 0.86 / 1.48** (nominal / perturbed) | | | |
-| `ent5e-3_on_nodr` | eval only | `abl_B_asym_ent5e-3` `model_4999` evaluated without DR (`-asym-nodr-v0`, new eval variant) | 29842299 / A10 | – | queued | | | |
+| `ent5e-3_on_nodr` | eval only | `abl_B_asym_ent5e-3` `model_4999` evaluated without DR (`-asym-nodr-v0`, new eval variant) | 29842299 / A10 | – | done (2026-10-29 08:00): **8.58 / 8.07 RPM, RA 87.8 / 79.7 %, DFSR 95 / 84 %, DC 0.05 / 0.23** (nominal / perturbed) | | | |
+
+What DR costs (nominal RPM): trained without DR, tested without DR 10.55 → trained without DR, tested with DR 3.32
+(collapses); trained with DR (`ent5e-3`), tested with DR 7.33 → the same policy tested without DR 8.58 (+17 %, and
+95 % drop-free). So the DR-trained policy is only modestly slowed by the randomized physics at test time; most of the
+gap to the no-DR policy (8.58 vs 10.55) is the more conservative gait it learned. Narrowing DR to the measured hand
+(Phase 2) can recover part of that ~2 RPM, not more.
 
 Run-plan summary: 5k (train, iters 4900–4999): reward 1809, drops 10 %, ep. length 579 — symmetric critic learns fine
 without DR/noise, so A's weakness is critic + DR/noise; B recovers ~87 % of this upper bound.

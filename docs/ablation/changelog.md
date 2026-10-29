@@ -48,3 +48,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | Export verified in sim (student_pt, 64 envs × 1000 steps, ~830 resets): rebuilt history == env obs on every step; exported == CPU policy exactly; GPU vs CPU arithmetic 3e-2 | [export](export.md) |
 | 2026-10-29 | entropy replicate: seed 1 5.74 RPM (seed 0 7.33) → ent 5e-3 mean 6.54 vs B 5.45: likely positive, not established (seed spread 1.6 RPM) | [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-29 | one-direction run with an unclipped speed reward was a reward hack (flings the cube at ~30 rad/s, 99.9 % drops): killed, speed reward now clipped at 3 rad/s, rerun as `abl_B_onedir_clip3_ent5e-3` | [rewards](rewards.md) |
+| 2026-10-29 | ent5e-3 evaluated without DR: 8.58 RPM (7.33 with DR): DR at test time costs ~15 %; most of the gap to the no-DR-trained policy (10.55) is the conservative gait learned under DR | [sim2real](sim2real.md#sanity-runs-no-dr) |
