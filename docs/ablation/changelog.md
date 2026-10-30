@@ -79,3 +79,4 @@ full entries live in the linked topic files.
 | 2026-10-30 | queued: privileged teacher on the demo reward (onedir + drop penalty, ent 5e-3, 6k; DTU A100 + pod) to distill a deployable demo student; onedir reward factored into `use_onedir_reward()` | [teacher-student](teacher_student.md) |
 | 2026-10-30 05:00 | **transformer student on rotlin: 10.90 RPM / 86 % drop-free** (perturbed 9.81 / 56 %): as fast as B-rotlin (10.33), more robust under perturbation (56–72 % vs 45 % drop-free); keeps 92 % of the teacher | [teacher-student](teacher_student.md) |
 | 2026-10-30 05:05 | rotlin + work penalty −1.5 killed: the policy learned to drop the cube to end the penalty (100 % drops); rerun at −0.15 | [rewards](rewards.md#work-penalty) |
+| 2026-10-30 05:25 | queued: onedir + 3× drop penalty (−6000, A100) as the alternative to the 2 rad/s cap; work penalty −0.15 tracks rotlin (rotation 10.4 vs 12.7 at it 183) | [rewards](rewards.md) |
