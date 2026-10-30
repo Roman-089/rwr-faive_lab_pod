@@ -97,3 +97,9 @@ here: add MPS runs while each adds >= ~10 % total it/s and the priority runs slo
 `nvidia-cuda-mps-control -d` (pipe/log in /tmp/mps-balazsph, re-start after a pod restart) and the exports in
 ~/isaac-env/bin/activate. Not applicable on DTU (one exclusive GPU per job).
 
+**Eval rendering on the pod (2026-10-30):** the eval videos rendered in software because only Mesa's glvnd EGL vendor
+was installed: ~8 min per video, ~40 min per run with the training slot held (why pod evals took ~1 h). Fix by the
+worker: an NVIDIA EGL vendor file (`/etc/glvnd/egl_vendor.d/10_nvidia.json`) and `__EGL_VENDOR_LIBRARY_FILENAMES` in
+`~/isaac-env/bin/activate`; a test render gives GL_RENDERER = RTX PRO 6000 at ~800–1150 fps instead of ~1.3 fps.
+`/etc` may not survive a pod restart: if evals slow down again, recreate the file.
+
