@@ -461,3 +461,30 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   So the large wrist swing seen in 742zn06f (entropy 5e-3) and most spin-up drops came largely from training under
   std 3–4 action noise, not from the onedir reward itself. Smoothness ×10 removed part of the spin-up drops on
   entropy 5e-3; whether it adds anything on default entropy is `abl_B_onedir_droppen_acc10_ent1e-4_r6k` (running).
+
+## Cube tumbling (2026-10-30)
+
+The user noticed in the default-entropy +z video (qn0pkisu) that the cube's rotation axis does not stay vertical, and
+that the wrist still moves too much. `scripts/eval/cube_motion.py` (nominal rollout of the last checkpoint):
+
+| Policy | spin about z [rad/s] | off-axis spin [rad/s] | cube tilt mean / p90 [deg] | top-face changes / min | wrist range [rad] / mean \|q̇\| [rad/s] |
+|---|---|---|---|---|---|
+| +z default entropy (qn0pkisu) | 1.85 | **2.54** | **36.0 / 46.2** | **173** | 0.64 / 1.10 |
+| +z smoothness ×10, entropy 5e-3 | 1.57 | 2.85 | 33.3 / 44.8 | 157 | 1.11 / 1.90 |
+| +z baseline, entropy 5e-3 | 1.72 | 2.91 | 25.0 / 41.9 | 106 | 1.34 / 1.97 |
+| +z teacher 742zn06f | 1.59 | 3.69 | 31.8 / 45.2 | 171 | 1.24 / 2.19 |
+| rotlin student p3dxn5pm | 1.14 | 1.49 | **6.7 / 11.5** | **3.8** | 0.48 / 0.23 |
+| rotlin teacher | 1.24 | 1.43 | 6.3 / 10.6 | 2.6 | 0.36 / 0.15 |
+
+The rotlin policies turn the cube flat (one face up, 6° tilt; their off-axis spin is rocking). Every +z policy tumbles
+it: 25–36° mean tilt, the top face changes ~2–3 times per second, more spin about the horizontal axes than about z. RPM
+only integrates the z-component, so this counted as speed; the 3 rad/s cap made it pay (rotlin's cap at the
+commanded 1.5 rad/s did not). For the demo ("z-rotation") the +z speed numbers are therefore not comparable to rotlin's.
+
+Fix: `rewards_ablation.cube_tilt` = 1 − max_i |(R e_i)·z|, zero while any face points up (so a clean z-rotation at any
+yaw is free, unlike the off-axis angular-velocity penalty, which at −15 stopped rotlin rotating), weight −200
+(`add_cube_tilt_penalty`: ~38 per second at 36° vs ~110 per second of rotation reward). Unit test: yaw only 0, 30° 0.134,
+90° (another face up) 0, 45° 0.293. 2×2 on default entropy: baseline (qn0pkisu, done) / fixed wrist (queued) /
+`abl_B_onedir_droppen_upright_ent1e-4` / `abl_B_onedir_droppen_upright_wristfix_ent1e-4`. The plain default-entropy
+teacher was dropped; the next teacher uses the winning cell. From now on every +z result is also judged on cube tilt,
+face changes and wrist motion (`cube_motion.py`), not only RPM.
