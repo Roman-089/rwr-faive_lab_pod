@@ -1,0 +1,54 @@
+{
+ "model_1000.pt": {
+  "rpm": 11.612703323364258,
+  "rpm_std": 2.218360662460327,
+  "ra": 61.05116009712219,
+  "dfsr": 40.625,
+  "dc": 1.140625,
+  "checkpoint": "model_1000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0",
+  "perturb": true
+ },
+ "model_2000.pt": {
+  "rpm": 12.942388534545898,
+  "rpm_std": 2.889206886291504,
+  "ra": 65.54416418075562,
+  "dfsr": 51.5625,
+  "dc": 0.90625,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0",
+  "perturb": true
+ },
+ "model_3500.pt": {
+  "rpm": 13.344642639160156,
+  "rpm_std": 2.501004457473755,
+  "ra": 68.3609664440155,
+  "dfsr": 50.0,
+  "dc": 0.703125,
+  "checkpoint": "model_3500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0",
+  "perturb": true
+ },
+ "model_4500.pt": {
+  "rpm": 13.144868850708008,
+  "rpm_std": 2.307499408721924,
+  "ra": 69.84766721725464,
+  "dfsr": 64.0625,
+  "dc": 0.515625,
+  "checkpoint": "model_4500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0",
+  "perturb": true
+ }
+}

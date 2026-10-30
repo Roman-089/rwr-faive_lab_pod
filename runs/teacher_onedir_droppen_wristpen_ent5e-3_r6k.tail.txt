@@ -1,40 +1,40 @@
-| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
-|     |                                  |        |     |            | Device-ID | UUID       |
-|     |                                  |        |     |            | Bus-ID    |            |
-|---------------------------------------------------------------------------------------------|
-| 0   | NVIDIA RTX PRO 6000 Blackwell .. | Yes: 0 |     | 97887   MB | 10de      | 0          |
-|     |                                  |        |     |            | 2bb5      | c19ab7f3.. |
-|     |                                  |        |     |            | a         |            |
-|=============================================================================================|
-| OS: 24.04.4 LTS (Noble Numbat) ubuntu, Version: 24.04.4, Kernel: 6.12.85+
-| Processor: AMD EPYC 9B45
-| Cores: 192 | Logical Cores: 384
-|---------------------------------------------------------------------------------------------|
-| Total Memory (MB): 163840 | Free Memory: 107615
-| Total Page/Swap (MB): 0 | Free Page/Swap: 0
-|---------------------------------------------------------------------------------------------|
-cat: '/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor': No such file or directory
-2026-10-30T22:02:51Z [83,879ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
-[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.orca_v2_repose_ablation_env_cfg:OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg
-[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2Teacher
-
-[36m======================================================================================[0m
-[36m[1m[INFO][IsaacLab]: Logging to file: /tmp/isaaclab/logs/isaaclab_2026-10-30_22-03-09.log[0m
-[36m======================================================================================[0m
-
-[33m22:03:09 [simulation_context.py] WARNING: The `enable_external_forces_every_iteration` parameter in the PhysxCfg is set to False. If you are experiencing noisy velocities, consider enabling this flag. You may need to slightly increase the number of velocity iterations (setting it to 1 or 2 rather than 0), together with this flag, to improve the accuracy of velocity updates.[0m
-[INFO]: Base environment:
-	Environment device    : cuda:0
-	Environment seed      : 42
-	Physics step-size     : 0.008333333333333333
-	Rendering step-size   : 0.05
-	Environment step-size : 0.05
-[INFO]: Time taken for scene creation : 1.351953 seconds
-[INFO]: Scene manager:  <class InteractiveScene>
-	Number of environments: 64
-	Environment spacing   : 0.5
-	Source prim name      : /World/envs/env_0
-	Global prim paths     : []
-	Replicate physics     : False
-[INFO]: Starting the simulation. This may take a few seconds. Please wait...
-[INFO]: Time taken for simulation start : 4.924427 seconds
+[replay] link /World/envs/env_0/Robot/right_pinky_pp: 81168 verts, 27056 tris
+[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
+[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
+[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
+[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 policy :  ['teacher']
+	 critic :  ['teacher']
+--------------------------------------------------------------------------------
+Actor MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+Critic MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=1, bias=True)
+)
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_1000.pt: {'rpm': 11.612703323364258, 'rpm_std': 2.218360662460327, 'ra': 61.05116009712219, 'dfsr': 40.625, 'dc': 1.140625, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_2000.pt: {'rpm': 12.942388534545898, 'rpm_std': 2.889206886291504, 'ra': 65.54416418075562, 'dfsr': 51.5625, 'dc': 0.90625, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_3500.pt: {'rpm': 13.344642639160156, 'rpm_std': 2.501004457473755, 'ra': 68.3609664440155, 'dfsr': 50.0, 'dc': 0.703125, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_4500.pt: {'rpm': 13.144868850708008, 'rpm_std': 2.307499408721924, 'ra': 69.84766721725464, 'dfsr': 64.0625, 'dc': 0.515625, 'checkpoint': 'model_4500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
