@@ -361,3 +361,14 @@ Isaac eval, last checkpoint, nominal / perturbed (64 envs × 60 s):
   gentle one; after 3 s the reward is the same as onedir-droppen. Tested on stubs: speed 2.5 rad/s at t = 0 / 1 / 2 / 10 s
   pays 0.5 / 1.33 / 2.17 / 2.5. The MLP has no clock, but the first seconds look different (hand near its reset pose,
   cube at rest), so it can learn a separate start-up behaviour.
+
+## Decision: +z only (2026-10-30)
+
+From 2026-10-30 every new ablation runs on the one-direction demo config (`-asym-onedir-*`, fixed +z command). The
+bidirectional rotlin line is closed; its transformer student `student_pt_rotlin` (W&B p3dxn5pm) stays the fallback
+deployable policy. Commanded one direction it gives +z 10.5 RPM / 91 % and −z 11.3 RPM / 81 % drop-free (nominal,
+model_1999, 32 envs per direction; the drop-free gap is inside the ±7-point noise). Stopped for this: the bidirectional
+α 0.5 run (A10, it ~850; re-queued on +z), `abl_B_rotlin_ent5e-3_offaxis8_r6k` (pod, it ~2000), and the held
+re-distillation from the 10k rotlin teacher. +z was chosen from the per-direction eval of the old-reward policies (11 of 12
+faster in +z); the rotlin-family policies are faster in −z (B 10k: 10.0 vs 11.6 RPM, teacher 10.7 vs 13.0), which is
+noted but not acted on (a direction-specific policy can learn a direction-specific gait).
