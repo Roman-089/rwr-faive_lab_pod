@@ -510,3 +510,9 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   15.3 / 54 % / 0.99 / 18 % / ~3.8: the perturbed drop-free rate ×2.5 (as on rotlin: 56 vs 39 %) at nearly the baseline
   speed. Cube motion: tilt 30°, 131 face changes / min, wrist 0.88 rad / 1.55 rad/s: still tumbling. Kept as a robustness
   add-on for the winning non-tumbling config (position ×3 / tilt penalty), not run alone again.
+- **Wrist-penalty teacher (`teacher_onedir_droppen_wristpen_ent5e-3_r6k`, pod, W&B cbgi1o9d)**, entropy 5e-3, privileged,
+  nominal / perturbed: 1000 13.84 / 11.61 RPM, 86 / 41 % · 2000 14.68 / 12.94, 80 / 52 % · 3500 14.87 / 13.34, 81 / 50 % ·
+  4500 13.85 / 13.14, 84 / 64 % · 5999 14.18 / 12.50, **89** / 59 %, DC 0.11 / 0.59. Last-3 mean 14.3 RPM / **85 %** /
+  DC 0.17, **perturbed 58 % / DC 0.60**, vs the same teacher without the penalty (742zn06f) 15.5 / 74 % / 0.34,
+  perturbed 17 % / 2.9: −1.2 RPM, +11 points nominal and ×3.4 perturbed drop-free. A calm wrist makes the gait far less
+  sensitive to action delay and encoder offset. Cube motion pending (npz from the pod).
