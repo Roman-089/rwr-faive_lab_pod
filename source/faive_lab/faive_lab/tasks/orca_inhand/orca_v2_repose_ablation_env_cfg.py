@@ -46,13 +46,14 @@ Play / replay a B or C checkpoint with the same task id: the critic's input size
 loads into the matching variant.
 """
 
+from isaaclab.managers import CurriculumTermCfg as CurrTerm
 from isaaclab.managers import ObservationGroupCfg as ObsGroup
 from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils import configclass
 
-from . import mdp, rewards_ablation
+from . import adr, mdp, rewards_ablation
 from .actions_ablation import HoldingEMAJointPositionToLimitsActionCfg, RelativeJointPositionToLimitsActionCfg
 from .actuator_net import servo_net_actuators
 from .commands_ablation import FixedDirectionRotationCommandCfg
@@ -553,6 +554,32 @@ class OrcaV2ReposeTeacherOneDirDropPenUprightWristFixHist10EnvCfg(OrcaV2ReposeTe
     def __post_init__(self):
         super().__post_init__()
         self.observations.policy.history_length = 10
+
+
+@configclass
+class ADRCurriculumCfg:
+    """ADR level for action delay and encoder offset (``adr.adr_level``)."""
+
+    adr = CurrTerm(func=adr.adr_level, params={"interval_steps": 480, "step": 0.05, "low": 0.25, "high": 0.40})
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """-onedir-droppen with ADR (arXiv 1910.07113) on the two deployment gaps of the perturbed eval: per-episode action
+    delay U[0, L * 15] physics substeps (eval: 6-12) and joint-encoder offset U(±L * 0.08 rad) (eval: ±0.05), L in [0, 1]
+    raised while the drop share of ended episodes stays below 25 % (adr.py). Critic obs unchanged, so a checkpoint of the
+    same config without ADR can be resumed (e.g. the position ×3 policy)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        a = self.actions.joint_pos
+        self.actions.joint_pos = adr.ADRDelayedEMAJointPositionToLimitsActionCfg(
+            asset_name=a.asset_name, joint_names=a.joint_names, alpha=a.alpha,
+            rescale_to_limits=a.rescale_to_limits, delay_substeps_range=(0, 15),
+        )
+        self.observations.policy.joint_pos.func = adr.joint_pos_limit_normalized_adr_biased
+        self.observations.policy.joint_pos.params = {"bias_rad": 0.08}
+        self.curriculum = ADRCurriculumCfg()
 
 
 @configclass
