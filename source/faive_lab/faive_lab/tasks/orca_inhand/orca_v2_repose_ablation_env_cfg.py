@@ -537,6 +537,25 @@ class OrcaV2ReposeTeacherOneDirDropPenWristPenHist10EnvCfg(OrcaV2ReposeTeacherOn
 
 
 @configclass
+class OrcaV2ReposeTeacherOneDirDropPenUprightEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
+    """Privileged +z teacher with the cube tilt penalty (flat z-rotation instead of 742zn06f's tumbling). Cube
+    position ×3 via ``env.rewards.object_position_tracking.weight=45.0``."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tilt_penalty(self)
+
+
+@configclass
+class OrcaV2ReposeTeacherOneDirDropPenUprightHist10EnvCfg(OrcaV2ReposeTeacherOneDirDropPenUprightEnvCfg):
+    """-teacher-onedir-droppen-upright env with the 10-step noisy ``policy`` history (transformer student)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
+
+
+@configclass
 class OrcaV2ReposeTeacherOneDirDropPenUprightWristFixEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
     """Privileged +z teacher with the cube tilt penalty and the wrist not actuated: the flat-rotation, no-wrist-swing
     version of 742zn06f (which tumbles the cube and swings the wrist)."""
@@ -580,6 +599,16 @@ class OrcaV2ReposeAsymOneDirDropPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg
         self.observations.policy.joint_pos.func = adr.joint_pos_limit_normalized_adr_biased
         self.observations.policy.joint_pos.params = {"bias_rad": 0.08}
         self.curriculum = ADRCurriculumCfg()
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg(OrcaV2ReposeAsymOneDirDropPenADREnvCfg):
+    """-onedir-droppen-adr + the cube tilt penalty: ADR fine-tune of an -onedir-droppen-upright policy (same obs and
+    critic, so its checkpoint resumes directly)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tilt_penalty(self)
 
 
 @configclass

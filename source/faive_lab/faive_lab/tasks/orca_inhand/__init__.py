@@ -59,6 +59,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristfix-v0", "OrcaV2ReposeAsymOneDirDropPenUprightWristFixEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0", "OrcaV2ReposeAsymOneDirDropPenUprightWristPenEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-adr-v0", "OrcaV2ReposeAsymOneDirDropPenADREnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0", "OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg"),
 ):
     gym.register(
         id=_task_id,
@@ -124,6 +125,11 @@ for _task_id, _env_cfg, _runner_cfg in (
     ("orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0", "OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg",
      "PPORunnerCfgOrcaV2Teacher"),
     ("orca-v2-inhand-repose-student-pt-onedir-droppen-wristpen-v0", "OrcaV2ReposeTeacherOneDirDropPenWristPenHist10EnvCfg",
+     "DistillationRunnerCfgOrcaV2Transformer"),
+    # demo reward + cube tilt penalty (cube position x3 via Hydra override)
+    ("orca-v2-inhand-repose-teacher-onedir-droppen-upright-v0", "OrcaV2ReposeTeacherOneDirDropPenUprightEnvCfg",
+     "PPORunnerCfgOrcaV2Teacher"),
+    ("orca-v2-inhand-repose-student-pt-onedir-droppen-upright-v0", "OrcaV2ReposeTeacherOneDirDropPenUprightHist10EnvCfg",
      "DistillationRunnerCfgOrcaV2Transformer"),
     # demo reward + cube tilt penalty + wrist not actuated
     ("orca-v2-inhand-repose-teacher-onedir-droppen-upright-wristfix-v0", "OrcaV2ReposeTeacherOneDirDropPenUprightWristFixEnvCfg",
