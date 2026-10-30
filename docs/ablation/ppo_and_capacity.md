@@ -118,7 +118,7 @@ gradient over larger mini-batches, while the number of policy updates (and so th
 same. **Decision: keep 8192 envs.** If the pod has spare capacity, a third concurrent run beats a bigger one; 16384
 would only be worth retrying with more mini-batches (same mini-batch size) or more epochs.
 
-### 4× wider MLPs (2026-10-30)
+### 2× wider MLPs, ~4× parameters (2026-10-30)
 
 `abl_B_rotlin_ent5e-3_big`: actor and critic `[1024, 1024, 512, 256]`, otherwise as `abl_B_rotlin_ent5e-3`. Its first
 eval loaded the default-size network and failed; `eval_policy.py` now rebuilds the network from the run's
