@@ -1,1 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA RTX PRO 6000 Blackwell .. | Yes: 0 |     | 97887   MB | 10de      | 0          |
+|     |                                  |        |     |            | 2bb5      | c19ab7f3.. |
+|     |                                  |        |     |            | a         |            |
+|=============================================================================================|
+| OS: 24.04.4 LTS (Noble Numbat) ubuntu, Version: 24.04.4, Kernel: 6.12.85+
+| Processor: AMD EPYC 9B45
+| Cores: 192 | Logical Cores: 384
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 163840 | Free Memory: 107703
+| Total Page/Swap (MB): 0 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+cat: '/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor': No such file or directory
+2026-10-30T18:43:11Z [62,147ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.orca_v2_repose_ablation_env_cfg:OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg
+[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.agents.rsl_rl_ppo_cfg:PPORunnerCfgOrcaV2
+[INFO] Logging experiment in directory: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose
+Exact experiment name requested from command line: 2026-10-30_18-43-26
+
+[36m============================================================================================================================================================================================[0m
+[36m[1m[INFO][IsaacLab]: Logging to file: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_18-43-26_abl_B_onedir_droppen_upright_ent1e-4_r6k/sim/isaaclab_2026-10-30_18-43-26.log[0m
+[36m============================================================================================================================================================================================[0m
+
+[33m18:43:26 [simulation_context.py] WARNING: The `enable_external_forces_every_iteration` parameter in the PhysxCfg is set to False. If you are experiencing noisy velocities, consider enabling this flag. You may need to slightly increase the number of velocity iterations (setting it to 1 or 2 rather than 0), together with this flag, to improve the accuracy of velocity updates.[0m
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 42
+	Physics step-size     : 0.008333333333333333
+	Rendering step-size   : 0.05
+	Environment step-size : 0.05
+[INFO]: Time taken for scene creation : 19.905436 seconds
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 8192
+	Environment spacing   : 0.5
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : False
+[INFO]: Starting the simulation. This may take a few seconds. Please wait...
