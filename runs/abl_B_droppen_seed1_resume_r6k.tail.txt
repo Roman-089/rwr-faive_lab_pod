@@ -1,14 +1,3 @@
-[replay] link /World/envs/env_0/Robot/right_pinky_pp: 81168 verts, 27056 tris
-[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
 /home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
   warnings.warn(
 --------------------------------------------------------------------------------
@@ -38,3 +27,14 @@ Critic MLP: MLP(
   (7): ELU(alpha=1.0)
   (8): Linear(in_features=128, out_features=1, bias=True)
 )
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_2500.pt: {'rpm': 7.437082767486572, 'rpm_std': 1.9811962842941284, 'ra': 74.85014796257019, 'dfsr': 71.875, 'dc': 0.390625, 'checkpoint': 'model_2500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_3000.pt: {'rpm': 7.377348899841309, 'rpm_std': 1.9907705783843994, 'ra': 74.43619966506958, 'dfsr': 67.1875, 'dc': 0.5, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_3500.pt: {'rpm': 7.791841506958008, 'rpm_std': 1.9264272451400757, 'ra': 76.04225873947144, 'dfsr': 62.5, 'dc': 0.5625, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_4000.pt: {'rpm': 7.574611186981201, 'rpm_std': 2.0600483417510986, 'ra': 73.80839586257935, 'dfsr': 59.375, 'dc': 0.640625, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_4999.pt: {'rpm': 7.546045303344727, 'rpm_std': 1.954417109489441, 'ra': 74.75618124008179, 'dfsr': 57.8125, 'dc': 0.75, 'checkpoint': 'model_4999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
+[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/eval/metrics_perturbed.json
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
