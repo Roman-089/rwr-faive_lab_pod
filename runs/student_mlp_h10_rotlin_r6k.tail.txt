@@ -1,1 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+[INFO]: Completed setting up the environment...
+2026-10-30T02:39:10Z [145,221ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/frames.
+2026-10-30T02:39:10Z [145,221ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/target_arrows.
+2026-10-30T02:39:10Z [145,221ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/current_arrows.
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 policy :  ['policy']
+	 teacher :  ['teacher']
+--------------------------------------------------------------------------------
+Student MLP: MLP(
+  (0): Linear(in_features=740, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+Teacher MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+[INFO]: Loading model checkpoint from: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_11-06-37_teacher_rotlin_ent5e-3/model_5999.pt
+wandb: [wandb.login()] Loaded credentials for https://api.forge.coreweave.com from /home/balazsph/.netrc.
+wandb: Currently logged in as: roman-brummer (rwr-fast) to https://api.forge.coreweave.com. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.31.0
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261030_023915-1uk7mra5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run 2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/1uk7mra5
