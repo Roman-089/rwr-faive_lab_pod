@@ -508,6 +508,15 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristFixEnvCfg(OrcaV2ReposeAsymOneDirD
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg):
+    """-onedir-droppen-upright + wrist velocity penalty: the soft alternative to the fixed wrist."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_wrist_vel_penalty(self)
+
+
+@configclass
 class OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
     """Privileged onedir + drop-penalty teacher with the wrist velocity penalty: 742zn06f swings the wrist ~10x more
     than the rotlin policies, which may not exist on the real hand and may explain the poor MuJoCo transfer."""

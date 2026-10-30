@@ -57,6 +57,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-onedir-droppen-wristfix-v0", "OrcaV2ReposeAsymOneDirDropPenWristFixEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-v0", "OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristfix-v0", "OrcaV2ReposeAsymOneDirDropPenUprightWristFixEnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0", "OrcaV2ReposeAsymOneDirDropPenUprightWristPenEnvCfg"),
 ):
     gym.register(
         id=_task_id,
