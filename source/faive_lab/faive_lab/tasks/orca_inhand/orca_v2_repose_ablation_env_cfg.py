@@ -451,6 +451,44 @@ class OrcaV2ReposeAsymOneDirDropPenWorkEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCf
         self.rewards.joint_work = RewTerm(func=rewards_ablation.joint_work_l1, weight=-0.15)
 
 
+def add_wrist_vel_penalty(env_cfg: OrcaV2ReposeEnvCfg, weight: float = -4.0):
+    """L2 penalty on the wrist joint velocity. The onedir policies swing the wrist (forearm -> carpals, eval rollouts
+    2026-10-30): range 1.2-1.3 rad, mean |qdot| ~2 rad/s, mean qdot^2 6.4, vs 0.36-0.48 rad / 0.15-0.23 rad/s / 0.06 for
+    the rotlin teacher and student. -4 costs ~25 per second at that motion (rotation reward ~95 per second) and ~0.2 at
+    rotlin-like wrist motion."""
+    env_cfg.rewards.wrist_vel = RewTerm(
+        func=mdp.joint_vel_l2, weight=weight, params={"asset_cfg": SceneEntityCfg("robot", joint_names=["right_wrist"])}
+    )
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenWristPenEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """-onedir-droppen + wrist velocity penalty (deployable PPO version, comparable to the three onedir seeds)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_wrist_vel_penalty(self)
+
+
+@configclass
+class OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
+    """Privileged onedir + drop-penalty teacher with the wrist velocity penalty: 742zn06f swings the wrist ~10x more
+    than the rotlin policies, which may not exist on the real hand and may explain the poor MuJoCo transfer."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_wrist_vel_penalty(self)
+
+
+@configclass
+class OrcaV2ReposeTeacherOneDirDropPenWristPenHist10EnvCfg(OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg):
+    """-teacher-onedir-droppen-wristpen env with the 10-step noisy ``policy`` history (transformer / MLP-h10 students)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
+
+
 @configclass
 class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
     """-asym-hist3 (3-step obs history MLP) on the -rotlin reward: the memory comparison so far was on the old reward."""

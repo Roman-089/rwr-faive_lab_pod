@@ -53,6 +53,7 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-onedir-droppen-v0", "OrcaV2ReposeAsymOneDirDropPenEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0", "OrcaV2ReposeAsymOneDirDropPenRampEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-work-v0", "OrcaV2ReposeAsymOneDirDropPenWorkEnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-wristpen-v0", "OrcaV2ReposeAsymOneDirDropPenWristPenEnvCfg"),
 ):
     gym.register(
         id=_task_id,
@@ -114,6 +115,11 @@ for _task_id, _env_cfg, _runner_cfg in (
      "DistillationRunnerCfgOrcaV2"),
     ("orca-v2-inhand-repose-student-lstm-onedir-droppen-v0", "OrcaV2ReposeTeacherOneDirDropPenEnvCfg",
      "DistillationRunnerCfgOrcaV2LSTM"),
+    # demo reward + wrist velocity penalty
+    ("orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0", "OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg",
+     "PPORunnerCfgOrcaV2Teacher"),
+    ("orca-v2-inhand-repose-student-pt-onedir-droppen-wristpen-v0", "OrcaV2ReposeTeacherOneDirDropPenWristPenHist10EnvCfg",
+     "DistillationRunnerCfgOrcaV2Transformer"),
 ):
     gym.register(
         id=_task_id,
