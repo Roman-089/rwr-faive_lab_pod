@@ -312,3 +312,23 @@ current L. Unit test on a stub env: 0 → 0.30 while the drop share is 10 %, bac
 the position ×3 checkpoint resumes directly: `abl_B_onedir_droppen_pos45_adr_from5e-3` (+3000 iterations, default
 entropy, task `-asym-onedir-droppen-adr-v0`). Judged on the perturbed eval (drop-free rate, DC) at an acceptable cost in
 nominal RPM, and on `Curriculum/adr` reaching ≥ 0.8 (the eval's ranges sit at L ≈ 0.6–0.8).
+
+## Deadline plan: deployable policies by 2026-10-31 10:00 Zurich (09:00Z)
+
+User request 2026-10-30 22:30: "robust, deployable policies by 10 am". Teacher → student needs ~12 h (6k + 2k on the
+pod) and cannot make it, so the deliverables are directly deployable +z PPO policies that keep the cube flat, plus the
+ADR fine-tunes, exported with `export_history_policy.py` (bit-exact self-check) and checked in MuJoCo (informational):
+
+| Candidate | Status | ETA (UTC) |
+|---|---|---|
+| A `student_pt_rotlin` (p3dxn5pm), bidirectional fallback | exported | done |
+| B `abl_B_onedir_droppen_pos45_ent5e-3`, +z, flat (16°), 88 % / perturbed 49 % | exported 2026-10-30 22:40; MuJoCo job queued | done |
+| B-ADR `abl_B_onedir_droppen_pos45_adr_from5e-3_r6k` (pod, first) | queued | ~04:00 |
+| `abl_B_onedir_droppen_upright_ent1e-4_r6k` (tilt penalty, pod) | running | ~01:40 |
+| upright + ADR fine-tune (`-asym-onedir-droppen-upright-adr-v0`, 2k, if upright keeps the cube flat) | held | ~07:30 |
+| `abl_B_onedir_droppen_pos45_ent1e-4_r6k`, `..._upright_pos45_ent1e-4_r6k` (pod, 4000 it) | queued (00:40Z slots) | ~07:00 |
+| teacher with the winning reward → transformer student (afternoon upgrade) | config ready (`-teacher-onedir-droppen-upright-v0` ± position ×3) | ~13:00–15:00 |
+
+Deployment notes for every +z PPO candidate: command +z at 1.5 rad/s (the policy ignores the magnitude), 20 Hz,
+17-joint position targets through EMA α 0.2 to the joint limits, single-step 74-dim observation (normalization inside
+`exported/policy_history.pt`).
