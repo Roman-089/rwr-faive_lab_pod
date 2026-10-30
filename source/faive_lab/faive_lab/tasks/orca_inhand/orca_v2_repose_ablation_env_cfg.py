@@ -441,6 +441,17 @@ class OrcaV2ReposeAsymOneDirDropPenRampEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCf
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenWorkEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """-onedir-droppen + HORA's work penalty (-0.15 * sum |tau * qdot|). On rotlin the same term kept the speed
+    (10.0 vs 10.3-10.4 RPM) and raised the perturbed drop-free rate (mean of the last 3 checkpoints 56 vs 39 %); onedir is
+    our fastest config but only 19 % drop-free under the perturbed eval."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.joint_work = RewTerm(func=rewards_ablation.joint_work_l1, weight=-0.15)
+
+
+@configclass
 class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
     """-asym-hist3 (3-step obs history MLP) on the -rotlin reward: the memory comparison so far was on the old reward."""
 
