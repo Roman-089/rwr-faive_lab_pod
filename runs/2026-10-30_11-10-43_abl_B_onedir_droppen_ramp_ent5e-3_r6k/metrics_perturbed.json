@@ -11,5 +11,57 @@
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
   "perturb": true
+ },
+ "model_2000.pt": {
+  "rpm": 15.939725875854492,
+  "rpm_std": 2.7550034523010254,
+  "ra": 76.2750506401062,
+  "dfsr": 32.8125,
+  "dc": 1.953125,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": true
+ },
+ "model_3000.pt": {
+  "rpm": 15.789642333984375,
+  "rpm_std": 2.497558116912842,
+  "ra": 76.07726454734802,
+  "dfsr": 25.0,
+  "dc": 2.109375,
+  "checkpoint": "model_3000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": true
+ },
+ "model_4000.pt": {
+  "rpm": 15.034088134765625,
+  "rpm_std": 2.683607816696167,
+  "ra": 73.26968312263489,
+  "dfsr": 20.3125,
+  "dc": 3.25,
+  "checkpoint": "model_4000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": true
+ },
+ "model_4999.pt": {
+  "rpm": 14.979225158691406,
+  "rpm_std": 3.333538770675659,
+  "ra": 73.43201041221619,
+  "dfsr": 26.5625,
+  "dc": 2.15625,
+  "checkpoint": "model_4999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": true
  }
 }

@@ -1,8 +1,8 @@
-# remote queue status (2026-10-30T18:32:01Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 96 %, 28025 MiB)
+# remote queue status (2026-10-30T18:42:07Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 81 %, 25063 MiB)
 abl_B_droppen_seed1_r6k moved_resume Learning iteration 2123/5000
 abl_B_droppen_seed1_resume_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen6k_ent5e-3_r6k done Learning iteration 4999/5000
-abl_B_onedir_droppen_acc10_ent1e-4_r6k running Learning iteration 767/5000
+abl_B_onedir_droppen_acc10_ent1e-4_r6k running Learning iteration 896/5000
 abl_B_onedir_droppen_acc10_ent5e-3_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_acc10_ent5e-3_seed1_r6k dropped_entropy 
 abl_B_onedir_droppen_acc30_ent5e-3_r6k dropped_entropy 
@@ -10,12 +10,13 @@ abl_B_onedir_droppen_alpha05_std05_ent1e-4_r6k dropped_tumbling
 abl_B_onedir_droppen_clip2_ent5e-3_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_clip4_ent5e-3_r6k skipped_dtu 
 abl_B_onedir_droppen_ent1e-4_r6k done Learning iteration 4999/5000
-abl_B_onedir_droppen_ent1e-4_seed1_r6k running Learning iteration 785/5000
+abl_B_onedir_droppen_ent1e-4_seed1_r6k running Learning iteration 908/5000
 abl_B_onedir_droppen_ent1e-4_seed2_r6k dropped_tumbling 
 abl_B_onedir_droppen_ent5e-3_alpha05_std05_r6k stopped_entropy Learning iteration 140/5000
 abl_B_onedir_droppen_ent5e-3_seed1_r6k skipped_dtu 
 abl_B_onedir_droppen_pos45_ent5e-3_r6k skipped_dtu 
-abl_B_onedir_droppen_ramp_ent5e-3_r6k running Learning iteration 4999/5000
+abl_B_onedir_droppen_ramp_ent5e-3_r6k done Learning iteration 4999/5000
+abl_B_onedir_droppen_upright_ent1e-4_r6k running 
 abl_B_onedir_droppen_work015_ent5e-3_r6k skipped_dtu 
 abl_B_onedir_droppen_wristfix_ent5e-3_r6k dropped_entropy 
 abl_B_onedir_droppen_wristpen_ent1e-4_r6k dropped_tumbling 
@@ -35,5 +36,5 @@ student_pt_rotlin_r6k skipped_dtu
 student_pt_rotlin_t10k_r6k dropped 
 teacher_onedir_droppen_ent1e-4_r6k dropped_tumbling 
 teacher_onedir_droppen_ent5e-3_r6k skipped_dtu 
-teacher_onedir_droppen_wristpen_ent5e-3_r6k running Learning iteration 3373/6000
+teacher_onedir_droppen_wristpen_ent5e-3_r6k running Learning iteration 3508/6000
 teacher_rotlin_cont10k_r6k done Learning iteration 9998/9999
