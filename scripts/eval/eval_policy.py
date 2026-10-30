@@ -88,9 +88,38 @@ def metrics(w_z: np.ndarray, cmd_sign: np.ndarray, dropped: np.ndarray, dt: floa
     }
 
 
+def apply_run_params(env_cfg, agent_cfg, ckpt: str):
+    """Rebuild what the run was trained with, from its saved params/: training-time hydra overrides (network sizes,
+    action-term settings) are not part of the task id, so without this a run trained with e.g.
+    agent.policy.actor_hidden_dims=[1024,...] fails to load and env.actions.joint_pos.alpha=0.5 is evaluated at 0.2."""
+    import yaml
+
+    class _Loader(yaml.SafeLoader):
+        pass
+
+    _Loader.add_multi_constructor("", lambda loader, suffix, node: None)  # ignore python/* tags
+    params = os.path.join(os.path.dirname(os.path.abspath(ckpt)), "params")
+    changed = []
+    if os.path.exists(os.path.join(params, "agent.yaml")):
+        policy = (yaml.load(open(os.path.join(params, "agent.yaml")), Loader=_Loader) or {}).get("policy") or {}
+        for key, value in policy.items():
+            if key.endswith("hidden_dims") and hasattr(agent_cfg.policy, key) and getattr(agent_cfg.policy, key) != value:
+                setattr(agent_cfg.policy, key, value)
+                changed.append(f"agent.policy.{key}={value}")
+    if os.path.exists(os.path.join(params, "env.yaml")):
+        action = ((yaml.load(open(os.path.join(params, "env.yaml")), Loader=_Loader) or {}).get("actions") or {}).get("joint_pos") or {}
+        for key in ("alpha", "delta_scale"):
+            if key in action and hasattr(env_cfg.actions.joint_pos, key) and getattr(env_cfg.actions.joint_pos, key) != action[key]:
+                setattr(env_cfg.actions.joint_pos, key, action[key])
+                changed.append(f"env.actions.joint_pos.{key}={action[key]}")
+    if changed:
+        print(f"[eval] from the run's params: {', '.join(changed)}")
+
+
 @hydra_task_config(args_cli.task, args_cli.agent)
 def main(env_cfg, agent_cfg):
     agent_cfg = cli_args.update_rsl_rl_cfg(agent_cfg, args_cli)
+    apply_run_params(env_cfg, agent_cfg, args_cli.checkpoints[0])
     env_cfg.scene.num_envs = args_cli.num_envs
     env_cfg.seed = args_cli.seed
     env_cfg.sim.device = args_cli.device if args_cli.device is not None else env_cfg.sim.device
