@@ -440,3 +440,10 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   after spawn) is 1.73 rad/s, as for cap 3 (1.56–1.75). Cap 2 → 3 moved it 1.06 → 1.72 rad/s; 3 → 4 adds nothing, so the
   speed is now limited by the hand / sim dynamics, not the reward. **Decision: keep cap 3.** The drop timing also shows
   the seed spread: steady-state drops 0.30 (seed 0) vs 0.90 (seed 1) per minute.
+- **Cube smoothness ×10 (`abl_B_onedir_droppen_acc10_ent5e-3_r6k`, pod, W&B mau1bbmt)**, nominal / perturbed: 1000
+  13.01 / 12.97 RPM, 55 / 13 % · 2000 14.20 / 14.02, 56 / 23 % · 3000 15.22 / 14.00, 69 / 20 % · 4000 14.70 / 14.08, 69 / 25 %
+  · 4999 14.97 / 14.36, **72 / 33 %**, DC 0.53 / 1.86. Last-3 mean 15.0 RPM / **70 %** / DC 0.58, perturbed 26 % / DC 2.0
+  vs the two-seed baseline 15.3 / 54 % / 0.99, perturbed 18 % / ~3.8. Same speed, +16 points drop-free (twice the ±8
+  seed spread), perturbed drops halved. Its drop-free rate rises over training (55 → 72 %) while every baseline seed's
+  falls, at a similar action-noise std (3.5): the smoothness term counteracts whatever drives the decline. **First clear
+  win among the +z single-knob tests.** Follow-ups: seed 1 and weight 30 (dose).
