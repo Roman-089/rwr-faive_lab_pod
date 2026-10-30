@@ -332,3 +332,9 @@ ADR fine-tunes, exported with `export_history_policy.py` (bit-exact self-check) 
 Deployment notes for every +z PPO candidate: command +z at 1.5 rad/s (the policy ignores the magnitude), 20 Hz,
 17-joint position targets through EMA α 0.2 to the joint limits, single-step 74-dim observation (normalization inside
 `exported/policy_history.pt`).
+
+Decision rule handed to the pod worker (2026-10-30 22:55, so the night slots never wait): when the tilt-penalty run
+`abl_B_onedir_droppen_upright_ent1e-4_r6k` is evaluated, it is GOOD if `cube_motion.py` gives tilt < 15° and < 20 face
+changes / min and model_4999 is ≥ 60 % drop-free. GOOD → teacher `-teacher-onedir-droppen-upright-v0` + position ×3
+(6k) into its slot, then the upright ADR fine-tune (2k, resume from its model_4999) into the ~04:00Z slot. Not GOOD →
+teacher `-teacher-onedir-droppen-v0` + position ×3, and the held single-knob runs continue.
