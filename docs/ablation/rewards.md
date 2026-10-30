@@ -412,3 +412,9 @@ explain why onedir keeps only 22 % of its speed in MuJoCo. Ablation: L2 penalty 
 rotlin-like motion): teacher `teacher_onedir_droppen_wristpen_ent5e-3` (the requested ablation of 742zn06f; student task
 `-student-pt-onedir-droppen-wristpen-v0` registered) and the deployable PPO version `abl_B_onedir_droppen_wristpen_ent5e-3`.
 Stronger alternative if the penalty is not enough: the wrist held fixed (`-wristfix-v0` exists for the old reward).
+- **3× drop penalty (`abl_B_onedir_droppen6k_ent5e-3_r6k`, pod, W&B 7ogu7mc5)**, nominal / perturbed: 1000 12.61 /
+  12.49 RPM, 88 / 34 % · 2000 12.69 / 12.83, 72 / 17 % · 3000 14.30 / 13.37, 61 / 17 % · 4000 14.76 / 14.40, 47 / 14 % ·
+  4999 14.38 / 14.12, 53 / 17 %, DC 1.14 / 3.94. Mean of the last three: 14.5 RPM / 54 % / DC 0.86 vs 15.7 / 61 % / 0.77
+  for the −2000 baseline (seed 0): slower and not fewer drops. **Decision: keep −2000.** Its drop-free rate falls as
+  training goes on (88 → 53 %) while the action-noise std climbs past 4 (pod log), the same pattern as the baseline
+  (73 → 61–63 %): another pointer at the entropy-5e-3 noise (see [PPO / capacity](ppo_and_capacity.md#action-noise-under-the-entropy-bonus)).
