@@ -242,6 +242,19 @@ rotlin pipeline: `-student-pt-onedir-droppen-v0` / `-student-mlp-h10-onedir-drop
   picking the best of five noisy checkpoints overstates it, and 4500 is worse perturbed (12.5 vs 17 %). Distilling both
   tests whether the choice matters.
 
+- **2026-10-30 17:50 — onedir transformer student from teacher model_4500 (`student_pt_onedir_droppen_t4500`, job
+  29853994)**, nominal / perturbed: 500 12.64 / 11.77 RPM, 33 / 3 % · 1000 13.77 / 12.43, 36 / 16 % · 1500 14.01 / 12.02,
+  55 / 14 % · 1999 14.57 / 12.36, 47 / 9 %, DC 1.23 / 4.08. Last-3 mean 14.1 RPM / 46 % / DC 1.14 vs teacher model_4500
+  16.0 / 81 % / 0.27 and the two-seed B baseline 15.3 / 54 % / 0.99. **The student keeps 88 % of the speed but not the
+  drop avoidance, and ends below plain PPO.** On rotlin the same pipeline kept 92 % of the speed and the drop-free rate.
+  Its final behavior loss is twice the rotlin student's (2.63 vs 1.26), from a similar start (52.8 vs 39.3; both teachers
+  output actions far outside the [-1, 1] the env clamps to, so that alone does not explain the gap): this teacher is
+  harder to imitate from proprio. Likely reason: at 1.7 rad/s the teacher's drop avoidance (and its wrist swing timing)
+  depends on the privileged cube pose, which a 0.5 s proprio history cannot recover — the imitation gap. Options:
+  PPO fine-tuning of the student (`student_finetune.py`, built for the MLP-h10 student; the transformer needs the actor
+  swap), distilling the wrist-penalty teacher (less wrist swing, may be easier to imitate), or clipping the teacher's
+  targets to [-1, 1] in the behavior loss (cheap, weakly motivated).
+
 ## Conclusions so far
 
 - The privileged teacher (7.44 RPM, 94 % DFSR) is the best policy so far and still improving at 10k.
