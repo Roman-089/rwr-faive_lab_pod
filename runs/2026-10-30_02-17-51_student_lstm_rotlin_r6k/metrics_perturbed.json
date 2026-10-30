@@ -11,5 +11,57 @@
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-student-lstm-rotlin-v0",
   "perturb": true
+ },
+ "model_500.pt": {
+  "rpm": 7.22547721862793,
+  "rpm_std": 2.560257911682129,
+  "ra": 49.02239441871643,
+  "dfsr": 29.6875,
+  "dc": 1.546875,
+  "checkpoint": "model_500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-lstm-rotlin-v0",
+  "perturb": true
+ },
+ "model_1000.pt": {
+  "rpm": 8.916940689086914,
+  "rpm_std": 4.409494400024414,
+  "ra": 62.26087212562561,
+  "dfsr": 53.125,
+  "dc": 1.0,
+  "checkpoint": "model_1000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-lstm-rotlin-v0",
+  "perturb": true
+ },
+ "model_1500.pt": {
+  "rpm": 8.898468971252441,
+  "rpm_std": 3.1335983276367188,
+  "ra": 58.57153534889221,
+  "dfsr": 46.875,
+  "dc": 1.203125,
+  "checkpoint": "model_1500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-lstm-rotlin-v0",
+  "perturb": true
+ },
+ "model_1999.pt": {
+  "rpm": 9.679412841796875,
+  "rpm_std": 2.5033674240112305,
+  "ra": 64.9350106716156,
+  "dfsr": 51.5625,
+  "dc": 0.859375,
+  "checkpoint": "model_1999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-lstm-rotlin-v0",
+  "perturb": true
  }
 }
