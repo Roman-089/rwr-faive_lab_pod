@@ -71,6 +71,24 @@ Cancelled (2026-10-27 15:20, before starting): A-based `-hist3` / `-hist10` / `-
 - Implication: for deployment, history is worth its cost (needs the history kept inside the exported policy); for
   speed, look at entropy / reward / action space instead.
 
+### History on the rotlin reward (2026-10-30)
+
+`abl_B_rotlin_hist3` (`-asym-rotlin-hist3-v0`, job 29851782), nominal / perturbed:
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 7.62 / 7.65 | 54.0 / 50.3 | 66 / 38 | 0.47 / 1.31 |
+| 2000 | 9.64 / 9.66 | 64.8 / 59.2 | 70 / 33 | 0.45 / 1.61 |
+| 3000 | 10.65 / 10.45 | 70.5 / 61.3 | 89 / 28 | 0.11 / 1.50 |
+| 4000 | 10.11 / 9.91 | 67.8 / 61.2 | 84 / 45 | 0.19 / 1.11 |
+| 4999 | 10.49 / 10.48 | 71.2 / 59.6 | 81 / 34 | 0.27 / 1.30 |
+| `abl_B_rotlin` (2 seeds), 4999 | 10.41, 10.25 / 11.07, 11.48 | 74.0, 76.8 / 67.8, 71.4 | 84, 83 / 44, 45 | 0.22, 0.23 / 1.09, 1.08 |
+
+Same nominal speed and drop rate as rotlin, and no perturbed robustness gain (34 vs 44–45 % drop-free, DC 1.30 vs
+1.08; within noise or slightly worse). The robustness gain hist3 showed on the old reward (perturbed DFSR 66 vs 52–55 %)
+does not carry over to rotlin. **Decision: no 3-step history for the onedir line.** The memory that pays off is the
+distilled transformer student (10-step history, perturbed 60 % drop-free), not a history MLP trained with PPO.
+
 ## Next steps / open questions
 
 - ~~hist10 eval~~ done. Combine history with the new base (entropy 5e-3) once the replicate confirms it: speed from
