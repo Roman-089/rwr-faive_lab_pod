@@ -396,6 +396,15 @@ class OrcaV2ReposeAsymOneDirDropPenEnvCfg(OrcaV2ReposeAsymOneDirEnvCfg):
             func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
         )
 
+
+@configclass
+class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
+    """-asym-hist3 (3-step obs history MLP) on the -rotlin reward: the memory comparison so far was on the old reward."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        use_rotlin_reward(self)
+
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
 
 
