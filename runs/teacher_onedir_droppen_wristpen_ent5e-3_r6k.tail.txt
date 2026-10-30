@@ -1,40 +1,40 @@
-                      Time elapsed: 07:42:00
-                               ETA: 00:15:55
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA RTX PRO 6000 Blackwell .. | Yes: 0 |     | 97887   MB | 10de      | 0          |
+|     |                                  |        |     |            | 2bb5      | c19ab7f3.. |
+|     |                                  |        |     |            | a         |            |
+|=============================================================================================|
+| OS: 24.04.4 LTS (Noble Numbat) ubuntu, Version: 24.04.4, Kernel: 6.12.85+
+| Processor: AMD EPYC 9B45
+| Cores: 192 | Logical Cores: 384
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 163840 | Free Memory: 107615
+| Total Page/Swap (MB): 0 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+cat: '/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor': No such file or directory
+2026-10-30T22:02:51Z [83,879ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.orca_v2_repose_ablation_env_cfg:OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg
+[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.rsl_rl_teacher_student_cfg:PPORunnerCfgOrcaV2Teacher
 
-################################################################################
-                     [1m Learning iteration 5801/6000 [0m                     
+[36m======================================================================================[0m
+[36m[1m[INFO][IsaacLab]: Logging to file: /tmp/isaaclab/logs/isaaclab_2026-10-30_22-03-09.log[0m
+[36m======================================================================================[0m
 
-                       Computation: 38763 steps/s (collection: 4.882s, learning 0.190s)
-             Mean action noise std: 3.17
-          Mean value_function loss: 698.8080
-               Mean surrogate loss: -0.0028
-                 Mean entropy loss: 43.3269
-                       Mean reward: 1535.93
-               Mean episode length: 609.24
-Episode_Reward/object_position_tracking: 3.5273
-Episode_Reward/angular_acceleration: 0.0541
-       Episode_Reward/joint_vel_l2: -0.0005
-          Episode_Reward/action_l2: -1.2514
-     Episode_Reward/action_rate_l2: -26.0537
-  Episode_Reward/rotation_progress: 87.4000
-Episode_Reward/off_axis_angular_velocity: -14.0924
-        Episode_Reward/object_drop: -0.2549
-          Episode_Reward/wrist_vel: -2.7711
-Metrics/continuous_rotation/position_error: 0.0429
-Metrics/continuous_rotation/current_angular_speed: 4.9943
-Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 3.4943
-Metrics/continuous_rotation/angular_velocity_error: 4.7799
-Metrics/continuous_rotation/angular_velocity_alignment: 0.3863
-Metrics/continuous_rotation/consecutive_success: 0.0518
-Metrics/continuous_rotation/total_success: 34.1503
-Metrics/continuous_rotation/vertical_drift: 0.0258
-Metrics/continuous_rotation/linear_speed: 0.2241
-      Episode_Termination/time_out: 0.9006
-Episode_Termination/object_dropped: 0.0994
---------------------------------------------------------------------------------
-                   Total timesteps: 1140719616
-                    Iteration time: 5.07s
-                      Time elapsed: 07:42:05
-                               ETA: 00:15:50
-
+[33m22:03:09 [simulation_context.py] WARNING: The `enable_external_forces_every_iteration` parameter in the PhysxCfg is set to False. If you are experiencing noisy velocities, consider enabling this flag. You may need to slightly increase the number of velocity iterations (setting it to 1 or 2 rather than 0), together with this flag, to improve the accuracy of velocity updates.[0m
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 42
+	Physics step-size     : 0.008333333333333333
+	Rendering step-size   : 0.05
+	Environment step-size : 0.05
+[INFO]: Time taken for scene creation : 1.351953 seconds
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 64
+	Environment spacing   : 0.5
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : False
+[INFO]: Starting the simulation. This may take a few seconds. Please wait...
+[INFO]: Time taken for simulation start : 4.924427 seconds
