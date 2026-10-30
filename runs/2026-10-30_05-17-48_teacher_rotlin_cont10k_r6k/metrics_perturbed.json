@@ -1,0 +1,67 @@
+{
+ "model_6500.pt": {
+  "rpm": 10.342778205871582,
+  "rpm_std": 2.4535043239593506,
+  "ra": 68.64562034606934,
+  "dfsr": 57.8125,
+  "dc": 0.671875,
+  "checkpoint": "model_6500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-rotlin-v0",
+  "perturb": true
+ },
+ "model_7500.pt": {
+  "rpm": 10.119163513183594,
+  "rpm_std": 2.5593175888061523,
+  "ra": 65.94640016555786,
+  "dfsr": 60.9375,
+  "dc": 0.609375,
+  "checkpoint": "model_7500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-rotlin-v0",
+  "perturb": true
+ },
+ "model_8000.pt": {
+  "rpm": 10.282308578491211,
+  "rpm_std": 2.878279685974121,
+  "ra": 67.62603521347046,
+  "dfsr": 64.0625,
+  "dc": 0.5,
+  "checkpoint": "model_8000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-rotlin-v0",
+  "perturb": true
+ },
+ "model_9000.pt": {
+  "rpm": 9.966385841369629,
+  "rpm_std": 3.089329481124878,
+  "ra": 67.90390610694885,
+  "dfsr": 64.0625,
+  "dc": 0.515625,
+  "checkpoint": "model_9000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-rotlin-v0",
+  "perturb": true
+ },
+ "model_9998.pt": {
+  "rpm": 9.630974769592285,
+  "rpm_std": 3.49517822265625,
+  "ra": 67.00570583343506,
+  "dfsr": 57.8125,
+  "dc": 0.59375,
+  "checkpoint": "model_9998.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-rotlin-v0",
+  "perturb": true
+ }
+}

@@ -1,40 +1,40 @@
-[replay] link /World/envs/env_0/Robot/right_ring_ap: 71214 verts, 23738 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_tp: 42630 verts, 14210 tris
-[replay] link /World/envs/env_0/Robot/right_index_pp: 74442 verts, 24814 tris
-[replay] link /World/envs/env_0/Robot/right_middle_pp: 69762 verts, 23254 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_pp: 81168 verts, 27056 tris
-[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
---------------------------------------------------------------------------------
-Resolved observation sets: 
-	 policy :  ['teacher']
-	 critic :  ['teacher']
---------------------------------------------------------------------------------
-Actor MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=17, bias=True)
-)
-Critic MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=1, bias=True)
-)
+wandb: Currently logged in as: roman-brummer (rwr-fast) to https://api.forge.coreweave.com. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.31.0
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261030_110647-zc61lpl0
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-30_05-17-48_teacher_rotlin_cont10k_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/zc61lpl0
+wandb: updating run metadata
+wandb: uploading media/videos/eval/video_07500_9999_78c12ab7d9c22d0f4dc1.mp4; uploading media/videos/eval/video_08000_10000_6248ed70f47cece32024.mp4; uploading media/videos/eval/video_09000_10001_c72113c9169fa38ad5f4.mp4; uploading media/videos/eval/video_09998_10002_2ee3570c50df91d51798.mp4; uploading wandb-summary.json (+ 3 more)
+wandb: uploading media/videos/eval/video_07500_9999_78c12ab7d9c22d0f4dc1.mp4; uploading media/videos/eval/video_08000_10000_6248ed70f47cece32024.mp4; uploading media/videos/eval/video_09000_10001_c72113c9169fa38ad5f4.mp4; uploading media/videos/eval/video_09998_10002_2ee3570c50df91d51798.mp4; uploading media/videos/eval/video_06500_9998_7aeac94fcc51ee72be3b.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc █▅▆▅▁
+wandb:           eval/dfsr ▁▆▁▃█
+wandb:      eval/iteration ▁▃▄▆█
+wandb:             eval/ra █▇▄▁▁
+wandb:            eval/rpm ▅█▄▅▁
+wandb:   eval_perturbed/dc █▅▁▂▅
+wandb: eval_perturbed/dfsr ▁▅██▁
+wandb:   eval_perturbed/ra █▁▅▆▄
+wandb:  eval_perturbed/rpm █▆▇▄▁
+wandb: 
+wandb: Run summary:
+wandb:                 Episode_Reward/action_l2 -1.20363
+wandb:            Episode_Reward/action_rate_l2 -22.56785
+wandb:      Episode_Reward/angular_acceleration 0.15137
+wandb:              Episode_Reward/joint_vel_l2 -0.00058
+wandb:  Episode_Reward/object_position_tracking 3.58083
+wandb: Episode_Reward/off_axis_angular_velocity -5.3898
+wandb:         Episode_Reward/rotation_progress 62.31375
+wandb:       Episode_Termination/object_dropped 0.08266
+wandb:             Episode_Termination/time_out 0.91734
+wandb:                             Loss/entropy 43.34849
+wandb:                                      +36 ...
+wandb: 
+wandb: 🚀 View run 2026-10-30_05-17-48_teacher_rotlin_cont10k_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/zc61lpl0
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261030_110647-zc61lpl0/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/zc61lpl0 (2026-10-30_05-17-48_teacher_rotlin_cont10k_r6k)
