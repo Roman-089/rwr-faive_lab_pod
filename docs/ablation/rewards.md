@@ -355,3 +355,9 @@ Isaac eval, last checkpoint, nominal / perturbed (64 envs × 60 s):
   `abl_B_onedir_droppen_acc10_ent5e-3` raises smoothness to 10 (should soften the spin-up; may cost steady-state speed if
   it also punishes the gait's wobble); `abl_B_onedir_droppen_pos45_ent5e-3` raises position to 45 (cube kept near the
   palm centre, fewer drops at any time).
+- Spin-up ramp (2026-10-30 10:20): `abl_B_onedir_droppen_ramp_ent5e-3` (`-asym-onedir-droppen-ramp-v0`). The speed
+  reward's cap rises linearly from 0.5 to 3 rad/s over the first 3 s of each episode (`rotation_progress_linear(...,
+  ramp_s=3.0, ramp_start_vel=0.5)`, time from `episode_length_buf`), so a fast spin-up from rest pays no more than a
+  gentle one; after 3 s the reward is the same as onedir-droppen. Tested on stubs: speed 2.5 rad/s at t = 0 / 1 / 2 / 10 s
+  pays 0.5 / 1.33 / 2.17 / 2.5. The MLP has no clock, but the first seconds look different (hand near its reset pose,
+  cube at rest), so it can learn a separate start-up behaviour.
