@@ -1,14 +1,3 @@
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
 --------------------------------------------------------------------------------
 Resolved observation sets: 
 	 policy :  ['policy']
@@ -38,3 +27,14 @@ Critic MLP: MLP(
 )
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_onedir_droppen_clip2_ent5e-3_r6k/model_1000.pt: {'rpm': 11.052183151245117, 'rpm_std': 3.5245795249938965, 'ra': 62.739646434783936, 'dfsr': 43.75, 'dc': 1.0625, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_onedir_droppen_clip2_ent5e-3_r6k/model_2000.pt: {'rpm': 10.36319351196289, 'rpm_std': 2.9521734714508057, 'ra': 60.024094581604004, 'dfsr': 45.3125, 'dc': 1.15625, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_onedir_droppen_clip2_ent5e-3_r6k/model_3000.pt: {'rpm': 9.830242156982422, 'rpm_std': 2.5340323448181152, 'ra': 60.53306460380554, 'dfsr': 43.75, 'dc': 1.234375, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_onedir_droppen_clip2_ent5e-3_r6k/model_4000.pt: {'rpm': 10.263010025024414, 'rpm_std': 2.529775857925415, 'ra': 64.47495818138123, 'dfsr': 43.75, 'dc': 1.046875, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_onedir_droppen_clip2_ent5e-3_r6k/model_4999.pt: {'rpm': 9.681095123291016, 'rpm_std': 2.5816853046417236, 'ra': 59.937584400177, 'dfsr': 40.625, 'dc': 1.359375, 'checkpoint': 'model_4999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
+[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_onedir_droppen_clip2_ent5e-3_r6k/eval/metrics_perturbed.json
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
+frame 400/600
+frame 500/600
