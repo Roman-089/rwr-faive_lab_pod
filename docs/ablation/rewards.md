@@ -504,3 +504,9 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   bidirectional rotlin student (10.9 RPM, 86–91 %, perturbed 56–60 %, 7° tilt): faster at a similar drop-free rate.
   Follow-ups on default entropy: `abl_B_onedir_droppen_pos45_ent1e-4` and with the tilt penalty
   `abl_B_onedir_droppen_upright_pos45_ent1e-4` (L40S top of queue + pod first).
+- **Work penalty on +z (`abl_B_onedir_droppen_work015_ent5e-3`, job 29853308)**, entropy 5e-3, nominal / perturbed: 1000
+  13.65 / 13.11 RPM, 67 / 31 % · 2000 13.65 / 13.93, 64 / 36 % · 3000 14.78 / 14.47, 61 / 33 % · 4000 15.12 / 14.85, 64 / 59 % ·
+  4999 14.35 / 13.77, 69 / 44 %. Last-3 mean 14.8 RPM / 65 % / DC 0.51, **perturbed 45 % / DC 1.17** vs the baseline
+  15.3 / 54 % / 0.99 / 18 % / ~3.8: the perturbed drop-free rate ×2.5 (as on rotlin: 56 vs 39 %) at nearly the baseline
+  speed. Cube motion: tilt 30°, 131 face changes / min, wrist 0.88 rad / 1.55 rad/s: still tumbling. Kept as a robustness
+  add-on for the winning non-tumbling config (position ×3 / tilt penalty), not run alone again.
