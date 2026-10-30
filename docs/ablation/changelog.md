@@ -77,3 +77,4 @@ full entries live in the linked topic files.
 | 2026-10-30 | big (1024-wide) eval failed: eval_policy ignored training-time overrides; it now rebuilds network sizes / action settings from the run's params; re-eval queued | [eval protocol](eval_protocol.md) |
 | 2026-10-30 | queued: rotlin + HORA work penalty (`-asym-rotlin-work-v0`, L40S) against rotlin's weak perturbed eval / wobbly gait | [rewards](rewards.md#work-penalty) |
 | 2026-10-30 | queued: privileged teacher on the demo reward (onedir + drop penalty, ent 5e-3, 6k; DTU A100 + pod) to distill a deployable demo student; onedir reward factored into `use_onedir_reward()` | [teacher-student](teacher_student.md) |
+| 2026-10-30 05:00 | **transformer student on rotlin: 10.90 RPM / 86 % drop-free** (perturbed 9.81 / 56 %): as fast as B-rotlin (10.33), more robust under perturbation (56–72 % vs 45 % drop-free); keeps 92 % of the teacher | [teacher-student](teacher_student.md) |

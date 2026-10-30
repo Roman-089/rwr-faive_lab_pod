@@ -137,6 +137,32 @@ Students distill from the teacher's `model_9999`.
   10.41) and as drop-free as the best student (95 %). The transformer / LSTM / MLP-h10 students distill from
   model_5999 (jobs 29848449 / 29850539 / 29850540).
 
+- **2026-10-30 05:00 — transformer student on rotlin (`student_pt_rotlin`)**, distilled from `teacher_rotlin_ent5e-3`
+  model_5999 (4096 envs, 2k), nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 500 | 9.54 / 8.97 | 69.7 / 60.3 | 91 / 48 | 0.13 / 0.80 |
+  | 1000 | 10.71 / 9.93 | 78.0 / 65.1 | 91 / 53 | 0.09 / 0.63 |
+  | 1500 | 10.89 / **10.36** | **79.6** / **69.4** | **97** / **72** | **0.03** / **0.50** |
+  | 1999 | **10.90** / 9.81 | 78.9 / 67.0 | 86 / 56 | 0.17 / 0.64 |
+
+  Compared at the last checkpoint (nominal / perturbed):
+
+  | Policy | RPM | DFSR % | DC |
+  |---|---|---|---|
+  | `teacher_rotlin_ent5e-3` (privileged) | 11.85 / 10.52 | 95 / 69 | 0.05 / 0.56 |
+  | **`student_pt_rotlin`** | **10.90** / 9.81 | **86** / **56** | **0.17** / **0.64** |
+  | `abl_B_rotlin` (2 seeds) | 10.41, 10.25 / 11.07, 11.48 | 84, 83 / 44, 45 | 0.22, 0.23 / 1.09, 1.08 |
+  | `student_pt` (old teacher) | 6.89 / 7.52 | 95 / 66 | 0.05 / 0.56 |
+
+  The best deployable rotlin policy so far: it keeps 92 % of the teacher's nominal speed (as `student_pt` kept 93 %),
+  is as fast as B-rotlin nominally (+0.6 RPM, inside the ±0.7 seed spread), and is clearly more robust under the
+  perturbed eval: 56–72 % drop-free and DC 0.5–0.64, where both B-rotlin seeds sit at 44–45 % and 1.08. B-rotlin is
+  faster under perturbation (11.1–11.5 vs 9.8–10.4 RPM). DFSR on 64 envs moves by ±5–10 points between neighbouring
+  checkpoints (86 vs 97 %), so 1500 vs 1999 is noise; the speed plateaus from 1000 on, so again the teacher limits it.
+  This confirms the teacher → student path on the new reward and motivates the demo-reward teacher below.
+
 ### Demo-reward teacher (queued 2026-10-30)
 
 `teacher_onedir_droppen_ent5e-3` (`-teacher-onedir-droppen-v0`): the rotlin teacher beat its deployable PPO
