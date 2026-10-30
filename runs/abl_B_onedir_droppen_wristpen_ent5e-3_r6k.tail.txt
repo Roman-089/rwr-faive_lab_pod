@@ -1,1 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+        Episode_Reward/object_drop: -1.1539
+          Episode_Reward/wrist_vel: -4.1068
+Metrics/continuous_rotation/position_error: 0.0876
+Metrics/continuous_rotation/current_angular_speed: 9.8701
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 8.3701
+Metrics/continuous_rotation/angular_velocity_error: 10.3562
+Metrics/continuous_rotation/angular_velocity_alignment: -0.0620
+Metrics/continuous_rotation/consecutive_success: 0.0159
+Metrics/continuous_rotation/total_success: 19.2038
+Metrics/continuous_rotation/vertical_drift: 0.0473
+Metrics/continuous_rotation/linear_speed: 0.6475
+      Episode_Termination/time_out: 0.5342
+Episode_Termination/object_dropped: 0.4660
+--------------------------------------------------------------------------------
+                   Total timesteps: 12779520
+                    Iteration time: 4.20s
+                      Time elapsed: 00:04:58
+                               ETA: 06:17:20
+
+2026-10-30T17:23:06Z [396,941ms] [Error] [carb] 
+
+../../../source/plugins/carb.tasking/Mutex.cpp(103): void carb::tasking::Mutex::lock()(): Assertion (m_recursive) failed: Recursion not allowed
+
+Assertion Failed!
+The following assertion condition failed in the process 229153:
+	'm_recursive'
+
+at the location:
+	'../../../source/plugins/carb.tasking/Mutex.cpp'
+	on line 103
+	 in void carb::tasking::Mutex::lock()()
+
+with the message:
+	"Recursion not allowed"
+
+Press ABORT to exit.
+Press RETRY to debug (attach a debugger first).
+Press IGNORE to attempt to continue.
+/home/balazsph/IsaacLab/isaaclab.sh: line 561: 229153 Aborted                 ${python_exe} "$@"
