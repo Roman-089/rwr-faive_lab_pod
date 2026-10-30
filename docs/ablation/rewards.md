@@ -418,3 +418,4 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   for the −2000 baseline (seed 0): slower and not fewer drops. **Decision: keep −2000.** Its drop-free rate falls as
   training goes on (88 → 53 %) while the action-noise std climbs past 4 (pod log), the same pattern as the baseline
   (73 → 61–63 %): another pointer at the entropy-5e-3 noise (see [PPO / capacity](ppo_and_capacity.md#action-noise-under-the-entropy-bonus)).
+  Queued 2026-10-30 15:30: the fixed-wrist version `abl_B_onedir_droppen_wristfix_ent5e-3` (`-asym-onedir-droppen-wristfix-v0`).
