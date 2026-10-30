@@ -41,6 +41,7 @@ table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node
 | `abl_B_rotlin_cont10k` (model_9998) | **10.81** | 78 / 91 / 0.12 | **6.21** (64) | 80 / 89 / 0.14 | **4.87** (64) | 66 / 86 / 0.17 | 0.57 / 0.45 |
 | `student_pt_rotlin` (model_1999, transformer) | **10.90** | 79 / 86 / 0.17 | **4.50** (64) | 59 / 67 / 0.53 | **4.37** (64) | 60 / 73 / 0.34 | 0.41 / 0.40 |
 | `abl_B_onedir_droppen_ent5e-3` (model_4999, +z only) | **16.41** | 83 / 63 / 0.64 | **3.54** (64) | 62 / 73 / 0.30 | **4.07** (64) | 58 / 63 / 0.56 | 0.22 / 0.25 |
+| `abl_B_onedir_droppen_pos45_ent5e-3` (model_4999, +z only, cube position ×3, no tumbling) | **12.59** | 81 / 86 / 0.14 | **6.03** (64) | 75 / **92** / 0.08 | **5.60** (64) | 66 / **92** / 0.08 | 0.48 / 0.44 |
 
 Rows added 2026-10-29 23:10 (job 29851207, CPU queue `hpc`, 64 trials each; informational, decisions use Isaac). The
 fastest Isaac policy (onedir, 15.2 RPM) keeps only 36 % of its speed and drops most; the drop-penalty run keeps the
@@ -88,6 +89,10 @@ Isaac speed (the best ratio and the fastest MuJoCo policy so far, 6.2 RPM, 89 % 
 and is the slowest of the three in MuJoCo; onedir without the penalty kept 36 %. The faster the Isaac gait, the less of
 it carries over to MuJoCo, so the onedir speed is the number most at risk on the real hand. This is a flag for the
 first hardware test, not a reason to drop onedir (MuJoCo's soft contact is not the real hand either).
+
+**2026-10-30 22:55 (job 29857930, informational).** The cube-position ×3 +z policy (no tumbling, 16° tilt) keeps 48 %
+of its Isaac speed (the tumbling onedir policies kept 22 %) and is the most drop-free policy in MuJoCo so far (92 %
+nominal and with Isaac's DR). Consistent with the Isaac finding that its flat, centred grasp is the robust one.
 
 ## Design
 
