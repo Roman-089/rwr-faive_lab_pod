@@ -335,3 +335,17 @@ Isaac eval, last checkpoint, nominal / perturbed (64 envs × 60 s):
   (`teacher_onedir_droppen_ent5e-3`).
 - rotlin 10k vs 5k (same seed): +0.4 RPM (inside the ±0.7 seed spread), +6 points nominal and +10 perturbed
   drop-free, DC 0.22 → 0.12 nominal. Longer training mainly makes rotlin safer, not faster.
+- Next point on the curve: cap 4 rad/s (`abl_B_onedir_droppen_clip4_ent5e-3`, A40).
+- **Drop timing** (`scripts/eval/drop_timing.py`, nominal eval, drops per env-minute by time since (re)spawn):
+
+  | Run | drops | 0–1 s | 1–2 s | 2–3 s | 3–5 s | 5–10 s | 10–20 s | 20–60 s |
+  |---|---|---|---|---|---|---|---|---|
+  | onedir + drop penalty (3 rad/s) | 41 | 2.94 | 3.76 | 1.96 | 1.01 | 1.16 | 0.42 | 0.30 |
+  | onedir, no drop penalty (3 rad/s) | 83 | 3.35 | 0.88 | 0.92 | 2.46 | 2.31 | 0.96 | 0.90 |
+  | rotlin 10k | 8 | 1.69 | 1.74 | 0.90 | 0 | 0 | 0.09 | 0.05 |
+  | transformer student (rotlin) | 11 | 1.62 | 0 | 0 | 0 | 0 | 0.17 | 0.17 |
+
+  The drop penalty cut the steady-state drop rate (≥ 10 s after spawn) by 2.5–3× (0.30–0.42 vs 0.90–0.96 per minute)
+  but not the spin-up drops in the first 3 s (2–4 per minute, ~a third of its drops): the cube is lost while the
+  hand accelerates it from rest to 1.7 rad/s. For a live demo a spin-up drop ends the attempt at once, so spin-up
+  needs its own fix (teacher / student, or a reward that does not pay for speed before the grasp is stable).
