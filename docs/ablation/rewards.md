@@ -349,3 +349,9 @@ Isaac eval, last checkpoint, nominal / perturbed (64 envs × 60 s):
   but not the spin-up drops in the first 3 s (2–4 per minute, ~a third of its drops): the cube is lost while the
   hand accelerates it from rest to 1.7 rad/s. For a live demo a spin-up drop ends the attempt at once, so spin-up
   needs its own fix (teacher / student, or a reward that does not pay for speed before the grasp is stable).
+- Two single-knob follow-ups on spin-up / position drops (2026-10-30 07:20). The base reward already has a cube
+  smoothness term (`angular_acceleration`, exp(−|Δω/dt|/σ), σ 0.5, weight 1) and a position term
+  (`object_position_tracking`, σ 2 cm, weight 15), both small next to the rotation term (90 × speed).
+  `abl_B_onedir_droppen_acc10_ent5e-3` raises smoothness to 10 (should soften the spin-up; may cost steady-state speed if
+  it also punishes the gait's wobble); `abl_B_onedir_droppen_pos45_ent5e-3` raises position to 45 (cube kept near the
+  palm centre, fewer drops at any time).
