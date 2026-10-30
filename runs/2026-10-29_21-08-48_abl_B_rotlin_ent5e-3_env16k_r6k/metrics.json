@@ -1,0 +1,28 @@
+{
+ "model_1000.pt": {
+  "rpm": 9.578524589538574,
+  "rpm_std": 1.6312165260314941,
+  "ra": 67.54276752471924,
+  "dfsr": 51.5625,
+  "dc": 0.78125,
+  "checkpoint": "model_1000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-rotlin-v0",
+  "perturb": false
+ },
+ "model_2000.pt": {
+  "rpm": 9.633962631225586,
+  "rpm_std": 1.597710132598877,
+  "ra": 71.94787263870239,
+  "dfsr": 64.0625,
+  "dc": 0.4375,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-rotlin-v0",
+  "perturb": false
+ }
+}
