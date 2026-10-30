@@ -70,3 +70,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | alpha05 on rotlin killed at it 224 (4-step episodes: the start noise knocks the cube off); retry with init_noise_std 0.5 queued; cont10k running on A10 | [action space](action_space.md) |
 | 2026-10-29 | pod on CUDA MPS: 3 runs at 0.658 it/s total = **1.84x** the 2-run non-MPS throughput, each run faster; seeds resumed from model_2000; a 4th run (16384 envs) being added | [infrastructure](infrastructure.md) |
 | 2026-10-29 | decision rule: MuJoCo sim2sim is informational; design decisions for new ablations are based solely on the Isaac eval | [sim2sim](sim2sim.md) |
+| 2026-10-30 | drop penalty replicated: seed 1 7.00 RPM → two-seed mean 7.47 vs B 5.45 (+2.0 RPM); LSTM student running on the pod | [rewards](rewards.md) |

@@ -183,6 +183,20 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
   policy produces: **check the rotation reward / commanded-axis speed in training, not only drops and episode length**.
   Keep −5; if wobble needs reducing, try −8 to −10 or penalize only off-axis speed above a dead band.
 
+- **2026-10-30 03:00 — drop penalty, seed 1** (pod, resumed at it 2000), nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 2500 | 6.63 / 7.44 | 75.2 / 74.9 | 86 / 72 | 0.16 / 0.39 |
+  | 3000 | 7.06 / 7.38 | 80.2 / 74.4 | 91 / 67 | 0.11 / 0.50 |
+  | 3500 | 6.87 / 7.79 | 78.4 / 76.0 | 92 / 63 | 0.09 / 0.56 |
+  | 4000 | 6.95 / 7.58 | 78.6 / 73.8 | 91 / 59 | 0.09 / 0.64 |
+  | 4999 | 7.00 / 7.55 | 80.3 / 74.8 | 88 / 58 | 0.14 / 0.75 |
+
+  **Replicated:** two-seed mean 7.47 RPM (7.94 / 7.00) vs B 5.45 (5.66 / 5.23) = **+2.0 RPM**, well beyond the ±0.7 seed
+  spread, at the same or better drop-free rate (88 % / 83 % vs B 88 %) and more robust under perturbation (seed 1:
+  58-72 % drop-free vs B ~53 %).
+
 ## Conclusions so far
 
 - **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).
