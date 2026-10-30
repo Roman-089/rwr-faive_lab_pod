@@ -18,8 +18,8 @@ so the deployed policy sees motor-encoder proprio only (74-dim obs at 20 Hz).
 ## Key results so far (2026-10-29 10:00)
 
 - **Reward is the largest lever:** a rotation reward linear in the speed about the commanded axis (`rotlin`, as in
-  HORA / LEAP) gives **10.41 RPM** vs 5.45 for the same setup with the old reward (+91 %), and was still improving at
-  5k. Costs: 84 % drop-free (B 88 %), weaker under the perturbed eval (44 vs ~55 % drop-free), 2× the off-axis wobble.
+  HORA / LEAP) gives **10.33 RPM (two seeds: 10.41 / 10.25)** vs 5.45 for the same setup with the old reward (+90 %).
+  A drop penalty adds +2.0 RPM on B (two seeds: 7.47 vs 5.45). Costs: 84 % drop-free (B 88 %), weaker under the perturbed eval (44 vs ~55 % drop-free), 2× the off-axis wobble.
 - **Asymmetric critic** (privileged critic, deployable actor): A 1.37 → B 5.45 RPM (two seeds). Extra critic inputs (C:
   cube velocity, DR parameters) add nothing (5.34, two seeds). Seed spread is ~±0.7 RPM.
 - **Entropy** 1e-4 → 5e-3 → 1e-2: 5.45 → 6.54 (two seeds) → 7.60 RPM (one seed); drops rise at 1e-2. It also makes the
@@ -70,7 +70,7 @@ Status as of 2026-10-29 ~10:00. Eval = nominal / perturbed at the last checkpoin
 | `teacher_rotlin_cont10k_r6k` | [teacher-student](teacher_student.md) | `-teacher-rotlin-v0` + `--resume` from model_5999, ent 5e-3 | rotlin teacher continued 6k → 10k (still improving at 6k) | pod, after the students | queued | | | | |
 | `student_pt_rotlin` | [teacher-student](teacher_student.md) | `-student-pt-rotlin-v0` | transformer student distilled from `teacher_rotlin_ent5e-3` model_5999 (4096 envs, 2k) | 29848449 / L40S, starts when the teacher job is done (+ pod copy `student_pt_rotlin_r6k`, teacher via W&B artifact `teacher_rotlin_ent5e-3`) | running (DTU L40S 29848449; A100 and pod copies cancelled) | | | | |
 | `student_lstm_rotlin` | [teacher-student](teacher_student.md) | `-student-lstm-rotlin-v0` | LSTM student from `teacher_rotlin_ent5e-3` | 29850539 / A40 (+ pod copy `student_lstm_rotlin_r6k`, teacher via W&B artifact `teacher_rotlin_ent5e-3`) | running on the pod (`student_lstm_rotlin_r6k`, since 02:16Z; DTU copy 29850539 cancelled) | | | | |
-| `student_mlp_h10_rotlin` | [teacher-student](teacher_student.md) | `-student-mlp-h10-rotlin-v0` | MLP on 10-step history from `teacher_rotlin_ent5e-3` | 29850540 / A100 (+ pod copy `student_mlp_h10_rotlin_r6k`, teacher via W&B artifact `teacher_rotlin_ent5e-3`) | queued | | | | |
+| `student_mlp_h10_rotlin` | [teacher-student](teacher_student.md) | `-student-mlp-h10-rotlin-v0` | MLP on 10-step history from `teacher_rotlin_ent5e-3` | 29850540 / A100 (+ pod copy `student_mlp_h10_rotlin_r6k`, teacher via W&B artifact `teacher_rotlin_ent5e-3`) | running on the pod (`student_mlp_h10_rotlin_r6k`, since 02:37Z; DTU copy 29850540 cancelled) | | | | |
 | `student_mlp_h10` | [teacher-student](teacher_student.md) | `-student-mlp-h10-v0` | distill → MLP on 10-step history (old-reward teacher) | 29839014 / A100 | cancelled before starting (replaced by `student_mlp_h10_rotlin`) | | | | |
 | `student_lstm` | [teacher-student](teacher_student.md) | `-student-lstm-v0` | distill → LSTM (old-reward teacher) | 29839015 / A40 | **crashed at load**: rsl_rl 3.1.2 builds a non-recurrent teacher MLP with the RNN's 256 inputs; fixed in `student_recurrent.py`, rerun on the rotlin teacher | | | | |
 | `student_pt` | [teacher-student](teacher_student.md) | `-student-pt-v0` | distill → transformer + recon loss (4096 envs) | 29845112 / L40S | done | 6.89 / 7.52 | 75.2 / 71.3 | **95** / 66 | **0.05** / 0.56 |
@@ -78,7 +78,7 @@ Status as of 2026-10-29 ~10:00. Eval = nominal / perturbed at the last checkpoin
 | `arch_rma_s2` | [RMA](rma.md) | `-rma-student-v0` | RMA adaptation module, 30-step history, 2k | 29837730 / L40S | done | 6.20 / 6.71 (best 6.29 / 6.35 @1500) | 72.3 / 68.0 | 83 / 78 | 0.25 / 0.38 |
 | `abl_B_rotlin` | [rewards](rewards.md) | `-asym-rotlin-v0` | B, linear clipped rotation reward + off-axis | 29838450 / L40S | done | **10.41** / 11.07 | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
 | `abl_B_rotlin_cont10k` | [rewards](rewards.md) | `-asym-rotlin-v0` + `--resume` from `abl_B_rotlin` model_4999 | rotlin trained to 10k (still improving at 5k) | 29850584 / A10 (A100 copy 29846685 cancelled) | running | | | | |
-| `abl_B_rotlin_seed1_r6k` | [rewards](rewards.md) | `-asym-rotlin-v0 --seed 1` | rotlin, second seed (pod); stopped at it 2000 and resumed under MPS as `_resume_r6k` | pod | running (resume, ~4.7 s/it) | | | | |
+| `abl_B_rotlin_seed1_r6k` | [rewards](rewards.md) | `-asym-rotlin-v0 --seed 1` | rotlin, second seed (pod; resumed under MPS from model_2000, W&B 1jaodg4h) | pod | done | **10.25** / 11.48 | 76.8 / 71.4 | 83 / 45 | 0.23 / 1.08 |
 | `abl_B_droppen_seed1_r6k` | [rewards](rewards.md) | `-asym-droppen-v0 --seed 1` | drop penalty, second seed (pod; resumed under MPS from model_2000, run dir `2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k`, W&B 3o9mpo0o) | pod | done | 7.00 / 7.55 (best 7.06 @3000) | 80.3 / 74.8 | 88 / 58 (best 92 @3500) | 0.14 / 0.75 |
 | `abl_B_onedir_droppen_clip2_ent5e-3_r6k` | [rewards](rewards.md) | `-asym-onedir-droppen-v0` + `env.rewards.rotation_progress.params.max_vel=2.0` | onedir + drop penalty, speed reward clipped at 2 rad/s instead of 3 (fewer drops?) | pod, after the seeds (~01:00Z) | running (MPS, ~4.7 s/it) | | | | |
 | `abl_B_onedir_droppen_clip2_ent5e-3_seed1` | [rewards](rewards.md) | `-asym-onedir-droppen-v0 --seed 1` + max_vel 2.0 | second seed of the likely demo config (2 rad/s cap: 14 % drops in training vs 48 % at 3 rad/s) | 29851783 / A40 | queued | | | | |

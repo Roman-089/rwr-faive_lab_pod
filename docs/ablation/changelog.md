@@ -72,3 +72,4 @@ full entries live in the linked topic files.
 | 2026-10-29 | decision rule: MuJoCo sim2sim is informational; design decisions for new ablations are based solely on the Isaac eval | [sim2sim](sim2sim.md) |
 | 2026-10-30 | drop penalty replicated: seed 1 7.00 RPM → two-seed mean 7.47 vs B 5.45 (+2.0 RPM); LSTM student running on the pod | [rewards](rewards.md) |
 | 2026-10-30 | queued: onedir + drop penalty + 2 rad/s second seed (A40), rotlin + 3-step history (L40S, new task `-asym-rotlin-hist3-v0`) | [README](README.md) |
+| 2026-10-30 | **rotlin replicated**: seed 1 10.25 RPM / 83 % (seed 0 10.41 / 84 %), mean 10.33 vs B 5.45; perturbed weakness replicates too; MLP student running on the pod | [rewards](rewards.md) |

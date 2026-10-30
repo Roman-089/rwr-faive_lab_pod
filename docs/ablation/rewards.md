@@ -197,6 +197,19 @@ Training reward was high (~1480, drops 8 %), so the policy found a better-paying
   spread, at the same or better drop-free rate (88 % / 83 % vs B 88 %) and more robust under perturbation (seed 1:
   58-72 % drop-free vs B ~53 %).
 
+- **2026-10-30 03:40 — rotlin seed 1** (pod, resumed at it 2000), nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 2500 | 9.38 / 10.49 | 74.1 / 70.6 | 80 / 47 | 0.36 / 0.92 |
+  | 3000 | 9.46 / 10.97 | 73.1 / 71.5 | 75 / 50 | 0.34 / 1.02 |
+  | 3500 | 9.76 / 10.30 | 76.2 / 68.1 | 83 / 45 | 0.19 / 1.14 |
+  | 4000 | 10.13 / 10.99 | 77.6 / 70.1 | 80 / 42 | 0.25 / 1.03 |
+  | 4999 | **10.25** / 11.48 | 76.8 / 71.4 | 83 / 45 | 0.23 / 1.08 |
+
+  **Replicated:** 10.41 / 10.25 RPM, mean 10.33 vs B 5.45 (+4.9 RPM, +90 %); drop-free 84 / 83 %. The weakness under
+  perturbation replicates as well (44 / 45 % drop-free, ~1.1 drops per trial).
+
 ## Conclusions so far
 
 - **`rotsoft` is a reward hack** (2026-10-28 17:10): ~0 RPM, RA ~7 %, while holding the cube safely (DFSR 92 %).
