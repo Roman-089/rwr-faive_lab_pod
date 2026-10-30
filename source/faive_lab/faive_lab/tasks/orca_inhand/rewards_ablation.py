@@ -74,3 +74,10 @@ def rotation_progress_linear(
     axis, _ = _target_axis(env, command_name)
     w_axis = (_get_numeric_root_ang_vel(env, object_cfg) * axis).sum(-1)
     return torch.clamp(w_axis, min=min_vel, max=max_vel) / ref_speed
+
+
+def joint_work_l1(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg = SceneEntityCfg("robot")) -> torch.Tensor:
+    """Mechanical power of the joints, sum |tau_i * qdot_i| [W] (HORA's work penalty, arXiv 2210.04887): favours smooth,
+    low-effort finger gaits. ``applied_torque`` is the PD drive's torque estimate for the implicit actuators."""
+    asset = env.scene[asset_cfg.name]
+    return torch.sum(torch.abs(asset.data.applied_torque * asset.data.joint_vel), dim=1)

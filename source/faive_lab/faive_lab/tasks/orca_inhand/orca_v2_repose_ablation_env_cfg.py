@@ -405,6 +405,17 @@ class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
         super().__post_init__()
         use_rotlin_reward(self)
 
+
+@configclass
+class OrcaV2ReposeAsymRotLinWorkEnvCfg(OrcaV2ReposeAsymRotLinEnvCfg):
+    """-rotlin + HORA's work penalty (-1.5 * sum |tau * qdot|): rotlin is fast but wobbly and weak under the perturbed
+    eval; the penalty targets jerky, high-effort gaits. Weight set so the term is ~10-20 % of the rotation reward
+    (torques <= 0.7-1.3 Nm, a few W in total); check Episode_Reward/joint_work early in training."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.joint_work = RewTerm(func=rewards_ablation.joint_work_l1, weight=-1.5)
+
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
 
 
