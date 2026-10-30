@@ -237,6 +237,10 @@ rotlin pipeline: `-student-pt-onedir-droppen-v0` / `-student-mlp-h10-onedir-drop
   minute); it reaches full speed (1.66 rad/s) within the first second. **Decision:** distill the transformer student from
   model_5999 (`student_pt_onedir_droppen`, DTU L40S + pod copy); the perturbed weakness needs its own fix (action
   delay in training, or the work penalty, `abl_B_onedir_droppen_work015_ent5e-3`).
+  Second student from model_4500 (`student_pt_onedir_droppen_t4500`, DTU L40S): 4500 looks better nominally (16.0 RPM /
+  81 % / DC 0.27 vs 15.2 / 69 % / 0.45) but the gap is about one eval-noise step (±0.7 RPM, ±6 points DFSR on 64 envs),
+  picking the best of five noisy checkpoints overstates it, and 4500 is worse perturbed (12.5 vs 17 %). Distilling both
+  tests whether the choice matters.
 
 ## Conclusions so far
 
