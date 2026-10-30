@@ -447,3 +447,17 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   seed spread), perturbed drops halved. Its drop-free rate rises over training (55 → 72 %) while every baseline seed's
   falls, at a similar action-noise std (3.5): the smoothness term counteracts whatever drives the decline. **First clear
   win among the +z single-knob tests.** Follow-ups: seed 1 and weight 30 (dose).
+- **Wrist motion and drop timing vs entropy (2026-10-30 18:45, model_4999 nominal rollouts; pod npz via remote-results):**
+
+  | Policy | wrist range p5–p95 [rad] | mean \|q̇\| [rad/s] | drops (64 × 60 s) | drops / env-min at 0–1 / 1–2 / 2–3 / 3–5 / 5–10 / 10–20 / 20–60 s |
+  |---|---|---|---|---|
+  | `abl_B_onedir_droppen_ent1e-4_r6k` (default entropy) | **0.64** | **1.10** | **19** | 2.96 / 0.77 / 0.00 / 0.78 / 0.16 / 0.43 / **0.15** |
+  | `abl_B_onedir_droppen_acc10_ent5e-3_r6k` | 1.11 | 1.90 | 34 | 3.11 / 1.31 / 0.00 / 1.00 / 0.71 / 0.56 / 0.33 |
+  | `abl_B_onedir_droppen_ent5e-3` (seed 0) | 1.34 | 1.97 | 41 | 2.94 / 3.76 / 1.96 / 1.01 / 1.16 / 0.42 / 0.30 |
+  | `abl_B_onedir_droppen_ent5e-3_seed1` | 1.33 | 2.04 | 71 | 4.16 / 2.46 / 1.02 / 1.07 / 1.03 / 0.99 / 0.90 |
+
+  The default-entropy policy is faster (17.5 vs 15.3 RPM) with half the wrist swing and almost no spin-up drops
+  (1–3 s after spawn); the remaining first-second drops (~3 per env-minute) are the spawn artifact every policy shows.
+  So the large wrist swing seen in 742zn06f (entropy 5e-3) and most spin-up drops came largely from training under
+  std 3–4 action noise, not from the onedir reward itself. Smoothness ×10 removed part of the spin-up drops on
+  entropy 5e-3; whether it adds anything on default entropy is `abl_B_onedir_droppen_acc10_ent1e-4_r6k` (running).
