@@ -98,6 +98,26 @@ vs B (2 seeds, last ckpt) 5.45 RPM / RA 64 % / DFSR 88 %, and the privileged tea
   (1.8 → 3.0), episodes stay at ~200 steps with 95 % drops. On the old reward the same entropy was at 450 steps / 40 % drops
   by it 600. With rotlin, 1e-2 is too much exploration; 5e-3 works (rotlin_ent5e-3: 9.50 RPM).
 
+### 2× envs (2026-10-30, pod)
+
+`abl_B_rotlin_ent5e-3_env16k_r6k`: rotlin + entropy 5e-3 with 16384 instead of 8192 envs, all PPO settings unchanged
+(so 2× samples per iteration and 2× mini-batch size, same number of gradient steps). Nominal / perturbed:
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 9.58 / 9.02 | 67.5 / 58.0 | 52 / 39 | 0.78 / 1.47 |
+| 2000 | 9.63 / 9.76 | 72.0 / 63.6 | 64 / 34 | 0.44 / 1.23 |
+| 3000 | 9.28 / 8.80 | 71.5 / 59.0 | 80 / 33 | 0.22 / 1.55 |
+| 4000 | 9.40 / 9.07 | 72.1 / 60.5 | 64 / 47 | 0.45 / 1.08 |
+| 4999 | 9.47 / 8.76 | 73.4 / 59.1 | 67 / 27 | 0.38 / 1.64 |
+| 8192 envs (`abl_B_rotlin_ent5e-3`), 4999 | 9.50 / 10.43 | 76.1 / 70.8 | 81 / 58 | 0.27 / 1.00 |
+
+Same speed, clearly more drops (perturbed 27 vs 58 % drop-free, beyond the ±10-point checkpoint noise; one seed each).
+Twice the data per iteration with the same number of updates did not help: the extra samples only average the
+gradient over larger mini-batches, while the number of policy updates (and so the learning per iteration) stays the
+same. **Decision: keep 8192 envs.** If the pod has spare capacity, a third concurrent run beats a bigger one; 16384
+would only be worth retrying with more mini-batches (same mini-batch size) or more epochs.
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;
