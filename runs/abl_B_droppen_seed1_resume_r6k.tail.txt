@@ -1,40 +1,40 @@
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_3000.pt: {'rpm': 7.377348899841309, 'rpm_std': 1.9907705783843994, 'ra': 74.43619966506958, 'dfsr': 67.1875, 'dc': 0.5, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_3500.pt: {'rpm': 7.791841506958008, 'rpm_std': 1.9264272451400757, 'ra': 76.04225873947144, 'dfsr': 62.5, 'dc': 0.5625, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_4000.pt: {'rpm': 7.574611186981201, 'rpm_std': 2.0600483417510986, 'ra': 73.80839586257935, 'dfsr': 59.375, 'dc': 0.640625, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/model_4999.pt: {'rpm': 7.546045303344727, 'rpm_std': 1.954417109489441, 'ra': 74.75618124008179, 'dfsr': 57.8125, 'dc': 0.75, 'checkpoint': 'model_4999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-droppen-v0', 'perturb': True}
-[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/eval/metrics_perturbed.json
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/eval/model_2500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/eval/model_3000.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/eval/model_3500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k/eval/model_4000.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261030_021559-3o9mpo0o
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/3o9mpo0o
+wandb: updating run metadata
+wandb: uploading wandb-metadata.json; uploading requirements.txt; uploading media/videos/eval/video_02500_4999_0d10d35cae15981864b0.mp4
+wandb: uploading wandb-metadata.json; uploading requirements.txt; uploading media/videos/eval/video_02500_4999_0d10d35cae15981864b0.mp4; uploading media/videos/eval/video_04000_5002_47f38a505eedb79d4095.mp4; uploading media/videos/eval/video_04999_5003_421d4e71d1038537c359.mp4 (+ 4 more)
+wandb: uploading media/videos/eval/video_02500_4999_0d10d35cae15981864b0.mp4; uploading media/videos/eval/video_04000_5002_47f38a505eedb79d4095.mp4; uploading media/videos/eval/video_04999_5003_421d4e71d1038537c359.mp4; uploading media/videos/eval/video_03000_5000_f644b67c0fcdd213abfc.mp4; uploading media/videos/eval/video_03500_5001_b7b54c7e72b1e275a8bd.mp4
+wandb: uploading media/videos/eval/video_04000_5002_47f38a505eedb79d4095.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc █▃▁▁▆
+wandb:           eval/dfsr ▁▆█▆▃
+wandb:      eval/iteration ▁▂▄▅█
+wandb:             eval/ra ▁█▅▆█
+wandb:            eval/rpm ▁█▅▆▇
+wandb:   eval_perturbed/dc ▁▃▄▆█
+wandb: eval_perturbed/dfsr █▆▃▂▁
+wandb:   eval_perturbed/ra ▄▃█▁▄
+wandb:  eval_perturbed/rpm ▂▁█▄▄
+wandb: 
+wandb: Run summary:
+wandb:                  Episode_Reward/action_l2 -0.01885
+wandb:             Episode_Reward/action_rate_l2 -1.09902
+wandb:       Episode_Reward/angular_acceleration 0.28954
+wandb: Episode_Reward/angular_velocity_direction 40.2944
+wandb: Episode_Reward/angular_velocity_magnitude 5.80289
+wandb:               Episode_Reward/joint_vel_l2 -0.00073
+wandb:                Episode_Reward/object_drop -0.34833
+wandb:   Episode_Reward/object_position_tracking 3.48774
+wandb:        Episode_Termination/object_dropped 0.10183
+wandb:              Episode_Termination/time_out 0.89817
+wandb:                                       +37 ...
+wandb: 
+wandb: 🚀 View run 2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/3o9mpo0o
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261030_021559-3o9mpo0o/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/3o9mpo0o (2026-10-29_20-56-39_abl_B_droppen_seed1_resume_r6k)
