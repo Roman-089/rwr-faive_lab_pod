@@ -91,3 +91,12 @@ def joint_work_l1(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg = SceneEntit
     low-effort finger gaits. ``applied_torque`` is the PD drive's torque estimate for the implicit actuators."""
     asset = env.scene[asset_cfg.name]
     return torch.sum(torch.abs(asset.data.applied_torque * asset.data.joint_vel), dim=1)
+
+
+def cube_tilt(env: ManagerBasedRLEnv, object_cfg: SceneEntityCfg = SceneEntityCfg("object")) -> torch.Tensor:
+    """1 - max_i |(R e_i) . z|: zero while one cube face points up (any yaw, so a clean z-rotation is free), 1 - cos(tilt)
+    otherwise (45 deg -> 0.29). The +z policies tumble the cube (mean tilt 25-36 deg, the top face changes ~100-170
+    times per minute, off-axis spin above the z spin) while rotlin keeps it flat (6 deg); docs/ablation/rewards.md."""
+    w, x, y, z = env.scene[object_cfg.name].data.root_quat_w.unbind(-1)
+    world_z_in_body = torch.stack([2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y)], dim=-1)
+    return 1.0 - world_z_in_body.abs().amax(dim=-1)

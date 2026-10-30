@@ -481,6 +481,32 @@ class OrcaV2ReposeAsymOneDirDropPenWristFixEnvCfg(OrcaV2ReposeAsymOneDirDropPenE
         self.actions.joint_pos.joint_names = ["(?!right_wrist).*"]
 
 
+def add_cube_tilt_penalty(env_cfg: OrcaV2ReposeEnvCfg, weight: float = -200.0):
+    """Penalty on the cube tilt (``rewards_ablation.cube_tilt``): -200 costs ~38 per second at the +z policies' mean
+    tilt (36 deg, 1 - cos = 0.19) against ~110 per second of rotation reward, and ~1 per second at rotlin's 6 deg."""
+    env_cfg.rewards.cube_tilt = RewTerm(
+        func=rewards_ablation.cube_tilt, weight=weight, params={"object_cfg": SceneEntityCfg("object")}
+    )
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """-onedir-droppen + cube tilt penalty: the +z policies tumble the cube instead of turning it flat about z."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tilt_penalty(self)
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristFixEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg):
+    """-onedir-droppen-upright with the wrist not actuated (as -wristfix): flat z-rotation without the wrist swing."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.actions.joint_pos.joint_names = ["(?!right_wrist).*"]
+
+
 @configclass
 class OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
     """Privileged onedir + drop-penalty teacher with the wrist velocity penalty: 742zn06f swings the wrist ~10x more

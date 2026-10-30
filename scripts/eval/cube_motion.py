@@ -1,0 +1,90 @@
+"""How clean is the rotation? Cube tilt, top-face changes, off-axis spin and wrist motion from eval rollouts (.npz).
+
+RPM only integrates the spin about the commanded axis, so a policy that tumbles the cube scores as fast as one that turns
+it flat. This reports, over the alive steps of the nominal rollout:
+  w_cmd / |w_xy|   mean spin about the commanded axis and mean off-axis spin [rad/s]
+  tilt             1 - max_i |(R e_i) . z| as an angle: 0 deg while a face points up [deg, mean / p90]
+  flips/min        changes of the face that points up (tumbling)
+  wrist            range (p5-p95) [rad] and mean |qdot| [rad/s] of forearm -> carpals (the right_wrist joint)
+
+Usage (CPU, numpy): python scripts/eval/cube_motion.py <npz or run dir> [...]   (run dir: its last eval/model_*.npz)
+"""
+
+import glob
+import os
+import sys
+
+import numpy as np
+
+
+def _qconj(q):
+    return q * np.array([1, -1, -1, -1])
+
+
+def _qmul(a, b):
+    w1, x1, y1, z1 = np.moveaxis(a, -1, 0)
+    w2, x2, y2, z2 = np.moveaxis(b, -1, 0)
+    return np.stack(
+        [
+            w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2,
+            w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
+            w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2,
+            w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2,
+        ],
+        -1,
+    )
+
+
+def _world_z_in_body(q):
+    w, x, y, z = np.moveaxis(q, -1, 0)
+    return np.stack([2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y)], -1)
+
+
+def _resolve(path):
+    if path.endswith(".npz"):
+        return path
+    files = [f for f in glob.glob(os.path.join(path, "eval", "model_*.npz")) if "perturbed" not in f and "_cmd" not in f]
+    return sorted(files, key=lambda p: int(p.split("model_")[1].split(".")[0]))[-1]
+
+
+def cube_motion(npz_path):
+    d = np.load(npz_path, allow_pickle=True)
+    dt = float(d["dt"])
+    alive = ~(d["done"] > 0)
+    w = d["obj_angvel"]
+    sign = np.sign(d["cmd_angvel"][0, :, 2])
+    w_cmd = w[..., 2] * sign
+    w_xy = np.linalg.norm(w[..., :2], axis=-1)
+    up = _world_z_in_body(d["obj_quat"])
+    tilt = np.degrees(np.arccos(np.clip(np.abs(up).max(-1), 0, 1)))
+    face = np.abs(up).argmax(-1)
+    flips = ((face[1:] != face[:-1]) & alive[1:] & alive[:-1]).sum()
+    names = list(d["link_names"])
+    q = d["link_quat"]
+    rel = _qmul(_qconj(q[:, :, names.index("right_forearm")]), q[:, :, names.index("right_carpals")])
+    rel = rel * np.sign(rel[..., :1])
+    drel = _qmul(_qconj(rel[:1]), rel)
+    drel = drel * np.sign(drel[..., :1])
+    ax = np.abs(drel[..., 1:]).reshape(-1, 3).sum(0).argmax()
+    wrist = 2 * np.arctan2(drel[..., 1 + ax], drel[..., 0])
+    return {
+        "w_cmd": float(w_cmd[alive].mean()),
+        "w_xy": float(w_xy[alive].mean()),
+        "tilt_mean": float(tilt[alive].mean()),
+        "tilt_p90": float(np.percentile(tilt[alive], 90)),
+        "flips_per_min": float(flips / (alive.sum() * dt / 60)),
+        "wrist_range": float(np.percentile(wrist, 95) - np.percentile(wrist, 5)),
+        "wrist_speed": float(np.abs(np.diff(wrist, axis=0) / dt).mean()),
+    }
+
+
+if __name__ == "__main__":
+    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed")
+    for arg in sys.argv[1:]:
+        path = _resolve(arg)
+        m = cube_motion(path)
+        name = os.path.relpath(path)[-60:]
+        print(
+            f"{name:60s} {m['w_cmd']:5.2f} {m['w_xy']:5.2f}  {m['tilt_mean']:5.1f} / {m['tilt_p90']:4.1f}"
+            f"  {m['flips_per_min']:8.1f}  {m['wrist_range']:5.2f} / {m['wrist_speed']:4.2f}"
+        )
