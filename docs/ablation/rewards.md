@@ -433,3 +433,10 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   noise, and more fragile under perturbation (12 vs 21 % drop-free). Unlike rotlin (10k: +0.4 RPM, +6 points
   drop-free) the onedir line gets faster, not safer, with more training. The wrist motion is unchanged (range 1.38 vs
   1.34 rad, mean |q̇| 2.06 vs 1.97 rad/s), so the extra speed is not more wrist swing.
+- **Cap 4 rad/s (`abl_B_onedir_droppen_clip4_ent5e-3`, job 29852091)**, nominal / perturbed: 1000 14.59 / 14.75 RPM,
+  59 / 19 % · 2000 13.56 / 14.54, 39 / 17 % · 3000 15.94 / 14.50, 55 / 8 % · 4000 15.97 / 14.98, 52 / 14 % · 4999 16.18 /
+  15.47, 45 / 13 %. Last-3 mean 16.0 RPM / 50 % / DC 1.16 / perturbed 12 % vs the two-seed cap-3 baseline 15.3 / 54 % /
+  0.99 / 18 %: inside the seed spread on speed and drops, a little worse perturbed. The steady-state cube speed (10–60 s
+  after spawn) is 1.73 rad/s, as for cap 3 (1.56–1.75). Cap 2 → 3 moved it 1.06 → 1.72 rad/s; 3 → 4 adds nothing, so the
+  speed is now limited by the hand / sim dynamics, not the reward. **Decision: keep cap 3.** The drop timing also shows
+  the seed spread: steady-state drops 0.30 (seed 0) vs 0.90 (seed 1) per minute.
