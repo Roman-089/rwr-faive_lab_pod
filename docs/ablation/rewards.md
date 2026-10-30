@@ -268,6 +268,21 @@ more (off-axis |ω_xy| 3.0 vs 2.2 rad/s). RPM counts through drops (respawn), so
 RPM and badly on the demo's "long without a drop". The drop-penalty version (`abl_B_onedir_droppen_ent5e-3`, running)
 is the direct fix; a lower clip (2 rad/s) is the other knob.
 
+### Result: `abl_B_onedir_droppen_ent5e-3` (2026-10-30 03:50), nominal / perturbed, +z only
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 13.61 / 12.97 | 74.5 / 63.9 | 73 / 33 | 0.34 / 1.67 |
+| 2000 | 13.68 / 14.13 | 75.2 / 68.6 | 64 / 27 | 0.59 / 1.92 |
+| 3000 | 15.20 / 15.06 | 78.1 / 68.9 | 61 / 23 | 0.70 / 3.59 |
+| 4000 | 15.55 / 15.32 | 79.2 / 70.1 | 61 / 20 | 0.97 / 3.52 |
+| 4999 | **16.41** / 15.07 | 82.8 / 69.9 | 63 / 19 | 0.64 / 2.94 |
+
+Fastest policy so far (16.4 RPM = 1.72 rad/s). Versus the same onedir run without the drop penalty (15.19 RPM, 44 %
+drop-free, 1.30 drops): the penalty halves the drops and is faster, as on B. Still too droppy for "long without a
+drop" (63 % drop-free, 19 % perturbed), and drops rose during training (training drop rate 25 → 48 %). The 2 rad/s
+clip version (pod, 14 % training drops) decides the demo setting.
+
 ## Next steps / open questions
 
 - **`rotlin` is the new reward base.** Queued 2026-10-29: `abl_B_rotlin_ent5e-3` (+ entropy 5e-3), and the action-space
