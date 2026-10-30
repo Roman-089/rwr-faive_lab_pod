@@ -203,6 +203,12 @@ Students distill from the teacher's `model_9999`.
   (`exported/policy_history.pt`, model_1999) passed the bit-exact self-check. Students from the demo-reward teacher:
   transformer first. Re-distillation from the 10k rotlin teacher is queued on the pod if that teacher improves.
 
+- **2026-10-30 12:15 — rotlin teacher continued to 10k (`teacher_rotlin_cont10k_r6k`, pod, W&B zc61lpl0)**, nominal /
+  perturbed: 6500 11.49 / 10.34 RPM, 89 / 58 % · 7500 11.68 / 10.12, 92 / 61 % · 8000 11.45 / 10.28, 89 / 64 % · 9000
+  11.48 / 9.97, 91 / 64 % · 9998 **11.25** / 9.63, **94** / 58 %, DC 0.06 / 0.59. No gain over model_5999 (11.85 / 95 %,
+  perturbed 10.52 / 69 %): the rotlin teacher has plateaued by 6k. The re-distillation from it was dropped anyway
+  (+z-only decision).
+
 ### Demo-reward teacher (queued 2026-10-30)
 
 `teacher_onedir_droppen_ent5e-3` (`-teacher-onedir-droppen-v0`): the rotlin teacher beat its deployable PPO
