@@ -24,5 +24,44 @@
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-rotlin-v0",
   "perturb": false
+ },
+ "model_3000.pt": {
+  "rpm": 9.281987190246582,
+  "rpm_std": 1.512803316116333,
+  "ra": 71.52675986289978,
+  "dfsr": 79.6875,
+  "dc": 0.21875,
+  "checkpoint": "model_3000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-rotlin-v0",
+  "perturb": false
+ },
+ "model_4000.pt": {
+  "rpm": 9.39702033996582,
+  "rpm_std": 1.4154527187347412,
+  "ra": 72.08552956581116,
+  "dfsr": 64.0625,
+  "dc": 0.453125,
+  "checkpoint": "model_4000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-rotlin-v0",
+  "perturb": false
+ },
+ "model_4999.pt": {
+  "rpm": 9.46521282196045,
+  "rpm_std": 1.1184425354003906,
+  "ra": 73.34545850753784,
+  "dfsr": 67.1875,
+  "dc": 0.375,
+  "checkpoint": "model_4999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-rotlin-v0",
+  "perturb": false
  }
 }

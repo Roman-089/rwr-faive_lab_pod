@@ -1,13 +1,3 @@
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
   warnings.warn(
 --------------------------------------------------------------------------------
 Resolved observation sets: 
@@ -36,5 +26,15 @@ Critic MLP: MLP(
   (7): ELU(alpha=1.0)
   (8): Linear(in_features=128, out_features=1, bias=True)
 )
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_1000.pt: {'rpm': 9.578524589538574, 'rpm_std': 1.6312165260314941, 'ra': 67.54276752471924, 'dfsr': 51.5625, 'dc': 0.78125, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': False}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_2000.pt: {'rpm': 9.633962631225586, 'rpm_std': 1.597710132598877, 'ra': 71.94787263870239, 'dfsr': 64.0625, 'dc': 0.4375, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': False}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_1000.pt: {'rpm': 9.020401000976562, 'rpm_std': 2.7253847122192383, 'ra': 57.96099901199341, 'dfsr': 39.0625, 'dc': 1.46875, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_2000.pt: {'rpm': 9.763921737670898, 'rpm_std': 2.639256000518799, 'ra': 63.5850191116333, 'dfsr': 34.375, 'dc': 1.234375, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_3000.pt: {'rpm': 8.803606033325195, 'rpm_std': 2.2237746715545654, 'ra': 59.01578068733215, 'dfsr': 32.8125, 'dc': 1.546875, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_4000.pt: {'rpm': 9.072830200195312, 'rpm_std': 2.6909515857696533, 'ra': 60.52992343902588, 'dfsr': 46.875, 'dc': 1.078125, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/model_4999.pt: {'rpm': 8.756613731384277, 'rpm_std': 2.7146430015563965, 'ra': 59.12724733352661, 'dfsr': 26.5625, 'dc': 1.640625, 'checkpoint': 'model_4999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
+[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_21-08-48_abl_B_rotlin_ent5e-3_env16k_r6k/eval/metrics_perturbed.json
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
+frame 400/600
