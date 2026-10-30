@@ -160,6 +160,13 @@ Evidence so far: entropy 5e-3 learns ~2.5× faster, final speed within noise of 
 `abl_B_onedir_droppen_ent5e-3_anneal0` (resume model_4999 with entropy 0 for 2k: does the std come down and the
 deterministic policy improve). If either wins, the remedy is an entropy schedule (5e-3 early, 0 late), or a std cap.
 
+Training curve vs eval of `abl_B_onedir_droppen_ent5e-3` (job 29849218): as the std passed ~3 (iteration 2500 →
+4000), the training drop rate rose 0.29 → 0.51 and the training rotation reward fell 70.9 → 66.9, while the
+deterministic eval kept getting faster (13.7 → 15.2 → 15.6 → 16.4 RPM at 2000 / 3000 / 4000 / 4999) at a flat
+drop-free rate (61–64 %). So past std ~3 the training curves mostly measure the noise, not the policy; judge onedir runs
+by their eval. `_clip4` reached std 4.2 by iteration 1800 (training rotation reward 74 → 65, one dip to 37 at 1400):
+watched, not killed, its eval decides.
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;
