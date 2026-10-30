@@ -105,3 +105,10 @@ Nominal rollouts of 10 policies (B, B seed1, ent5e-3, C, teacher, RMA s1/s2, his
 **Verdict:** a grasp cache (HORA / LEAP) would mostly fix a sim-only failure. It is not where speed or real-robot
 endurance is lost; deprioritized. Cheaper: report a steady-state DFSR (ignoring drops in the first ~1 s after a spawn)
 so the sim metric matches the demo, and revisit a gentler reset only if training-time drops stay high.
+
+**Training-time overrides in the eval (fixed 2026-10-30).** `eval_policy.py` builds the policy from the task's
+registered cfgs, so hydra overrides used in training were lost: `abl_B_rotlin_ent5e-3_big` (actor/critic
+1024-1024-512-256) failed to load, and an `env.actions.joint_pos.alpha=0.5` run would have been evaluated at α 0.2.
+The eval now reads `*hidden_dims` from the run's `params/agent.yaml` and `alpha` / `delta_scale` of the action term from
+`params/env.yaml` (printed as `[eval] from the run's params: ...`). Reward overrides need nothing: rewards are not
+part of the metrics.
