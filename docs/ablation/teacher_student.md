@@ -163,6 +163,21 @@ Students distill from the teacher's `model_9999`.
   checkpoints (86 vs 97 %), so 1500 vs 1999 is noise; the speed plateaus from 1000 on, so again the teacher limits it.
   This confirms the teacher → student path on the new reward and motivates the demo-reward teacher below.
 
+- **2026-10-30 07:15 — LSTM student on rotlin (`student_lstm_rotlin_r6k`, pod)**, from the same teacher, nominal /
+  perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 500 | 7.93 / 7.23 | 60.1 / 49.0 | 70 / 30 | 0.39 / 1.55 |
+  | 1000 | 6.89 / 8.92 | 57.3 / 62.3 | 73 / 53 | 0.34 / 1.00 |
+  | 1500 | 10.96 / 8.90 | 78.2 / 58.6 | 81 / 47 | 0.19 / 1.20 |
+  | 1999 | **10.76** / 9.68 | 77.6 / 64.9 | **91** / 52 | 0.14 / 0.86 |
+
+  Same end point as the transformer student (10.90 / 86 %, perturbed 9.81 / 56 %, DC 0.64): the two are equal within
+  eval noise. The LSTM learns more slowly (7–8 RPM at 500–1000 vs 9.5–10.7) and is less robust in the perturbed eval at
+  matched checkpoints (DC 0.86–1.20 vs 0.50–0.64). Its exported form also needs the hidden-state reset handled on the
+  robot (see export.md); the transformer only needs its 10-step history buffer.
+
 ### Demo-reward teacher (queued 2026-10-30)
 
 `teacher_onedir_droppen_ent5e-3` (`-teacher-onedir-droppen-v0`): the rotlin teacher beat its deployable PPO
