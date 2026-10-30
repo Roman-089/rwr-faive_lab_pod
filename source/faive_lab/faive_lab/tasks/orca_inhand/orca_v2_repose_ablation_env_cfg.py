@@ -301,6 +301,32 @@ class OrcaV2ReposeTeacherRotLinHist10EnvCfg(OrcaV2ReposeTeacherRotLinEnvCfg):
         self.observations.policy.history_length = 10
 
 
+def use_onedir_reward(env_cfg: OrcaV2ReposeEnvCfg):
+    """-onedir: fixed +z command and a linear speed reward clipped at 3 rad/s (see OrcaV2ReposeAsymOneDirEnvCfg)."""
+    c = env_cfg.commands.continuous_rotation
+    env_cfg.commands.continuous_rotation = FixedDirectionRotationCommandCfg(
+        asset_name=c.asset_name,
+        init_pos_offset=c.init_pos_offset,
+        angular_vel_range=c.angular_vel_range,
+        angular_vel_magnitude_threshold=c.angular_vel_magnitude_threshold,
+        angular_vel_direction_threshold=c.angular_vel_direction_threshold,
+        position_success_threshold=c.position_success_threshold,
+        resampling_time_range=c.resampling_time_range,
+        direction=1.0,
+    )
+    cmd = {"command_name": "continuous_rotation", "object_cfg": SceneEntityCfg("object")}
+    env_cfg.rewards.angular_velocity_direction = None
+    env_cfg.rewards.angular_velocity_magnitude = None
+    env_cfg.rewards.rotation_progress = RewTerm(
+        func=rewards_ablation.rotation_progress_linear,
+        weight=90.0,
+        params={**cmd, "ref_speed": 1.5, "min_vel": -0.5, "max_vel": 3.0},
+    )
+    env_cfg.rewards.off_axis_angular_velocity = RewTerm(
+        func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
+    )
+
+
 @configclass
 class OrcaV2ReposeAsymOneDirEnvCfg(OrcaV2ReposeAsymEnvCfg):
     """B for the demo metric (fast, long, no drop): always +z at 1.5 rad/s, reward linear in speed clipped at 3 rad/s.
@@ -313,28 +339,7 @@ class OrcaV2ReposeAsymOneDirEnvCfg(OrcaV2ReposeAsymEnvCfg):
 
     def __post_init__(self):
         super().__post_init__()
-        c = self.commands.continuous_rotation
-        self.commands.continuous_rotation = FixedDirectionRotationCommandCfg(
-            asset_name=c.asset_name,
-            init_pos_offset=c.init_pos_offset,
-            angular_vel_range=c.angular_vel_range,
-            angular_vel_magnitude_threshold=c.angular_vel_magnitude_threshold,
-            angular_vel_direction_threshold=c.angular_vel_direction_threshold,
-            position_success_threshold=c.position_success_threshold,
-            resampling_time_range=c.resampling_time_range,
-            direction=1.0,
-        )
-        cmd = {"command_name": "continuous_rotation", "object_cfg": SceneEntityCfg("object")}
-        self.rewards.angular_velocity_direction = None
-        self.rewards.angular_velocity_magnitude = None
-        self.rewards.rotation_progress = RewTerm(
-            func=rewards_ablation.rotation_progress_linear,
-            weight=90.0,
-            params={**cmd, "ref_speed": 1.5, "min_vel": -0.5, "max_vel": 3.0},
-        )
-        self.rewards.off_axis_angular_velocity = RewTerm(
-            func=rewards_ablation.off_axis_angular_velocity_l1, weight=-5.0, params=cmd
-        )
+        use_onedir_reward(self)
 
 
 @configclass
@@ -395,6 +400,33 @@ class OrcaV2ReposeAsymOneDirDropPenEnvCfg(OrcaV2ReposeAsymOneDirEnvCfg):
         self.rewards.object_drop = RewTerm(
             func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
         )
+
+
+def add_drop_penalty(env_cfg: OrcaV2ReposeEnvCfg):
+    """-droppen: -2000 per-step weight on the drop termination (-100 return at dt = 1/20 s)."""
+    env_cfg.rewards.object_drop = RewTerm(
+        func=mdp.is_terminated_term, weight=-2000.0, params={"term_keys": "object_dropped"}
+    )
+
+
+@configclass
+class OrcaV2ReposeTeacherOneDirDropPenEnvCfg(OrcaV2ReposeTeacherEnvCfg):
+    """Privileged teacher on the demo reward (-onedir + -droppen): on rotlin the teacher beat B by 1.5 RPM and 11 points
+    drop-free, so distilling this one is the path to a deployable demo policy. NOT deployable itself."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        use_onedir_reward(self)
+        add_drop_penalty(self)
+
+
+@configclass
+class OrcaV2ReposeTeacherOneDirDropPenHist10EnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
+    """-teacher-onedir-droppen env with the 10-step noisy ``policy`` history (MLP-h10 / transformer students)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
 
 
 @configclass

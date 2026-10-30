@@ -104,6 +104,14 @@ for _task_id, _env_cfg, _runner_cfg in (
     ("orca-v2-inhand-repose-student-mlp-h10-rotlin-v0", "OrcaV2ReposeTeacherRotLinHist10EnvCfg",
      "DistillationRunnerCfgOrcaV2"),
     ("orca-v2-inhand-repose-student-lstm-rotlin-v0", "OrcaV2ReposeTeacherRotLinEnvCfg", "DistillationRunnerCfgOrcaV2LSTM"),
+    # and on the demo reward (-onedir + -droppen; the eval commands +z only for "-onedir" tasks)
+    ("orca-v2-inhand-repose-teacher-onedir-droppen-v0", "OrcaV2ReposeTeacherOneDirDropPenEnvCfg", "PPORunnerCfgOrcaV2Teacher"),
+    ("orca-v2-inhand-repose-student-pt-onedir-droppen-v0", "OrcaV2ReposeTeacherOneDirDropPenHist10EnvCfg",
+     "DistillationRunnerCfgOrcaV2Transformer"),
+    ("orca-v2-inhand-repose-student-mlp-h10-onedir-droppen-v0", "OrcaV2ReposeTeacherOneDirDropPenHist10EnvCfg",
+     "DistillationRunnerCfgOrcaV2"),
+    ("orca-v2-inhand-repose-student-lstm-onedir-droppen-v0", "OrcaV2ReposeTeacherOneDirDropPenEnvCfg",
+     "DistillationRunnerCfgOrcaV2LSTM"),
 ):
     gym.register(
         id=_task_id,
