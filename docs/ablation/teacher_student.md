@@ -178,6 +178,31 @@ Students distill from the teacher's `model_9999`.
   matched checkpoints (DC 0.86–1.20 vs 0.50–0.64). Its exported form also needs the hidden-state reset handled on the
   robot (see export.md); the transformer only needs its 10-step history buffer.
 
+- **2026-10-30 07:35 — MLP-h10 student on rotlin (`student_mlp_h10_rotlin_r6k`, pod)**, nominal / perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 500 | 9.64 / 9.30 | 71.6 / 62.0 | 73 / 50 | 0.33 / 0.92 |
+  | 1000 | 10.86 / 9.77 | 77.8 / 64.9 | 88 / 50 | 0.16 / 0.84 |
+  | 1500 | 10.83 / 9.62 | 78.1 / 64.0 | 91 / 55 | 0.12 / 0.72 |
+  | 1999 | **11.09** / 9.96 | 78.6 / 65.0 | 81 / 50 | 0.27 / 0.69 |
+
+- **Student comparison on rotlin** (same teacher, model_5999). Single checkpoints move by ±5–10 points of DFSR, so this
+  averages the last three (1000 / 1500 / 1999):
+
+  | Student | nominal RPM | nominal DFSR % | nominal DC | perturbed RPM | perturbed DFSR % | perturbed DC |
+  |---|---|---|---|---|---|---|
+  | **transformer** (`student_pt_rotlin`) | 10.83 | **91** | **0.10** | **10.03** | **60** | **0.59** |
+  | MLP on 10-step history | **10.93** | 87 | 0.18 | 9.78 | 52 | 0.75 |
+  | LSTM | 9.54 | 82 | 0.22 | 9.17 | 51 | 1.02 |
+  | teacher (privileged, model_5999 only) | 11.85 | 95 | 0.05 | 10.52 | 69 | 0.56 |
+
+  **Decision (Isaac):** the transformer student is the deployable rotlin policy. Same speed as the MLP-h10 student,
+  fewer drops nominally, and the most robust under the perturbed eval (60 vs 51–52 % drop-free, DC 0.59 vs 0.75–1.02).
+  This matches the paper's motivation for the transformer + reconstruction loss (arXiv 2605.21330). Its export
+  (`exported/policy_history.pt`, model_1999) passed the bit-exact self-check. Students from the demo-reward teacher:
+  transformer first. Re-distillation from the 10k rotlin teacher is queued on the pod if that teacher improves.
+
 ### Demo-reward teacher (queued 2026-10-30)
 
 `teacher_onedir_droppen_ent5e-3` (`-teacher-onedir-droppen-v0`): the rotlin teacher beat its deployable PPO
