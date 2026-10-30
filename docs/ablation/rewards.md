@@ -303,3 +303,11 @@ reward (10.33 RPM, two seeds) but drops to ~45 % drop-free under the perturbed e
 renders. The weight is a first guess (aim: penalty ≈ 10–20 % of the rotation reward); check
 `Episode_Reward/joint_work` against `rotation_progress` in the first iterations and rescale if it dominates or vanishes.
 Expected result if it works: slightly lower nominal RPM, higher perturbed drop-free rate.
+
+**Result at −1.5 (job 29851888, killed at iteration 467):** the term started at 2× the rotation reward (−3.9 vs 1.7
+per episode-second) and the policy learned to let the cube drop: 100 % of episodes ended in a drop, rotation reward 1.7
+where rotlin had 25 at iteration 500, and the work term shrank to −0.6 because the episodes got short. rotlin has no
+drop penalty, so ending the episode early is the cheapest way to stop paying a per-step cost (the usual trap of
+negative per-step rewards with early termination). Rerun at **−0.15** (`abl_B_rotlin_work015`, job 29851938): ~1/5 of
+the rotation reward at the start, shrinking as the policy rotates. If that run still collapses, the next step is to
+combine it with the drop penalty instead of shrinking it further.
