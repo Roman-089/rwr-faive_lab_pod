@@ -118,6 +118,25 @@ gradient over larger mini-batches, while the number of policy updates (and so th
 same. **Decision: keep 8192 envs.** If the pod has spare capacity, a third concurrent run beats a bigger one; 16384
 would only be worth retrying with more mini-batches (same mini-batch size) or more epochs.
 
+### 4× wider MLPs (2026-10-30)
+
+`abl_B_rotlin_ent5e-3_big`: actor and critic `[1024, 1024, 512, 256]`, otherwise as `abl_B_rotlin_ent5e-3`. Its first
+eval loaded the default-size network and failed; `eval_policy.py` now rebuilds the network from the run's
+`params/agent.yaml` (re-eval job 29852090). Nominal / perturbed:
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 11.07 / 11.97 | 68.3 / 63.7 | 45 / 27 | 1.08 / 2.59 |
+| 2000 | **11.53** / 12.05 | 71.6 / 65.6 | 72 / 42 | 0.42 / 1.11 |
+| 3000 | 10.48 / 10.98 | 73.6 / 66.9 | 67 / 47 | 0.38 / 1.12 |
+| 4000 | 10.11 / 10.91 | 75.3 / 67.1 | 88 / 55 | 0.14 / 0.97 |
+| 4999 | 10.08 / 10.97 | 72.1 / 67.2 | 78 / 62 | 0.27 / 0.59 |
+| default size (`abl_B_rotlin_ent5e-3`), 4999 | 9.50 / 10.43 | 76.1 / 70.8 | 81 / 58 | 0.27 / 1.00 |
+
++0.6 RPM at the end (inside the ±0.7 seed spread), same drop-free rate, slightly fewer perturbed drops (DC 0.59 vs
+1.00). It is faster early (11.1–11.5 RPM at 1000–2000) and then trades speed for fewer drops, which the default net does
+from the start. **Capacity is not the bottleneck**; not worth the 2–3× slower training and inference. Keep the default.
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;
