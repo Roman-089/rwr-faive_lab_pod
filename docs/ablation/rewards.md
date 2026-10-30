@@ -494,3 +494,13 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   baseline 15.3 / 54 % / 0.99 / 18 %: +15 points drop-free, like smoothness ×10 (70 %). Cube motion (model_4999): tilt
   31° mean, 129 face changes / min, wrist 1.00 rad / 1.64 rad/s: still tumbling. Not ported to default entropy for now:
   default entropy already removed most spin-up drops, and the tumbling fix (tilt penalty) comes first.
+- **Cube position ×3 (`abl_B_onedir_droppen_pos45_ent5e-3`, job 29852803)**, entropy 5e-3, nominal / perturbed: 1000
+  10.41 / 10.37 RPM, 72 / 38 % · 2000 12.32 / 12.07, 80 / 41 % · 3000 13.06 / 13.26, **91** / 48 % · 4000 12.73 / 14.01, 86 / 48 %
+  · 4999 12.59 / 13.77, 86 / 50 %, DC 0.14 / 0.97. Last-3 mean **12.8 RPM, 88 % drop-free, DC 0.15, perturbed 49 % / DC
+  1.07** vs the entropy-5e-3 baseline 15.3 / 54 % / 0.99 / 18 %. Cube motion (`cube_motion.py`, model_4999): tilt 16° mean /
+  25° p90, **3.7 face changes / min** (baseline 106), wrist 0.42 rad / 0.75 rad/s (baseline 1.34 / 1.97). Keeping the cube
+  at the palm centre (σ 2 cm, weight 45) removes the tumbling and most of the wrist swing on its own, and is by far the
+  most robust +z policy under the perturbed eval (2.7× the baseline's drop-free rate), at −2.5 RPM. Against the clean
+  bidirectional rotlin student (10.9 RPM, 86–91 %, perturbed 56–60 %, 7° tilt): faster at a similar drop-free rate.
+  Follow-ups on default entropy: `abl_B_onedir_droppen_pos45_ent1e-4` and with the tilt penalty
+  `abl_B_onedir_droppen_upright_pos45_ent1e-4` (L40S top of queue + pod first).
