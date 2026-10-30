@@ -1,14 +1,3 @@
-  warnings.warn(
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
---------------------------------------------------------------------------------
-Resolved observation sets: 
-	 policy :  ['policy']
-	 critic :  ['critic']
---------------------------------------------------------------------------------
-Actor MLP: MLP(
-  (0): Linear(in_features=74, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
   (2): Linear(in_features=512, out_features=512, bias=True)
   (3): ELU(alpha=1.0)
   (4): Linear(in_features=512, out_features=256, bias=True)
@@ -38,3 +27,14 @@ Critic MLP: MLP(
 frame 0/600
 frame 100/600
 frame 200/600
+frame 300/600
+frame 400/600
+frame 500/600
+wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_2500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
+frame 400/600
+frame 500/600
