@@ -292,3 +292,14 @@ clip version (pod, 14 % training drops) decides the demo setting.
 - Then rotlin + drop penalty, position / velocity variant, HORA work / torque penalties if rotlin is jerky.
 - Re-check drop timing on B's rollout.
 - Grasp-cache resets (HORA `gen_grasp.py` + `cache/`; LEAP_Hand_Sim grasp cache per cube size): deprioritized, see log.
+
+## Work penalty
+
+`abl_B_rotlin_work` (`-asym-rotlin-work-v0`, 2026-10-30): rotlin plus HORA's work term (Qi et al. 2022,
+arXiv 2210.04887), `rewards_ablation.joint_work_l1` = Σ|τᵢ·q̇ᵢ| over the 17 joints, weight −1.5. τ is the
+implicit PD drive's `applied_torque` (≤ 0.66 / 0.78 / 1.29 Nm for abd / mcp / pip). HORA uses it, together with a
+torque penalty, to get smooth finger gaits that transfer to hardware. Motivation: rotlin is our fastest deployable
+reward (10.33 RPM, two seeds) but drops to ~45 % drop-free under the perturbed eval and its gait looks wobbly in the
+renders. The weight is a first guess (aim: penalty ≈ 10–20 % of the rotation reward); check
+`Episode_Reward/joint_work` against `rotation_progress` in the first iterations and rescale if it dominates or vanishes.
+Expected result if it works: slightly lower nominal RPM, higher perturbed drop-free rate.

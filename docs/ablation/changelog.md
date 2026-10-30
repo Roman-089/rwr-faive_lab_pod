@@ -75,3 +75,4 @@ full entries live in the linked topic files.
 | 2026-10-30 | **rotlin replicated**: seed 1 10.25 RPM / 83 % (seed 0 10.41 / 84 %), mean 10.33 vs B 5.45; perturbed weakness replicates too; MLP student running on the pod | [rewards](rewards.md) |
 | 2026-10-30 | onedir + drop penalty (3 rad/s): **16.41 RPM**, 63 % drop-free (without penalty 15.19 / 44 %): penalty halves drops, still too droppy; 2 rad/s version pending; rotlin_hist3 running | [rewards](rewards.md) |
 | 2026-10-30 | big (1024-wide) eval failed: eval_policy ignored training-time overrides; it now rebuilds network sizes / action settings from the run's params; re-eval queued | [eval protocol](eval_protocol.md) |
+| 2026-10-30 | queued: rotlin + HORA work penalty (`-asym-rotlin-work-v0`, L40S) against rotlin's weak perturbed eval / wobbly gait | [rewards](rewards.md#work-penalty) |
