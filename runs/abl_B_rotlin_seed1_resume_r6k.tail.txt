@@ -1,15 +1,3 @@
-)
-Critic MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=1, bias=True)
-)
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_2500.pt: {'rpm': 10.49000072479248, 'rpm_std': 2.638613700866699, 'ra': 70.58587074279785, 'dfsr': 46.875, 'dc': 0.921875, 'checkpoint': 'model_2500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_3000.pt: {'rpm': 10.969101905822754, 'rpm_std': 3.0093910694122314, 'ra': 71.48465514183044, 'dfsr': 50.0, 'dc': 1.015625, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_3500.pt: {'rpm': 10.298497200012207, 'rpm_std': 2.998272657394409, 'ra': 68.14534068107605, 'dfsr': 45.3125, 'dc': 1.140625, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
@@ -38,3 +26,15 @@ frame 100/600
 frame 200/600
 frame 300/600
 frame 400/600
+frame 500/600
+wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_3500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
+frame 400/600
+frame 500/600
+wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_4000.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
