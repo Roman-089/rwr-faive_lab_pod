@@ -1,0 +1,15 @@
+{
+ "model_0.pt": {
+  "rpm": -0.2223021686077118,
+  "rpm_std": 1.328857660293579,
+  "ra": 7.111923396587372,
+  "dfsr": 21.875,
+  "dc": 4.125,
+  "checkpoint": "model_0.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-mlp-h10-rotlin-v0",
+  "perturb": true
+ }
+}
