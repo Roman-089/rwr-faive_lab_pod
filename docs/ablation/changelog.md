@@ -106,3 +106,4 @@ full entries live in the linked topic files.
 | 2026-10-30 17:05 | cap 4 rad/s: 16.0 RPM / 50 % (last-3 mean) vs cap-3 baseline 15.3 / 54 %: steady-state speed unchanged (1.73 rad/s) → speed limited by the dynamics, keep cap 3 | [rewards](rewards.md) |
 | 2026-10-30 17:50 | onedir transformer student (teacher model_4500): 14.1 RPM / 46 % (last-3 mean) vs teacher 16.0 / 81 % and B 15.3 / 54 %: keeps the speed, loses the drop avoidance (imitation gap); behavior loss 2.6 vs 1.3 on rotlin | [teacher-student](teacher_student.md) |
 | 2026-10-30 18:15 | **cube smoothness ×10 on +z: 15.0 RPM / 70 % drop-free** (last-3 mean) vs baseline 15.3 / 54 %, perturbed drops halved → first clear +z win; seed 1 and ×30 queued | [rewards](rewards.md) |
+| 2026-10-30 18:30 | queued a privileged +z teacher with cube smoothness ×10 (A100), merging the first +z win into the teacher→student path | [teacher-student](teacher_student.md) |
