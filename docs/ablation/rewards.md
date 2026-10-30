@@ -426,3 +426,10 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   this: the 3× penalty (14.5 / 54 %) is inside the spread, and the onedir teacher (15.5 / 74 %) is ~20 points more
   drop-free. Seed 1's drop-free rate also falls during training (67 → 41 %) as the noise std rises, the third run with
   that pattern. Seed 2 (A10) is running.
+- **Baseline seed 0 trained to 10k (`abl_B_onedir_droppen_ent5e-3_cont10k`, job 29852088)**, nominal / perturbed: 6000
+  16.47 / 13.91 RPM, 59 / 14 % · 7000 16.52 / 14.12, 48 / 11 % · 8000 **17.05** / 13.30, 53 / 13 % · 9000 16.73 / 13.69,
+  53 / 9 % · 9998 16.88 / 14.22, 59 / 14 %, DC 0.70 / 3.41. Last-3 mean 16.9 RPM / 55 % / DC 0.72 vs 15.7 / 61 % / 0.77
+  for the same seed at 5k: +1.2 RPM (the fastest policy so far, 17.0 RPM at 8000), the same drop-free rate within seed
+  noise, and more fragile under perturbation (12 vs 21 % drop-free). Unlike rotlin (10k: +0.4 RPM, +6 points
+  drop-free) the onedir line gets faster, not safer, with more training. The wrist motion is unchanged (range 1.38 vs
+  1.34 rad, mean |q̇| 2.06 vs 1.97 rad/s), so the extra speed is not more wrist swing.
