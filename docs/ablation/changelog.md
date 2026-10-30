@@ -89,3 +89,4 @@ full entries live in the linked topic files.
 | 2026-10-30 09:30 | 16384 envs (rotlin ent 5e-3, same PPO settings): 9.47 RPM / 67 % (perturbed 27 %) vs 9.50 / 81 % (58 %) at 8192 → keep 8192 | [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-30 09:55 | 2× wider MLPs (~4× parameters, re-eval): 10.08 RPM / 78 % (perturbed 10.97 / 62 %) vs 9.50 / 81 % (10.43 / 58 %) at default size: within seed noise → capacity is not the bottleneck | [PPO / capacity](ppo_and_capacity.md) |
 | 2026-10-30 10:05 | rotlin + 3-step history: 10.49 RPM / 81 % (perturbed 34 %) = rotlin, no robustness gain → no history for onedir; cube position ×3 moved to the freed L40S | [history](history_and_memory.md) |
+| 2026-10-30 10:10 | queued third seed of the onedir baseline (A10) to judge the single-knob variants against seed spread | [README](README.md) |
