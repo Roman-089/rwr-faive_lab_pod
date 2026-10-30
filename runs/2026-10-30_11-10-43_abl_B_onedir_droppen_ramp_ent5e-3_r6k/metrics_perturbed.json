@@ -1,0 +1,15 @@
+{
+ "model_1000.pt": {
+  "rpm": 12.377962112426758,
+  "rpm_std": 2.4363698959350586,
+  "ra": 64.51078057289124,
+  "dfsr": 32.8125,
+  "dc": 1.515625,
+  "checkpoint": "model_1000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": true
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "model_1000.pt": {
+  "rpm": 12.263106346130371,
+  "rpm_std": 1.9220199584960938,
+  "ra": 72.07369804382324,
+  "dfsr": 68.75,
+  "dc": 0.40625,
+  "checkpoint": "model_1000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": false
+ },
+ "model_2000.pt": {
+  "rpm": 15.157997131347656,
+  "rpm_std": 3.2185182571411133,
+  "ra": 81.83095455169678,
+  "dfsr": 64.0625,
+  "dc": 0.546875,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": false
+ },
+ "model_3000.pt": {
+  "rpm": 16.017257690429688,
+  "rpm_std": 2.411970853805542,
+  "ra": 84.83456373214722,
+  "dfsr": 67.1875,
+  "dc": 0.46875,
+  "checkpoint": "model_3000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": false
+ },
+ "model_4000.pt": {
+  "rpm": 16.211095809936523,
+  "rpm_std": 2.341197967529297,
+  "ra": 85.45209169387817,
+  "dfsr": 75.0,
+  "dc": 0.359375,
+  "checkpoint": "model_4000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": false
+ },
+ "model_4999.pt": {
+  "rpm": 15.916315078735352,
+  "rpm_std": 2.4780006408691406,
+  "ra": 84.81152057647705,
+  "dfsr": 65.625,
+  "dc": 0.4375,
+  "checkpoint": "model_4999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-ramp-v0",
+  "perturb": false
+ }
+}
