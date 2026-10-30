@@ -1,40 +1,40 @@
-                   Total timesteps: 765198336
-                    Iteration time: 4.33s
-                      Time elapsed: 05:19:36
-                               ETA: 00:08:57
-
-################################################################################
-                     [1m Learning iteration 9891/9999 [0m                     
-
-                       Computation: 46233 steps/s (collection: 4.062s, learning 0.191s)
-             Mean action noise std: 3.12
-          Mean value_function loss: 430.6665
-               Mean surrogate loss: -0.0031
-                 Mean entropy loss: 43.1954
-                       Mean reward: 1191.88
-               Mean episode length: 581.34
-Episode_Reward/object_position_tracking: 3.6940
-Episode_Reward/angular_acceleration: 0.1589
-       Episode_Reward/joint_vel_l2: -0.0006
-          Episode_Reward/action_l2: -1.0864
-     Episode_Reward/action_rate_l2: -22.7272
-  Episode_Reward/rotation_progress: 65.2079
-Episode_Reward/off_axis_angular_velocity: -5.4473
-Metrics/continuous_rotation/position_error: 0.0393
-Metrics/continuous_rotation/current_angular_speed: 3.7482
-Metrics/continuous_rotation/target_angular_speed: 1.1980
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 2.5502
-Metrics/continuous_rotation/angular_velocity_error: 3.5701
-Metrics/continuous_rotation/angular_velocity_alignment: 0.4212
-Metrics/continuous_rotation/consecutive_success: 0.1444
-Metrics/continuous_rotation/total_success: 66.5244
-Metrics/continuous_rotation/vertical_drift: 0.0284
-Metrics/continuous_rotation/linear_speed: 0.1544
-      Episode_Termination/time_out: 0.9264
-Episode_Termination/object_dropped: 0.0736
+[replay] link /World/envs/env_0/Robot/right_ring_ap: 71214 verts, 23738 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_tp: 42630 verts, 14210 tris
+[replay] link /World/envs/env_0/Robot/right_index_pp: 74442 verts, 24814 tris
+[replay] link /World/envs/env_0/Robot/right_middle_pp: 69762 verts, 23254 tris
+[replay] link /World/envs/env_0/Robot/right_pinky_pp: 81168 verts, 27056 tris
+[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
+[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
+[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
+[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
 --------------------------------------------------------------------------------
-                   Total timesteps: 765394944
-                    Iteration time: 4.25s
-                      Time elapsed: 05:19:41
-                               ETA: 00:08:52
-
+Resolved observation sets: 
+	 policy :  ['teacher']
+	 critic :  ['teacher']
+--------------------------------------------------------------------------------
+Actor MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+Critic MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=1, bias=True)
+)
