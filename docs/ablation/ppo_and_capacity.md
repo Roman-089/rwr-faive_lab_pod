@@ -167,6 +167,27 @@ drop-free rate (61–64 %). So past std ~3 the training curves mostly measure th
 by their eval. `_clip4` reached std 4.2 by iteration 1800 (training rotation reward 74 → 65, one dip to 37 at 1400):
 watched, not killed, its eval decides.
 
+### Result: default entropy on +z (2026-10-30 18:30)
+
+`abl_B_onedir_droppen_ent1e-4_r6k` (pod, W&B qn0pkisu), the same config as the onedir baseline but with the default
+entropy 1e-4 (std 1.5 → 0.47 by the end), nominal / perturbed:
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 13.98 / 14.69 | 78.1 / 71.2 | 75 / 27 | 0.27 / 2.27 |
+| 2000 | 15.01 / 15.33 | 83.2 / 76.9 | 81 / 17 | 0.39 / 2.45 |
+| 3000 | 17.14 / 15.87 | 87.4 / 78.9 | 72 / 27 | 0.50 / 2.12 |
+| 4000 | **17.79** / 15.67 | **90.1** / 78.1 | 77 / 22 | 0.31 / 2.61 |
+| 4999 | 17.66 / 15.39 | 89.9 / 78.3 | **80** / 36 | 0.30 / 1.91 |
+
+Mean of the last three: **17.5 RPM, RA 89 %, 76 % drop-free, DC 0.37, perturbed 28 % / DC 2.2**, vs the entropy-5e-3
+baseline (two seeds) 15.3 RPM, ~79 %, 54 %, 0.99, perturbed 18 % / ~3.8. Faster, more accurate and much safer at once;
+its drop-free rate does not decay over training. The entropy-5e-3 bonus (std 3–4, ~75 % of action samples clamped) was
+the main thing holding the +z line back. On rotlin the same bonus was harmless (9.50 vs 10.33 RPM, within noise), so the
+harm is specific to the faster onedir gait. **Decision: every new +z run uses the default entropy.** Not-started
+entropy-5e-3 runs were cancelled / replaced (2026-10-30 18:30); running ones (cube position ×3, work penalty, speed
+ramp, the wrist-penalty teacher) finish as single-knob tests on the old baseline.
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;
