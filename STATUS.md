@@ -1,11 +1,11 @@
-# remote queue status (2026-10-30T10:11:34Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 97 %, 33356 MiB)
+# remote queue status (2026-10-30T10:29:12Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 83 %, 33358 MiB)
 abl_B_droppen_seed1_r6k moved_resume Learning iteration 2123/5000
 abl_B_droppen_seed1_resume_r6k done Learning iteration 4999/5000
-abl_B_onedir_droppen6k_ent5e-3_r6k running Learning iteration 2681/5000
-abl_B_onedir_droppen_acc10_ent5e-3_r6k running Learning iteration 718/5000
+abl_B_onedir_droppen6k_ent5e-3_r6k running Learning iteration 2876/5000
+abl_B_onedir_droppen_acc10_ent5e-3_r6k running Learning iteration 909/5000
 abl_B_onedir_droppen_clip2_ent5e-3_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_clip4_ent5e-3_r6k skipped_dtu 
-abl_B_onedir_droppen_ent1e-4_r6k running Learning iteration 407/5000
+abl_B_onedir_droppen_ent1e-4_r6k running Learning iteration 604/5000
 abl_B_onedir_droppen_ent5e-3_seed1_r6k skipped_dtu 
 abl_B_onedir_droppen_pos45_ent5e-3_r6k skipped_dtu 
 abl_B_rotlin_ent1e-2_r6k skipped_dtu 
@@ -21,4 +21,4 @@ student_mlp_h10_rotlin_r6k done Learning iteration 1999/2000
 student_pt_rotlin_r6k skipped_dtu 
 student_pt_rotlin_t10k_r6k dropped 
 teacher_onedir_droppen_ent5e-3_r6k skipped_dtu 
-teacher_rotlin_cont10k_r6k running Learning iteration 9525/9999
+teacher_rotlin_cont10k_r6k running Learning iteration 9739/9999
