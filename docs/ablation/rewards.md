@@ -312,6 +312,23 @@ negative per-step rewards with early termination). Rerun at **−0.15** (`abl_B_
 the rotation reward at the start, shrinking as the policy rotates. If that run still collapses, the next step is to
 combine it with the drop penalty instead of shrinking it further.
 
+**Result at −0.15 (`abl_B_rotlin_work015`, job 29851938), nominal / perturbed:**
+
+| ckpt | RPM | RA % | DFSR % | DC |
+|---|---|---|---|---|
+| 1000 | 5.58 / 6.95 | 47.8 / 48.0 | 67 / 38 | 0.39 / 1.27 |
+| 2000 | 6.57 / 7.80 | 53.6 / 52.9 | 86 / 44 | 0.16 / 0.80 |
+| 3000 | 7.57 / 8.62 | 58.6 / 57.0 | 88 / 61 | 0.19 / 0.67 |
+| 4000 | 10.12 / 9.88 | 69.1 / 61.1 | 88 / 61 | 0.16 / 0.73 |
+| 4999 | 10.02 / 10.32 | 69.2 / 61.8 | 86 / 47 | 0.14 / 0.89 |
+| `abl_B_rotlin` seed 0, 4999 | 10.41 / 11.07 | 74.0 / 67.8 | 84 / 44 | 0.22 / 1.09 |
+
+Same nominal speed and drop rate (10.0 vs 10.3–10.4 RPM), slower to learn (7.6 vs 9.6 RPM at 3000), slightly slower
+perturbed (10.3 vs 11.1–11.5) but more robust there: perturbed drop-free 61 / 61 / 47 % over the last three checkpoints
+(mean 56 %) vs 39 / 33 / 44 % for rotlin seed 0, DC 0.67–0.89 vs 1.03–1.52. One seed, so suggestive. Since +z is the
+line now and its weak point is the perturbed eval (19 % drop-free), the term is carried over:
+`abl_B_onedir_droppen_work015_ent5e-3` (`-asym-onedir-droppen-work-v0`, L40S + pod).
+
 ## Speed cap: 2 vs 3 rad/s on onedir + drop penalty (2026-10-30)
 
 Isaac eval, last checkpoint, nominal / perturbed (64 envs × 60 s):
