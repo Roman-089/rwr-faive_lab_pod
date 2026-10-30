@@ -137,6 +137,16 @@ Students distill from the teacher's `model_9999`.
   10.41) and as drop-free as the best student (95 %). The transformer / LSTM / MLP-h10 students distill from
   model_5999 (jobs 29848449 / 29850539 / 29850540).
 
+### Demo-reward teacher (queued 2026-10-30)
+
+`teacher_onedir_droppen_ent5e-3` (`-teacher-onedir-droppen-v0`): the rotlin teacher beat its deployable PPO
+counterpart B-rotlin by 1.5 RPM and 11 points drop-free (11.85 / 95 % vs 10.33 / 84 %), and the onedir + drop penalty
+B run is our fastest policy but still drops in 37 % of the 60 s episodes (16.41 RPM / 63 %). So the same privileged
+teacher on the demo reward (+z only, linear speed reward clipped at 3 rad/s, −2000 drop penalty) should give the best
+target to distill. Settings as `teacher_rotlin_ent5e-3` (entropy 5e-3, 6k iterations). The students reuse the
+rotlin pipeline: `-student-pt-onedir-droppen-v0` / `-student-mlp-h10-onedir-droppen-v0` (10-step history env) and
+`-student-lstm-onedir-droppen-v0`; which ones to run is decided from the rotlin students' Isaac eval.
+
 ## Conclusions so far
 
 - The privileged teacher (7.44 RPM, 94 % DFSR) is the best policy so far and still improving at 10k.

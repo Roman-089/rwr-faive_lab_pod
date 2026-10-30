@@ -76,3 +76,4 @@ full entries live in the linked topic files.
 | 2026-10-30 | onedir + drop penalty (3 rad/s): **16.41 RPM**, 63 % drop-free (without penalty 15.19 / 44 %): penalty halves drops, still too droppy; 2 rad/s version pending; rotlin_hist3 running | [rewards](rewards.md) |
 | 2026-10-30 | big (1024-wide) eval failed: eval_policy ignored training-time overrides; it now rebuilds network sizes / action settings from the run's params; re-eval queued | [eval protocol](eval_protocol.md) |
 | 2026-10-30 | queued: rotlin + HORA work penalty (`-asym-rotlin-work-v0`, L40S) against rotlin's weak perturbed eval / wobbly gait | [rewards](rewards.md#work-penalty) |
+| 2026-10-30 | queued: privileged teacher on the demo reward (onedir + drop penalty, ent 5e-3, 6k; DTU A100 + pod) to distill a deployable demo student; onedir reward factored into `use_onedir_reward()` | [teacher-student](teacher_student.md) |
