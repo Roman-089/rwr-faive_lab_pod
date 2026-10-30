@@ -1,40 +1,40 @@
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_2500.pt: {'rpm': 10.49000072479248, 'rpm_std': 2.638613700866699, 'ra': 70.58587074279785, 'dfsr': 46.875, 'dc': 0.921875, 'checkpoint': 'model_2500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_3000.pt: {'rpm': 10.969101905822754, 'rpm_std': 3.0093910694122314, 'ra': 71.48465514183044, 'dfsr': 50.0, 'dc': 1.015625, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_3500.pt: {'rpm': 10.298497200012207, 'rpm_std': 2.998272657394409, 'ra': 68.14534068107605, 'dfsr': 45.3125, 'dc': 1.140625, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_4000.pt: {'rpm': 10.990354537963867, 'rpm_std': 2.6798722743988037, 'ra': 70.09770274162292, 'dfsr': 42.1875, 'dc': 1.03125, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/model_4999.pt: {'rpm': 11.480276107788086, 'rpm_std': 3.0810611248016357, 'ra': 71.38843536376953, 'dfsr': 45.3125, 'dc': 1.078125, 'checkpoint': 'model_4999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-rotlin-v0', 'perturb': True}
-[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/metrics_perturbed.json
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_2500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_3000.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_3500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k/eval/model_4000.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
+wandb: setting up run 1jaodg4h
+wandb: Tracking run with wandb version 0.31.0
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261030_023439-1jaodg4h
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/1jaodg4h
+wandb: updating run metadata
+wandb: uploading media/videos/eval/video_03500_5001_a50863fcfe9689fbfe34.mp4; uploading media/videos/eval/video_04000_5002_03bfb91ccd57200eb7ad.mp4; uploading media/videos/eval/video_04999_5003_5bdd703e14ea7c1812a0.mp4; uploading wandb-summary.json; uploading wandb-metadata.json (+ 3 more)
+wandb: uploading media/videos/eval/video_03500_5001_a50863fcfe9689fbfe34.mp4; uploading media/videos/eval/video_04000_5002_03bfb91ccd57200eb7ad.mp4; uploading media/videos/eval/video_04999_5003_5bdd703e14ea7c1812a0.mp4; uploading media/videos/eval/video_02500_4999_0304769ff965545b5e4e.mp4; uploading media/videos/eval/video_03000_5000_d8beffcc249611c01eab.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc █▇▁▄▃
+wandb:           eval/dfsr ▅▁█▅█
+wandb:      eval/iteration ▁▂▄▅█
+wandb:             eval/ra ▃▁▆█▇
+wandb:            eval/rpm ▁▂▄▇█
+wandb:   eval_perturbed/dc ▁▄█▅▆
+wandb: eval_perturbed/dfsr ▅█▄▁▄
+wandb:   eval_perturbed/ra ▆█▁▅█
+wandb:  eval_perturbed/rpm ▂▅▁▅█
+wandb: 
+wandb: Run summary:
+wandb:                 Episode_Reward/action_l2 -0.01358
+wandb:            Episode_Reward/action_rate_l2 -1.46803
+wandb:      Episode_Reward/angular_acceleration 0.10224
+wandb:              Episode_Reward/joint_vel_l2 -0.00081
+wandb:  Episode_Reward/object_position_tracking 3.06718
+wandb: Episode_Reward/off_axis_angular_velocity -9.13965
+wandb:         Episode_Reward/rotation_progress 63.6365
+wandb:       Episode_Termination/object_dropped 0.15135
+wandb:             Episode_Termination/time_out 0.84877
+wandb:                             Loss/entropy 11.09411
+wandb:                                      +36 ...
+wandb: 
+wandb: 🚀 View run 2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/1jaodg4h
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261030_023439-1jaodg4h/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/1jaodg4h (2026-10-29_20-56-39_abl_B_rotlin_seed1_resume_r6k)
