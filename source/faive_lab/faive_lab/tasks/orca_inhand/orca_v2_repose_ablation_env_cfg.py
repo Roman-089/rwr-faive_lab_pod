@@ -471,6 +471,17 @@ class OrcaV2ReposeAsymOneDirDropPenWristPenEnvCfg(OrcaV2ReposeAsymOneDirDropPenE
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenWristFixEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """-onedir-droppen with the wrist not actuated (its PD drive holds the default position, 16-dim action), as
+    -wristfix-v0 for the old reward: the hard version of the wrist penalty, and the hardware setting of the PT paper
+    (arXiv 2605.21330: wrist unsensed, fixed at 0)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.actions.joint_pos.joint_names = ["(?!right_wrist).*"]
+
+
+@configclass
 class OrcaV2ReposeTeacherOneDirDropPenWristPenEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
     """Privileged onedir + drop-penalty teacher with the wrist velocity penalty: 742zn06f swings the wrist ~10x more
     than the rotlin policies, which may not exist on the real hand and may explain the poor MuJoCo transfer."""
