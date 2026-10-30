@@ -430,6 +430,17 @@ class OrcaV2ReposeTeacherOneDirDropPenHist10EnvCfg(OrcaV2ReposeTeacherOneDirDrop
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenRampEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """-onedir-droppen with a spin-up ramp on the speed clip: 0.5 -> 3 rad/s over the first 3 s of each episode. A third of
+    onedir-droppen's drops happen in the first 3 s, while the hand accelerates the cube from rest; the drop penalty
+    did not reduce them. Same cap after 3 s, so steady-state speed should be unchanged."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.rewards.rotation_progress.params.update(ramp_s=3.0, ramp_start_vel=0.5)
+
+
+@configclass
 class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
     """-asym-hist3 (3-step obs history MLP) on the -rotlin reward: the memory comparison so far was on the old reward."""
 

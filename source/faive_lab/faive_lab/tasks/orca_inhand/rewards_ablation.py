@@ -65,15 +65,25 @@ def rotation_progress_linear(
     ref_speed: float = 1.5,
     min_vel: float = -0.5,
     max_vel: float | None = None,
+    ramp_s: float = 0.0,
+    ramp_start_vel: float = 0.5,
 ) -> torch.Tensor:
     """clip(w . k, min_vel, max_vel) / ref_speed: linear in the speed about the target axis, independent of the commanded
     speed ("as fast as possible" up to ``max_vel``); ``ref_speed`` only sets the scale (1 at ref_speed).
 
     ``max_vel=None`` (no upper clip) is exploited: the policy flings the cube, which spins at ~30 rad/s while it falls,
-    and the short burst pays more than holding it (run 2026-10-29: 99.9 % drops, episodes of 2 s). Use a finite clip."""
+    and the short burst pays more than holding it (run 2026-10-29: 99.9 % drops, episodes of 2 s). Use a finite clip.
+
+    ``ramp_s > 0``: the clip rises linearly from ``ramp_start_vel`` to ``max_vel`` over the first ``ramp_s`` seconds of
+    each episode, so a fast spin-up from rest pays no more than a gentle one (a third of onedir's drops happen in the
+    first 3 s after spawn, docs/ablation/rewards.md)."""
     axis, _ = _target_axis(env, command_name)
     w_axis = (_get_numeric_root_ang_vel(env, object_cfg) * axis).sum(-1)
-    return torch.clamp(w_axis, min=min_vel, max=max_vel) / ref_speed
+    w_axis = torch.clamp(w_axis, min=min_vel, max=max_vel)
+    if ramp_s > 0.0 and max_vel is not None:
+        frac = torch.clamp(env.episode_length_buf * env.step_dt / ramp_s, max=1.0)
+        w_axis = torch.minimum(w_axis, ramp_start_vel + (max_vel - ramp_start_vel) * frac)
+    return w_axis / ref_speed
 
 
 def joint_work_l1(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg = SceneEntityCfg("robot")) -> torch.Tensor:
