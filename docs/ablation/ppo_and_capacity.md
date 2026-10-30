@@ -137,6 +137,29 @@ eval loaded the default-size network and failed; `eval_policy.py` now rebuilds t
 1.00). It is faster early (11.1–11.5 RPM at 1000–2000) and then trades speed for fewer drops, which the default net does
 from the start. **Capacity is not the bottleneck**; not worth the 2–3× slower training and inference. Keep the default.
 
+### Action noise under the entropy bonus
+
+Action-noise std (rsl_rl's state-independent Gaussian std) over training, 2026-10-30:
+
+| Runs | Entropy | std |
+|---|---|---|
+| `abl_B_rotlin`, `abl_B_rotlin_hist3`, `abl_B_rotlin_work015` | 1e-4 (default) | 1.5 → 0.42–0.48, flat after ~2k |
+| `abl_B_rotlin_ent5e-3`, `teacher_onedir_droppen_ent5e-3` | 5e-3 | 1.5 → 2.97 / 2.98 |
+| `abl_B_onedir_droppen_ent5e-3_seed1`, `_clip4` | 5e-3 | 1.5 → 3.2–3.4 at 1.5–2k, still rising |
+| `abl_B_onedir_droppen_ent5e-3_cont10k` | 5e-3 | 3.56–3.58 |
+| `abl_B_rotlin_ent1e-2` (failed) | 1e-2 | → 3 early, never learned |
+
+`EMAJointPositionToLimitsAction` clamps actions to [-1, 1] before rescaling to the joint limits. At std 3 about 75 % of
+the sampled action components fall outside and are clamped, but PPO's Gaussian log-likelihood still treats them as
+distinct actions, so the entropy bonus can raise the std with little cost in return (the EMA α 0.2 low-passes the
+saturated targets). Consequences: the eval (deterministic mean) is unaffected directly, but training optimizes the
+policy under heavy, mostly saturated noise, and the training rewards / drop rates understate the deployed policy.
+Evidence so far: entropy 5e-3 learns ~2.5× faster, final speed within noise of 1e-4 on rotlin (9.50 vs 10.33 RPM) and
++0.5–1.1 RPM on B / the teacher. The onedir line (our fastest) has only ever run with 5e-3. Tests (queued
+2026-10-30 10:40): `abl_B_onedir_droppen_ent1e-4_r6k` (default entropy from scratch, pod) and
+`abl_B_onedir_droppen_ent5e-3_anneal0` (resume model_4999 with entropy 0 for 2k: does the std come down and the
+deterministic policy improve). If either wins, the remedy is an entropy schedule (5e-3 early, 0 late), or a std cap.
+
 ## Conclusions so far
 
 - **Entropy 1e-4 → 5e-3: +1.1 RPM on two seeds (5.45 → 6.54; seeds 7.33 / 5.74), RA +7 pp, same drop-free rate**;

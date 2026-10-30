@@ -91,3 +91,4 @@ full entries live in the linked topic files.
 | 2026-10-30 10:05 | rotlin + 3-step history: 10.49 RPM / 81 % (perturbed 34 %) = rotlin, no robustness gain → no history for onedir; cube position ×3 moved to the freed L40S | [history](history_and_memory.md) |
 | 2026-10-30 10:10 | queued third seed of the onedir baseline (A10) to judge the single-knob variants against seed spread | [README](README.md) |
 | 2026-10-30 10:20 | cube smoothness ×10 started on the pod (DTU copy cancelled); new task `-asym-onedir-droppen-ramp-v0` (speed cap ramps over the first 3 s, against spin-up drops) queued on A100 + pod | [rewards](rewards.md) |
+| 2026-10-30 10:40 | entropy 5e-3 runs' action-noise std climbs to 3–3.6 (actions clamped to [-1,1], ~75 % saturate), default-entropy runs settle at 0.4: queued onedir with default entropy (pod) and a resume with entropy 0 (A100) | [PPO / capacity](ppo_and_capacity.md#action-noise-under-the-entropy-bonus) |
