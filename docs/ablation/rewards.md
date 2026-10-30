@@ -389,3 +389,26 @@ model_1999, 32 envs per direction; the drop-free gap is inside the ±7-point noi
 re-distillation from the 10k rotlin teacher. +z was chosen from the per-direction eval of the old-reward policies (11 of 12
 faster in +z); the rotlin-family policies are faster in −z (B 10k: 10.0 vs 11.6 RPM, teacher 10.7 vs 13.0), which is
 noted but not acted on (a direction-specific policy can learn a direction-specific gait).
+
+## Wrist motion (2026-10-30)
+
+The user noticed in the onedir teacher's videos (742zn06f) that it moves the wrist a lot. Measured from the eval
+rollouts (relative rotation forearm → carpals = the `right_wrist` joint, 4 rendered envs × 60 s; the tower is rigid to the
+forearm):
+
+| Policy | wrist range p5–p95 [rad] | mean \|q̇\| [rad/s] | p95 \|q̇\| [rad/s] | mean q̇² |
+|---|---|---|---|---|
+| `teacher_onedir_droppen_ent5e-3` model_5999 (742zn06f) | **1.24** | **2.19** | 4.45 | 6.37 |
+| same, model_4500 | 1.11 | 1.89 | 4.11 | |
+| `abl_B_onedir_droppen_ent5e-3` (80hm76fu) | 1.34 | 1.97 | 3.58 | |
+| `student_pt_rotlin` (p3dxn5pm) | 0.48 | 0.23 | 0.78 | |
+| `teacher_rotlin_ent5e-3` | 0.36 | 0.15 | 0.40 | 0.06 |
+| `abl_B_rotlin_cont10k` | 0.40 | 0.47 | 1.13 | |
+
+Every onedir policy swings the wrist ~10× faster than the rotlin ones: part of the extra onedir speed comes from rocking
+the whole hand, which may not be reproducible on the real hand (the PT paper fixes the wrist at 0 on hardware) and may
+explain why onedir keeps only 22 % of its speed in MuJoCo. Ablation: L2 penalty on the wrist joint velocity,
+`add_wrist_vel_penalty` (−4·q̇², ~25 per second at the onedir motion vs ~95 per second of rotation reward, ~0.2 at
+rotlin-like motion): teacher `teacher_onedir_droppen_wristpen_ent5e-3` (the requested ablation of 742zn06f; student task
+`-student-pt-onedir-droppen-wristpen-v0` registered) and the deployable PPO version `abl_B_onedir_droppen_wristpen_ent5e-3`.
+Stronger alternative if the penalty is not enough: the wrist held fixed (`-wristfix-v0` exists for the old reward).
