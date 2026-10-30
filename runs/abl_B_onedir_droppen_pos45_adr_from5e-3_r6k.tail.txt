@@ -1,0 +1,4 @@
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+[INFO][AppLauncher]: Using device: cuda:0
+[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
+[Info] [carb] Logging to file: /tmp/rwr_kit_abl_B_onedir_droppen_pos45_adr_from5e-3_r6k/logs/Kit/Isaac-Sim/5.1/kit_20261030_221825.log

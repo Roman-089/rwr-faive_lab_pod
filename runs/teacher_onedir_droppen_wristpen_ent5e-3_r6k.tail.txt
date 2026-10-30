@@ -1,40 +1,40 @@
-[replay] link /World/envs/env_0/Robot/right_pinky_pp: 81168 verts, 27056 tris
-[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
---------------------------------------------------------------------------------
-Resolved observation sets: 
-	 policy :  ['teacher']
-	 critic :  ['teacher']
---------------------------------------------------------------------------------
-Actor MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=17, bias=True)
-)
-Critic MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=1, bias=True)
-)
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_1000.pt: {'rpm': 11.612703323364258, 'rpm_std': 2.218360662460327, 'ra': 61.05116009712219, 'dfsr': 40.625, 'dc': 1.140625, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_2000.pt: {'rpm': 12.942388534545898, 'rpm_std': 2.889206886291504, 'ra': 65.54416418075562, 'dfsr': 51.5625, 'dc': 0.90625, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_3500.pt: {'rpm': 13.344642639160156, 'rpm_std': 2.501004457473755, 'ra': 68.3609664440155, 'dfsr': 50.0, 'dc': 0.703125, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k/model_4500.pt: {'rpm': 13.144868850708008, 'rpm_std': 2.307499408721924, 'ra': 69.84766721725464, 'dfsr': 64.0625, 'dc': 0.515625, 'checkpoint': 'model_4500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-teacher-onedir-droppen-wristpen-v0', 'perturb': True}
+wandb: Tracking run with wandb version 0.31.0
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261030_221656-cbgi1o9d
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/cbgi1o9d
+wandb: updating run metadata
+wandb: uploading media/videos/eval/video_03500_6001_fba0d0fa6989f8d84485.mp4; uploading media/videos/eval/video_04500_6002_209c7b22bf98a7e8b0ff.mp4; uploading requirements.txt; uploading media/videos/eval/video_05999_6003_7bbd2daebf647fe4484e.mp4; uploading wandb-summary.json (+ 4 more)
+wandb: uploading media/videos/eval/video_03500_6001_fba0d0fa6989f8d84485.mp4; uploading media/videos/eval/video_04500_6002_209c7b22bf98a7e8b0ff.mp4; uploading media/videos/eval/video_05999_6003_7bbd2daebf647fe4484e.mp4; uploading media/videos/eval/video_01000_5999_9dcf18640218ed879d63.mp4; uploading media/videos/eval/video_02000_6000_f1d282c8956ae6445995.mp4
+wandb: uploading media/videos/eval/video_05999_6003_7bbd2daebf647fe4484e.mp4; uploading media/videos/eval/video_01000_5999_9dcf18640218ed879d63.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc ▆█▆█▁
+wandb:           eval/dfsr ▆▁▂▅█
+wandb:      eval/iteration ▁▂▅▆█
+wandb:             eval/ra ▁▂▇▅█
+wandb:            eval/rpm ▁▇█▁▃
+wandb:   eval_perturbed/dc █▅▃▁▂
+wandb: eval_perturbed/dfsr ▁▄▄█▇
+wandb:   eval_perturbed/ra ▁▅▇█▅
+wandb:  eval_perturbed/rpm ▁▆█▇▅
+wandb: 
+wandb: Run summary:
+wandb:                 Episode_Reward/action_l2 -1.12982
+wandb:            Episode_Reward/action_rate_l2 -25.36944
+wandb:      Episode_Reward/angular_acceleration 0.05543
+wandb:              Episode_Reward/joint_vel_l2 -0.00049
+wandb:               Episode_Reward/object_drop -0.36939
+wandb:  Episode_Reward/object_position_tracking 3.45769
+wandb: Episode_Reward/off_axis_angular_velocity -13.60744
+wandb:         Episode_Reward/rotation_progress 86.32768
+wandb:                 Episode_Reward/wrist_vel -2.62636
+wandb:       Episode_Termination/object_dropped 0.10434
+wandb:                                      +38 ...
+wandb: 
+wandb: 🚀 View run 2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/cbgi1o9d
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261030_221656-cbgi1o9d/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/cbgi1o9d (2026-10-30_13-56-48_teacher_onedir_droppen_wristpen_ent5e-3_r6k)
