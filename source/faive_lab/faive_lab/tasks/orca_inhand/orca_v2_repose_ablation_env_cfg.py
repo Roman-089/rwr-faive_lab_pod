@@ -440,13 +440,14 @@ class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
 
 @configclass
 class OrcaV2ReposeAsymRotLinWorkEnvCfg(OrcaV2ReposeAsymRotLinEnvCfg):
-    """-rotlin + HORA's work penalty (-1.5 * sum |tau * qdot|): rotlin is fast but wobbly and weak under the perturbed
-    eval; the penalty targets jerky, high-effort gaits. Weight set so the term is ~10-20 % of the rotation reward
-    (torques <= 0.7-1.3 Nm, a few W in total); check Episode_Reward/joint_work early in training."""
+    """-rotlin + HORA's work penalty (-0.15 * sum |tau * qdot|): rotlin is fast but wobbly and weak under the perturbed
+    eval; the penalty targets jerky, high-effort gaits. At -1.5 (job 29851888) the term was 2x the rotation reward at
+    the start and, with no drop penalty, the policy learned to drop the cube to end the episode (100 % drops,
+    rotation 1.7 vs 25 for rotlin at iteration 500): -0.15 starts at ~1/5 of the rotation reward."""
 
     def __post_init__(self):
         super().__post_init__()
-        self.rewards.joint_work = RewTerm(func=rewards_ablation.joint_work_l1, weight=-1.5)
+        self.rewards.joint_work = RewTerm(func=rewards_ablation.joint_work_l1, weight=-0.15)
 
 # --- Rapid Motor Adaptation (HORA, arXiv 2210.04887): see rma.py.
 
