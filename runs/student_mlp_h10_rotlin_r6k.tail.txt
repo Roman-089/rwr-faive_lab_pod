@@ -1,40 +1,40 @@
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=17, bias=True)
-)
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/model_0.pt: {'rpm': -0.2223021686077118, 'rpm_std': 1.328857660293579, 'ra': 7.111923396587372, 'dfsr': 21.875, 'dc': 4.125, 'checkpoint': 'model_0.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-student-mlp-h10-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/model_500.pt: {'rpm': 9.304491996765137, 'rpm_std': 2.666806697845459, 'ra': 61.95257306098938, 'dfsr': 50.0, 'dc': 0.921875, 'checkpoint': 'model_500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-student-mlp-h10-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/model_1000.pt: {'rpm': 9.768558502197266, 'rpm_std': 2.412038803100586, 'ra': 64.88152742385864, 'dfsr': 50.0, 'dc': 0.84375, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-student-mlp-h10-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/model_1500.pt: {'rpm': 9.621099472045898, 'rpm_std': 2.61130428314209, 'ra': 63.99611830711365, 'dfsr': 54.6875, 'dc': 0.71875, 'checkpoint': 'model_1500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-student-mlp-h10-rotlin-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/model_1999.pt: {'rpm': 9.962966918945312, 'rpm_std': 2.5806987285614014, 'ra': 64.95699882507324, 'dfsr': 50.0, 'dc': 0.6875, 'checkpoint': 'model_1999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-student-mlp-h10-rotlin-v0', 'perturb': True}
-[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/eval/metrics_perturbed.json
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/eval/model_0.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/eval/model_500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
-frame 100/600
-frame 200/600
-frame 300/600
-frame 400/600
-frame 500/600
-wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k/eval/model_1000.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-frame 0/600
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261030_062618-1uk7mra5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/1uk7mra5
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json; uploading requirements.txt; uploading media/videos/eval/video_01999_2002_45b38acb18dfc47e7139.mp4 (+ 1 more)
+wandb: uploading wandb-summary.json; uploading wandb-metadata.json; uploading requirements.txt; uploading media/videos/eval/video_01999_2002_45b38acb18dfc47e7139.mp4; uploading media/videos/eval/video_00000_1998_f97101c65c99f63f1fe3.mp4 (+ 3 more)
+wandb: uploading media/videos/eval/video_01999_2002_45b38acb18dfc47e7139.mp4; uploading media/videos/eval/video_00000_1998_f97101c65c99f63f1fe3.mp4; uploading media/videos/eval/video_00500_1999_da4c13518691b6d4fa75.mp4; uploading media/videos/eval/video_01000_2000_e5628352f221c0853575.mp4; uploading media/videos/eval/video_01500_2001_d78901443ba592f8e44f.mp4
+wandb: uploading media/videos/eval/video_01999_2002_45b38acb18dfc47e7139.mp4; uploading media/videos/eval/video_00500_1999_da4c13518691b6d4fa75.mp4; uploading media/videos/eval/video_01000_2000_e5628352f221c0853575.mp4; uploading media/videos/eval/video_01500_2001_d78901443ba592f8e44f.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc █▂▁▁▁
+wandb:           eval/dfsr ▁▆██▇
+wandb:      eval/iteration ▁▃▅▆█
+wandb:             eval/ra ▁▇███
+wandb:            eval/rpm ▁▇███
+wandb:   eval_perturbed/dc █▁▁▁▁
+wandb: eval_perturbed/dfsr ▁▇▇█▇
+wandb:   eval_perturbed/ra ▁████
+wandb:  eval_perturbed/rpm ▁████
+wandb: 
+wandb: Run summary:
+wandb:                 Episode_Reward/action_l2 -0.65149
+wandb:            Episode_Reward/action_rate_l2 -4.81441
+wandb:      Episode_Reward/angular_acceleration 0.15107
+wandb:              Episode_Reward/joint_vel_l2 -0.00062
+wandb:  Episode_Reward/object_position_tracking 3.46667
+wandb: Episode_Reward/off_axis_angular_velocity -5.61003
+wandb:         Episode_Reward/rotation_progress 61.43855
+wandb:       Episode_Termination/object_dropped 0.1125
+wandb:             Episode_Termination/time_out 0.88762
+wandb:                            Loss/behavior 1.15461
+wandb:                                      +34 ...
+wandb: 
+wandb: 🚀 View run 2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/1uk7mra5
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261030_062618-1uk7mra5/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/1uk7mra5 (2026-10-30_02-38-01_student_mlp_h10_rotlin_r6k)
