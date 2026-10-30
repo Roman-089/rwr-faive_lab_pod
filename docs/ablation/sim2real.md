@@ -338,3 +338,5 @@ Decision rule handed to the pod worker (2026-10-30 22:55, so the night slots nev
 changes / min and model_4999 is ≥ 60 % drop-free. GOOD → teacher `-teacher-onedir-droppen-upright-v0` + position ×3
 (6k) into its slot, then the upright ADR fine-tune (2k, resume from its model_4999) into the ~04:00Z slot. Not GOOD →
 teacher `-teacher-onedir-droppen-v0` + position ×3, and the held single-knob runs continue.
+
+ADR fine-tune started on the pod 2026-10-30 22:18Z (W&B on6yv8hs): resumed at 4999/7999, ADR action term (delay 0–15), ADR offset (0.08 rad), curriculum active, entropy 1e-4, position ×3 — all checked by the worker.

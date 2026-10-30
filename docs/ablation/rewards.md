@@ -515,4 +515,6 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   4500 13.85 / 13.14, 84 / 64 % · 5999 14.18 / 12.50, **89** / 59 %, DC 0.11 / 0.59. Last-3 mean 14.3 RPM / **85 %** /
   DC 0.17, **perturbed 58 % / DC 0.60**, vs the same teacher without the penalty (742zn06f) 15.5 / 74 % / 0.34,
   perturbed 17 % / 2.9: −1.2 RPM, +11 points nominal and ×3.4 perturbed drop-free. A calm wrist makes the gait far less
-  sensitive to action delay and encoder offset. Cube motion pending (npz from the pod).
+  sensitive to action delay and encoder offset. Cube motion (model_5999): tilt 20° mean / 35° p90, **16 face changes /
+  min** (742zn06f: 32° / 171), wrist 0.43 rad / 0.51 rad/s: the wrist penalty also mostly stops the tumbling, so the
+  wrist swing was a main driver of it.
