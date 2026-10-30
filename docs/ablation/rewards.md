@@ -419,3 +419,10 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   training goes on (88 → 53 %) while the action-noise std climbs past 4 (pod log), the same pattern as the baseline
   (73 → 61–63 %): another pointer at the entropy-5e-3 noise (see [PPO / capacity](ppo_and_capacity.md#action-noise-under-the-entropy-bonus)).
   Queued 2026-10-30 15:30: the fixed-wrist version `abl_B_onedir_droppen_wristfix_ent5e-3` (`-asym-onedir-droppen-wristfix-v0`).
+- **Baseline seed 1 (`abl_B_onedir_droppen_ent5e-3_seed1`, job 29852087)**, nominal / perturbed: 1000 12.77 / 13.01 RPM,
+  67 / 27 % · 2000 13.17 / 14.06, 42 / 22 % · 3000 15.66 / 14.35, 50 / 20 % · 4000 13.88 / 13.17, 48 / 11 % · 4999 14.89 /
+  14.40, 41 / 14 %. Last-3 mean 14.8 RPM / 46 % / DC 1.20 (seed 0: 15.7 / 61 % / 0.77). **Two-seed baseline: 15.3 RPM,
+  54 % drop-free (seed spread ±8 points), DC 0.99, perturbed 18 %.** Seed 0's 16.4 RPM / 63 % was the lucky end. Against
+  this: the 3× penalty (14.5 / 54 %) is inside the spread, and the onedir teacher (15.5 / 74 %) is ~20 points more
+  drop-free. Seed 1's drop-free rate also falls during training (67 → 41 %) as the noise std rises, the third run with
+  that pattern. Seed 2 (A10) is running.
