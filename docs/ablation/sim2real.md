@@ -293,3 +293,22 @@ Task ids from `orca_v2_repose_ablation_env_cfg.py`, single change vs the baselin
   `rwr_faive_system` once released.
 - Phase 2: fixed delay + [random action holding](#random-action-holding) (implemented, not run); log the real
   missed-command rate in the policy node to fit `hold_prob_max`.
+
+## ADR on action delay and encoder offset (2026-10-30)
+
+User request (2026-10-30 21:40): make the cube-position ×3 policy (`abl_B_onedir_droppen_pos45_ent5e-3`: 12.8 RPM,
+88 % drop-free, perturbed 49 %, no tumbling) more robust for deployment, including action delay, following OpenAI's
+automatic domain randomization (ADR, arXiv 1910.07113). This unparks the delay / offset part of the Phase 2 list.
+
+`adr.py` (ours; subclasses the S0 terms in `mdp/sim2real.py`): one global level L ∈ [0, 1] scales the two gaps the
+perturbed eval tests and the env does not randomize yet (it already randomizes gains, friction, masses, gravity, joint
+limits):
+- action delay per episode U[0, round(L·15)] physics substeps (≤ 125 ms; the eval uses 6–12 = 50–100 ms);
+- joint-encoder offset per episode and joint U(±L·0.08 rad) (eval ±0.05).
+
+`adr_level` (curriculum term, logged as `Curriculum/adr`): every 480 env steps (20 iterations) and ≥ 1000 ended episodes,
+L += 0.05 if fewer than 25 % of the ended episodes were drops, L −= 0.05 above 40 %. New episodes sample with the
+current L. Unit test on a stub env: 0 → 0.30 while the drop share is 10 %, back down at 60 %. Critic obs unchanged, so
+the position ×3 checkpoint resumes directly: `abl_B_onedir_droppen_pos45_adr_from5e-3` (+3000 iterations, default
+entropy, task `-asym-onedir-droppen-adr-v0`). Judged on the perturbed eval (drop-free rate, DC) at an acceptable cost in
+nominal RPM, and on `Curriculum/adr` reaching ≥ 0.8 (the eval's ranges sit at L ≈ 0.6–0.8).
