@@ -219,6 +219,25 @@ target to distill. Settings as `teacher_rotlin_ent5e-3` (entropy 5e-3, 6k iterat
 rotlin pipeline: `-student-pt-onedir-droppen-v0` / `-student-mlp-h10-onedir-droppen-v0` (10-step history env) and
 `-student-lstm-onedir-droppen-v0`; which ones to run is decided from the rotlin students' Isaac eval.
 
+- **2026-10-30 13:15 — demo-reward teacher (`teacher_onedir_droppen_ent5e-3`, W&B 742zn06f)**, +z only, nominal /
+  perturbed:
+
+  | ckpt | RPM | RA % | DFSR % | DC |
+  |---|---|---|---|---|
+  | 1000 | 13.39 / 13.00 | 70.9 / 62.7 | 73 / 30 | 0.28 / 1.92 |
+  | 2000 | 14.01 / 13.88 | 74.0 / 67.3 | 73 / 34 | 0.34 / 1.67 |
+  | 3500 | 15.32 / 13.86 | 78.7 / 66.0 | 72 / 20 | 0.31 / 2.97 |
+  | 4500 | **16.01** / 14.35 | **81.2** / 67.0 | **81** / 13 | **0.27** / 2.94 |
+  | 5999 | 15.19 / 14.41 | 79.4 / 69.1 | 69 / 17 | 0.45 / 2.89 |
+
+  Mean of the last three vs `abl_B_onedir_droppen_ent5e-3` (same reward, deployable PPO): 15.5 vs 15.7 RPM, drop-free
+  **74 vs 61 %**, DC **0.34 vs 0.77**, perturbed drop-free 17 vs 21 %. Same speed, half the nominal drops; equally weak
+  under the perturbed eval (delay + offset), so the teacher does not fix that. Drop timing: no drops 1–2 s after spawn
+  (B: 3.8 per minute), spawn-second drops as everywhere (3.3 per minute), the same steady-state rate (0.31 vs 0.30 per
+  minute); it reaches full speed (1.66 rad/s) within the first second. **Decision:** distill the transformer student from
+  model_5999 (`student_pt_onedir_droppen`, DTU L40S + pod copy); the perturbed weakness needs its own fix (action
+  delay in training, or the work penalty, `abl_B_onedir_droppen_work015_ent5e-3`).
+
 ## Conclusions so far
 
 - The privileged teacher (7.44 RPM, 94 % DFSR) is the best policy so far and still improving at 10k.
