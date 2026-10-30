@@ -38,6 +38,9 @@ table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node
 | `abl_B_rotlin_ent5e-3` (model_4999) | **9.50** | 76 / 81 / 0.27 | **4.00** (64 trials) | 62 / 77 / 0.27 | **3.89** (64) | 60 / 83 / 0.19 | 0.42 / 0.41 |
 | `abl_B_onedir_clip3_ent5e-3` (model_4999, +z only) | **15.19** | 79 / 44 / 1.30 | **5.42** (64) | 64 / 31 / 1.31 | **5.47** (64) | 58 / 17 / 1.83 | 0.36 / 0.36 |
 | `abl_B_rotlin_droppen_ent5e-3` (model_4999) | **8.29** | 71 / 89 / 0.17 | **4.77** (64) | 72 / 92 / 0.08 | **4.44** (64) | 67 / 92 / 0.08 | 0.58 / 0.54 |
+| `abl_B_rotlin_cont10k` (model_9998) | **10.81** | 78 / 91 / 0.12 | **6.21** (64) | 80 / 89 / 0.14 | **4.87** (64) | 66 / 86 / 0.17 | 0.57 / 0.45 |
+| `student_pt_rotlin` (model_1999, transformer) | **10.90** | 79 / 86 / 0.17 | **4.50** (64) | 59 / 67 / 0.53 | **4.37** (64) | 60 / 73 / 0.34 | 0.41 / 0.40 |
+| `abl_B_onedir_droppen_ent5e-3` (model_4999, +z only) | **16.41** | 83 / 63 / 0.64 | **3.54** (64) | 62 / 73 / 0.30 | **4.07** (64) | 58 / 63 / 0.56 | 0.22 / 0.25 |
 
 Rows added 2026-10-29 23:10 (job 29851207, CPU queue `hpc`, 64 trials each; informational, decisions use Isaac). The
 fastest Isaac policy (onedir, 15.2 RPM) keeps only 36 % of its speed and drops most; the drop-penalty run keeps the
@@ -78,6 +81,13 @@ MP4s (first 2 trials, 20 s each, nominal):
 `logs/rsl_rl/orca_v2_repose/{2026-10-28_21-11-45_abl_B_rotlin,2026-10-28_22-01-33_student_pt}/sim2sim/sim2sim_drnone_2trials_20s.mp4`.
 Per-trial numbers: `<run>/sim2sim/metrics_dr{none,isaac}.json`, rollouts `rollout_*.npz` (`logs/` is gitignored).
 64-trial runs: `scripts/sim2sim/sim2sim_job.sh` (CPU queue `hpc`, ~25 min, not submitted).
+
+**2026-10-30 (job 29852089, informational only: design decisions use the Isaac eval).** rotlin 10k keeps 57 % of its
+Isaac speed (the best ratio and the fastest MuJoCo policy so far, 6.2 RPM, 89 % drop-free). The transformer student keeps
+41 %, like `student_pt` (0.41). The fastest Isaac policy, onedir + drop penalty (16.4 RPM), keeps only 22 % (3.5 RPM)
+and is the slowest of the three in MuJoCo; onedir without the penalty kept 36 %. The faster the Isaac gait, the less of
+it carries over to MuJoCo, so the onedir speed is the number most at risk on the real hand. This is a flag for the
+first hardware test, not a reason to drop onedir (MuJoCo's soft contact is not the real hand either).
 
 ## Design
 
