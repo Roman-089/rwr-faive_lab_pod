@@ -536,6 +536,26 @@ class OrcaV2ReposeTeacherOneDirDropPenWristPenHist10EnvCfg(OrcaV2ReposeTeacherOn
 
 
 @configclass
+class OrcaV2ReposeTeacherOneDirDropPenUprightWristFixEnvCfg(OrcaV2ReposeTeacherOneDirDropPenEnvCfg):
+    """Privileged +z teacher with the cube tilt penalty and the wrist not actuated: the flat-rotation, no-wrist-swing
+    version of 742zn06f (which tumbles the cube and swings the wrist)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tilt_penalty(self)
+        self.actions.joint_pos.joint_names = ["(?!right_wrist).*"]
+
+
+@configclass
+class OrcaV2ReposeTeacherOneDirDropPenUprightWristFixHist10EnvCfg(OrcaV2ReposeTeacherOneDirDropPenUprightWristFixEnvCfg):
+    """-teacher-onedir-droppen-upright-wristfix env with the 10-step noisy ``policy`` history (transformer student)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 10
+
+
+@configclass
 class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
     """-asym-hist3 (3-step obs history MLP) on the -rotlin reward: the memory comparison so far was on the old reward."""
 

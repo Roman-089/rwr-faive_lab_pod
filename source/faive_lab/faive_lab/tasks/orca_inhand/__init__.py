@@ -124,6 +124,11 @@ for _task_id, _env_cfg, _runner_cfg in (
      "PPORunnerCfgOrcaV2Teacher"),
     ("orca-v2-inhand-repose-student-pt-onedir-droppen-wristpen-v0", "OrcaV2ReposeTeacherOneDirDropPenWristPenHist10EnvCfg",
      "DistillationRunnerCfgOrcaV2Transformer"),
+    # demo reward + cube tilt penalty + wrist not actuated
+    ("orca-v2-inhand-repose-teacher-onedir-droppen-upright-wristfix-v0", "OrcaV2ReposeTeacherOneDirDropPenUprightWristFixEnvCfg",
+     "PPORunnerCfgOrcaV2Teacher"),
+    ("orca-v2-inhand-repose-student-pt-onedir-droppen-upright-wristfix-v0",
+     "OrcaV2ReposeTeacherOneDirDropPenUprightWristFixHist10EnvCfg", "DistillationRunnerCfgOrcaV2Transformer"),
 ):
     gym.register(
         id=_task_id,
