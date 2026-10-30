@@ -1,1 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
++-----------+----------+
+|   Index   | Name     |
++-----------+----------+
++-----------+----------+
+
+[INFO]: Completed setting up the environment...
+2026-10-30T06:10:19Z [147,827ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/frames.
+2026-10-30T06:10:19Z [147,827ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/target_arrows.
+2026-10-30T06:10:19Z [147,827ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/current_arrows.
+/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
+  warnings.warn(
+/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
+  warnings.warn(
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 policy :  ['policy']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor MLP: MLP(
+  (0): Linear(in_features=74, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+Critic MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=1, bias=True)
+)
