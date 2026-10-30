@@ -488,3 +488,9 @@ yaw is free, unlike the off-axis angular-velocity penalty, which at −15 stoppe
 `abl_B_onedir_droppen_upright_ent1e-4` / `abl_B_onedir_droppen_upright_wristfix_ent1e-4`. The plain default-entropy
 teacher was dropped; the next teacher uses the winning cell. From now on every +z result is also judged on cube tilt,
 face changes and wrist motion (`cube_motion.py`), not only RPM.
+- **Spin-up ramp (`abl_B_onedir_droppen_ramp_ent5e-3_r6k`, pod, W&B ty9c9smm)**, entropy 5e-3, nominal / perturbed:
+  1000 12.26 / 12.38 RPM, 69 / 33 % · 2000 15.16 / 15.94, 64 / 33 % · 3000 16.02 / 15.79, 67 / 25 % · 4000 16.21 / 15.03,
+  75 / 20 % · 4999 15.92 / 14.98, 66 / 27 %. Last-3 mean 16.1 RPM / 69 % / DC 0.42 / perturbed 24 % vs the entropy-5e-3
+  baseline 15.3 / 54 % / 0.99 / 18 %: +15 points drop-free, like smoothness ×10 (70 %). Cube motion (model_4999): tilt
+  31° mean, 129 face changes / min, wrist 1.00 rad / 1.64 rad/s: still tumbling. Not ported to default entropy for now:
+  default entropy already removed most spin-up drops, and the tumbling fix (tilt penalty) comes first.
