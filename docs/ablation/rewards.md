@@ -311,3 +311,27 @@ drop penalty, so ending the episode early is the cheapest way to stop paying a p
 negative per-step rewards with early termination). Rerun at **−0.15** (`abl_B_rotlin_work015`, job 29851938): ~1/5 of
 the rotation reward at the start, shrinking as the policy rotates. If that run still collapses, the next step is to
 combine it with the drop penalty instead of shrinking it further.
+
+## Speed cap: 2 vs 3 rad/s on onedir + drop penalty (2026-10-30)
+
+Isaac eval, last checkpoint, nominal / perturbed (64 envs × 60 s):
+
+| Run | RPM | DFSR % | DC |
+|---|---|---|---|
+| `abl_B_onedir_droppen_clip2_ent5e-3_r6k` (cap 2 rad/s, pod) | 10.09 / 9.68 | 91 / 41 | 0.11 / 1.36 |
+| `abl_B_onedir_droppen_ent5e-3` (cap 3 rad/s) | **16.41** / **15.07** | 63 / 19 | 0.64 / 2.94 |
+| `abl_B_rotlin_cont10k` (both directions, cap = command 1.5 rad/s) | 10.81 / 10.70 | 91 / 55 | 0.12 / 0.77 |
+| `abl_B_rotlin` (5k, 2 seeds) | 10.33 / 11.3 | 84 / 45 | 0.22 / 1.08 |
+
+- The 2 rad/s cap does not just clip the top speed: the policy settles at 10.1 RPM (1.06 rad/s, half the cap), the same
+  speed as rotlin. With the 3 rad/s cap it settles at 1.72 rad/s. The cap sets how much extra speed is worth the
+  extra drop risk, and the policy stops well below it in both cases.
+- At 2 rad/s the onedir run is no better than rotlin 10k on any Isaac metric (equal nominally, worse perturbed:
+  41 vs 55 % drop-free, DC 1.36 vs 0.77), and rotlin also turns both ways. **Decision: drop the 2 rad/s cap**;
+  its second seed (A40 / A100) is cancelled before starting.
+- The demo line stays at 3 rad/s, where drops are the problem (37 % of nominal and 81 % of perturbed episodes see a
+  drop). Levers now queued: second seed (`abl_B_onedir_droppen_ent5e-3_seed1`), 10k training
+  (`..._cont10k`), 3× drop penalty (`abl_B_onedir_droppen6k_ent5e-3`), and the privileged teacher → student path
+  (`teacher_onedir_droppen_ent5e-3`).
+- rotlin 10k vs 5k (same seed): +0.4 RPM (inside the ±0.7 seed spread), +6 points nominal and +10 perturbed
+  drop-free, DC 0.22 → 0.12 nominal. Longer training mainly makes rotlin safer, not faster.
