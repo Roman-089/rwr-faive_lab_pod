@@ -553,3 +553,15 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   flat rotation and the calm wrist replicate; speed and drop-free rate do not (its rotation reward plateaued at ~55 vs
   ~78 for seed 0): the tilt penalty makes the problem harder to optimize and seed-dependent, so seed 0 (5oklh054) is
   a good draw, not the expected result. Replicate of the combined config queued (`upright_pos45` seed 1, A10).
+- **Position ×3 and tilt + position ×3 on default entropy (pod, 4000 it each; W&B kfuq4jwb, b0r506gz)**, nominal / perturbed:
+  - position ×3 (`abl_B_onedir_droppen_pos45_ent1e-4_r6k`): 1500 14.03 / 13.75 RPM, 81 / 30 % · 2000 14.68 / 14.00, 84 / 52 % ·
+    3000 15.52 / 14.40, 92 / 48 % · 3999 15.51 / 14.44, 92 / 42 %. Last-3 mean **15.2 RPM, 90 % drop-free, perturbed 47 %**
+    (entropy 5e-3: 12.8 / 88 / 49). Cube motion (3999): tilt 16.8° / 28.8° p90, 3.8 face changes / min, wrist 0.46 rad /
+    0.43 rad/s. The fastest policy that does not tumble (the tumbling baseline qn0pkisu: 17.5 RPM at 36° tilt).
+  - tilt + position ×3 (`abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k`): 1500 13.64 / 12.22, 86 / 47 % · 2000 13.77 /
+    12.45, 89 / 58 % · 3000 13.87 / 11.60, 94 / 45 % · 3999 14.54 / 11.53, 92 / 45 %. Last-3 mean **14.1 RPM, 92 %
+    drop-free, perturbed 50 %**. Cube motion: tilt **10.4° / 17.7°**, 2.3 face changes / min, wrist 0.31 rad / 0.29 rad/s.
+  Adding the position term to the tilt penalty buys +2.7 RPM (11.4 → 14.1) at the same drop-free rate and a still-flat
+  cube (10° vs 7°): the centred grasp lets the hand turn faster without tilting. Its ADR fine-tune
+  (`upright_pos45_adr`, pod) and the one of position ×3 (`pos45_ent1e-4_adr`, DTU) follow; their seed spread is open
+  (`upright_pos45` seed 1 queued on A10).
