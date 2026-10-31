@@ -120,7 +120,7 @@ class ServoProfileAction(DelayedEMAJointPositionToLimitsAction):
         self._joint_target = self._prof_pos.clone()
         self._dt = env.physics_dt
 
-    def _scale(self, nominal, rng, n):
+    def _dr_scale(self, nominal, rng, n):
         lo, hi = rng
         return nominal * (lo + (hi - lo) * torch.rand(n, self.action_dim, device=self.device))
 
@@ -128,9 +128,9 @@ class ServoProfileAction(DelayedEMAJointPositionToLimitsAction):
         super().reset(env_ids)
         ids = slice(None) if env_ids is None else env_ids
         n = self.num_envs if env_ids is None else len(env_ids)
-        self._amax[ids] = self._scale(self._amax_nominal, self.cfg.amax_scale_range, n)
-        self._play[ids] = self._scale(self._play_nominal, self.cfg.play_scale_range, n)
-        self._slope[ids] = self._scale(self._slope_nominal, self.cfg.slope_scale_range, n)
+        self._amax[ids] = self._dr_scale(self._amax_nominal, self.cfg.amax_scale_range, n)
+        self._play[ids] = self._dr_scale(self._play_nominal, self.cfg.play_scale_range, n)
+        self._slope[ids] = self._dr_scale(self._slope_nominal, self.cfg.slope_scale_range, n)
         start = self._prev_applied_actions[ids]  # at rest at the reset pose
         self._prof_pos[ids] = start
         self._prof_vel[ids] = 0.0
