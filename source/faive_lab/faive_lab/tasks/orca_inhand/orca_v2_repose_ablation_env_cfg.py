@@ -612,6 +612,16 @@ class OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg(OrcaV2ReposeAsymOneDirDropPe
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg):
+    """-onedir-droppen-upright-adr + the wrist velocity penalty: ADR fine-tune of an -onedir-droppen-upright-wristpen
+    policy (same obs and critic)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_wrist_vel_penalty(self)
+
+
+@configclass
 class OrcaV2ReposeAsymRotLinHist3EnvCfg(OrcaV2ReposeAsymHist3EnvCfg):
     """-asym-hist3 (3-step obs history MLP) on the -rotlin reward: the memory comparison so far was on the old reward."""
 
