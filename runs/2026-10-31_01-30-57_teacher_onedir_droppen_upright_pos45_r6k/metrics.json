@@ -24,5 +24,44 @@
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-teacher-onedir-droppen-upright-v0",
   "perturb": false
+ },
+ "model_3500.pt": {
+  "rpm": 9.772895812988281,
+  "rpm_std": 2.5741207599639893,
+  "ra": 73.31902384757996,
+  "dfsr": 87.5,
+  "dc": 0.171875,
+  "checkpoint": "model_3500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-upright-v0",
+  "perturb": false
+ },
+ "model_4500.pt": {
+  "rpm": 10.482233047485352,
+  "rpm_std": 2.7454488277435303,
+  "ra": 77.28217244148254,
+  "dfsr": 90.625,
+  "dc": 0.09375,
+  "checkpoint": "model_4500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-upright-v0",
+  "perturb": false
+ },
+ "model_5999.pt": {
+  "rpm": 10.15372371673584,
+  "rpm_std": 2.7950212955474854,
+  "ra": 75.34245252609253,
+  "dfsr": 82.8125,
+  "dc": 0.25,
+  "checkpoint": "model_5999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-teacher-onedir-droppen-upright-v0",
+  "perturb": false
  }
 }
