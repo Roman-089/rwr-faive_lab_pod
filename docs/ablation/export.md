@@ -109,17 +109,26 @@ How the policies consume the flat history (repo code):
    `policy.reset()` at episode start, and keep one call per tick. The JSON records the history length, obs layout
    (with training noise and scales for reference), action term (EMA α 0.2, rescale to limits), checkpoint and task.
 
-### Open question: how does the real policy node call the model?
+### The real policy node (rwr_system, inspected 2026-10-31)
 
-`rwr_faive_system` is not released, so we cannot check yet:
+`rwr-fast/rwr_system` (commit f0f8cf6), `experiments/rl_inference/policy_inference_cube_spin_v2.py`:
 
-- whether the node calls the model exactly once per tick (no dry-run / warm-up call at start-up, no retries);
-- whether it has an episode-start hook where `reset()` can go, or restarts / reloads the model per trial;
-- whether the tick rate is a steady 20 Hz under load (a late tick still pushes one step; a dropped tick drops one);
-- how it calls the model: file name `policy.pt`, input `[1, 74]` or `[74]` (both work), torch vs numpy, and
-  `no_grad` / `inference_mode` (all three tested identical).
+- loads the file with `torch.jit.load(policy_ckpt_path)` (any path, so `policy_history.pt` works as is), calls it as
+  `policy(obs[1, 74])` under `torch.no_grad()`, 17 outputs asserted;
+- builds the 74-dim obs exactly as the task: limit-normalized joint_pos (USD soft limits, USD joint order),
+  joint_vel × 0.2, goal_command `[0, 0, -0.05, 0, 0, goal_ang_vel]` (= the sim's command, checked in the eval
+  rollouts: cmd_pos (0, 0, −0.05)), raw last action, last EMA joint command; actions clipped to [−1, 1], rescaled to
+  the limits, EMA α 0.2, clipped to the limits; last_action = 0 and last command = measured pose on the first step;
+- one call per 20 Hz timer tick (a tick without hand state or with a non-finite state is skipped);
+- **one warm-up call `policy(torch.zeros(1, 74))` at load** and no `reset()`; no episode hook (one node start = one
+  trial).
 
-Check these in the node's source as soon as it is released, before the first hardware run of a history policy.
+Consequences: memoryless MLP policies (all +z PPO policies) run unchanged. A history policy (student-pt, MLP-h10, LSTM)
+needs `self.policy.reset()` right after the warm-up call: otherwise the zero observation stays in the history for the
+first H − 1 steps (CPU test on `student_pt_rotlin`, random obs: up to 29 action units off in the first 10 steps,
+identical afterwards; with `reset()` bit-identical). Restart the node per trial (or add a reset on a new trial).
+`goal_ang_vel` defaults to 1.0 (the default task samples |w| in [0.9, 1.5] with either sign); the +z policies were
+trained on exactly +1.5, so run them with `-p goal_ang_vel:=1.5` and `goal_flip_period_s` 0.
 
 ## Tests (CPU)
 

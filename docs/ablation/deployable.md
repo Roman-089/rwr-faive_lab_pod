@@ -55,6 +55,20 @@ network and observation layout (`params/SOURCE.txt`; the run's own config in `pa
 
 ## How to run them (deploy contract, [export](export.md#deploy-contract))
 
+**With the course node** (`rwr_system/experiments/rl_inference/policy_inference_cube_spin_v2.py`, inspected
+2026-10-31, [export](export.md#the-real-policy-node-rwr_system-inspected-2026-10-31)): #1–#5 and #3a need **no node
+change**, only the right parameters:
+
+```bash
+ros2 run experiments policy_inference_cube_spin_v2.py --ros-args \
+    -p policy_ckpt_path:=<run dir>/exported/policy_history.pt -p goal_ang_vel:=1.5   # +z, as trained; flip period stays 0
+```
+
+(the node's default `goal_ang_vel` 1.0 is an input the +z policies never saw). The fallback student (10-step history)
+needs one line in the node, `self.policy.reset()` right after the warm-up call `self.policy(torch.zeros(1, OBS_DIM))`,
+and one node start per trial; it takes the default `goal_ang_vel` (trained on |w| 0.9–1.5, either sign).
+
+
 - **Interface = the default repo's `policy.pt`:** 74-dim observation per 50 ms step, float32, `[1, 74]` or `[74]`, in
   this order: `joint_pos` (17, limit-normalized to [−1, 1]), `joint_vel` (17, × 0.2), `goal_command` (6: target cube
   position in the env frame, then target angular velocity), `last_action` (17), `last_joint_pos_cmd` (17). No noise.
