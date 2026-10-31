@@ -460,7 +460,23 @@ Stronger alternative if the penalty is not enough: the wrist held fixed (`-wrist
   (1–3 s after spawn); the remaining first-second drops (~3 per env-minute) are the spawn artifact every policy shows.
   So the large wrist swing seen in 742zn06f (entropy 5e-3) and most spin-up drops came largely from training under
   std 3–4 action noise, not from the onedir reward itself. Smoothness ×10 removed part of the spin-up drops on
-  entropy 5e-3; whether it adds anything on default entropy is `abl_B_onedir_droppen_acc10_ent1e-4_r6k` (running).
+  entropy 5e-3; on default entropy it trades ~2 RPM for +25 points perturbed drop-free ([below](#smoothness-on-default-entropy-2026-10-31)).
+
+## Smoothness on default entropy (2026-10-31)
+
+`abl_B_onedir_droppen_acc10_ent1e-4_r6k` (pod, W&B ps0bke4n): the cube smoothness term ×10 on the default-entropy +z
+config. Isaac, +z, 64 envs × 60 s, nominal / perturbed (6–12 substep delay, ±0.05 rad offset):
+
+| | 1000 | 2000 | 3000 | 4000 | 4999 | last-3 mean |
+|---|---|---|---|---|---|---|
+| RPM | 14.2 / 13.3 | 13.9 / 14.5 | 15.1 / 15.0 | 15.5 / 14.7 | 16.5 / 15.3 | 15.7 / 15.0 |
+| DFSR % | 86 / 34 | 80 / 44 | 75 / 50 | 83 / 53 | 88 / 55 | 82 / **53** |
+
+Against the same config without it (qn0pkisu, last-3 mean 17.5 RPM, 76 / 28 % drop-free) it gives up ~1.8 RPM for
++6 points nominal and **+25 points perturbed** drop-free: like the work penalty and the wrist penalty, a smoother
+cube motion makes the policy much less sensitive to action delay and encoder offset. It does not fix the tumbling
+(cube_motion at 4999: tilt 40° mean / 48° p90, 200 top-face changes / min, wrist 0.54 rad / 0.90 rad/s). Next:
+`abl_B_onedir_droppen_upright_acc10_ent1e-4` (DTU L40S, 4000 it) adds it to the tilt penalty.
 
 ## Cube tumbling (2026-10-30)
 
