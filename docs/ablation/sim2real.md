@@ -588,3 +588,9 @@ friction + wrist penalty + plain 0–100 ms delay + encoder offset, no profile);
 so per-collider friction needs a PhysX shape-index mapping (+ GPU check); per link, the skinless links (the AP links,
 thumb_tp / thumb_ap) can be made PLA. Contact friction below half the cube's needs PhysX's "min" combine mode instead of
 the default average. Next round.
+
+**Repeat runs on the hand (13:20Z):** the user re-ran the top 4 and ranked them 07 > 02b > 17 > 12. 07: full 60 s in
+both runs; 02b: run 1 "ok, no drop", run 2 "quite bad" (21 s), wrist calm in both: inconsistent; 17 40 s; 12 36 s. 07
+is the base (it also tops the low-friction Isaac ranking). The 02b servo-profile fine-tune is replaced by a second seed
+of the 07 friction-only fine-tune (`07_wp_rf_ft_seed1_r6k`). Ship rule: beat 07's low-friction eval (9.74 score, 87.5 %
+drop-free) with the wrist at ≤ ~0.1–0.14 rad/s.
