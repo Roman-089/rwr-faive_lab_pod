@@ -715,6 +715,8 @@ m4800 / m4900: LOWFRIC 11.55 / 95.3 % / 0.05, 92.9 % in region; 11.58 / 92.2 % /
 
 Control (weight 50) final m5000: LOWFRIC 11.41 / 93.8 % / 0.06, 93.7 % in region (OWN 13.97 / 87.5 %, 91.0 %): 400 iterations did not move the in-region rate. `07ft_region200_ft_r6k` started 16:18Z on the pod (config: weight 200, r 27.5 mm, σ 10 mm; ~4.8 s/it).
 
+region200 m4700 (100 it): LOWFRIC 11.46 RPM / 96.9 % / 0.03 drops, wrist 0.07, **95.0 % in region** (base 94.1 %, weight 50 at the same iteration 93.2 %); OWN 13.65 / 87.5 %, 92.9 % in region. First movement, at no cost in speed or drops.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
