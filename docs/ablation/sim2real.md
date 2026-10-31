@@ -574,3 +574,17 @@ every friction level.
 **Finger pads measured too (13:00Z):** PLA cube on the silicone pads slips at 30–40° → μ 0.58–0.84. Friction ranges
 set to the measurements (2b253ad): finger links 0.8–1.3 (contacts 0.55–0.9), palm links 0.3–0.5 (contacts 0.3–0.5), cube
 0.3–0.5. The pod restarts the two fine-tunes on it (`*_servo_wp_rf_ft_r6k_v2`).
+
+**Friction alone reproduces the hand (13:10Z, normal eval at low friction, hand 0.3–0.6 / cube 0.3–0.5):** 07 9.74
+(11.13 RPM / 87.5 % / 0.20 drops; wrist 0.16 rad / **0.14 rad/s**) > 05 8.71 (11.15 / 78.1; **0.46**) > 01 8.67 (11.56
+/ 75.0; **0.47**) > 02b 6.42 (8.22 / 78.1; 0.11). 07 first, and the wrist speed separates the hand's good (07, 02b) from
+its bad (01, 05) policies exactly. The servo profile in closed loop is what ranked 07 last, so it is not validated
+(the kinematic replay is). Hedge: the 07 fine-tune switched to `-upright-wristpen-realfric-v0` (5de6236: real-hand
+friction + wrist penalty + plain 0–100 ms delay + encoder offset, no profile); the 02b fine-tune stays on
+`-upright-servo-wristpen-realfric-v0`.
+
+**Skeleton material (user):** the printed skeleton is PLA, "extreme low friction" on the PLA cube (not measured;
+~0.1–0.25 suggested). The hand's 53 colliders are all under instanced prims (no USD materials, no per-prim binding),
+so per-collider friction needs a PhysX shape-index mapping (+ GPU check); per link, the skinless links (the AP links,
+thumb_tp / thumb_ap) can be made PLA. Contact friction below half the cube's needs PhysX's "min" combine mode instead of
+the default average. Next round.
