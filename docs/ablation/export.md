@@ -123,7 +123,7 @@ How the policies consume the flat history (repo code):
 - **one warm-up call `policy(torch.zeros(1, 74))` at load** and no `reset()`; no episode hook (one node start = one
   trial).
 
-Consequences: memoryless MLP policies (all +z PPO policies) run unchanged. A history policy (student-pt, MLP-h10, LSTM)
+Consequences: memoryless MLP policies (all +z PPO policies) run unchanged. On the real hand (2026-10-31) the student's first steps stalled the loop 216–593 ms after a single warm-up call (TorchScript's profiling executor optimizing on the first real calls); **three warm-up calls, then `reset()`**, brought the longest loop step down to 74 ms. A history policy (student-pt, MLP-h10, LSTM)
 needs `self.policy.reset()` right after the warm-up call: otherwise the zero observation stays in the history for the
 first H − 1 steps (CPU test on `student_pt_rotlin`, random obs: up to 29 action units off in the first 10 steps,
 identical afterwards; with `reset()` bit-identical). Restart the node per trial (or add a reset on a new trial).

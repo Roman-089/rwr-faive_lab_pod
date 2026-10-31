@@ -484,3 +484,11 @@ than any model predicts (cube load, not in the unloaded chirps). Hand ranking so
 wrist speed) full 60 s "best"; 02b (2.3°/s) full 60 s "ok, no drop"; 12 (74°/s) full 60 s "too much wrist"; 05
 (51°/s) stopped at 46 s "bad"; 01, 03 "bad": wrist motion is the best predictor. Next: fine-tunes from 07 and 02b under
 the corrected model + wrist velocity penalty (`-upright-servo-wristpen`, pod), re-scoring of all candidates under it.
+
+**Independent confirmation (deploy session, 13:00Z).** After fixing its replay (a start-offset bias), the deploy
+session's replay of p7, p02b, p4, p05, p12 agrees: delay + per-joint amax + stiff loop gives 4.1–7.1° RMSE per trial
+(mean of 17 joints) vs 9.8–13.6° for the task's PD and 18.9–23.5° for the raw command, also on the joints whose delay /
+loop are copied from the index finger (pinky_pip 1.8 vs 4.5, middle_mcp 6.8 vs 16.9, pinky_mcp 8.5 vs 22.3; wrist 2.0
+vs 9.2, thumb_mcp 4.7 vs 20.4). Two more hand trials confirm the wrist finding: 18 (transformer student) "bad", wrist
+50.7°/s; 16 (droppen, bidirectional) "bad, cube falls when the wrist moves", 33.6°/s. Hand ranking by mean wrist speed:
+02b 2.3°/s (ok, no drop), 07 6.7 (best), 16 33.6, 05 50.6, 18 50.7 (bad), 12 73.8 (quite good, too much wrist).
