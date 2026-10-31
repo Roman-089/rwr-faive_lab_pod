@@ -1,1 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+                      Time elapsed: 00:01:01
+                               ETA: 06:03:42
+
+################################################################################
+                      [1m Learning iteration 14/5000 [0m                      
+
+                       Computation: 47713 steps/s (collection: 3.959s, learning 0.161s)
+             Mean action noise std: 1.46
+          Mean value_function loss: 544.5048
+               Mean surrogate loss: -0.0016
+                 Mean entropy loss: 28.7946
+                       Mean reward: -277.02
+               Mean episode length: 108.49
+Episode_Reward/object_position_tracking: 0.3999
+Episode_Reward/angular_acceleration: 0.0208
+       Episode_Reward/joint_vel_l2: -0.0003
+          Episode_Reward/action_l2: -0.0013
+     Episode_Reward/action_rate_l2: -0.9318
+  Episode_Reward/rotation_progress: 2.3081
+Episode_Reward/off_axis_angular_velocity: -2.7619
+        Episode_Reward/object_drop: -2.9474
+          Episode_Reward/cube_tilt: -4.6725
+Metrics/continuous_rotation/position_error: 0.1669
+Metrics/continuous_rotation/current_angular_speed: 19.5702
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 18.0702
+Metrics/continuous_rotation/angular_velocity_error: 19.6681
+Metrics/continuous_rotation/angular_velocity_alignment: -0.0065
+Metrics/continuous_rotation/consecutive_success: 0.0044
+Metrics/continuous_rotation/total_success: 4.5540
+Metrics/continuous_rotation/vertical_drift: 0.1143
+Metrics/continuous_rotation/linear_speed: 1.1684
+      Episode_Termination/time_out: 0.0716
+Episode_Termination/object_dropped: 0.8328
+--------------------------------------------------------------------------------
+                   Total timesteps: 2949120
+                    Iteration time: 4.12s
+                      Time elapsed: 00:01:05
+                               ETA: 06:02:13
+
