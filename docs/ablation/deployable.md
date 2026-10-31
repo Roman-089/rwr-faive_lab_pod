@@ -44,6 +44,14 @@ policies (#1–#3) as `<n>_<name>/policy.pt` + `policy.json`, a README for the p
 `manifest.json` (checkpoint, W&B run, Isaac / MuJoCo / in-the-loop metrics, sha256 per policy). Download:
 `wandb artifact get rwr-fast/orca_v2_repose/orca_v2_zrot_deploy:latest`.
 
+## Real-hand fine-tunes (2026-10-31 afternoon)
+
+W&B **`rwr-fast/orca_v2_repose/orca_v2_zrot_hand_ft`**: 07 fine-tuned on the real hand's friction (TPU palm 0.3–0.5,
+silicone pads 0.55–0.9, measured), a wrist penalty and delay / encoder-offset DR, after 17 + 4 hand trials showed that
+wrist motion (palm tipping on a slippery palm) is what drops the cube. v0 = `07ft_s0_m4150`: 10.0 RPM, 92 % drop-free,
+wrist 0.08 rad/s at the measured friction (07: 11.1, 88 %, 0.14). Same interface and launch as #7. Details:
+[sim2real](sim2real.md#real-hand-servo-model-as-dr-2026-10-31).
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported

@@ -609,3 +609,10 @@ four AP links, thumb_tp, thumb_ap: all hulls PLA) become a third class. With Phy
 links 0.55–0.9, PLA links 0.1–0.25 (CPU check: exact ranges, events ordered after the hand-wide one). The skinned
 links' own PLA hulls still get the skin value (instanced colliders). Not started: the current fine-tunes run on
 `-realfric`.
+
+**First real-hand fine-tune shipped (13:30Z): W&B `orca_v2_zrot_hand_ft:v0` (alias `07ft_s0_m4150`).** 07 model_4000
+fine-tuned 150 iterations (12288 envs, pod) on `-upright-wristpen-realfric-v0`. Normal eval at the measured low
+friction (`-upright-v0` + hand 0.3–0.6 / cube 0.3–0.5): 10.04 RPM, 92.2 % drop-free, 0.08 drops, wrist 0.16 rad / 0.08
+rad/s, tilt 5.9°, 2.2 flips/min vs the 07 base 11.13 / 87.5 / 0.20 / wrist 0.14: fewer drops and a calmer wrist at −10 %
+speed. On its own task (delay / offset DR, per-link friction): 13.07 RPM, 84.4 %, wrist 0.08. Export bit-exact; the
+unchanged course node ran it 10 s in the MuJoCo loop (no drop, interface match ≤ 6e-7). Sent to the deploy session.
