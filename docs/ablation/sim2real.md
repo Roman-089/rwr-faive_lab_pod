@@ -545,3 +545,12 @@ sit 5–13° more flexed under load on the hand than any model predicts). The va
 eval's (it ordered the 17 hand policies); ship rule: normal eval wrist speed ≤ ~0.1 rad/s with drop-free like the
 base, and a better `--servo` score than the base. Note: `eval_policy.py` hydra overrides must come before
 `--checkpoints` (nargs="+" takes everything after it as checkpoint paths).
+
+**Real friction measured (13:40Z, deploy session):** cube on the open palm, hand tilted at the wrist until the cube
+slides, 5 tries: 23 / 25 / 18 / 25 / 21° → **μ = tan θ ≈ 0.41 (0.32–0.47)**, below the sim's whole effective
+cube–hand range (0.55–1.5 = PhysX average of hand 0.8–2.0 and cube 0.3–1.0). So a palm tipped more than ~20–25° loses
+the cube on the real hand, which matches every trial (the level-palm policies survive). Finger pads and materials not
+measured yet. Fine-tunes restarted with hand 0.3–0.7, cube 0.3–0.6 (contact 0.3–0.65; hydra overrides of the two
+material events) + servo model + wrist penalty, from 07 and 02b (pod) and from 07 without the wrist penalty (DTU
+29860492); re-score of the candidates at low friction with and without the servo model running (does friction alone
+reproduce the hand ranking?).
