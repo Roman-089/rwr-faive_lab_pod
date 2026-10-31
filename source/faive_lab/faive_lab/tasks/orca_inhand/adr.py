@@ -242,11 +242,12 @@ ORCA_V2_SERVO_LOOP_LAG_S = {"right_wrist": 0.10, "fingers": 0.01}
 
 
 SERVO_PARTS = ("delay", "profile", "slope", "play", "stiff")
-# Default without the slope: replaying the commanded targets of 5 real-hand trials (p1-p4, p7) through the model,
-# delay + profile + play + stiff loop gives 7.2 deg RMSE (mean over joints) vs 12.4 for the old first-order PD lag;
-# adding the slope (scaled from the start pose) raises it to 10.2 (pip joints 15-20 deg): the measured slope is a
-# small-amplitude friction effect, not a gain on 70-110 deg policy swings (deploy session's replay agrees).
-DEFAULT_SERVO_PARTS = ("delay", "profile", "play", "stiff")
+# Default parts, from replaying the commanded targets of 5 real-hand trials (p1-p4, p7) through the model (RMSE vs
+# the measured joints, mean of 17): the task's PD lag alone 12.4 deg; delay + profile + play + stiff loop 7.2; the same
+# behind the task's own (soft, overdamped) PD 8.2; + slope 10.2 (the measured slope is a small-amplitude friction
+# effect, not a gain on 70-110 deg swings). In closed loop the stiff loop removed the contact damping (07 / 02 lost
+# 60-70 points of drop-free from it alone), so the default keeps the task's PD: delay + profile + play.
+DEFAULT_SERVO_PARTS = ("delay", "profile", "play")
 
 
 def use_orca_v2_servo_model(env_cfg, delay_substeps_range: tuple[int, int], adr: bool, nominal: bool = False,

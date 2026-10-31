@@ -614,13 +614,15 @@ class OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg(OrcaV2ReposeAsymOneDirDropPe
 @configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightServoEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg):
     """-onedir-droppen-upright with the real ORCA v2 servo model as DR (adr.ServoProfileAction, fitted on the real hand
-    2026-10-31): action delay 17-117 ms (2-14 substeps), per-joint acceleration-limited profile (x0.7-1.3) and play
-    (x0.5-1.5), stiff position loop, no slope (adr.DEFAULT_SERVO_PARTS); joint-encoder offset +-0.08 rad. Policy obs and critic unchanged,
+    2026-10-31): pure action delay 0-67 ms (0-8 substeps; measured 0-40 ms + 0-10 ms ROS, the rest of the 60-90 ms
+    dead time is the profile's ramp), per-joint acceleration-limited profile (x0.8-1.2) and play (x0.5-1.5) in front of
+    the task's own PD, no slope (adr.DEFAULT_SERVO_PARTS); joint-encoder offset +-0.08 rad. Policy obs and critic unchanged,
     so the deployable +z policies (07_tilt, ...) resume directly."""
 
     def __post_init__(self):
         super().__post_init__()
-        adr.use_orca_v2_servo_model(self, delay_substeps_range=(2, 14), adr=False)
+        adr.use_orca_v2_servo_model(self, delay_substeps_range=(0, 8), adr=False)
+        self.actions.joint_pos.amax_scale_range = (0.8, 1.2)
         self.observations.policy.joint_pos.func = adr.joint_pos_limit_normalized_biased
         self.observations.policy.joint_pos.params = {"bias_rad": 0.08}
 
