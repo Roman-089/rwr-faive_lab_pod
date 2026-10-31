@@ -536,3 +536,12 @@ rotlin_cont10k 73.8 full 60 s "quite good but too much wrist". Earlier: 01 "bad"
 rad/s; 01 0.32; 03 0.52; tumbling / rotlin policies higher), so **sim wrist speed is a selection criterion validated on
 the hand**, unlike the servo-model score so far. Ship rule for the fine-tunes: beat the base under `--servo` and keep the
 sim wrist speed ≤ 07's (~0.1 rad/s).
+
+**Cube motion under `--servo` (2c18c33, nominal servo):** 07 tilt 16.4°, 45 flips/min, **wrist 0.44 rad / 0.32 rad/s**
+(normal eval 0.28 / 0.09; on the hand calm and pinned at its limit, 6.7°/s) · 02 10.4°, 13, 0.20 / 0.11 · 02b 11.9°, 24,
+0.40 / 0.21 · 01 13.6°, 15, 0.30 / 0.30 · 05 16.8°, 36, 0.52 / 0.44. In closed loop the servo model makes 07's wrist
+swing, which the real hand did not: the model still misses something that matters with the cube in hand (the mcp / pip
+sit 5–13° more flexed under load on the hand than any model predicts). The validated wrist criterion is the normal
+eval's (it ordered the 17 hand policies); ship rule: normal eval wrist speed ≤ ~0.1 rad/s with drop-free like the
+base, and a better `--servo` score than the base. Note: `eval_policy.py` hydra overrides must come before
+`--checkpoints` (nargs="+" takes everything after it as checkpoint paths).
