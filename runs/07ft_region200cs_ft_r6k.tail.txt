@@ -1,40 +1,40 @@
+                     [1m Learning iteration 5599/5600 [0m                     
 
-################################################################################
-                     [1m Learning iteration 5494/5600 [0m                     
-
-                       Computation: 40417 steps/s (collection: 4.658s, learning 0.207s)
-             Mean action noise std: 0.38
-          Mean value_function loss: 1433.8051
-               Mean surrogate loss: -0.0033
-                 Mean entropy loss: 6.3511
-                       Mean reward: 1558.68
-               Mean episode length: 475.79
-Episode_Reward/object_position_tracking: 2.3350
-Episode_Reward/angular_acceleration: 0.1989
+                       Computation: 42205 steps/s (collection: 4.438s, learning 0.220s)
+             Mean action noise std: 0.37
+          Mean value_function loss: 1504.3105
+               Mean surrogate loss: -0.0039
+                 Mean entropy loss: 6.2341
+                       Mean reward: 1622.72
+               Mean episode length: 483.26
+Episode_Reward/object_position_tracking: 2.2880
+Episode_Reward/angular_acceleration: 0.1947
        Episode_Reward/joint_vel_l2: -0.0007
           Episode_Reward/action_l2: -0.0169
-     Episode_Reward/action_rate_l2: -1.3195
-  Episode_Reward/rotation_progress: 57.0465
-Episode_Reward/off_axis_angular_velocity: -3.4586
-        Episode_Reward/object_drop: -0.8462
-          Episode_Reward/cube_tilt: -1.8442
-          Episode_Reward/wrist_vel: -0.6404
-        Episode_Reward/cube_region: -4.1202
-Metrics/continuous_rotation/position_error: 0.0733
-Metrics/continuous_rotation/current_angular_speed: 7.9136
+     Episode_Reward/action_rate_l2: -1.3082
+  Episode_Reward/rotation_progress: 57.5477
+Episode_Reward/off_axis_angular_velocity: -3.4535
+        Episode_Reward/object_drop: -0.9006
+          Episode_Reward/cube_tilt: -1.7472
+          Episode_Reward/wrist_vel: -0.6876
+        Episode_Reward/cube_region: -3.6874
+Metrics/continuous_rotation/position_error: 0.0763
+Metrics/continuous_rotation/current_angular_speed: 8.9949
 Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 6.4136
-Metrics/continuous_rotation/angular_velocity_error: 7.6432
-Metrics/continuous_rotation/angular_velocity_alignment: 0.4494
-Metrics/continuous_rotation/consecutive_success: 0.2253
-Metrics/continuous_rotation/total_success: 103.4144
-Metrics/continuous_rotation/vertical_drift: 0.0452
-Metrics/continuous_rotation/linear_speed: 0.4918
-      Episode_Termination/time_out: 0.7271
-Episode_Termination/object_dropped: 0.2729
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 7.4949
+Metrics/continuous_rotation/angular_velocity_error: 8.7128
+Metrics/continuous_rotation/angular_velocity_alignment: 0.4653
+Metrics/continuous_rotation/consecutive_success: 0.2471
+Metrics/continuous_rotation/total_success: 99.4736
+Metrics/continuous_rotation/vertical_drift: 0.0483
+Metrics/continuous_rotation/linear_speed: 0.5227
+      Episode_Termination/time_out: 0.7281
+Episode_Termination/object_dropped: 0.2719
 --------------------------------------------------------------------------------
-                   Total timesteps: 175964160
-                    Iteration time: 4.86s
-                      Time elapsed: 01:10:29
-                               ETA: 00:08:20
+                   Total timesteps: 196608000
+                    Iteration time: 4.66s
+                      Time elapsed: 01:18:57
+                               ETA: 00:00:04
 
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+TRAIN_EXIT rc=0

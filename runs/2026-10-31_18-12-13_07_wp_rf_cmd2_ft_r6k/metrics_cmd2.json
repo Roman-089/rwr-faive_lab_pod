@@ -88,5 +88,35 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4700.pt": {
+  "rpm": 11.014062881469727,
+  "rpm_std": 3.014770984649658,
+  "ra": 85.10973453521729,
+  "dfsr": 90.625,
+  "dc": 0.109375,
+  "checkpoint": "model_4700.pt",
+  "cmd": 2.0,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_4800.pt": {
+  "rpm": 11.48336124420166,
+  "rpm_std": 2.797017812728882,
+  "ra": 87.59211897850037,
+  "dfsr": 90.625,
+  "dc": 0.09375,
+  "checkpoint": "model_4800.pt",
+  "cmd": 2.0,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
