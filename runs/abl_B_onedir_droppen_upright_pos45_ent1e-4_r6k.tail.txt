@@ -1,40 +1,40 @@
-                 Mean entropy loss: 13.4853
-                       Mean reward: 2720.43
-               Mean episode length: 595.25
-Episode_Reward/object_position_tracking: 14.5499
-Episode_Reward/angular_acceleration: 0.0959
-       Episode_Reward/joint_vel_l2: -0.0006
-          Episode_Reward/action_l2: -0.0180
-     Episode_Reward/action_rate_l2: -2.4054
-  Episode_Reward/rotation_progress: 83.1828
-Episode_Reward/off_axis_angular_velocity: -8.4844
-        Episode_Reward/object_drop: -0.3256
-          Episode_Reward/cube_tilt: -5.1072
-Metrics/continuous_rotation/position_error: 0.0389
-Metrics/continuous_rotation/current_angular_speed: 5.3152
-Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 3.8152
-Metrics/continuous_rotation/angular_velocity_error: 5.1223
-Metrics/continuous_rotation/angular_velocity_alignment: 0.3777
-Metrics/continuous_rotation/consecutive_success: 0.1180
-Metrics/continuous_rotation/total_success: 56.7323
-Metrics/continuous_rotation/vertical_drift: 0.0244
-Metrics/continuous_rotation/linear_speed: 0.2334
-      Episode_Termination/time_out: 0.9063
-Episode_Termination/object_dropped: 0.0937
+[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
+[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
+/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
+  warnings.warn(
+/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
+  warnings.warn(
 --------------------------------------------------------------------------------
-                   Total timesteps: 786432000
-                    Iteration time: 4.31s
-                      Time elapsed: 04:53:24
-                               ETA: 00:00:04
-
-wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
-[eval_run] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_01-07-40_abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k (orca-v2-inhand-repose-asym-onedir-droppen-upright-v0): model_500.pt model_1500.pt model_2000.pt model_3000.pt model_3999.pt
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-[INFO][AppLauncher]: Using device: cuda:0
-[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
-[Info] [carb] Logging to file: /tmp/rwr_kit_eval_389553/logs/Kit/Isaac-Sim/5.1/kit_20261031_060557.log
-2026-10-31T06:06:06Z [8,908ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
-2026-10-31T06:06:12Z [15,609ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
-2026-10-31T06:06:15Z [18,345ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
-2026-10-31T06:06:15Z [18,473ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+Resolved observation sets: 
+	 policy :  ['policy']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor MLP: MLP(
+  (0): Linear(in_features=74, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+Critic MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=1, bias=True)
+)
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_01-07-40_abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k/model_500.pt: {'rpm': 9.54205322265625, 'rpm_std': 3.487175941467285, 'ra': 65.01272916793823, 'dfsr': 50.0, 'dc': 0.84375, 'checkpoint': 'model_500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_01-07-40_abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k/model_1500.pt: {'rpm': 12.22441291809082, 'rpm_std': 2.4708757400512695, 'ra': 70.91541886329651, 'dfsr': 46.875, 'dc': 0.96875, 'checkpoint': 'model_1500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_01-07-40_abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k/model_2000.pt: {'rpm': 12.451086044311523, 'rpm_std': 3.1212406158447266, 'ra': 72.4153995513916, 'dfsr': 57.8125, 'dc': 0.59375, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_01-07-40_abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k/model_3000.pt: {'rpm': 11.603071212768555, 'rpm_std': 3.1143455505371094, 'ra': 69.89145278930664, 'dfsr': 45.3125, 'dc': 0.921875, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-v0', 'perturb': True}
