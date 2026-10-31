@@ -36,6 +36,14 @@ everything works, then #1. The ADR policies (#1–#3) drop 3–5× less under de
 good draw (seed 1: 9.6 RPM / 74 %); seeds 1 and 2 of #5 / #1's base config are queued. The +z speed counts rotation
 about world z only; all ranked policies keep the cube flat, so it is not inflated by tumbling.
 
+## Deploy package (for the hand)
+
+W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_zrot_deploy`** (v0, aliases `latest`, `2026-10-31`): the three ADR
+policies (#1–#3) as `<n>_<name>/policy.pt` + `policy.json`, a README for the person at the hand, `run_policy.sh <n>`
+(runs the unchanged course node with `goal_ang_vel:=1.5`, flip period 0; extra `-p` args pass through) and
+`manifest.json` (checkpoint, W&B run, Isaac / MuJoCo / in-the-loop metrics, sha256 per policy). Download:
+`wandb artifact get rwr-fast/orca_v2_repose/orca_v2_zrot_deploy:latest`.
+
 ## Files
 
 On DTU under `~/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/<run dir>/exported/` (`policy_history.pt` + `.json`):
