@@ -364,6 +364,12 @@ Third replicate of the ADR effect: perturbed drop-free +23 points, nominal uncha
 robust policy so far (+2.5 RPM over tilt penalty + ADR at a similar perturbed rate). model_5500 (98 / 72 %) exported
 bit-exact (W&B checkpoint; params from the resumed run, `params/SOURCE.txt`). MuJoCo: job 29859924.
 
+**Fourth ADR fine-tune: the weaker tilt-penalty seed (2026-10-31 14:40, DTU, W&B 2kv2feur).** Resume of
+`abl_B_onedir_droppen_upright_ent1e-4_seed1` model_4999 (9.6 RPM, 74 / 39 %), +2000 it, `-upright-adr-v0`. Last-3 mean:
+nominal 8.66 RPM / 80.7 % (+6 points), perturbed 9.79 RPM / 52.6 % (+14 points), cube flat (7.8°), wrist 0.08 rad/s;
+`--servo` 5.57 / 25.5 %. ADR helps every base, but less on a weak one (+14 points vs +23–31 for position ×3, tilt seed
+0 and tilt + position ×3).
+
 ## Deadline plan: deployable policies by 2026-10-31 10:00 Zurich (09:00Z)
 
 User request 2026-10-30 22:30: "robust, deployable policies by 10 am". Teacher → student needs ~12 h (6k + 2k on the
