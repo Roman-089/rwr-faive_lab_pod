@@ -178,5 +178,35 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_5300.pt": {
+  "rpm": 11.459348678588867,
+  "rpm_std": 2.4462966918945312,
+  "ra": 88.25352191925049,
+  "dfsr": 89.0625,
+  "dc": 0.109375,
+  "checkpoint": "model_5300.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_5400.pt": {
+  "rpm": 13.594341278076172,
+  "rpm_std": 3.9083874225616455,
+  "ra": 88.33885192871094,
+  "dfsr": 82.8125,
+  "dc": 0.234375,
+  "checkpoint": "model_5400.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
