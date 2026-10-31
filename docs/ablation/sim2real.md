@@ -502,7 +502,7 @@ real hand's 150–300 ms tracking lag and occasional drops); play is harmless; t
 setting (on the servo the profile is what smooths the motion). Fine-tunes under delay + profile + play + stiff loop +
 wrist penalty, from 07 and 02b, 12288 envs each (32768 overflowed PhysX's contact buffer), started ~12:40Z.
 
-**Closed loop says the model is too harsh (13:05Z).** Under delay 17–117 ms + profile + play + stiff loop (`--servo`
+**Closed loop says the model is too harsh (12:35Z).** Under delay 17–117 ms + profile + play + stiff loop (`--servo`
 of f2e4e2a) every candidate drops the cube all the time (0 % drop-free, 07: 20 drops per minute) and 07, the hand's best,
 ranks last. Two errors: (1) the delay was double counted: the measured pure delay is 0–40 ms (+0–10 ms ROS), the rest
 of the 60–90 ms dead time is the profile's ramp, which the model now produces itself; (2) the stiff loop (damping cut
@@ -512,7 +512,7 @@ the task's PD; training delay 0–8 substeps (0–67 ms), amax ×0.8–1.2, play
 hand: delay 0–6 substeps, nominal values. Validation (07 / 02b above 01 / 05) and the two wrist-penalty fine-tunes
 started together on the pod.
 
-**Validation still fails with the corrected model (13:20Z, `--servo` of 2c18c33, the measured hand):** 01 11.24 RPM /
+**Validation still fails with the corrected model (12:40Z, `--servo` of 2c18c33, the measured hand):** 01 11.24 RPM /
 35.9 % / 1.58 (score 4.04) > 02 11.11 / 31.2 / 1.61 (3.47) > 02b 8.98 / 17.2 / 3.20 (1.54) > 05 8.03 / 15.6 / 4.14 (1.25)
 > 07 7.52 / 6.2 / 5.66 (0.47). Much milder than before, but the ADR policies win and 07 is last; the hand says 07, 02b
 good, 01, 05 bad. The model now rewards delay robustness, not what fails on the hand.
@@ -526,7 +526,7 @@ likely lower. Test running: `--servo` with contact friction ~0.3–0.55 (hydra o
 the deploy session is asked to measure the slip angle (μ ≈ tan θ). The wrist-penalty fine-tunes from 07 / 02b keep
 running meanwhile (12:43Z, 12288 envs, 5.3 s/it).
 
-**17 of 19 policies on the real hand (13:30Z, deploy session; flat forearm, −30° wrist relay): mean |wrist speed|
+**17 of 19 policies on the real hand (12:45Z, deploy session; flat forearm, −30° wrist relay): mean |wrist speed|
 ranks them without exception.** 02b 2.3°/s full 60 s "ok, no drop" · 07 6.7 full 60 s "best" · 17 (asym ent 5e-3,
 bidirectional) 15.2, 52 s "is ok" · 16 droppen 33.6 full 60 s "bad, cube falls when wrist moves" · 09 (tumbles) 47.0,
 25 s · 05 50.6, 46 s "bad" · 18 student_pt 50.7, 44 s "bad" · 06 pos45 55.9, 23 s · 15 rotlin_droppen 57.2 full 60 s
@@ -546,7 +546,7 @@ eval's (it ordered the 17 hand policies); ship rule: normal eval wrist speed ≤
 base, and a better `--servo` score than the base. Note: `eval_policy.py` hydra overrides must come before
 `--checkpoints` (nargs="+" takes everything after it as checkpoint paths).
 
-**Real friction measured (13:40Z, deploy session):** cube on the open palm, hand tilted at the wrist until the cube
+**Real friction measured (12:50Z, deploy session):** cube on the open palm, hand tilted at the wrist until the cube
 slides, 5 tries: 23 / 25 / 18 / 25 / 21° → **μ = tan θ ≈ 0.41 (0.32–0.47)**, below the sim's whole effective
 cube–hand range (0.55–1.5 = PhysX average of hand 0.8–2.0 and cube 0.3–1.0). So a palm tipped more than ~20–25° loses
 the cube on the real hand, which matches every trial (the level-palm policies survive). Finger pads and materials not
@@ -562,7 +562,7 @@ the wrist criterion added (sim wrist ≤ ~0.15 rad/s) the order is 02 > 02b, 01 
 07, which in the sim is fragile under the actuator dynamics but ran a clean minute on the real hand (one trial).
 Fine-tunes restarted 12:56Z with low friction + servo model + wrist penalty from 07 and 02b (`*_servo_wp_lf_ft_r6k`).
 
-**Materials (user, 14:00Z): PLA cube, TPU palm, soft silicone fingers ("10 NV", probably Shore ~10A).** The measured
+**Materials (user, 12:58Z): PLA cube, TPU palm, soft silicone fingers ("10 NV", probably Shore ~10A).** The measured
 μ ≈ 0.41 is PLA on the TPU palm; PLA on soft silicone is typically ~0.8–1.2. One friction range for the whole hand is
 therefore wrong: `use_real_hand_friction` sets the finger links to 1.2–2.0, the palm links (forearm, tower, carpals,
 thumb_tp) to 0.3–0.6 via an extra startup event that overrides only their shapes, and the cube to 0.3–0.5, so PhysX's
@@ -571,6 +571,6 @@ average gives palm contacts 0.3–0.55 and finger contacts 0.75–1.25. Task `-u
 (hand 0.5–0.8, cube 0.4–0.6): 02 3.79 > 01 2.90 > 02b 2.49 > 05 1.13 > 07 0.41: under the servo model 07 is last at
 every friction level.
 
-**Finger pads measured too (14:10Z):** PLA cube on the silicone pads slips at 30–40° → μ 0.58–0.84. Friction ranges
+**Finger pads measured too (13:00Z):** PLA cube on the silicone pads slips at 30–40° → μ 0.58–0.84. Friction ranges
 set to the measurements (2b253ad): finger links 0.8–1.3 (contacts 0.55–0.9), palm links 0.3–0.5 (contacts 0.3–0.5), cube
 0.3–0.5. The pod restarts the two fine-tunes on it (`*_servo_wp_rf_ft_r6k_v2`).
