@@ -671,6 +671,25 @@ class OrcaV2ReposeAsymOneDirDropPenUprightServoWristPenRealFrictionEnvCfg(
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightWristPenEnvCfg):
+    """-upright-wristpen with the real hand's friction and the deployment gaps as plain DR, no servo profile: action
+    delay 0-100 ms (0-12 substeps; the real dead time is 60-90 ms), joint-encoder offset +-0.08 rad. At low friction
+    the task's own actuators rank the real-hand policies the hand's way (07 first, wrist speed separating 07 / 02b from
+    01 / 05), while the servo profile in closed loop put 07 last."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        use_real_hand_friction(self)
+        a = self.actions.joint_pos
+        self.actions.joint_pos = DelayedEMAJointPositionToLimitsActionCfg(
+            asset_name=a.asset_name, joint_names=a.joint_names, alpha=a.alpha,
+            rescale_to_limits=a.rescale_to_limits, delay_substeps_range=(0, 12),
+        )
+        self.observations.policy.joint_pos.func = joint_pos_limit_normalized_biased
+        self.observations.policy.joint_pos.params = {"bias_rad": 0.08}
+
+
+@configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightWristPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg):
     """-onedir-droppen-upright-adr + the wrist velocity penalty: ADR fine-tune of an -onedir-droppen-upright-wristpen
     policy (same obs and critic)."""
