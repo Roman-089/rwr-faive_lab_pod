@@ -491,6 +491,7 @@ that the wrist still moves too much. `scripts/eval/cube_motion.py` (nominal roll
 | +z teacher 742zn06f | 1.59 | 3.69 | 31.8 / 45.2 | 171 | 1.24 / 2.19 |
 | rotlin student p3dxn5pm | 1.14 | 1.49 | **6.7 / 11.5** | **3.8** | 0.48 / 0.23 |
 | rotlin teacher | 1.24 | 1.43 | 6.3 / 10.6 | 2.6 | 0.36 / 0.15 |
+| +z tilt penalty (5oklh054, default entropy) | 1.18 | 1.52 | **7.4 / 14.7** | **2.7** | **0.28 / 0.09** |
 
 The rotlin policies turn the cube flat (one face up, 6° tilt; their off-axis spin is rocking). Every +z policy tumbles
 it: 25–36° mean tilt, the top face changes ~2–3 times per second, more spin about the horizontal axes than about z. RPM
@@ -534,3 +535,14 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   sensitive to action delay and encoder offset. Cube motion (model_5999): tilt 20° mean / 35° p90, **16 face changes /
   min** (742zn06f: 32° / 171), wrist 0.43 rad / 0.51 rad/s: the wrist penalty also mostly stops the tumbling, so the
   wrist swing was a main driver of it.
+- **Tilt penalty on default entropy (`abl_B_onedir_droppen_upright_ent1e-4_r6k`, pod, W&B 5oklh054)**, nominal /
+  perturbed: 1000 12.24 / 11.21 RPM, 83 / 58 % · 2000 11.90 / 11.20, 91 / 53 % · 3000 11.67 / 11.06, **95** / 53 % · 4000
+  11.21 / 11.26, 94 / **63** % · 4999 11.24 / 10.54, 91 / 47 %, DC 0.09 / 0.80. Last-3 mean **11.4 RPM, 93 % drop-free,
+  DC 0.07, perturbed 54 % / DC 0.83** vs the same config without it (qn0pkisu) 17.5 / 76 % / 0.30 / 28 %. Cube motion
+  (model_4999): tilt **7.4° mean / 14.7° p90, 2.7 face changes / min** (qn0pkisu 36° / 173), wrist **0.28 rad /
+  0.09 rad/s** (0.64 / 1.10): a flat z-rotation like the rotlin policies, the calmest wrist of any policy so far, and the
+  most reliable +z policy; it gives up 6 RPM, i.e. most of the "speed" of the tumbling policies was off-axis tumbling.
+  Pod decision rule → GOOD: teacher `teacher_onedir_droppen_upright_pos45` (6k) and the ADR fine-tune of this policy
+  (`upright_adr`, 2k) started / queued on the pod. Dose: upright500 (stronger) and upright100 (weaker) queued on DTU.
+  model_4000 (best nominal + perturbed pair, 94 / 63 %) exported bit-exact: `<run>/exported/policy_history.pt`
+  (params from the DTU seed-1 run of the same config, `params/SOURCE.txt`).
