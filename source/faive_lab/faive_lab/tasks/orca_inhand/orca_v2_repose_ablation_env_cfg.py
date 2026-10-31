@@ -689,6 +689,43 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg(OrcaV2Repos
         self.observations.policy.joint_pos.params = {"bias_rad": 0.08}
 
 
+ORCA_V2_TPU_PALM_BODIES = ["right_forearm", "right_tower", "right_carpals"]
+ORCA_V2_PLA_BODIES = [  # finger links without silicone skin (all collision hulls printed PLA)
+    "right_index_ap", "right_middle_ap", "right_pinky_ap", "right_ring_ap", "right_thumb_tp", "right_thumb_ap",
+]
+
+
+def use_real_hand_friction_v2(env_cfg: OrcaV2ReposeEnvCfg):
+    """``use_real_hand_friction`` with the PLA skeleton as its own material: contacts with the PLA cube of the TPU palm
+    0.3-0.5 (measured 0.32-0.47), the silicone-skinned finger links 0.55-0.9 (measured 0.58-0.84), and the skinless PLA
+    links 0.1-0.25 (PLA on PLA, "extreme low", not measured). With PhysX's average combine and the cube at 0.2-0.3 the
+    link ranges are 2 * contact - cube: PLA 0.0-0.2, palm 0.4-0.7, skin links 0.9-1.5. Per link: the skinned links' PLA
+    skeleton hulls get the skin value (the hand's 53 colliders are instanced, no per-collider materials)."""
+    rng = lambda lo, hi: {"static_friction_range": (lo, hi), "dynamic_friction_range": (lo, hi)}  # noqa: E731
+    env_cfg.events.robot_physics_material.params.update(rng(0.9, 1.5))
+    env_cfg.events.object_physics_material.params.update(rng(0.2, 0.3))
+    # after robot_physics_material (same startup mode, defined later): override only these links' shapes
+    for name, bodies, r in (("palm_physics_material", ORCA_V2_TPU_PALM_BODIES, (0.4, 0.7)),
+                            ("pla_physics_material", ORCA_V2_PLA_BODIES, (0.0, 0.2))):
+        setattr(env_cfg.events, name, EventTerm(
+            func=mdp.randomize_rigid_body_material,
+            mode="startup",
+            params={"asset_cfg": SceneEntityCfg("robot", body_names=bodies), **rng(*r),
+                    "restitution_range": (0.0, 0.0), "num_buckets": 250},
+        ))
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFriction2EnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg
+):
+    """-upright-wristpen-realfric with the PLA skeleton links as a third friction class (``use_real_hand_friction_v2``)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        use_real_hand_friction_v2(self)
+
+
 @configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightWristPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg):
     """-onedir-droppen-upright-adr + the wrist velocity penalty: ADR fine-tune of an -onedir-droppen-upright-wristpen
