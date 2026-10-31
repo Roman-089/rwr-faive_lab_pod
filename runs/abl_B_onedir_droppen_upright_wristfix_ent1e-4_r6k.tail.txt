@@ -1,40 +1,40 @@
-                      Time elapsed: 04:51:13
-                               ETA: 01:49:13
+                      Time elapsed: 05:09:52
+                               ETA: 01:32:50
 
 ################################################################################
-                     [1m Learning iteration 3637/5000 [0m                     
+                     [1m Learning iteration 3848/5000 [0m                     
 
-                       Computation: 36888 steps/s (collection: 5.141s, learning 0.189s)
+                       Computation: 40416 steps/s (collection: 4.462s, learning 0.402s)
              Mean action noise std: 0.31
-          Mean value_function loss: 1281.2857
-               Mean surrogate loss: -0.0049
-                 Mean entropy loss: 3.5280
-                       Mean reward: 1605.62
-               Mean episode length: 497.17
-Episode_Reward/object_position_tracking: 1.3136
-Episode_Reward/angular_acceleration: 0.0881
-       Episode_Reward/joint_vel_l2: -0.0004
+          Mean value_function loss: 1370.9955
+               Mean surrogate loss: -0.0048
+                 Mean entropy loss: 3.3126
+                       Mean reward: 1588.12
+               Mean episode length: 493.41
+Episode_Reward/object_position_tracking: 1.3203
+Episode_Reward/angular_acceleration: 0.0905
+       Episode_Reward/joint_vel_l2: -0.0005
           Episode_Reward/action_l2: -0.0093
-     Episode_Reward/action_rate_l2: -1.0996
-  Episode_Reward/rotation_progress: 62.3481
-Episode_Reward/off_axis_angular_velocity: -6.0234
-        Episode_Reward/object_drop: -0.9975
-          Episode_Reward/cube_tilt: -4.6021
-Metrics/continuous_rotation/position_error: 0.0879
-Metrics/continuous_rotation/current_angular_speed: 8.7880
+     Episode_Reward/action_rate_l2: -1.1050
+  Episode_Reward/rotation_progress: 62.5856
+Episode_Reward/off_axis_angular_velocity: -5.9924
+        Episode_Reward/object_drop: -1.0049
+          Episode_Reward/cube_tilt: -4.7893
+Metrics/continuous_rotation/position_error: 0.0920
+Metrics/continuous_rotation/current_angular_speed: 9.6078
 Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 7.2880
-Metrics/continuous_rotation/angular_velocity_error: 8.7589
-Metrics/continuous_rotation/angular_velocity_alignment: 0.2436
-Metrics/continuous_rotation/consecutive_success: 0.1333
-Metrics/continuous_rotation/total_success: 47.7203
-Metrics/continuous_rotation/vertical_drift: 0.0556
-Metrics/continuous_rotation/linear_speed: 0.4581
-      Episode_Termination/time_out: 0.7342
-Episode_Termination/object_dropped: 0.2660
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 8.1078
+Metrics/continuous_rotation/angular_velocity_error: 9.5639
+Metrics/continuous_rotation/angular_velocity_alignment: 0.2249
+Metrics/continuous_rotation/consecutive_success: 0.0624
+Metrics/continuous_rotation/total_success: 49.4571
+Metrics/continuous_rotation/vertical_drift: 0.0549
+Metrics/continuous_rotation/linear_speed: 0.4669
+      Episode_Termination/time_out: 0.7248
+Episode_Termination/object_dropped: 0.2756
 --------------------------------------------------------------------------------
-                   Total timesteps: 715259904
-                    Iteration time: 5.33s
-                      Time elapsed: 04:51:19
-                               ETA: 01:49:08
+                   Total timesteps: 756744192
+                    Iteration time: 4.86s
+                      Time elapsed: 05:09:57
+                               ETA: 01:32:46
 
