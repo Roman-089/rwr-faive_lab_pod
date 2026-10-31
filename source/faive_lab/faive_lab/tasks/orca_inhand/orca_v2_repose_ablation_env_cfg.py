@@ -785,6 +785,26 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200CEnvCfg(
         t.params["target_xy"] = CUBE_AXIS_REGION["center"]
 
 
+def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
+    """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
+    (offsets from the default root state), so the command's target and the goal observation stay unchanged."""
+    pr = env_cfg.events.reset_object.params["pose_range"]
+    pr["x"] = [center[0] - 0.005, center[0] + 0.005]
+    pr["y"] = [center[1] - 0.005, center[1] + 0.005]
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200CSEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200CEnvCfg
+):
+    """-region200c with the cube also spawned at the region centre: from (0, 0) it starts 17.9 mm off centre, 7.5 mm
+    inside the circle on the side where 95 % of the excursions leave (the user places the real cube by hand)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        center_cube_spawn(self)
+
+
 @configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightWristPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg):
     """-onedir-droppen-upright-adr + the wrist velocity penalty: ADR fine-tune of an -onedir-droppen-upright-wristpen
