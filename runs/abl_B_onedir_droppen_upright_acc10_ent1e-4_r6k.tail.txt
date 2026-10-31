@@ -1,40 +1,40 @@
-                      Time elapsed: 04:51:08
-                               ETA: 00:08:18
-
-################################################################################
-                     [1m Learning iteration 3890/4000 [0m                     
-
-                       Computation: 34714 steps/s (collection: 5.471s, learning 0.192s)
-             Mean action noise std: 0.31
-          Mean value_function loss: 1738.9196
-               Mean surrogate loss: -0.0007
-                 Mean entropy loss: 3.4676
-                       Mean reward: 1966.05
-               Mean episode length: 566.87
-Episode_Reward/object_position_tracking: 1.6384
-Episode_Reward/angular_acceleration: 1.2098
-       Episode_Reward/joint_vel_l2: -0.0007
-          Episode_Reward/action_l2: -0.0169
-     Episode_Reward/action_rate_l2: -1.0878
-  Episode_Reward/rotation_progress: 70.9957
-Episode_Reward/off_axis_angular_velocity: -6.8734
-        Episode_Reward/object_drop: -0.6389
-          Episode_Reward/cube_tilt: -4.2437
-Metrics/continuous_rotation/position_error: 0.0712
-Metrics/continuous_rotation/current_angular_speed: 7.1212
+                 Mean entropy loss: 3.3194
+                       Mean reward: 1902.86
+               Mean episode length: 579.26
+Episode_Reward/object_position_tracking: 1.5486
+Episode_Reward/angular_acceleration: 1.2691
+       Episode_Reward/joint_vel_l2: -0.0006
+          Episode_Reward/action_l2: -0.0166
+     Episode_Reward/action_rate_l2: -1.0426
+  Episode_Reward/rotation_progress: 68.7967
+Episode_Reward/off_axis_angular_velocity: -6.8217
+        Episode_Reward/object_drop: -0.7659
+          Episode_Reward/cube_tilt: -4.3315
+Metrics/continuous_rotation/position_error: 0.0779
+Metrics/continuous_rotation/current_angular_speed: 7.1206
 Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 5.6212
-Metrics/continuous_rotation/angular_velocity_error: 7.1612
-Metrics/continuous_rotation/angular_velocity_alignment: 0.2241
-Metrics/continuous_rotation/consecutive_success: 0.0967
-Metrics/continuous_rotation/total_success: 59.8888
-Metrics/continuous_rotation/vertical_drift: 0.0417
-Metrics/continuous_rotation/linear_speed: 0.3863
-      Episode_Termination/time_out: 0.7522
-Episode_Termination/object_dropped: 0.2478
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 5.6206
+Metrics/continuous_rotation/angular_velocity_error: 7.0710
+Metrics/continuous_rotation/angular_velocity_alignment: 0.2512
+Metrics/continuous_rotation/consecutive_success: 0.0636
+Metrics/continuous_rotation/total_success: 57.7246
+Metrics/continuous_rotation/vertical_drift: 0.0459
+Metrics/continuous_rotation/linear_speed: 0.4700
+      Episode_Termination/time_out: 0.7642
+Episode_Termination/object_dropped: 0.2360
 --------------------------------------------------------------------------------
-                   Total timesteps: 765001728
-                    Iteration time: 5.66s
-                      Time elapsed: 04:51:13
-                               ETA: 00:08:13
+                   Total timesteps: 786432000
+                    Iteration time: 5.47s
+                      Time elapsed: 05:01:53
+                               ETA: 00:00:04
 
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+[eval_run] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_05-42-33_abl_B_onedir_droppen_upright_acc10_ent1e-4_r6k (orca-v2-inhand-repose-asym-onedir-droppen-upright-v0): model_500.pt model_1500.pt model_2000.pt model_3000.pt model_3999.pt
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+[INFO][AppLauncher]: Using device: cuda:0
+[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
+[Info] [carb] Logging to file: /tmp/rwr_kit_eval_460822/logs/Kit/Isaac-Sim/5.1/kit_20261031_104927.log
+2026-10-31T10:49:36Z [9,145ms] [Warning] [omni.usd_config.extension] Enable omni.materialx.libs extension to use MaterialX
+2026-10-31T10:49:44Z [16,376ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+2026-10-31T10:49:47Z [19,209ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+2026-10-31T10:49:47Z [19,340ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
