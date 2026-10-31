@@ -44,6 +44,7 @@ table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node
 | `abl_B_onedir_droppen_pos45_ent5e-3` (model_4999, +z only, cube position ×3, no tumbling) | **12.59** | 81 / 86 / 0.14 | **6.03** (64) | 75 / **92** / 0.08 | **5.60** (64) | 66 / **92** / 0.08 | 0.48 / 0.44 |
 | `abl_B_onedir_droppen_upright_ent1e-4` (model_4000, +z only, cube tilt penalty, flat) | **11.21** | 80 / 94 / 0.06 | **7.18** (64) | 78 / 84 / 0.20 | **6.20** (64) | 72 / 84 / 0.22 | **0.64 / 0.55** |
 | `abl_B_onedir_droppen_pos45_adr_from5e-3` (model_7000, +z only, position ×3 + ADR on delay / offset) | **12.30** | 82 / 95 / 0.05 | **5.68** (64) | 79 / **92** / 0.08 | **4.58** (64) | 62 / 89 / 0.11 | 0.46 / 0.37 |
+| `abl_B_onedir_droppen_upright_adr` (model_5500, +z only, tilt penalty + ADR) | **10.62** | 81 / 94 / 0.06 | **7.08** (64) | 80 / **92** / 0.09 | **5.64** (64) | 70 / 89 / 0.12 | **0.67 / 0.53** |
 
 Rows added 2026-10-29 23:10 (job 29851207, CPU queue `hpc`, 64 trials each; informational, decisions use Isaac). The
 fastest Isaac policy (onedir, 15.2 RPM) keeps only 36 % of its speed and drops most; the drop-penalty run keeps the
@@ -105,6 +106,10 @@ drop-free (position ×3: 92 %). A flat z-rotation transfers best; the tumbling "
 perturbed drop-free 84 % vs 50 % before ADR) scores 5.7 RPM / 92 % in MuJoCo, 4.6 RPM / 89 % with Isaac's DR: about the
 same as before ADR (6.0 / 92 %, 5.6 / 92 %). MuJoCo has no delay or encoder offset, so ADR's gain cannot show here;
 it does not make the MuJoCo transfer worse beyond ~1 RPM under DR.
+
+**2026-10-31 06:20 (job 29859208, informational).** Tilt penalty + ADR (model_5500): 7.1 RPM / 92 % in MuJoCo, 5.6 RPM /
+89 % with Isaac's DR: as fast as the tilt-penalty policy before ADR (7.2) and as drop-free as position ×3 (92 %), i.e.
+the best MuJoCo result of any policy so far, and 67 % of its Isaac speed.
 
 ## Design
 
