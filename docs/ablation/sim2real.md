@@ -616,3 +616,8 @@ friction (`-upright-v0` + hand 0.3–0.6 / cube 0.3–0.5): 10.04 RPM, 92.2 % dr
 rad/s, tilt 5.9°, 2.2 flips/min vs the 07 base 11.13 / 87.5 / 0.20 / wrist 0.14: fewer drops and a calmer wrist at −10 %
 speed. On its own task (delay / offset DR, per-link friction): 13.07 RPM, 84.4 %, wrist 0.08. Export bit-exact; the
 unchanged course node ran it 10 s in the MuJoCo loop (no drop, interface match ≤ 6e-7). Sent to the deploy session.
+
+**Seed 1 reproduces it (13:35Z):** `07_wp_rf_ft_seed1_r6k` model_4150 at the measured low friction: 10.34 RPM, 93.8 %
+drop-free, 0.06 drops, wrist 0.08 rad/s (score 9.70 vs 07's 9.74); own task 13.17 RPM, 81.2 %. Both seeds cut the drops
+~3× and calm the wrist at about the base's speed. Shipped together as `orca_v2_zrot_hand_ft:v2` (folders
+`07ft_s1_m4150`, recommended, and `07ft_s0_m4150`; v1 had a misnamed folder, superseded).
