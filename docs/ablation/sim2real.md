@@ -664,3 +664,14 @@ s1 m4150 10.34 / 93.8, m4300 10.80 / 93.8, m4450 10.89 / 89.1; realfric2 (PLA sk
 **98.4** / 0.02. Seed 0 m4600 stays recommended (A: best on its harder training task, 90.6 %); realfric2 m5200 is
 candidate B (trained also with the slippery PLA skeleton). `orca_v2_zrot_hand_ft:v8` (latest) holds both plus the
 earlier three; v7 holds only B.
+
+## Cube rotation-axis region (user, 2026-10-31 15:40Z)
+
+The user chose, with `docs/ablation/tools/palm_axis_region.html`, the region the cube's rotation axis (the vertical
+through the cube centre, the cube turns about world z) may occupy: centre (−11.6, 13.6) mm, radius 27.5 mm (env frame;
+contains the commanded cube position (0, 0) at 17.9 mm). Term (`rewards_ablation.cube_outside_region`, user: "fall
+exponentially if outside the circle"): 50 × (exp(−e / 10 mm) − 1), e = distance outside the circle: 0 inside, −31.6 per
+second 10 mm outside, slope 5 per mm at the boundary, saturating at −50 per second (rotation reward ~90 per second).
+Task `-upright-wristpen-realfric-region-v0` (78e09b8) = the real-hand recipe + this term. Baseline: 07 (model_4999)
+keeps the cube inside 91.8 % of the time (`cube_motion.py --region -0.0116 0.0136 0.0275`). Fine-tune from
+`07ft_s0_m4600` on the pod (`07ft_region_ft_r6k`, 1000 it), target > 98 % inside at the same speed / drop-free.
