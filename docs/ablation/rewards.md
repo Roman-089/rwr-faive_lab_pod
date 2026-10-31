@@ -585,3 +585,9 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   12.17 / 10.14, 84 / 45 %. Last-3 mean 12.2 RPM, 82 % drop-free, perturbed 43 %; tilt 6.0° / 11.9°, 2.4 face changes / min,
   wrist 0.25 rad / 0.10 rad/s. Slightly flatter than −200 (7.4–7.8°); speed and drop-free rate inside the −200 seed spread
   (11.4 / 93 / 54 and 9.6 / 74 / 39). The weight is not critical between −200 and −500; −100 (queued) tests the low side.
+- **Tilt penalty + smoothness ×10 (`abl_B_onedir_droppen_upright_acc10_ent1e-4_r6k`, pod, W&B x7i5siys)**, nominal / perturbed:
+  1500 9.46 / 7.41 RPM, 75 / 25 % · 2000 10.84 / 9.32, 64 / 31 % · 3000 10.84 / 9.71, 72 / 27 % · 3999 10.96 / 10.54,
+  67 / 31 %. Last-3 mean 10.9 RPM, 68 % drop-free, perturbed 30 %; cube motion (3999) tilt 9.1° / 17.0°, 6.0 face changes /
+  min, wrist 0.32 rad / 0.19 rad/s. Worse than the tilt penalty alone on both seeds (11.4 / 93 / 54, 9.6 / 74 / 39):
+  on the tumbling baseline smoothness ×10 doubled the perturbed drop-free rate, on top of the tilt penalty it hurts
+  (two cube-motion terms competing with the speed reward?). Not combined further (`upright_pos45_acc10` cancelled).
