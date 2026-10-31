@@ -1,0 +1,40 @@
+
+                       Computation: 28607 steps/s (collection: 6.535s, learning 0.338s)
+             Mean action noise std: 1.50
+          Mean value_function loss: 7207.9344
+               Mean surrogate loss: -0.0072
+                 Mean entropy loss: 31.0043
+                       Mean reward: -146.36
+               Mean episode length: 9.94
+Episode_Reward/object_position_tracking: 0.0255
+Episode_Reward/angular_acceleration: 0.0029
+       Episode_Reward/joint_vel_l2: -0.0000
+          Episode_Reward/action_l2: -0.0001
+     Episode_Reward/action_rate_l2: -0.0663
+  Episode_Reward/rotation_progress: 0.5238
+Episode_Reward/off_axis_angular_velocity: -0.9391
+        Episode_Reward/object_drop: -2.5970
+          Episode_Reward/cube_tilt: -0.3961
+          Episode_Reward/wrist_vel: -0.2191
+Metrics/continuous_rotation/position_error: 0.1421
+Metrics/continuous_rotation/current_angular_speed: 20.4251
+Metrics/continuous_rotation/target_angular_speed: 1.4375
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 18.9876
+Metrics/continuous_rotation/angular_velocity_error: 20.5007
+Metrics/continuous_rotation/angular_velocity_alignment: 0.0217
+Metrics/continuous_rotation/consecutive_success: 0.0028
+Metrics/continuous_rotation/total_success: 0.0121
+Metrics/continuous_rotation/vertical_drift: 0.1040
+Metrics/continuous_rotation/linear_speed: 1.0028
+      Episode_Termination/time_out: 0.0082
+Episode_Termination/object_dropped: 0.5419
+--------------------------------------------------------------------------------
+                   Total timesteps: 196608
+                    Iteration time: 6.87s
+                      Time elapsed: 00:00:06
+                               ETA: 09:32:42
+
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
+Could not find git repository in /home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/__init__.py. Skipping.
+Storing git diff for 'rwr_faive_lab' in: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_15-42-04_upright_wp_rf_scratch_r6k/git/rwr_faive_lab.diff
+wandb: WARNING Symlinked 1 file into the W&B run directory; call wandb.save again to sync new files.
