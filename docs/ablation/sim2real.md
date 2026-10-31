@@ -721,6 +721,21 @@ m4800: LOWFRIC 11.75 / 92.2 % / 0.09, 95.3 % in region (OWN 94.1 %). **Where the
 
 region200c m4700 (first 100 it, 16:47Z start as 5th process): LOWFRIC 10.95 / 84.4 % / 0.27, **95.7 % in region** (region200 needed 300 it for that); OWN 13.70 / 82.8 %, 93.6 %. Drop-free dipped (the gait moves the cube 18 mm to the new target); watch m4800–m5000. region200 m5000: 11.56 / 95.3 % / 0.05, 95.5 % (OWN 94.6 %): the plain weight plateaus at ~95.5 %.
 
+**512-env re-eval of the candidates (pod, 17:23–17:40Z, `lowfric512_summary.md` on remote-results):**
+
+| candidate | RPM | drop-free % | drops/min | wrist rad/s | in region % |
+|---|---|---|---|---|---|
+| A 07ft_s0 m4600 | 11.41 | 90.0 | 0.109 | 0.06 | 93.2 |
+| B 07rf2_s0 m5200 | 11.15 | 89.3 | 0.129 | 0.07 | 91.5 |
+| 07ft_s0 m5200 | 11.16 | 91.4 | 0.100 | 0.06 | 89.7 |
+| 07ft_s1 m4900 | 11.39 | 92.2 | 0.082 | 0.07 | 94.2 |
+| region200c m4800 | 11.48 | 90.0 | 0.111 | 0.07 | 94.7 |
+| region200 m5000 | 11.40 | 90.6 | 0.105 | 0.07 | 95.2 |
+| roll10 m4600 | 11.48 | 91.6 | 0.102 | 0.07 | 93.3 |
+| roll10 m5000 | 11.80 | 90.0 | 0.113 | 0.08 | 90.6 |
+
+All within ~2 SE of each other. The 64-env numbers we selected on (A 96.9 %, B 98.4 %, region 96–97 %) were winners of many noisy draws. The region terms gain only 1.5–2 points in region (94.7 / 95.2 vs 93.2 %), far from 98 %. Next: `-region200cs` (6b5f4b9) also spawns the cube at the region centre (from (0, 0) it starts 7.5 mm inside the circle on the side where it leaves), queued first on the pod. The eval also runs with a centred spawn, because the real cube is placed by hand. Ship rule now uses the 512-env eval ([deployable](deployable.md#real-hand-fine-tunes-2026-10-31-afternoon)).
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run

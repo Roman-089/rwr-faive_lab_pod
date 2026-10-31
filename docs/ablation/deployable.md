@@ -53,6 +53,8 @@ friction; 07: 11.1 / 88 % / 0.20 / 0.14), B = `07rf2_s0_m5200` (also trained wit
 RPM, 98 %, 0.02 drops), plus `07ft_s1_m4300`, `07ft_s1_m4150`, `07ft_s0_m4150`. Same interface and launch as #7. Details:
 [sim2real](sim2real.md#real-hand-servo-model-as-dr-2026-10-31).
 
+**512-env re-eval (17:40Z): A and B are not better than the other fine-tunes.** At the measured friction with 512 envs (drop-free SE ±1.3 %) all eight candidates sit at 89–92 % drop-free, 11.2–11.8 RPM, wrist 0.06–0.08 rad/s: A 90.0 % (11.41 RPM), B 89.3 % (11.15), 07ft_s0 m5200 91.4 %, **07ft_s1 m4900 92.2 % (11.39, nominal leader, n.s.)**, region200c m4800 90.0 %, region200 m5000 90.6 %, roll10 m4600 91.6 %, m5000 90.0 %. Their 64-env scores (A 96.9 %, B 98.4 %) were the best of many noisy evals (SE ±3.7 %). The ranking A > B in `deploy_policies/` is therefore a coin flip in sim: let the hand decide. **Ship rule from now on:** the candidate must beat the current best on the 512-env measured-friction eval by more than 2 SE (~2.5 points drop-free or a clear RPM gain at equal drop-free), plus the own-task eval and wrist ≤ ~0.1 rad/s. 64-env evals only pre-select.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
