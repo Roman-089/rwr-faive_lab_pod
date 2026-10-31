@@ -492,3 +492,12 @@ loop are copied from the index finger (pinky_pip 1.8 vs 4.5, middle_mcp 6.8 vs 1
 vs 9.2, thumb_mcp 4.7 vs 20.4). Two more hand trials confirm the wrist finding: 18 (transformer student) "bad", wrist
 50.7°/s; 16 (droppen, bidirectional) "bad, cube falls when the wrist moves", 33.6°/s. Hand ranking by mean wrist speed:
 02b 2.3°/s (ok, no drop), 07 6.7 (best), 16 33.6, 05 50.6, 18 50.7 (bad), 12 73.8 (quite good, too much wrist).
+
+**Per-part ablation of the servo model on 07 (model_4000; pod, 64 envs × 60 s, with the randomization ranges of
+training):** all off 10.97 RPM / 87.5 % / 0.12 drops (sanity: the normal eval gives 11.21 / 93.8, within noise) · delay
+17–117 ms only 12.66 / 45.3 % / 0.92 · **acceleration profile only 7.91 / 10.9 % / 3.64** · slope only (dropped since)
+5.15 / 65.6 % / 0.50 · play only 10.85 / 95.3 % / 0.08 · stiff loop only (no profile) 3.79 / 34.4 % / 1.36. The
+acceleration limit is what breaks the trained gait (it needs faster joints than the real servos deliver; matches the
+real hand's 150–300 ms tracking lag and occasional drops); play is harmless; the stiff loop alone is not a realistic
+setting (on the servo the profile is what smooths the motion). Fine-tunes under delay + profile + play + stiff loop +
+wrist penalty, from 07 and 02b, 12288 envs each (32768 overflowed PhysX's contact buffer), started ~12:40Z.
