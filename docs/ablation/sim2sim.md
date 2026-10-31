@@ -411,6 +411,21 @@ steps (float32 rounding): the node's joint mapping, limit table, command `[0, 0,
 EMA and clipping match the training task. (Two independent runs, node vs `run_sim2sim`, start equal to 6e-8 and diverge
 after ~60 steps: float32 vs float64 arithmetic, amplified by the contacts.)
 
+**Results (job 29859981, 16 × 60 s trials, nominal physics, no obs noise; informational).**
+
+| policy / setting | RPM (± std over trials) | drop-free | drops after the first second |
+|---|---|---|---|
+| tilt + position ×3 + ADR (model_5500), lock-step, `goal_ang_vel` 1.5 | **7.3 ± 0.4** | 88 % | 0 |
+| tilt penalty + ADR (model_6998), lock-step, 1.5 | 6.2 ± 1.6 | 88 % | 0 |
+| same, real driver timing (100 Hz state, 10 ms command latency) | 6.0 ± 1.4 | 88 % | 0 |
+| same, **the node's default `goal_ang_vel` 1.0** | **0.1 ± 0.3** | 88 % | 0 |
+
+All drops are spawn artifacts: trial 6 at 0.3 / 0.6 s and trial 15 at 0.25 s in every run, independent of policy and
+command (the same seed gives the same spawns). The driver's real timing costs nothing. The command magnitude does: the
++z policies were trained on exactly +1.5 and, at the node's default 1.0, hold the cube without turning it, so
+`-p goal_ang_vel:=1.5` is required ([deployable](deployable.md#how-to-run-them)). The node's observation and commands
+match our code to ≤ 6e-7 over the whole 1199-step trial for both policies.
+
 ## Plan: fake ROS hand driver (done 2026-10-31, see above)
 
 When `rwr_faive_system` is released, the course's node `experiments/rl_inference/policy_inference_cube_spin_v2.py`

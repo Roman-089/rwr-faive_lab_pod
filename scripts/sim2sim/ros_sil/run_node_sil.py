@@ -156,9 +156,12 @@ def main():
     w = np.stack([t["w"][:, 2] for t in trials], 1)
     done = np.stack([t["done"] for t in trials], 1)
     m = metrics(w, np.sign(np.full(args.trials, args.goal_ang_vel)), done, task.CONTROL_DT)
+    m["drop_times_s"] = [[round((i + 1) * task.CONTROL_DT, 2) for i in np.flatnonzero(t["done"])] for t in trials]
+    m["rpm_per_trial"] = [round(float(x), 2) for x in w.sum(0) * task.CONTROL_DT / (2 * np.pi) / (args.steps * task.CONTROL_DT / 60)]
     m.update(policy=args.policy, trials=args.trials, steps=args.steps, goal_ang_vel=args.goal_ang_vel,
              state_hz=args.state_hz, cmd_latency_ms=args.cmd_latency_ms, node=str(args.rwr_system / NODE_REL))
     print("[sil] " + " ".join(f"{k} {v:.3f}" for k, v in m.items() if isinstance(v, float)))
+    print(f"[sil] drop times [s] per trial: {m['drop_times_s']}")
 
     if args.acceptance:
         policy = torch.jit.load(args.policy, map_location="cpu").eval()
