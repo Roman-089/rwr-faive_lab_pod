@@ -1,0 +1,32 @@
+{
+ "model_4700.pt": {
+  "rpm": 11.458301544189453,
+  "rpm_std": 2.8528518676757812,
+  "ra": 88.78394961357117,
+  "dfsr": 96.875,
+  "dc": 0.03125,
+  "checkpoint": "model_4700.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_4800.pt": {
+  "rpm": 13.932073593139648,
+  "rpm_std": 3.5609517097473145,
+  "ra": 90.89276790618896,
+  "dfsr": 87.5,
+  "dc": 0.125,
+  "checkpoint": "model_4800.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-region200-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
