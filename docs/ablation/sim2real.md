@@ -602,3 +602,10 @@ drop-free) with the wrist at ≤ ~0.1–0.14 rad/s.
 reach 68–74 °C after ~35 min holding a pose** (keep torque off when idle). Open: the 07 fine-tune on the hand,
 per-collider friction (skin vs PLA skeleton), why the closed-loop servo profile mis-ranks, a higher servo acceleration
 register (untested), the index_mcp / middle collision angle.
+
+**Next-round friction model (prepared; task `-upright-wristpen-realfric2-v0`):** the skinless finger links (the
+four AP links, thumb_tp, thumb_ap: all hulls PLA) become a third class. With PhysX's average combine and the cube at
+0.2–0.3, link ranges 2 × contact − cube give contacts: TPU palm (forearm, tower, carpals) 0.3–0.5, silicone-skinned
+links 0.55–0.9, PLA links 0.1–0.25 (CPU check: exact ranges, events ordered after the hand-wide one). The skinned
+links' own PLA hulls still get the skin value (instanced colliders). Not started: the current fine-tunes run on
+`-realfric`.
