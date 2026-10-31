@@ -682,6 +682,8 @@ check: cube_region weight 50, σ 10 mm, centre / radius as chosen). Baseline of 
 
 m4700 (100 it into the term): LOWFRIC 11.77 RPM / 93.8 % drop-free / 0.08 drops, 93.2 % in region; OWN 14.28 / 82.8 / 0.22, 90.4 % in region: no region gain yet. DTU queued two more region fine-tunes: from candidate B (rf2 m5200) and from A with seed 1. Final 07 fine-tune checkpoints (m5400/m5499, all three seeds/variants) decline to 84–91 % drop-free at the measured friction; the shipped m4600 / rf2 m5200 stay best.
 
+m4800 / m4900: LOWFRIC 11.55 / 95.3 % / 0.05, 92.9 % in region; 11.58 / 92.2 % / 0.09, 94.2 % (OWN 91.0 %). The term is active but small: Episode_Reward/cube_region −1.8 per episode vs rotation_progress +67 (~3 %, like the tilt term), and the actor sees no cube pose, so it gets a weak, indirect signal. Next: `-realfric-region200-v0` (weight 200, −126 per second at 10 mm outside, −200 saturated, above the ~90 per second of rotation reward). The weight-50 run stops at m5000 as the control; region200 from 07ft_s0_m4600 on the pod; on DTU from B (rf2 m5200) and from A with seed 1.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
