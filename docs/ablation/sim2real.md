@@ -657,3 +657,10 @@ rad/s, tilt 5.7°, 1.5 flips/min (score 10.93 vs 07's 9.74: as fast, 4× fewer d
 90.6 %. Other checkpoints so far at the measured friction: s0 m4150 10.04 / 92.2, m4300 10.72 / 90.6, m4450 11.40 / 85.9;
 s1 m4150 10.34 / 93.8, m4300 10.80 / 93.8, m4450 10.89 / 89.1; realfric2 (PLA skeleton) m4200 10.30 / 81.2 (own task
 13.09 / 89.1).
+
+**Fine-tunes plateau; candidate B added (15:25Z).** At the measured friction: seed 0 m4900 11.39 / 96.9 / 0.03, m5050
+11.67 / 93.8, m5200 11.17 / **98.4** / 0.02 (own task 12.11 vs 12.68 for m4600); seed 1 m4900 11.36 / 95.3, m5050 11.38 /
+93.8, m5200 10.90 / 93.8; realfric2 (PLA skeleton) m4600 11.39 / 87.5, m4800 11.19 / 92.2, m5000 11.45 / 84.4, m5200 11.07 /
+**98.4** / 0.02. Seed 0 m4600 stays recommended (A: best on its harder training task, 90.6 %); realfric2 m5200 is
+candidate B (trained also with the slippery PLA skeleton). `orca_v2_zrot_hand_ft:v8` (latest) holds both plus the
+earlier three; v7 holds only B.
