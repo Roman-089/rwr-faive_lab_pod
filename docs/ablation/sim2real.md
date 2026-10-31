@@ -525,3 +525,14 @@ i.e. keep the palm level (35° against the 30° mounting tilt); the bad ones (p1
 likely lower. Test running: `--servo` with contact friction ~0.3–0.55 (hydra overrides of the two material events);
 the deploy session is asked to measure the slip angle (μ ≈ tan θ). The wrist-penalty fine-tunes from 07 / 02b keep
 running meanwhile (12:43Z, 12288 envs, 5.3 s/it).
+
+**17 of 19 policies on the real hand (13:30Z, deploy session; flat forearm, −30° wrist relay): mean |wrist speed|
+ranks them without exception.** 02b 2.3°/s full 60 s "ok, no drop" · 07 6.7 full 60 s "best" · 17 (asym ent 5e-3,
+bidirectional) 15.2, 52 s "is ok" · 16 droppen 33.6 full 60 s "bad, cube falls when wrist moves" · 09 (tumbles) 47.0,
+25 s · 05 50.6, 46 s "bad" · 18 student_pt 50.7, 44 s "bad" · 06 pos45 55.9, 23 s · 15 rotlin_droppen 57.2 full 60 s
+"not very good" · 08 pos45 ent5e-3 61.9, 44 s · 13 rotlin 67.4, 24 / 34 s · 14 rotlin ent5e-3 72.1, 29 s · 12
+rotlin_cont10k 73.8 full 60 s "quite good but too much wrist". Earlier: 01 "bad", 03 28 s, 04 58 s (wrist pinned like
+02 / 07). The sim's own wrist speed (`cube_motion.py`, nominal rollout) orders them the same way (02 / 07 0.08–0.09
+rad/s; 01 0.32; 03 0.52; tumbling / rotlin policies higher), so **sim wrist speed is a selection criterion validated on
+the hand**, unlike the servo-model score so far. Ship rule for the fine-tunes: beat the base under `--servo` and keep the
+sim wrist speed ≤ 07's (~0.1 rad/s).
