@@ -565,3 +565,11 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   cube (10° vs 7°): the centred grasp lets the hand turn faster without tilting. Its ADR fine-tune
   (`upright_pos45_adr`, pod) and the one of position ×3 (`pos45_ent1e-4_adr`, DTU) follow; their seed spread is open
   (`upright_pos45` seed 1 queued on A10).
+- **Fixed wrist on default entropy (`abl_B_onedir_droppen_wristfix_ent1e-4`, DTU A40, W&B z49id6xq)**, nominal / perturbed:
+  1000 14.25 / 13.99 RPM, 77 / 47 % · 2000 15.43 / 13.73, 78 / 66 % · 3000 15.59 / 12.62, 77 / 45 % · 4000 16.03 / 12.65,
+  78 / 59 % · 4999 16.37 / 12.78, 70 / 47 %. Last-3 mean 16.0 RPM, 75 % drop-free, perturbed **51 %** (baseline qn0pkisu
+  17.5 / 76 / 28). Cube motion (4999): **tilt 39.5° / 49.7°, 156 face changes / min** (baseline 36° / 173), wrist (passive)
+  0.22 rad / 0.10 rad/s. Without a wrist the fingers tumble the cube just as much: on default entropy the wrist swing
+  is not what causes the tumbling (on the entropy-5e-3 teacher the wrist penalty did reduce it, 171 → 16 / min), the
+  tumbling is a finger gait the speed reward pays for, and the tilt penalty is the fix. A calm or fixed wrist does make
+  the policy more robust to delay / offset (28 → 51 %), like the wrist penalty on the teacher (17 → 58 %).
