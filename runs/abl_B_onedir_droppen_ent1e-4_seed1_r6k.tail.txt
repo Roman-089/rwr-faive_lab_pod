@@ -1,40 +1,40 @@
-[INFO] Termination Manager:  <TerminationManager> contains 2 active terms.
-+-----------------------------------+
-|      Active Termination Terms     |
-+-------+----------------+----------+
-| Index | Name           | Time Out |
-+-------+----------------+----------+
-|   0   | time_out       |   True   |
-|   1   | object_dropped |  False   |
-+-------+----------------+----------+
-
-[INFO] Reward Manager:  <RewardManager> contains 8 active terms.
-+---------------------------------------------+
-|             Active Reward Terms             |
-+-------+---------------------------+---------+
-| Index | Name                      |  Weight |
-+-------+---------------------------+---------+
-|   0   | object_position_tracking  |    15.0 |
-|   1   | angular_acceleration      |     1.0 |
-|   2   | joint_vel_l2              |  -1e-05 |
-|   3   | action_l2                 | -0.0002 |
-|   4   | action_rate_l2            |  -0.075 |
-|   5   | rotation_progress         |    90.0 |
-|   6   | off_axis_angular_velocity |    -5.0 |
-|   7   | object_drop               | -2000.0 |
-+-------+---------------------------+---------+
-
-[INFO] Curriculum Manager:  <CurriculumManager> contains 0 active terms.
-+----------------------+
-| Active Curriculum Terms |
-+-----------+----------+
-|   Index   | Name     |
-+-----------+----------+
-+-----------+----------+
-
-[INFO]: Completed setting up the environment...
-2026-10-31T00:49:20Z [20,679ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/frames.
-2026-10-31T00:49:20Z [20,679ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/target_arrows.
-2026-10-31T00:49:20Z [20,679ms] [Warning] [omni.physx.fabric.plugin] FabricManager::initializePointInstancer mismatched prototypes on point instancer: /Visuals/Command/current_arrows.
-[replay] link /World/envs/env_0/Robot/right_forearm: 5436 verts, 1812 tris
-[replay] link /World/envs/env_0/Robot/right_tower: 49638 verts, 16546 tris
+wandb: Tracking run with wandb version 0.31.0
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261031_010337-cule0dej
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-30_17-24-11_abl_B_onedir_droppen_ent1e-4_seed1_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/cule0dej
+wandb: updating run metadata
+wandb: uploading wandb-metadata.json; uploading media/videos/eval/video_01000_4999_84137920d0cd30100fbb.mp4
+wandb: uploading media/videos/eval/video_01000_4999_84137920d0cd30100fbb.mp4; uploading media/videos/eval/video_02000_5000_e191125e3227c0b02ffc.mp4; uploading media/videos/eval/video_04999_5003_dd3488399e7830a4503c.mp4; uploading wandb-summary.json; uploading config.yaml (+ 3 more)
+wandb: uploading media/videos/eval/video_01000_4999_84137920d0cd30100fbb.mp4; uploading media/videos/eval/video_02000_5000_e191125e3227c0b02ffc.mp4; uploading media/videos/eval/video_04999_5003_dd3488399e7830a4503c.mp4; uploading media/videos/eval/video_03000_5001_692eacada477b94372c4.mp4; uploading media/videos/eval/video_04000_5002_d54041977ff952987198.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc ▁▂▂▇█
+wandb:           eval/dfsr ▆▅█▂▁
+wandb:      eval/iteration ▁▃▅▆█
+wandb:             eval/ra ▁█▆▆▇
+wandb:            eval/rpm ▁▆█▅█
+wandb:   eval_perturbed/dc ▁▃▆██
+wandb: eval_perturbed/dfsr █▆▆▁▅
+wandb:   eval_perturbed/ra ▁▄▆▅█
+wandb:  eval_perturbed/rpm ▁▅▇▄█
+wandb: 
+wandb: Run summary:
+wandb:                 Episode_Reward/action_l2 -0.01893
+wandb:            Episode_Reward/action_rate_l2 -2.63275
+wandb:      Episode_Reward/angular_acceleration 0.03668
+wandb:              Episode_Reward/joint_vel_l2 -0.00091
+wandb:               Episode_Reward/object_drop -0.75526
+wandb:  Episode_Reward/object_position_tracking 2.00088
+wandb: Episode_Reward/off_axis_angular_velocity -17.19961
+wandb:         Episode_Reward/rotation_progress 87.73456
+wandb:       Episode_Termination/object_dropped 0.22689
+wandb:             Episode_Termination/time_out 0.7736
+wandb:                                      +37 ...
+wandb: 
+wandb: 🚀 View run 2026-10-30_17-24-11_abl_B_onedir_droppen_ent1e-4_seed1_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/cule0dej
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261031_010337-cule0dej/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/cule0dej (2026-10-30_17-24-11_abl_B_onedir_droppen_ent1e-4_seed1_r6k)
