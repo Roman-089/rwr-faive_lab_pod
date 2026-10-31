@@ -7,7 +7,10 @@ it flat. This reports, over the alive steps of the nominal rollout:
   flips/min        changes of the face that points up (tumbling)
   wrist            range (p5-p95) [rad] and mean |qdot| [rad/s] of forearm -> carpals (the right_wrist joint)
 
-Usage (CPU, numpy): python scripts/eval/cube_motion.py <npz or run dir> [...]   (run dir: its last eval/model_*.npz)
+  in region        share of alive steps whose cube centre (rotation axis) is inside --region CX CY R (metres, env frame)
+
+Usage (CPU, numpy): python scripts/eval/cube_motion.py <npz or run dir> [...] [--region CX CY R]
+(run dir: its last eval/model_*.npz)
 """
 
 import glob
@@ -47,7 +50,7 @@ def _resolve(path):
     return sorted(files, key=lambda p: int(p.split("model_")[1].split(".")[0]))[-1]
 
 
-def cube_motion(npz_path):
+def cube_motion(npz_path, region=None):
     d = np.load(npz_path, allow_pickle=True)
     dt = float(d["dt"])
     alive = ~(d["done"] > 0)
@@ -67,7 +70,12 @@ def cube_motion(npz_path):
     drel = drel * np.sign(drel[..., :1])
     ax = np.abs(drel[..., 1:]).reshape(-1, 3).sum(0).argmax()
     wrist = 2 * np.arctan2(drel[..., 1 + ax], drel[..., 0])
-    return {
+    out_region = {}
+    if region is not None:
+        cx, cy, r = region
+        inside = np.hypot(d["obj_pos"][..., 0] - cx, d["obj_pos"][..., 1] - cy) <= r
+        out_region = {"in_region": float(inside[alive].mean())}
+    return out_region | {
         "w_cmd": float(w_cmd[alive].mean()),
         "w_xy": float(w_xy[alive].mean()),
         "tilt_mean": float(tilt[alive].mean()),
@@ -79,12 +87,18 @@ def cube_motion(npz_path):
 
 
 if __name__ == "__main__":
-    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed")
-    for arg in sys.argv[1:]:
+    argv, region = sys.argv[1:], None
+    if "--region" in argv:
+        i = argv.index("--region")
+        region = tuple(float(v) for v in argv[i + 1 : i + 4])
+        argv = argv[:i] + argv[i + 4 :]
+    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed" + ("  in region" if region else ""))
+    for arg in argv:
         path = _resolve(arg)
-        m = cube_motion(path)
+        m = cube_motion(path, region)
         name = os.path.relpath(path)[-60:]
         print(
             f"{name:60s} {m['w_cmd']:5.2f} {m['w_xy']:5.2f}  {m['tilt_mean']:5.1f} / {m['tilt_p90']:4.1f}"
             f"  {m['flips_per_min']:8.1f}  {m['wrist_range']:5.2f} / {m['wrist_speed']:4.2f}"
+            + (f"  {100 * m['in_region']:9.1f} %" if region else "")
         )

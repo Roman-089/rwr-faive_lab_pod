@@ -483,6 +483,23 @@ class OrcaV2ReposeAsymOneDirDropPenWristFixEnvCfg(OrcaV2ReposeAsymOneDirDropPenE
         self.actions.joint_pos.joint_names = ["(?!right_wrist).*"]
 
 
+# Region of the cube's rotation axis on the palm, chosen by the user (2026-10-31) with
+# docs/ablation/tools/palm_axis_region.html; env frame, metres. Contains the commanded cube position (0, 0) at 17.9 mm.
+CUBE_AXIS_REGION = dict(center=(-0.0116, 0.0136), radius=0.0275)
+
+
+def add_cube_region_penalty(env_cfg: OrcaV2ReposeEnvCfg, weight: float = 50.0, sigma: float = 0.010,
+                            region: dict = CUBE_AXIS_REGION):
+    """Term falling exponentially once the cube's rotation axis leaves ``region``
+    (``rewards_ablation.cube_outside_region`` = exp(-excess / sigma) - 1): 0 inside, -50 x (1 - e^-1) = -32 per second
+    10 mm outside, slope 5 per mm at the boundary, saturating at -50 per second (rotation reward ~90 per second)."""
+    env_cfg.rewards.cube_region = RewTerm(
+        func=rewards_ablation.cube_outside_region, weight=weight,
+        params={"center": region["center"], "radius": region["radius"], "sigma": sigma,
+                "object_cfg": SceneEntityCfg("object")},
+    )
+
+
 def add_cube_tilt_penalty(env_cfg: OrcaV2ReposeEnvCfg, weight: float = -200.0):
     """Penalty on the cube tilt (``rewards_ablation.cube_tilt``): -200 costs ~38 per second at the +z policies' mean
     tilt (36 deg, 1 - cos = 0.19) against ~110 per second of rotation reward, and ~1 per second at rotlin's 6 deg."""
@@ -724,6 +741,18 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFriction2EnvCfg(
     def __post_init__(self):
         super().__post_init__()
         use_real_hand_friction_v2(self)
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegionEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg
+):
+    """-upright-wristpen-realfric (the real-hand recipe of 07ft_s0_m4600) + the user's cube rotation-axis region
+    (``add_cube_region_penalty``)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_region_penalty(self)
 
 
 @configclass

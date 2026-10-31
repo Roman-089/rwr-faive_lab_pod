@@ -93,6 +93,23 @@ def joint_work_l1(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg = SceneEntit
     return torch.sum(torch.abs(asset.data.applied_torque * asset.data.joint_vel), dim=1)
 
 
+def cube_outside_region(
+    env: ManagerBasedRLEnv,
+    center: tuple[float, float],
+    radius: float,
+    sigma: float,
+    object_cfg: SceneEntityCfg = SceneEntityCfg("object"),
+) -> torch.Tensor:
+    """exp(-e / sigma) - 1 for the cube's rotation axis being e = max(0, |c_xy - center| - radius) outside an allowed
+    circle on the palm: 0 inside, falling exponentially towards -1 outside (use a positive weight). The cube turns about
+    world z, so its axis is the vertical through the cube centre c_xy (env frame). The region was chosen by the user
+    with docs/ablation/tools/palm_axis_region.html."""
+    obj = env.scene[object_cfg.name]
+    xy = obj.data.root_pos_w[:, :2] - env.scene.env_origins[:, :2]
+    d = torch.linalg.norm(xy - torch.tensor(center, device=xy.device), dim=-1)
+    return torch.exp(-torch.clamp(d - radius, min=0.0) / sigma) - 1.0
+
+
 def cube_tilt(env: ManagerBasedRLEnv, object_cfg: SceneEntityCfg = SceneEntityCfg("object")) -> torch.Tensor:
     """1 - max_i |(R e_i) . z|: zero while one cube face points up (any yaw, so a clean z-rotation is free), 1 - cos(tilt)
     otherwise (45 deg -> 0.29). The +z policies tumble the cube (mean tilt 25-36 deg, the top face changes ~100-170
