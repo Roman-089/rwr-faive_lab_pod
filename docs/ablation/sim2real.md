@@ -675,3 +675,13 @@ second 10 mm outside, slope 5 per mm at the boundary, saturating at −50 per se
 Task `-upright-wristpen-realfric-region-v0` (78e09b8) = the real-hand recipe + this term. Baseline: 07 (model_4999)
 keeps the cube inside 91.8 % of the time (`cube_motion.py --region -0.0116 0.0136 0.0275`). Fine-tune from
 `07ft_s0_m4600` on the pod (`07ft_region_ft_r6k`, 1000 it), target > 98 % inside at the same speed / drop-free.
+
+Region fine-tune `07ft_region_ft_r6k` started 15:33Z on the pod (resume 07ft_s0_m4600, 8192 envs, ~7.6 s/it; config
+check: cube_region weight 50, σ 10 mm, centre / radius as chosen). Baseline of its base checkpoint (LOWFRIC rollout):
+94.1 % of alive steps inside the circle.
+
+**Deploy branch (user's standing instruction, 15:50Z):** every new policy that passes the ship rule also goes to
+`rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
+manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
+without `--push`; verified: LFS pointer, re-ranking, commit identity). Already there: 07ft_s0_m4600 (rank 1),
+07rf2_s0_m5200 (2), 07_tilt, 02b_tilt_adr_m5500, 17_asym_ent5e-3, 12_rotlin_cont10k.
