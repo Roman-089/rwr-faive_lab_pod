@@ -48,8 +48,8 @@ policies (#1–#3) as `<n>_<name>/policy.pt` + `policy.json`, a README for the p
 
 W&B **`rwr-fast/orca_v2_repose/orca_v2_zrot_hand_ft`**: 07 fine-tuned on the real hand's friction (TPU palm 0.3–0.5,
 silicone pads 0.55–0.9, measured), a wrist penalty and delay / encoder-offset DR, after 17 + 4 hand trials showed that
-wrist motion (palm tipping on a slippery palm) is what drops the cube. v2 (latest) = `07ft_s1_m4150` (recommended: 10.3 RPM, 94 % drop-free, 0.06 drops, wrist 0.08 rad/s at the measured
-friction) + `07ft_s0_m4150` (10.0, 92 %, 0.08); 07: 11.1, 88 %, 0.20, 0.14. Same interface and launch as #7. Details:
+wrist motion (palm tipping on a slippery palm) is what drops the cube. v4 (latest) = `07ft_s1_m4300` (recommended: 10.8 RPM, 94 % drop-free, 0.06 drops, wrist 0.08 rad/s at the measured
+friction; beats 07's 11.1 / 88 % / 0.20 / 0.14 on score) + `07ft_s1_m4150` + `07ft_s0_m4150`. Same interface and launch as #7. Details:
 [sim2real](sim2real.md#real-hand-servo-model-as-dr-2026-10-31).
 
 ## All exported policies

@@ -621,3 +621,26 @@ unchanged course node ran it 10 s in the MuJoCo loop (no drop, interface match �
 drop-free, 0.06 drops, wrist 0.08 rad/s (score 9.70 vs 07's 9.74); own task 13.17 RPM, 81.2 %. Both seeds cut the drops
 ~3× and calm the wrist at about the base's speed. Shipped together as `orca_v2_zrot_hand_ft:v2` (folders
 `07ft_s1_m4150`, recommended, and `07ft_s0_m4150`; v1 had a misnamed folder, superseded).
+
+**Does the sim at the measured friction fit the hand? (8 policies, 13:50Z)** Normal eval at hand 0.3–0.6 / cube 0.3–0.5
+(pod, `--tag _lowfric`, cube_motion) vs the hand trials (mean |wrist speed| from the node CSVs; duration of the trial):
+
+| policy | sim wrist rad/s | hand wrist rad/s | sim drop-free % | hand duration s (mean) |
+|---|---|---|---|---|
+| 02b | 0.11 | 0.06 | 84.4 | 37.4 (56.8 / 18.0) |
+| 07 | 0.14 | 0.09 | 87.5 | 55.7 (56.7 / 54.7) |
+| 02 | 0.16 | 0.22 | 81.2 | 44.3 |
+| 05 | 0.46 | 0.88 | 78.1 | 43.3 |
+| 01 | 0.47 | 1.15 | 75.0 | 16.4 |
+| 06 | 0.49 | 0.98 | 70.3 | 20.3 |
+| 03 | 0.73 | 0.89 | 87.5 | 27.5 |
+| 08 | 0.79 | 1.08 | 79.7 | 40.9 |
+
+Spearman: sim vs hand wrist speed **ρ = 0.83 (p = 0.01)**; sim drop-free vs hand duration 0.51 (p = 0.19); sim wrist vs
+hand duration −0.45 (p = 0.26). The sim reproduces *which* policies move the wrist (the swingers about 2× more on the
+hand: slipping makes them correct harder), not yet *how long* they last (single, user-stopped trials are noisy). The
+other 11 policies are evaluated on DTU (job 29860553) for n = 19.
+
+**Shipped `orca_v2_zrot_hand_ft:v4` (13:50Z):** `07ft_s1_m4300` (recommended): at the measured friction 10.80 RPM, 93.8 %
+drop-free, 0.06 drops, wrist 0.08 rad/s, score 10.12 vs 07's 9.74: beats the base on every criterion; own task 13.64
+RPM / 84.4 %. Plus `07ft_s1_m4150`, `07ft_s0_m4150`.
