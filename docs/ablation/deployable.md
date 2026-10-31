@@ -6,8 +6,8 @@ policy) and evaluated in Isaac with the fixed protocol ([eval_protocol](eval_pro
 1.5 rad/s, the task's DR + obs noise; "perturbed" adds 50–100 ms action delay and ±0.05 rad joint-encoder offset).
 Numbers are for the exported checkpoint itself (nominal / perturbed); cube motion from `scripts/eval/cube_motion.py`;
 MuJoCo and the course node in the loop are informational ([sim2sim](sim2sim.md)). All are +z only (the user's
-2026-10-30 decision) except the fallback. Version 1 of the bundle (07:40Z) had #2, #3, #5, #6, #7 and the fallback;
-version 2 (10:45Z) adds #1 and #4 and this ranking.
+2026-10-30 decision) except the fallback. The bundle's first version (W&B v0, 07:40Z) had #2, #3, #5, #6, #7 and
+the fallback under their old numbers; v1 (10:45Z) adds #1 and #4 and this ranking.
 
 ## Ranking
 
