@@ -1,40 +1,40 @@
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
---------------------------------------------------------------------------------
-Resolved observation sets: 
-	 policy :  ['policy']
-	 critic :  ['critic']
---------------------------------------------------------------------------------
-Actor MLP: MLP(
-  (0): Linear(in_features=74, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=17, bias=True)
-)
-Critic MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=1, bias=True)
-)
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k/model_1000.pt: {'rpm': 13.261106491088867, 'rpm_std': 2.6692068576812744, 'ra': 63.76801133155823, 'dfsr': 34.375, 'dc': 1.5, 'checkpoint': 'model_1000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k/model_2000.pt: {'rpm': 14.539791107177734, 'rpm_std': 2.8755264282226562, 'ra': 75.67355632781982, 'dfsr': 43.75, 'dc': 1.359375, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k/model_3000.pt: {'rpm': 15.023155212402344, 'rpm_std': 3.7755038738250732, 'ra': 76.65480971336365, 'dfsr': 50.0, 'dc': 0.96875, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
-[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k/model_4000.pt: {'rpm': 14.68140697479248, 'rpm_std': 3.0927562713623047, 'ra': 76.8956184387207, 'dfsr': 53.125, 'dc': 0.96875, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-v0', 'perturb': True}
+wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261031_004819-ps0bke4n
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Resuming run 2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k
+wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/ps0bke4n
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json; uploading media/videos/eval/video_01000_4999_7c98682d69e770fe4614.mp4
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json; uploading media/videos/eval/video_01000_4999_7c98682d69e770fe4614.mp4; uploading media/videos/eval/video_04000_5002_f6665f8d3b1d36b29a11.mp4 (+ 4 more)
+wandb: uploading media/videos/eval/video_01000_4999_7c98682d69e770fe4614.mp4; uploading media/videos/eval/video_04000_5002_f6665f8d3b1d36b29a11.mp4; uploading media/videos/eval/video_04999_5003_38f1b060a80eee34828a.mp4; uploading media/videos/eval/video_02000_5000_0ad06eb4c8790c7d5cba.mp4; uploading media/videos/eval/video_03000_5001_751e82c70cb12fb0d7a6.mp4
+wandb: uploading media/videos/eval/video_01000_4999_7c98682d69e770fe4614.mp4; uploading media/videos/eval/video_04999_5003_38f1b060a80eee34828a.mp4; uploading media/videos/eval/video_02000_5000_0ad06eb4c8790c7d5cba.mp4; uploading media/videos/eval/video_03000_5001_751e82c70cb12fb0d7a6.mp4
+wandb: 
+wandb: Run history:
+wandb:             eval/dc ▄▅█▆▁
+wandb:           eval/dfsr ▇▄▁▅█
+wandb:      eval/iteration ▁▃▅▆█
+wandb:             eval/ra ▁▅▆▆█
+wandb:            eval/rpm ▂▁▄▅█
+wandb:   eval_perturbed/dc █▆▁▁▂
+wandb: eval_perturbed/dfsr ▁▄▆▇█
+wandb:   eval_perturbed/ra ▁▇███
+wandb:  eval_perturbed/rpm ▁▅▇▆█
+wandb: 
+wandb: Run summary:
+wandb:                 Episode_Reward/action_l2 -0.01708
+wandb:            Episode_Reward/action_rate_l2 -2.37879
+wandb:      Episode_Reward/angular_acceleration 0.53555
+wandb:              Episode_Reward/joint_vel_l2 -0.00079
+wandb:               Episode_Reward/object_drop -0.45174
+wandb:  Episode_Reward/object_position_tracking 1.6476
+wandb: Episode_Reward/off_axis_angular_velocity -13.01103
+wandb:         Episode_Reward/rotation_progress 100.27249
+wandb:       Episode_Termination/object_dropped 0.13253
+wandb:             Episode_Termination/time_out 0.86747
+wandb:                                      +37 ...
+wandb: 
+wandb: 🚀 View run 2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/ps0bke4n
+wandb: ⭐️ View project at: https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
+wandb: Synced 4 W&B file(s), 5 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./logs/wandb/run-20261031_004819-ps0bke4n/logs
+logged 5 checkpoints to rwr-fast/orca_v2_repose/ps0bke4n (2026-10-30_17-26-55_abl_B_onedir_droppen_acc10_ent1e-4_r6k)

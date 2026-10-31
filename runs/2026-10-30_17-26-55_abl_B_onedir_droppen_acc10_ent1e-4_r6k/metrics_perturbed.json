@@ -50,5 +50,18 @@
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-v0",
   "perturb": true
+ },
+ "model_4999.pt": {
+  "rpm": 15.274500846862793,
+  "rpm_std": 3.362619161605835,
+  "ra": 76.84172987937927,
+  "dfsr": 54.6875,
+  "dc": 1.015625,
+  "checkpoint": "model_4999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-v0",
+  "perturb": true
  }
 }
