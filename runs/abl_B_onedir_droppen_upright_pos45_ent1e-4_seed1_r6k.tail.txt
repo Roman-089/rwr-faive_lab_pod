@@ -1,5 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
-[INFO][AppLauncher]: Using device: cuda:0
-[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
-Loading user config located at: '/tmp/rwr_kit_abl_B_onedir_droppen_upright_pos45_ent1e-4_seed1_r6k/data/Kit/Isaac-Sim/5.1/user.config.json'
-[Info] [carb] Logging to file: /tmp/rwr_kit_abl_B_onedir_droppen_upright_pos45_ent1e-4_seed1_r6k/logs/Kit/Isaac-Sim/5.1/kit_20261031_192904.log
+                      Time elapsed: 00:08:22
+                               ETA: 04:33:38
+
+################################################################################
+                     [1m Learning iteration 604/4000 [0m                      
+
+                       Computation: 40500 steps/s (collection: 4.650s, learning 0.205s)
+             Mean action noise std: 0.73
+          Mean value_function loss: 761.3009
+               Mean surrogate loss: -0.0004
+                 Mean entropy loss: 18.7134
+                       Mean reward: 966.70
+               Mean episode length: 496.37
+Episode_Reward/object_position_tracking: 9.4641
+Episode_Reward/angular_acceleration: 0.1833
+       Episode_Reward/joint_vel_l2: -0.0008
+          Episode_Reward/action_l2: -0.0095
+     Episode_Reward/action_rate_l2: -1.5086
+  Episode_Reward/rotation_progress: 32.6356
+Episode_Reward/off_axis_angular_velocity: -5.7040
+        Episode_Reward/object_drop: -1.0025
+          Episode_Reward/cube_tilt: -4.4007
+Metrics/continuous_rotation/position_error: 0.0846
+Metrics/continuous_rotation/current_angular_speed: 8.9822
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 7.4822
+Metrics/continuous_rotation/angular_velocity_error: 9.1416
+Metrics/continuous_rotation/angular_velocity_alignment: 0.2207
+Metrics/continuous_rotation/consecutive_success: 0.0961
+Metrics/continuous_rotation/total_success: 44.7209
+Metrics/continuous_rotation/vertical_drift: 0.0489
+Metrics/continuous_rotation/linear_speed: 0.5964
+      Episode_Termination/time_out: 0.7369
+Episode_Termination/object_dropped: 0.2635
+--------------------------------------------------------------------------------
+                   Total timesteps: 20643840
+                    Iteration time: 4.85s
+                      Time elapsed: 00:08:27
+                               ETA: 04:33:33
+
