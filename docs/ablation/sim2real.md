@@ -350,6 +350,20 @@ the save-interval checkpoints are on W&B) exported bit-exact as `logs/rsl_rl/orc
 exported/policy_history.pt`; model_5500 (94 / 80 %) in `exported_model5500/`. MuJoCo: job 29859208.
 Caveat: the base policy is seed 0 of the tilt penalty, the good draw (seed 1: 9.6 RPM / 74 %).
 
+**Third ADR fine-tune: tilt + position ×3 (2026-10-31 09:20, pod, W&B s1jru0ly).** Resume of
+`abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k` model_3999, +2000 iterations, `-asym-onedir-droppen-upright-adr-v0` +
+position ×3. Isaac, +z, nominal / perturbed:
+
+| checkpoint | 4000 | 4500 | 5000 | 5500 | 5998 | last-3 mean | before ADR (last-3) |
+|---|---|---|---|---|---|---|---|
+| RPM | 14.1 / 12.9 | 14.1 / 14.7 | 14.3 / 15.3 | 14.2 / 16.0 | 13.9 / 15.4 | **14.1 / 15.6** | 14.1 / 11.9 |
+| DFSR % | 95 / 59 | 92 / 77 | 91 / 77 | **98** / 72 | 86 / 72 | **92 / 73** | 92 / 50 |
+| DC | 0.06 / 0.61 | 0.08 / 0.38 | 0.11 / 0.33 | 0.02 / 0.36 | 0.14 / 0.39 | 0.09 / 0.36 | 0.06 / 1.0 |
+
+Third replicate of the ADR effect: perturbed drop-free +23 points, nominal unchanged, faster under delay. The fastest
+robust policy so far (+2.5 RPM over tilt penalty + ADR at a similar perturbed rate). model_5500 (98 / 72 %) exported
+bit-exact (W&B checkpoint; params from the resumed run, `params/SOURCE.txt`). MuJoCo: job 29859924.
+
 ## Deadline plan: deployable policies by 2026-10-31 10:00 Zurich (09:00Z)
 
 User request 2026-10-30 22:30: "robust, deployable policies by 10 am". Teacher → student needs ~12 h (6k + 2k on the
