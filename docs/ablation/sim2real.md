@@ -464,3 +464,23 @@ A bug (the helper `_scale` shadowed by `JointAction._scale`, reset crashed) was 
 a time; with none on it must reproduce the normal eval (sanity check of the class). Running on 07 and 02. Fine-tunes
 under the full model meanwhile: 02 on the pod (32k envs, `02_tilt_adr_servo_ft_r6k`, since 12:28Z), 07 on DTU
 (L40S, 29860426, pending).
+
+**Trial replay validates the model without the slope (12:45Z).** `scripts/sim2sim/replay_hand_trial.py` feeds the
+commanded joint targets of real-hand trials (node CSV logs, W&B `hand_trials_2026-10-31`) through each actuator model
+and compares with the measured joints (kinematic: no contact load). Pooled over p1, p2, p3, p4, p7, RMSE [deg]:
+
+| model | mean of 17 joints | wrist | index_mcp | thumb_mcp | middle_pip | ring_pip |
+|---|---|---|---|---|---|---|
+| raw command (q = target) | 15.8–23.1 per trial | | | | | |
+| task's PD (first-order lag Kd/Kp, no delay) | 12.4 | 10.4 | 23.0 | 24.7 | 14.6 | 8.5 |
+| delay + profile + stiff loop | 7.7 | 5.1 | 12.6 | 13.6 | 8.3 | 5.3 |
+| **+ play (the new default)** | **7.2** | **4.7** | **12.0** | **13.0** | **7.8** | **5.0** |
+| + slope (as first implemented) | 10.2 | 5.1 | 12.1 | 13.0 | 15.3 | 18.8 |
+
+The acceleration-limited profile is real (the big slewing joints halve their error); the slope, scaled from the start
+pose, is not (the measured slope is a small-amplitude friction effect; the deploy session's replay agrees). Default now
+`adr.DEFAULT_SERVO_PARTS` = delay, profile, play, stiff. Residual: in trials the mcp / pip joints sit 8–12° more flexed
+than any model predicts (cube load, not in the unloaded chirps). Hand ranking so far (deploy session): 07 (6.7°/s mean
+wrist speed) full 60 s "best"; 02b (2.3°/s) full 60 s "ok, no drop"; 12 (74°/s) full 60 s "too much wrist"; 05
+(51°/s) stopped at 46 s "bad"; 01, 03 "bad": wrist motion is the best predictor. Next: fine-tunes from 07 and 02b under
+the corrected model + wrist velocity penalty (`-upright-servo-wristpen`, pod), re-scoring of all candidates under it.
