@@ -313,6 +313,26 @@ the position ×3 checkpoint resumes directly: `abl_B_onedir_droppen_pos45_adr_fr
 entropy, task `-asym-onedir-droppen-adr-v0`). Judged on the perturbed eval (drop-free rate, DC) at an acceptable cost in
 nominal RPM, and on `Curriculum/adr` reaching ≥ 0.8 (the eval's ranges sit at L ≈ 0.6–0.8).
 
+**Result (2026-10-31 02:50, pod, W&B on6yv8hs).** `Curriculum/adr` reached 1.00 (delay U[0, 15] substeps, offset
+±0.08 rad) and held there (drop share 22–26 %, between the 25 / 40 % thresholds). Isaac, +z, nominal / perturbed
+(the perturbed eval swaps in the fixed 6–12 substep delay and ±0.05 rad offset regardless of the training task; the
+nominal eval runs at L = 0):
+
+| checkpoint | 5500 | 6000 | 6500 | 7000 | 7998 | last-3 mean | before ADR (pos45, last-3) |
+|---|---|---|---|---|---|---|---|
+| RPM | 12.2 / 15.5 | 12.4 / 15.0 | 12.4 / 15.3 | 12.3 / 15.8 | 12.6 / 15.8 | 12.4 / 15.6 | 12.8 / 13.6 |
+| DFSR % | 89 / 75 | 91 / 69 | 91 / 78 | **95 / 84** | 88 / 78 | **91 / 80** | 88 / 49 |
+| DC | 0.11 / 0.42 | 0.09 / 0.38 | 0.09 / 0.30 | 0.05 / 0.19 | 0.14 / 0.31 | 0.09 / 0.27 | 0.15 / 1.07 |
+
+ADR lifts the perturbed drop-free rate from 49 to **80 %** (drops per trial 1.07 → 0.27) at no nominal cost; the
+best result under the perturbed eval so far by a wide margin. Under 50–100 ms delay it even turns faster (15.6 vs
+12.4 RPM): trained mostly with delay (mean 7.5 substeps at L = 1), its gait is tuned for late targets, so on a
+delay-free sim it is slightly conservative. Cube motion (model_7998, nominal): tilt 16.5° / 23.5° p90, 3.5 face
+changes / min, wrist 0.34 rad / 0.52 rad/s, as flat as before. model_7000 (95 / 84 %) exported bit-exact:
+`logs/rsl_rl/orca_v2_repose/2026-10-30_22-18-44_abl_B_onedir_droppen_pos45_adr_from5e-3_r6k/exported/policy_history.pt`
+(params from the resumed run, same policy obs; the ADR run's own config in `params/wandb_config_on6yv8hs.json`).
+MuJoCo check: job 29858891. Same recipe on the tilt-penalty policy: `upright_adr` (pod, W&B 6rsbkqqm, since 02:41Z).
+
 ## Deadline plan: deployable policies by 2026-10-31 10:00 Zurich (09:00Z)
 
 User request 2026-10-30 22:30: "robust, deployable policies by 10 am". Teacher → student needs ~12 h (6k + 2k on the
@@ -323,9 +343,9 @@ ADR fine-tunes, exported with `export_history_policy.py` (bit-exact self-check) 
 |---|---|---|
 | A `student_pt_rotlin` (p3dxn5pm), bidirectional fallback | exported | done |
 | B `abl_B_onedir_droppen_pos45_ent5e-3`, +z, flat (16°), 88 % / perturbed 49 % | exported 2026-10-30 22:40; MuJoCo job queued | done |
-| B-ADR `abl_B_onedir_droppen_pos45_adr_from5e-3_r6k` (pod, first) | queued | ~04:00 |
-| `abl_B_onedir_droppen_upright_ent1e-4_r6k` (tilt penalty, pod) | running | ~01:40 |
-| upright + ADR fine-tune (`-asym-onedir-droppen-upright-adr-v0`, 2k, if upright keeps the cube flat) | held | ~07:30 |
+| B-ADR `abl_B_onedir_droppen_pos45_adr_from5e-3_r6k`: 12.4 RPM, 91 % / **perturbed 80 %**, flat (16°) | exported 02:55Z (model_7000) | done |
+| C `abl_B_onedir_droppen_upright_ent1e-4_r6k` (tilt penalty): 11.4 RPM, 93 % / perturbed 54 %, flat (7°), calmest wrist; MuJoCo 7.2 RPM (best) | exported 01:40Z (model_4000) | done |
+| C-ADR upright + ADR fine-tune (`-asym-onedir-droppen-upright-adr-v0`, 2k, W&B 6rsbkqqm) | running since 02:41Z | ~05:50 |
 | `abl_B_onedir_droppen_pos45_ent1e-4_r6k`, `..._upright_pos45_ent1e-4_r6k` (pod, 4000 it) | queued (00:40Z slots) | ~07:00 |
 | teacher with the winning reward → transformer student (afternoon upgrade) | config ready (`-teacher-onedir-droppen-upright-v0` ± position ×3) | ~13:00–15:00 |
 
