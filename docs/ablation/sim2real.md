@@ -644,3 +644,10 @@ other 11 policies are evaluated on DTU (job 29860553) for n = 19.
 **Shipped `orca_v2_zrot_hand_ft:v4` (13:50Z):** `07ft_s1_m4300` (recommended): at the measured friction 10.80 RPM, 93.8 %
 drop-free, 0.06 drops, wrist 0.08 rad/s, score 10.12 vs 07's 9.74: beats the base on every criterion; own task 13.64
 RPM / 84.4 %. Plus `07ft_s1_m4150`, `07ft_s0_m4150`.
+
+**New best real-hand fine-tune (14:15Z): `07ft_s0_m4600`, W&B `orca_v2_zrot_hand_ft:v6` (latest; v5 holds only this
+checkpoint).** Seed 0 model_4600 at the measured friction: 11.29 RPM, 96.9 % drop-free, 0.05 drops, wrist 0.16 rad / 0.08
+rad/s, tilt 5.7°, 1.5 flips/min (score 10.93 vs 07's 9.74: as fast, 4× fewer drops, calmer wrist); own task 13.99 RPM /
+90.6 %. Other checkpoints so far at the measured friction: s0 m4150 10.04 / 92.2, m4300 10.72 / 90.6, m4450 11.40 / 85.9;
+s1 m4150 10.34 / 93.8, m4300 10.80 / 93.8, m4450 10.89 / 89.1; realfric2 (PLA skeleton) m4200 10.30 / 81.2 (own task
+13.09 / 89.1).
