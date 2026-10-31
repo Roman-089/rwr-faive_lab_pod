@@ -133,5 +133,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_5000.pt": {
+  "rpm": 14.29548454284668,
+  "rpm_std": 3.5450305938720703,
+  "ra": 91.69074296951294,
+  "dfsr": 85.9375,
+  "dc": 0.171875,
+  "checkpoint": "model_5000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
