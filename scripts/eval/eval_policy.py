@@ -48,6 +48,8 @@ parser.add_argument("--perturb", action="store_true", help="test-time action del
 parser.add_argument("--servo", action="store_true",
                     help="real ORCA v2 servo model with its training DR (17-117 ms delay, per-joint acceleration limit, "
                          "play, slope; adr.use_orca_v2_servo_model); outputs *_servo")
+parser.add_argument("--servo_parts", default="delay,profile,slope,play,stiff",
+                    help="comma list of servo-model parts to switch on (ablation); outputs *_servo-<parts> if not all")
 cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
@@ -144,8 +146,9 @@ def main(env_cfg, agent_cfg):
     if args_cli.servo:
         if args_cli.perturb:
             raise ValueError("--servo and --perturb are exclusive")
-        suffix += "_servo"
-        orca_adr.use_orca_v2_servo_model(env_cfg, delay_substeps_range=(2, 14), adr=False)
+        parts = tuple(p for p in args_cli.servo_parts.split(",") if p)
+        suffix += "_servo" if set(parts) == set(orca_adr.SERVO_PARTS) else "_servo-" + "-".join(parts or ("none",))
+        orca_adr.use_orca_v2_servo_model(env_cfg, delay_substeps_range=(2, 14), adr=False, parts=parts)
 
     env = RslRlVecEnvWrapper(gym.make(args_cli.task, cfg=env_cfg), clip_actions=agent_cfg.clip_actions)
     base = env.unwrapped
@@ -203,7 +206,7 @@ def main(env_cfg, agent_cfg):
         m = metrics(data["obj_angvel"][..., 2], cmd_sign.cpu().numpy(), data["done"] > 0, float(base.step_dt))
         m["checkpoint"] = os.path.basename(ckpt)
         m.update(cmd=args_cli.cmd, steps=args_cli.steps, num_envs=n, task=args_cli.task, perturb=args_cli.perturb,
-                 servo=args_cli.servo)
+                 servo=args_cli.servo, servo_parts=args_cli.servo_parts if args_cli.servo else "")
         print(f"[eval] {ckpt}: {m}")
 
         out_dir = os.path.join(os.path.dirname(ckpt), "eval")

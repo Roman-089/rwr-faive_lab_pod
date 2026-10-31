@@ -241,21 +241,32 @@ def adr_level(
 ORCA_V2_SERVO_LOOP_LAG_S = {"right_wrist": 0.10, "fingers": 0.01}
 
 
-def use_orca_v2_servo_model(env_cfg, delay_substeps_range: tuple[int, int], adr: bool, nominal: bool = False):
+SERVO_PARTS = ("delay", "profile", "slope", "play", "stiff")
+
+
+def use_orca_v2_servo_model(env_cfg, delay_substeps_range: tuple[int, int], adr: bool, nominal: bool = False,
+                            parts: tuple[str, ...] = SERVO_PARTS):
     """Swap the env's joint action for the real servo model (delay -> acceleration-limited profile -> slope -> play ->
     stiff loop): ``(ADR)ServoProfileActionCfg`` with the measured per-joint values, and drive damping = stiffness * lag
     (``ORCA_V2_SERVO_LOOP_LAG_S``) for every actuator group. ``nominal``: no per-episode scaling (eval). Used by the
-    -servo tasks and by the eval's --servo."""
+    -servo tasks and by the eval's --servo. ``parts`` switches the model's components on (ablation of the model):
+    without "delay" the delay is 0, without "profile" / "slope" / "play" the acceleration limit is 1e6 rad/s^2, the
+    slope 1, the play 0, and without "stiff" the task's damping stays."""
+    unknown = set(parts) - set(SERVO_PARTS)
+    if unknown:
+        raise ValueError(f"unknown servo parts {unknown}")
     a = env_cfg.actions.joint_pos
     cls = ADRServoProfileActionCfg if adr else ServoProfileActionCfg
     one = (1.0, 1.0)
     env_cfg.actions.joint_pos = cls(
         asset_name=a.asset_name, joint_names=a.joint_names, alpha=a.alpha, rescale_to_limits=a.rescale_to_limits,
-        delay_substeps_range=delay_substeps_range, amax_rad_s2=ORCA_V2_SERVO_AMAX_RAD_S2,
-        play_deg=ORCA_V2_SERVO_PLAY_DEG, slope=ORCA_V2_SERVO_SLOPE,
+        delay_substeps_range=delay_substeps_range if "delay" in parts else (0, 0),
+        amax_rad_s2=ORCA_V2_SERVO_AMAX_RAD_S2 if "profile" in parts else {".*": 1e6},
+        play_deg=ORCA_V2_SERVO_PLAY_DEG if "play" in parts else {".*": 0.0},
+        slope=ORCA_V2_SERVO_SLOPE if "slope" in parts else {".*": 1.0},
         **({"amax_scale_range": one, "play_scale_range": one, "slope_scale_range": one} if nominal else {}),
     )
-    for act in env_cfg.scene.robot.actuators.values():
+    for act in env_cfg.scene.robot.actuators.values() if "stiff" in parts else ():
         stiff = act.stiffness
         if not isinstance(stiff, dict):
             raise TypeError(f"expected per-joint stiffness dicts, got {type(stiff)}")
