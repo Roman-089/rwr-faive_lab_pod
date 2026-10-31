@@ -349,6 +349,11 @@ ADR fine-tunes, exported with `export_history_policy.py` (bit-exact self-check) 
 | `abl_B_onedir_droppen_pos45_ent1e-4_r6k`, `..._upright_pos45_ent1e-4_r6k` (pod, 4000 it) | queued (00:40Z slots) | ~07:00 |
 | teacher with the winning reward → transformer student (afternoon upgrade) | config ready (`-teacher-onedir-droppen-upright-v0` ± position ×3) | ~13:00–15:00 |
 
+Pod plan for the slots freeing 05:50–09:30Z (sent 04:10Z): tilt + smoothness ×10 (4000 it, DTU copy cancelled when
+it starts); if tilt + position ×3 passes the flat / drop-free rule, its ADR fine-tune (resume model_3999, +2000 it), else
+tilt + fixed wrist; tilt + fixed wrist or ADR from scratch; after the teacher (ETA ~09:05Z) the transformer student
+`student_pt_onedir_droppen_upright_pos45` (2000 it).
+
 Deployment notes for every +z PPO candidate: command +z at 1.5 rad/s (the policy ignores the magnitude), 20 Hz,
 17-joint position targets through EMA α 0.2 to the joint limits, single-step 74-dim observation (normalization inside
 `exported/policy_history.pt`).
