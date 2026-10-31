@@ -48,6 +48,7 @@ parser.add_argument("--perturb", action="store_true", help="test-time action del
 parser.add_argument("--servo", action="store_true",
                     help="real ORCA v2 servo model as measured (0-50 ms delay, nominal per-joint acceleration limit and "
                          "play; adr.use_orca_v2_servo_model); outputs *_servo")
+parser.add_argument("--tag", default="", help="extra output suffix, e.g. _lowfric (keeps the default outputs intact)")
 parser.add_argument("--servo_parts", default="delay,profile,play",
                     help="comma list of servo-model parts to switch on (ablation); outputs *_servo-<parts> if not all")
 cli_args.add_rsl_rl_args(parser)
@@ -134,6 +135,7 @@ def main(env_cfg, agent_cfg):
     env_cfg.commands.continuous_rotation.resampling_time_range = (1e6, 1e6)
     # non-default command speeds get their own outputs (speed-tracking check)
     suffix = "" if args_cli.cmd == 1.5 else f"_cmd{args_cli.cmd:g}"
+    suffix += args_cli.tag
     if args_cli.perturb:
         suffix += "_perturbed"
         a = env_cfg.actions.joint_pos
