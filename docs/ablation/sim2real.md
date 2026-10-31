@@ -665,7 +665,7 @@ s1 m4150 10.34 / 93.8, m4300 10.80 / 93.8, m4450 10.89 / 89.1; realfric2 (PLA sk
 candidate B (trained also with the slippery PLA skeleton). `orca_v2_zrot_hand_ft:v8` (latest) holds both plus the
 earlier three; v7 holds only B.
 
-## Cube rotation-axis region (user, 2026-10-31 15:40Z)
+## Cube rotation-axis region (user, 2026-10-31 15:30Z)
 
 The user chose, with `docs/ablation/tools/palm_axis_region.html`, the region the cube's rotation axis (the vertical
 through the cube centre, the cube turns about world z) may occupy: centre (−11.6, 13.6) mm, radius 27.5 mm (env frame;
@@ -680,7 +680,7 @@ Region fine-tune `07ft_region_ft_r6k` started 15:33Z on the pod (resume 07ft_s0_
 check: cube_region weight 50, σ 10 mm, centre / radius as chosen). Baseline of its base checkpoint (LOWFRIC rollout):
 94.1 % of alive steps inside the circle.
 
-**Deploy branch (user's standing instruction, 15:50Z):** every new policy that passes the ship rule also goes to
+**Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
 without `--push`; verified: LFS pointer, re-ranking, commit identity). Already there: 07ft_s0_m4600 (rank 1),
