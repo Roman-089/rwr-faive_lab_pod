@@ -1,4 +1,4 @@
-# remote queue status (2026-10-31T17:45:14Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 99 %, 34566 MiB)
+# remote queue status (2026-10-31T17:55:20Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 39079 MiB)
 # queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated); 02b_servo_wp_rf_ft_r6k_v2 superseded (07 is the base)
 07_wp_rf_ft_r6k TRAIN_EXIT rc=0 Learning iteration 5499/5500
 #   13:24 OWN model_4150 rpm 13.07 dfsr 84.4 dc 0.17 score 11.03 | tilt 7.3 flips 2.8 wrist 0.18/0.08
@@ -88,7 +88,9 @@
 #   17:33 LOWFRIC model_5400 rpm 10.52 dfsr 93.8 dc 0.06 score 9.86 | tilt 5.4 flips 1.5 wrist 0.16/0.07 region 97.7%
 #   17:38 OWN model_5500 rpm 13.83 dfsr 89.1 dc 0.14 score 12.32 | tilt 5.6 flips 2.2 wrist 0.19/0.07 region 95.6%
 #   17:40 LOWFRIC model_5500 rpm 10.40 dfsr 90.6 dc 0.09 score 9.43 | tilt 5.8 flips 1.8 wrist 0.16/0.08 region 96.4%
-07ft_region200c_ft_r6k running Learning iteration 5233/5600
+#   17:47 OWN model_5599 rpm 13.86 dfsr 85.9 dc 0.17 score 11.91 | tilt 5.8 flips 2.7 wrist 0.19/0.08 region 94.7%
+#   17:49 LOWFRIC model_5599 rpm 10.84 dfsr 89.1 dc 0.12 score 9.66 | tilt 5.6 flips 1.8 wrist 0.16/0.07 region 95.3%
+07ft_region200c_ft_r6k running Learning iteration 5360/5600
 #   17:00 OWN model_4700 rpm 13.70 dfsr 82.8 dc 0.19 score 11.34 | tilt 6.3 flips 2.3 wrist 0.19/0.07 region 93.6%
 #   17:02 LOWFRIC model_4700 rpm 10.95 dfsr 84.4 dc 0.27 score 9.24 | tilt 5.7 flips 2.2 wrist 0.16/0.06 region 95.7%
 #   17:08 OWN model_4800 rpm 13.96 dfsr 84.4 dc 0.16 score 11.78 | tilt 6.3 flips 2.4 wrist 0.19/0.07 region 93.5%
@@ -100,8 +102,11 @@
 #   17:36 OWN model_5100 rpm 13.88 dfsr 87.5 dc 0.16 score 12.15 | tilt 5.9 flips 2.7 wrist 0.19/0.07 region 94.5%
 #   17:38 LOWFRIC model_5100 rpm 11.36 dfsr 92.2 dc 0.08 score 10.48 | tilt 5.4 flips 1.6 wrist 0.16/0.07 region 97.2%
 #   17:44 OWN model_5200 rpm 13.41 dfsr 81.2 dc 0.19 score 10.89 | tilt 5.8 flips 2.7 wrist 0.19/0.08 region 95.6%
+#   17:47 LOWFRIC model_5200 rpm 11.02 dfsr 85.9 dc 0.17 score 9.47 | tilt 5.4 flips 2.0 wrist 0.16/0.07 region 97.3%
+#   17:52 OWN model_5300 rpm 13.72 dfsr 87.5 dc 0.17 score 12.01 | tilt 5.7 flips 2.4 wrist 0.19/0.07 region 95.3%
+#   17:54 LOWFRIC model_5300 rpm 11.55 dfsr 92.2 dc 0.08 score 10.65 | tilt 5.4 flips 1.6 wrist 0.16/0.07 region 97.5%
 07ft_region200cs_ft_r6k queued (not started)
-06_wp_rf_ft_r6k running Learning iteration 5319/5499
+06_wp_rf_ft_r6k running Learning iteration 5440/5499
 #   16:06 OWN model_4200 rpm 16.01 dfsr 79.7 dc 0.33 score 12.76 | tilt 15.5 flips 5.7 wrist 0.19/0.29
 #   16:09 LOWFRIC model_4200 rpm 14.37 dfsr 90.6 dc 0.11 score 13.02 | tilt 15.0 flips 2.2 wrist 0.29/0.27
 #   16:24 OWN model_4400 rpm 16.96 dfsr 78.1 dc 0.27 score 13.25 | tilt 14.2 flips 4.0 wrist 0.20/0.28
@@ -114,7 +119,8 @@
 #   17:20 LOWFRIC model_5000 rpm 14.96 dfsr 84.4 dc 0.19 score 12.62 | tilt 14.1 flips 2.1 wrist 0.26/0.22
 #   17:36 OWN model_5200 rpm 17.48 dfsr 84.4 dc 0.16 score 14.75 | tilt 13.6 flips 3.4 wrist 0.20/0.25 region 98.0%
 #   17:39 LOWFRIC model_5200 rpm 14.83 dfsr 82.8 dc 0.19 score 12.28 | tilt 13.6 flips 2.1 wrist 0.25/0.21 region 97.8%
-upright_wp_rf_scratch_r6k running Learning iteration 1490/5000
+#   17:54 OWN model_5400 rpm 16.61 dfsr 85.9 dc 0.17 score 14.28 | tilt 12.3 flips 3.0 wrist 0.21/0.25 region 98.0%
+upright_wp_rf_scratch_r6k running Learning iteration 1627/5000
 #   16:04 OWN model_200 rpm 0.23 dfsr 87.5 dc 0.12 score 0.20 | tilt 3.8 flips 2.0 wrist 0.16/0.01
 #   16:06 LOWFRIC model_200 rpm 0.16 dfsr 87.5 dc 0.12 score 0.14 | tilt 4.3 flips 1.5 wrist 0.17/0.01
 #   16:20 OWN model_400 rpm 4.84 dfsr 70.3 dc 0.45 score 3.41 | tilt 7.6 flips 4.3 wrist 0.19/0.06
@@ -129,7 +135,7 @@ upright_wp_rf_scratch_r6k running Learning iteration 1490/5000
 #   17:27 LOWFRIC model_1200 rpm 9.67 dfsr 75.0 dc 0.30 score 7.25 | tilt 6.5 flips 6.9 wrist 0.49/0.26 region 98.3%
 #   17:40 OWN model_1400 rpm 12.93 dfsr 75.0 dc 0.44 score 9.70 | tilt 4.9 flips 3.9 wrist 0.39/0.19 region 98.6%
 #   17:42 LOWFRIC model_1400 rpm 10.09 dfsr 70.3 dc 0.47 score 7.09 | tilt 6.4 flips 5.7 wrist 0.49/0.22 region 98.3%
-07_wp_rf_roll10_ft_r6k running Learning iteration 5362/5500
+07_wp_rf_roll10_ft_r6k running Learning iteration 5491/5500
 #   16:08 OWN model_4200 rpm 13.27 dfsr 82.8 dc 0.19 score 10.99 | tilt 7.4 flips 2.6 wrist 0.19/0.09
 #   16:10 LOWFRIC model_4200 rpm 10.82 dfsr 93.8 dc 0.06 score 10.14 | tilt 6.0 flips 1.7 wrist 0.17/0.09
 #   16:24 OWN model_4400 rpm 13.85 dfsr 89.1 dc 0.16 score 12.33 | tilt 7.0 flips 2.1 wrist 0.19/0.08
@@ -142,6 +148,8 @@ upright_wp_rf_scratch_r6k running Learning iteration 1490/5000
 #   17:17 LOWFRIC model_5000 rpm 11.83 dfsr 90.6 dc 0.09 score 10.72 | tilt 6.0 flips 2.2 wrist 0.16/0.08
 #   17:33 OWN model_5200 rpm 14.37 dfsr 81.2 dc 0.20 score 11.68 | tilt 6.1 flips 2.5 wrist 0.19/0.08 region 81.6%
 #   17:35 LOWFRIC model_5200 rpm 11.85 dfsr 92.2 dc 0.09 score 10.93 | tilt 5.6 flips 1.9 wrist 0.16/0.08 region 89.5%
+#   17:50 OWN model_5400 rpm 14.57 dfsr 87.5 dc 0.16 score 12.75 | tilt 5.7 flips 2.1 wrist 0.19/0.07 region 83.2%
+#   17:52 LOWFRIC model_5400 rpm 11.62 dfsr 90.6 dc 0.09 score 10.53 | tilt 5.5 flips 1.8 wrist 0.16/0.07 region 90.5%
 07_wp_rf_mount10_ft_r6k queued (not started)
 07_wp_rf_kl005_ft_r6k queued (not started)
 07_wp_rf_cmd2_ft_r6k queued (not started)
