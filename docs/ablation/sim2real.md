@@ -396,3 +396,28 @@ changes / min and model_4999 is ≥ 60 % drop-free. GOOD → teacher `-teacher-o
 teacher `-teacher-onedir-droppen-v0` + position ×3, and the held single-knob runs continue.
 
 ADR fine-tune started on the pod 2026-10-30 22:18Z (W&B on6yv8hs): resumed at 4999/7999, ADR action term (delay 0–15), ADR offset (0.08 rad), curriculum active, entropy 1e-4, position ×3 — all checked by the worker.
+
+## First real-hand results (2026-10-31, interim, from the deploy session `deploy-rwr`)
+
+Run on the real ORCA v2 with the unchanged course node: `orca_v2_zrot_deploy` #1–#3, `deployable_policies` #4 and the
+bidirectional transformer student (4 trials). The hand lay flat with a −30° wrist offset in a relay, so the palm's angle
+to gravity matched the training tilt. Measured (full report with CSVs to follow as a W&B dataset):
+
+- **Latency:** command → joint starts moving 60–75 ms (fingers), ~90 ms (wrist); median 69 ms with ROS (+0–7 ms).
+  Effective lag below 1 Hz: 80–93 ms fingers, **147 ms wrist**. ADR's delay range (0–125 ms) covers the fingers, not the
+  wrist.
+- **Servos are slew limited:** peak 120–180°/s on 15° steps, acceleration limit 22.8 rad/s² (motor side, orca_core
+  default profile), bandwidth 2.3–3 Hz fingers, 1.6 Hz wrist. **The sim has no velocity or acceleration limit**: the PD
+  tracks the EMA target, which moves by up to α·range = 0.2 × 125° = 25° per 50 ms (~500°/s) for MCP / PIP.
+- In the trials the policies saturate their raw actions 50–99 % of the steps and command 60–120° swings; the real joints
+  follow 150–300 ms late with 13–52° RMS tracking error.
+- Joint-position noise at rest ~0 (training adds 0.1 normalized, 2.7–6.3°); holding error at neutral up to 3.6° (inside
+  ADR's ±0.08 rad = ±4.6° offset).
+- index_pip auto-calibration under-measured its stroke (63–74 vs 96 motor degrees), fixed by manual calibration
+  → candidate: per-joint scale DR.
+- The transformer student stalls the control loop for 216–593 ms in every trial (MLPs: one 209 ms stall); guess:
+  TorchScript's profiling executor re-optimizing on the first real calls after a single warm-up call (unverified).
+
+Consequence for the next round: model the servo (rate and acceleration limits, ~70–150 ms lag, lower bandwidth) in
+the sim (actuator model / net, [actuator_net](actuator_net.md)), and make the action pipeline trackable (rate-limited
+targets, lower EMA α or a stronger action-rate penalty); then re-fine-tune the deployable policies.
