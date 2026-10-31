@@ -42,6 +42,7 @@ table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node
 | `student_pt_rotlin` (model_1999, transformer) | **10.90** | 79 / 86 / 0.17 | **4.50** (64) | 59 / 67 / 0.53 | **4.37** (64) | 60 / 73 / 0.34 | 0.41 / 0.40 |
 | `abl_B_onedir_droppen_ent5e-3` (model_4999, +z only) | **16.41** | 83 / 63 / 0.64 | **3.54** (64) | 62 / 73 / 0.30 | **4.07** (64) | 58 / 63 / 0.56 | 0.22 / 0.25 |
 | `abl_B_onedir_droppen_pos45_ent5e-3` (model_4999, +z only, cube position ×3, no tumbling) | **12.59** | 81 / 86 / 0.14 | **6.03** (64) | 75 / **92** / 0.08 | **5.60** (64) | 66 / **92** / 0.08 | 0.48 / 0.44 |
+| `abl_B_onedir_droppen_upright_ent1e-4` (model_4000, +z only, cube tilt penalty, flat) | **11.21** | 80 / 94 / 0.06 | **7.18** (64) | 78 / 84 / 0.20 | **6.20** (64) | 72 / 84 / 0.22 | **0.64 / 0.55** |
 
 Rows added 2026-10-29 23:10 (job 29851207, CPU queue `hpc`, 64 trials each; informational, decisions use Isaac). The
 fastest Isaac policy (onedir, 15.2 RPM) keeps only 36 % of its speed and drops most; the drop-penalty run keeps the
@@ -93,6 +94,11 @@ first hardware test, not a reason to drop onedir (MuJoCo's soft contact is not t
 **2026-10-30 22:55 (job 29857930, informational).** The cube-position ×3 +z policy (no tumbling, 16° tilt) keeps 48 %
 of its Isaac speed (the tumbling onedir policies kept 22 %) and is the most drop-free policy in MuJoCo so far (92 %
 nominal and with Isaac's DR). Consistent with the Isaac finding that its flat, centred grasp is the robust one.
+
+**2026-10-31 02:20 (job 29858623, informational).** The tilt-penalty +z policy (model_4000, the exported one; 7° tilt,
+2.7 face changes / min in Isaac) keeps **64 %** of its Isaac speed in MuJoCo (55 % with Isaac's DR), the best speed
+transfer so far (position ×3: 48 %, tumbling onedir: 22 %): 7.2 RPM nominal, the fastest policy in MuJoCo, at 84 %
+drop-free (position ×3: 92 %). A flat z-rotation transfers best; the tumbling "speed" did not transfer at all.
 
 ## Design
 
