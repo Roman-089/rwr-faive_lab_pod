@@ -421,3 +421,28 @@ to gravity matched the training tilt. Measured (full report with CSVs to follow 
 Consequence for the next round: model the servo (rate and acceleration limits, ~70–150 ms lag, lower bandwidth) in
 the sim (actuator model / net, [actuator_net](actuator_net.md)), and make the action pipeline trackable (rate-limited
 targets, lower EMA α or a stronger action-rate penalty); then re-fine-tune the deployable policies.
+
+## Real-hand servo model as DR (2026-10-31)
+
+Fit of the deploy session (W&B dataset `hand_trials_2026-10-31:v0`, `actuator/actuator_model_orca_v2_right_2026-10-31.json`;
+chirps ±10° 0.1–5 Hz + 190 Hz steps of 2 / 5 / 15°): commanded angle → pure delay d (0–40 ms; + 0–10 ms state age
+with the node) → **trapezoidal profile** with the Feetech profile register's acceleration (22.78 rad/s² motor side /
+the joint's motor ratio = 14.8 rad/s² wrist, 23–30 fingers, 38–41 thumb_abd / thumb_dip; the speed register never
+binds; a step of s peaks at √(a·s): 15° → ~150°/s) → stiff loop (fingers ωn 140–300 rad/s, wrist 20) with friction
+**play** (hysteresis 2.4–3.8°, thumb_abd 5.8°) and a **slope** below 1 (index_pip 0.70, thumb_dip 0.80, others
+0.87–0.95). Chirp RMSE 1.4–2.4° vs 5.6–6.1° raw. The sim's PD is heavily overdamped (ζ 3–160 at the joints' tiny
+inertias, joint-space inertia at the neutral pose 1.8e-6–1.5e-3 kg m²): a first-order lag of Kd/Kp = 70–140 ms with no
+dead time and no rate limit; a 1 rad error starts at ~10 rad/s.
+
+Implemented (`adr.ServoProfileAction`, `adr.use_orca_v2_servo_model`): delayed EMA target → `trapezoid_step` (per
+joint amax) → slope around the episode's start pose → play (backlash) → PD with damping = Kp × lag (fingers 10 ms,
+wrist 100 ms). CPU test of the profile: step peaks within 2 % of √(a·s), no overshoot, arrival ~10 % earlier than the
+continuous formula. Task `-asym-onedir-droppen-upright-servo-v0`: delay 2–14 substeps (17–117 ms), amax ×0.7–1.3, play
+×0.5–1.5, slope ×0.9–1.1, encoder offset ±0.08 rad; policy interface unchanged. Eval `eval_policy.py --servo` (same
+DR, outputs `*_servo`).
+
+User instruction (13:30Z, via the deploy session): stop all pod trainings, use the whole GPU to fine-tune the best
+speed / robustness mix under the servo model; candidates 07, 02, 02b, 01, 05 scored under `--servo` first (score =
+RPM × drop-free), then the winner (07 if within 10 %) fine-tuned with 32k envs, servo eval every ~150 iterations.
+Real-hand ratings so far: 07_tilt (no ADR) the only full 60 s run ("best till now"), 01 "bad", the others stopped
+early after occasional drops.
