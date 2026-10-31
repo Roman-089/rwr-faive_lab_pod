@@ -680,6 +680,8 @@ Region fine-tune `07ft_region_ft_r6k` started 15:33Z on the pod (resume 07ft_s0_
 check: cube_region weight 50, σ 10 mm, centre / radius as chosen). Baseline of its base checkpoint (LOWFRIC rollout):
 94.1 % of alive steps inside the circle.
 
+m4700 (100 it into the term): LOWFRIC 11.77 RPM / 93.8 % drop-free / 0.08 drops, 93.2 % in region; OWN 14.28 / 82.8 / 0.22, 90.4 % in region: no region gain yet. DTU queued two more region fine-tunes: from candidate B (rf2 m5200) and from A with seed 1. Final 07 fine-tune checkpoints (m5400/m5499, all three seeds/variants) decline to 84–91 % drop-free at the measured friction; the shipped m4600 / rf2 m5200 stay best.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
