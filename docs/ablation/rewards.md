@@ -573,3 +573,10 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   is not what causes the tumbling (on the entropy-5e-3 teacher the wrist penalty did reduce it, 171 → 16 / min), the
   tumbling is a finger gait the speed reward pays for, and the tilt penalty is the fix. A calm or fixed wrist does make
   the policy more robust to delay / offset (28 → 51 %), like the wrist penalty on the teacher (17 → 58 %).
+- **Tilt + wrist penalty (`abl_B_onedir_droppen_upright_wristpen_ent1e-4`, DTU A100, W&B 1xxwpij9)**, nominal / perturbed:
+  1000 10.55 / 9.63 RPM, 73 / 50 % · 2000 11.85 / 11.39, 78 / 47 % · 3000 13.06 / 11.95, 84 / 66 % · 4000 13.41 / 12.42,
+  92 / 61 % · 4999 13.40 / 11.84, 91 / 63 %. Last-3 mean **13.3 RPM, 89 % drop-free, perturbed 63 %** (tilt alone: seed 0
+  11.4 / 93 / 54, seed 1 9.6 / 74 / 39). Cube motion (4999): tilt **7.0° / 13.1°**, 2.3 face changes / min, wrist 0.33 rad /
+  0.10 rad/s. Flat like the tilt penalty alone, faster than both tilt seeds and the most robust non-ADR policy so far:
+  the wrist penalty adds robustness on top of the tilt penalty, as on the teacher (it is one seed; the tilt penalty's
+  seed spread is ~2 RPM / ~20 points). ADR fine-tune queued (new task `-asym-onedir-droppen-upright-wristpen-adr-v0`).
