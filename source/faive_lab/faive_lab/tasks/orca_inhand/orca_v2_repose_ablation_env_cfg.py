@@ -614,8 +614,8 @@ class OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg(OrcaV2ReposeAsymOneDirDropPe
 @configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightServoEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg):
     """-onedir-droppen-upright with the real ORCA v2 servo model as DR (adr.ServoProfileAction, fitted on the real hand
-    2026-10-31): action delay 17-117 ms (2-14 substeps), per-joint acceleration-limited profile (x0.7-1.3), slope
-    (x0.9-1.1) and play (x0.5-1.5), stiff position loop; joint-encoder offset +-0.08 rad. Policy obs and critic unchanged,
+    2026-10-31): action delay 17-117 ms (2-14 substeps), per-joint acceleration-limited profile (x0.7-1.3) and play
+    (x0.5-1.5), stiff position loop, no slope (adr.DEFAULT_SERVO_PARTS); joint-encoder offset +-0.08 rad. Policy obs and critic unchanged,
     so the deployable +z policies (07_tilt, ...) resume directly."""
 
     def __post_init__(self):
@@ -623,6 +623,16 @@ class OrcaV2ReposeAsymOneDirDropPenUprightServoEnvCfg(OrcaV2ReposeAsymOneDirDrop
         adr.use_orca_v2_servo_model(self, delay_substeps_range=(2, 14), adr=False)
         self.observations.policy.joint_pos.func = adr.joint_pos_limit_normalized_biased
         self.observations.policy.joint_pos.params = {"bias_rad": 0.08}
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightServoWristPenEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightServoEnvCfg):
+    """-upright-servo + the wrist velocity penalty (-4): on the real hand the policies that keep the wrist still (07,
+    02b: 2-7 deg/s mean wrist speed) ran the full minute, those that move it (05: 51 deg/s) were stopped."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_wrist_vel_penalty(self)
 
 
 @configclass

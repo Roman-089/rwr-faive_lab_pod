@@ -48,7 +48,7 @@ parser.add_argument("--perturb", action="store_true", help="test-time action del
 parser.add_argument("--servo", action="store_true",
                     help="real ORCA v2 servo model with its training DR (17-117 ms delay, per-joint acceleration limit, "
                          "play, slope; adr.use_orca_v2_servo_model); outputs *_servo")
-parser.add_argument("--servo_parts", default="delay,profile,slope,play,stiff",
+parser.add_argument("--servo_parts", default="delay,profile,play,stiff",
                     help="comma list of servo-model parts to switch on (ablation); outputs *_servo-<parts> if not all")
 cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
@@ -147,7 +147,7 @@ def main(env_cfg, agent_cfg):
         if args_cli.perturb:
             raise ValueError("--servo and --perturb are exclusive")
         parts = tuple(p for p in args_cli.servo_parts.split(",") if p)
-        suffix += "_servo" if set(parts) == set(orca_adr.SERVO_PARTS) else "_servo-" + "-".join(parts or ("none",))
+        suffix += "_servo" if set(parts) == set(orca_adr.DEFAULT_SERVO_PARTS) else "_servo-" + "-".join(parts or ("none",))
         orca_adr.use_orca_v2_servo_model(env_cfg, delay_substeps_range=(2, 14), adr=False, parts=parts)
 
     env = RslRlVecEnvWrapper(gym.make(args_cli.task, cfg=env_cfg), clip_actions=agent_cfg.clip_actions)
