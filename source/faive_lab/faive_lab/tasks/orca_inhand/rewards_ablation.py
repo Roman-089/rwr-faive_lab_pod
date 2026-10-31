@@ -110,6 +110,23 @@ def cube_outside_region(
     return torch.exp(-torch.clamp(d - radius, min=0.0) / sigma) - 1.0
 
 
+def track_position_exp_xy(
+    env: ManagerBasedRLEnv,
+    command_name: str,
+    target_xy: tuple[float, float],
+    sigma: float = 0.02,
+    object_cfg: SceneEntityCfg = SceneEntityCfg("object"),
+) -> torch.Tensor:
+    """mdp.track_position_exp with the target's x-y replaced by ``target_xy`` (env frame), z still the command's. The
+    command (and so the policy's goal observation [0, 0, -0.05, ...], hard-coded in the deploy node) stays unchanged;
+    only the reward pulls the cube elsewhere, e.g. to the centre of the user's rotation-axis region."""
+    obj = env.scene[object_cfg.name]
+    target = env.command_manager.get_term(command_name).command[:, 0:3].clone()
+    target[:, 0], target[:, 1] = target_xy
+    err = torch.linalg.norm(obj.data.root_pos_w - env.scene.env_origins - target, dim=-1)
+    return torch.exp(-err / sigma).clamp(0.0, 1.0)
+
+
 def cube_tilt(env: ManagerBasedRLEnv, object_cfg: SceneEntityCfg = SceneEntityCfg("object")) -> torch.Tensor:
     """1 - max_i |(R e_i) . z|: zero while one cube face points up (any yaw, so a clean z-rotation is free), 1 - cos(tilt)
     otherwise (45 deg -> 0.29). The +z policies tumble the cube (mean tilt 25-36 deg, the top face changes ~100-170

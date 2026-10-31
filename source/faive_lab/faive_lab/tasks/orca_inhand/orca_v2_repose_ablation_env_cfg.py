@@ -769,6 +769,23 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200EnvCfg(
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200CEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200EnvCfg
+):
+    """-realfric-region200 with the position-tracking reward pulled to the region's centre instead of (0, 0). The cube
+    of 07ft_s0_m4600 sits on average at (-6.9, -6.0) mm, 20 mm from the centre (-11.6, 13.6) mm, and 95 % of its
+    out-of-region steps leave the circle towards -y, where the old target (0, 0) lies 17.9 mm from the centre:
+    the tracking reward and the region term pull against each other. Command and goal observation unchanged
+    (``rewards_ablation.track_position_exp_xy``), so the unchanged deploy node still fits."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        t = self.rewards.object_position_tracking
+        t.func = rewards_ablation.track_position_exp_xy
+        t.params["target_xy"] = CUBE_AXIS_REGION["center"]
+
+
+@configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightWristPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg):
     """-onedir-droppen-upright-adr + the wrist velocity penalty: ADR fine-tune of an -onedir-droppen-upright-wristpen
     policy (same obs and critic)."""
