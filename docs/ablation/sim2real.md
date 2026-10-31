@@ -561,3 +561,12 @@ reproduce the hand ranking?).
 the wrist criterion added (sim wrist ≤ ~0.15 rad/s) the order is 02 > 02b, 01 / 05 / 07 out: matches the hand except
 07, which in the sim is fragile under the actuator dynamics but ran a clean minute on the real hand (one trial).
 Fine-tunes restarted 12:56Z with low friction + servo model + wrist penalty from 07 and 02b (`*_servo_wp_lf_ft_r6k`).
+
+**Materials (user, 14:00Z): PLA cube, TPU palm, soft silicone fingers ("10 NV", probably Shore ~10A).** The measured
+μ ≈ 0.41 is PLA on the TPU palm; PLA on soft silicone is typically ~0.8–1.2. One friction range for the whole hand is
+therefore wrong: `use_real_hand_friction` sets the finger links to 1.2–2.0, the palm links (forearm, tower, carpals,
+thumb_tp) to 0.3–0.6 via an extra startup event that overrides only their shapes, and the cube to 0.3–0.5, so PhysX's
+average gives palm contacts 0.3–0.55 and finger contacts 0.75–1.25. Task `-upright-servo-wristpen-realfric-v0`
+(c5a9993); the pod's fine-tunes from 07 and 02b switched to it (`*_servo_wp_rf_ft_r6k`). `--servo` at mid friction
+(hand 0.5–0.8, cube 0.4–0.6): 02 3.79 > 01 2.90 > 02b 2.49 > 05 1.13 > 07 0.41: under the servo model 07 is last at
+every friction level.
