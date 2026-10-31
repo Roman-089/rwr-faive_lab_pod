@@ -1,1 +1,40 @@
-[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+                    Iteration time: 5.38s
+                      Time elapsed: 00:09:16
+                               ETA: 02:32:12
+
+################################################################################
+                     [1m Learning iteration 115/2000 [0m                      
+
+                       Computation: 18550 steps/s (collection: 3.850s, learning 1.450s)
+             Mean action noise std: 0.10
+                Mean behavior loss: 1.9037
+          Mean reconstruction loss: 0.1169
+                       Mean reward: 128.46
+               Mean episode length: 286.92
+Episode_Reward/object_position_tracking: 4.6079
+Episode_Reward/angular_acceleration: 0.0744
+       Episode_Reward/joint_vel_l2: -0.0037
+          Episode_Reward/action_l2: -0.0058
+     Episode_Reward/action_rate_l2: -0.1780
+  Episode_Reward/rotation_progress: 9.9349
+Episode_Reward/off_axis_angular_velocity: -4.6580
+        Episode_Reward/object_drop: -2.8567
+          Episode_Reward/cube_tilt: -5.4126
+Metrics/continuous_rotation/position_error: 0.2062
+Metrics/continuous_rotation/current_angular_speed: 20.7849
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 19.2849
+Metrics/continuous_rotation/angular_velocity_error: 20.8606
+Metrics/continuous_rotation/angular_velocity_alignment: 0.0213
+Metrics/continuous_rotation/consecutive_success: 0.0049
+Metrics/continuous_rotation/total_success: 11.9112
+Metrics/continuous_rotation/vertical_drift: 0.1016
+Metrics/continuous_rotation/linear_speed: 1.5508
+      Episode_Termination/time_out: 0.1237
+Episode_Termination/object_dropped: 0.8766
+--------------------------------------------------------------------------------
+                   Total timesteps: 11403264
+                    Iteration time: 5.30s
+                      Time elapsed: 00:09:22
+                               ETA: 02:32:14
+
