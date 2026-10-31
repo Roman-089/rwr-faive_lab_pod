@@ -1,4 +1,4 @@
-# remote queue status (2026-10-31T21:18:14Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 36269 MiB)
+# remote queue status (2026-10-31T21:28:21Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 99 %, 33268 MiB)
 # queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated); 02b_servo_wp_rf_ft_r6k_v2 superseded (07 is the base)
 07_wp_rf_ft_r6k TRAIN_EXIT rc=0 Learning iteration 5499/5500
 #   13:24 OWN model_4150 rpm 13.07 dfsr 84.4 dc 0.17 score 11.03 | tilt 7.3 flips 2.8 wrist 0.18/0.08
@@ -159,7 +159,7 @@
 #   17:56 LOWFRIC model_5400 rpm 14.56 dfsr 87.5 dc 0.12 score 12.74 | tilt 12.1 flips 2.1 wrist 0.29/0.22 region 98.3%
 #   18:01 OWN model_5498 rpm 17.66 dfsr 82.8 dc 0.23 score 14.62 | tilt 12.4 flips 2.4 wrist 0.21/0.27 region 97.6%
 #   18:03 LOWFRIC model_5498 rpm 14.91 dfsr 90.6 dc 0.12 score 13.51 | tilt 12.5 flips 1.7 wrist 0.29/0.23 region 98.0%
-upright_wp_rf_scratch_r6k running Learning iteration 4447/5000
+upright_wp_rf_scratch_r6k running Learning iteration 4588/5000
 #   16:04 OWN model_200 rpm 0.23 dfsr 87.5 dc 0.12 score 0.20 | tilt 3.8 flips 2.0 wrist 0.16/0.01
 #   16:06 LOWFRIC model_200 rpm 0.16 dfsr 87.5 dc 0.12 score 0.14 | tilt 4.3 flips 1.5 wrist 0.17/0.01
 #   16:20 OWN model_400 rpm 4.84 dfsr 70.3 dc 0.45 score 3.41 | tilt 7.6 flips 4.3 wrist 0.19/0.06
@@ -202,6 +202,8 @@ upright_wp_rf_scratch_r6k running Learning iteration 4447/5000
 #   20:51 LOWFRIC model_4000 rpm 11.23 dfsr 64.1 dc 0.47 score 7.20 | tilt 6.5 flips 4.8 wrist 0.43/0.19 region 97.0%
 #   21:04 OWN model_4200 rpm 14.22 dfsr 75.0 dc 0.34 score 10.67 | tilt 4.7 flips 2.9 wrist 0.30/0.14 region 98.7%
 #   21:06 LOWFRIC model_4200 rpm 11.26 dfsr 71.9 dc 0.42 score 8.10 | tilt 6.2 flips 3.6 wrist 0.46/0.21 region 98.0%
+#   21:18 OWN model_4400 rpm 14.30 dfsr 76.6 dc 0.34 score 10.94 | tilt 4.7 flips 3.1 wrist 0.24/0.11 region 98.9%
+#   21:20 LOWFRIC model_4400 rpm 11.16 dfsr 70.3 dc 0.41 score 7.85 | tilt 5.8 flips 3.4 wrist 0.46/0.24 region 98.6%
 07_wp_rf_roll10_ft_r6k TRAIN_EXIT rc=0 Learning iteration 5499/5500
 #   16:08 OWN model_4200 rpm 13.27 dfsr 82.8 dc 0.19 score 10.99 | tilt 7.4 flips 2.6 wrist 0.19/0.09
 #   16:10 LOWFRIC model_4200 rpm 10.82 dfsr 93.8 dc 0.06 score 10.14 | tilt 6.0 flips 1.7 wrist 0.17/0.09
@@ -331,14 +333,14 @@ abl_B_onedir_droppen_ramp_ent5e-3_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_upright500_ent1e-4_r6k skipped_dtu 
 abl_B_onedir_droppen_upright_acc10_ent1e-4_r6k done Learning iteration 3999/4000
 abl_B_onedir_droppen_upright_adr_r6k done Learning iteration 6998/6999
-abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k running Learning iteration 2850/5000
+abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k running Learning iteration 2975/5000
 abl_B_onedir_droppen_upright_ent1e-4_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_upright_ent1e-4_seed1_r6k skipped_dtu 
 abl_B_onedir_droppen_upright_pos45_adr_r6k done Learning iteration 5998/5999
 abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k done Learning iteration 3999/4000
-abl_B_onedir_droppen_upright_pos45_ent1e-4_seed1_r6k running Learning iteration 1856/4000
+abl_B_onedir_droppen_upright_pos45_ent1e-4_seed1_r6k running Learning iteration 1988/4000
 abl_B_onedir_droppen_upright_pos45_ent1e-4_seed2_r6k held_order 
-abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k running Learning iteration 809/4000
+abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k running Learning iteration 934/4000
 abl_B_onedir_droppen_upright_wristfix_ent1e-4_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_upright_wristpen_ent1e-4_r6k skipped_dtu 
 abl_B_onedir_droppen_work015_ent5e-3_r6k skipped_dtu 
