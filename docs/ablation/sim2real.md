@@ -345,9 +345,9 @@ iterations in, drop share ~22 %. Isaac, +z, nominal / perturbed:
 
 Same picture as on position ×3: perturbed drop-free +23 points, drops under delay / offset −63 %, nominal unchanged, and
 faster under delay. The cube stays as flat as before ADR (model_6998: tilt 7.4° / 14.7° p90, 2.5 face changes / min) and
-the wrist as calm (0.28 rad / 0.08 rad/s). **Best deployable policy so far** (flat + calm + robust); model_5500
-(94 / 80 %) exported bit-exact (`logs/rsl_rl/orca_v2_repose/2026-10-31_02-41-27_abl_B_onedir_droppen_upright_adr_r6k/
-exported/policy_history.pt`), the final model_6998 (91 / 83 %, not on W&B) once the pod pushes it. MuJoCo: job 29859208.
+the wrist as calm (0.28 rad / 0.08 rad/s). **Best deployable policy so far** (flat + calm + robust); the final model_6998 (91 / 83 %, pushed by the pod: only
+the save-interval checkpoints are on W&B) exported bit-exact as `logs/rsl_rl/orca_v2_repose/2026-10-31_02-41-27_abl_B_onedir_droppen_upright_adr_r6k/
+exported/policy_history.pt`; model_5500 (94 / 80 %) in `exported_model5500/`. MuJoCo: job 29859208.
 Caveat: the base policy is seed 0 of the tilt penalty, the good draw (seed 1: 9.6 RPM / 74 %).
 
 ## Deadline plan: deployable policies by 2026-10-31 10:00 Zurich (09:00Z)
@@ -362,7 +362,7 @@ ADR fine-tunes, exported with `export_history_policy.py` (bit-exact self-check) 
 | B `abl_B_onedir_droppen_pos45_ent5e-3`, +z, flat (16°), 88 % / perturbed 49 % | exported 2026-10-30 22:40; MuJoCo job queued | done |
 | B-ADR `abl_B_onedir_droppen_pos45_adr_from5e-3_r6k`: 12.4 RPM, 91 % / **perturbed 80 %**, flat (16°) | exported 02:55Z (model_7000) | done |
 | C `abl_B_onedir_droppen_upright_ent1e-4_r6k` (tilt penalty): 11.4 RPM, 93 % / perturbed 54 %, flat (7°), calmest wrist; MuJoCo 7.2 RPM (best) | exported 01:40Z (model_4000) | done |
-| **C-ADR** upright + ADR fine-tune (W&B 6rsbkqqm): 11.4 RPM, 91 % / **perturbed 77 %**, flat (7°), calm wrist | exported 05:50Z (model_5500; model_6998 pending push) | done |
+| **C-ADR** upright + ADR fine-tune (W&B 6rsbkqqm): 11.4 RPM, 91 % / **perturbed 77 %**, flat (7°), calm wrist | exported 06:45Z (model_6998; model_5500 as alternative) | done |
 | `abl_B_onedir_droppen_pos45_ent1e-4_r6k`, `..._upright_pos45_ent1e-4_r6k` (pod, 4000 it) | queued (00:40Z slots) | ~07:00 |
 | teacher with the winning reward → transformer student (afternoon upgrade) | config ready (`-teacher-onedir-droppen-upright-v0` ± position ×3) | ~13:00–15:00 |
 
