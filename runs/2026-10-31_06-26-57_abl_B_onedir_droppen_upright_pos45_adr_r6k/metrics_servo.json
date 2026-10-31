@@ -1,10 +1,10 @@
 {
  "model_5500.pt": {
-  "rpm": 4.2690300941467285,
-  "rpm_std": 3.0609757900238037,
-  "ra": 20.401543378829956,
-  "dfsr": 0.0,
-  "dc": 11.546875,
+  "rpm": 11.23713493347168,
+  "rpm_std": 2.1810922622680664,
+  "ra": 70.86382508277893,
+  "dfsr": 35.9375,
+  "dc": 1.578125,
   "checkpoint": "model_5500.pt",
   "cmd": 1.5,
   "steps": 1200,
@@ -12,6 +12,6 @@
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0",
   "perturb": false,
   "servo": true,
-  "servo_parts": "delay,profile,play,stiff"
+  "servo_parts": "delay,profile,play"
  }
 }

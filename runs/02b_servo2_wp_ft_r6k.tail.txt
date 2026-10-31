@@ -1,3 +1,40 @@
-[INFO][AppLauncher]: Using device: cuda:0
-[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
-[Info] [carb] Logging to file: /tmp/rwr_kit_02b_servo2_wp_ft_r6k/logs/Kit/Isaac-Sim/5.1/kit_20261031_124311.log
+                               ETA: 01:58:40
+
+################################################################################
+                     [1m Learning iteration 5594/7000 [0m                     
+
+                       Computation: 60624 steps/s (collection: 4.570s, learning 0.295s)
+             Mean action noise std: 0.40
+          Mean value_function loss: 4230.2489
+               Mean surrogate loss: -0.0036
+                 Mean entropy loss: 7.5942
+                       Mean reward: 306.39
+               Mean episode length: 239.13
+Episode_Reward/object_position_tracking: 1.4880
+Episode_Reward/angular_acceleration: 0.0845
+       Episode_Reward/joint_vel_l2: -0.0005
+          Episode_Reward/action_l2: -0.0088
+     Episode_Reward/action_rate_l2: -0.6725
+  Episode_Reward/rotation_progress: 20.9633
+Episode_Reward/off_axis_angular_velocity: -3.9808
+        Episode_Reward/object_drop: -2.1631
+          Episode_Reward/cube_tilt: -3.0397
+          Episode_Reward/wrist_vel: -1.1035
+Metrics/continuous_rotation/position_error: 0.1398
+Metrics/continuous_rotation/current_angular_speed: 17.2117
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 15.7117
+Metrics/continuous_rotation/angular_velocity_error: 17.2473
+Metrics/continuous_rotation/angular_velocity_alignment: 0.1123
+Metrics/continuous_rotation/consecutive_success: 0.0422
+Metrics/continuous_rotation/total_success: 25.3739
+Metrics/continuous_rotation/vertical_drift: 0.0853
+Metrics/continuous_rotation/linear_speed: 1.0104
+      Episode_Termination/time_out: 0.3179
+Episode_Termination/object_dropped: 0.6824
+--------------------------------------------------------------------------------
+                   Total timesteps: 28016640
+                    Iteration time: 4.86s
+                      Time elapsed: 00:08:00
+                               ETA: 01:58:32
+
