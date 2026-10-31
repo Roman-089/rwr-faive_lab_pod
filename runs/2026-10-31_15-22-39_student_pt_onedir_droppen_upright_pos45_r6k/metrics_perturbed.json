@@ -13,5 +13,20 @@
   "perturb": true,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_1999.pt": {
+  "rpm": 7.0358195304870605,
+  "rpm_std": 2.7846627235412598,
+  "ra": 52.98701524734497,
+  "dfsr": 29.6875,
+  "dc": 1.90625,
+  "checkpoint": "model_1999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-pt-onedir-droppen-upright-v0",
+  "perturb": true,
+  "servo": false,
+  "servo_parts": ""
  }
 }
