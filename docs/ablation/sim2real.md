@@ -501,3 +501,13 @@ acceleration limit is what breaks the trained gait (it needs faster joints than 
 real hand's 150–300 ms tracking lag and occasional drops); play is harmless; the stiff loop alone is not a realistic
 setting (on the servo the profile is what smooths the motion). Fine-tunes under delay + profile + play + stiff loop +
 wrist penalty, from 07 and 02b, 12288 envs each (32768 overflowed PhysX's contact buffer), started ~12:40Z.
+
+**Closed loop says the model is too harsh (13:05Z).** Under delay 17–117 ms + profile + play + stiff loop (`--servo`
+of f2e4e2a) every candidate drops the cube all the time (0 % drop-free, 07: 20 drops per minute) and 07, the hand's best,
+ranks last. Two errors: (1) the delay was double counted: the measured pure delay is 0–40 ms (+0–10 ms ROS), the rest
+of the 60–90 ms dead time is the profile's ramp, which the model now produces itself; (2) the stiff loop (damping cut
+10×) removes the contact damping (alone it cost 07 / 02 60–70 points). Replay: profile + delay + play in front of the
+task's own PD still fits at 8.2° (stiff 7.2°, task PD alone 12.4°). New default (2c18c33): delay + profile + play,
+the task's PD; training delay 0–8 substeps (0–67 ms), amax ×0.8–1.2, play ×0.5–1.5; eval `--servo` = the measured
+hand: delay 0–6 substeps, nominal values. Validation (07 / 02b above 01 / 05) and the two wrist-penalty fine-tunes
+started together on the pod.

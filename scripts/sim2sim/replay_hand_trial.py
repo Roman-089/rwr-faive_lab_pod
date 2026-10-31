@@ -2,7 +2,7 @@
 
 Usage (CPU): python scripts/sim2sim/replay_hand_trial.py <hand_trials dataset dir> p7_t1 p2_t1 ...   (W&B rwr-fast/orca_v2_repose/hand_trials_2026-10-31)
 Models: sim (the task's first-order PD lag Kd/Kp), servo-noplay (per-joint delay + acceleration-limited profile + stiff loop),
-servo-play (+ play), servo (+ slope). Output: RMSE [deg] per joint pooled over the trials."""
+servo-play (+ play), servo-play-soft (profile + play in front of the task's own PD lag). Output: RMSE [deg] per joint pooled over the trials."""
 import json, sys
 import numpy as np
 D = sys.argv[1]
@@ -54,14 +54,16 @@ def simulate(t, q0, cmd, model, extra_delay=0.005):
             if model == "servo":
                 tgt = q0 + SLOPE * (prof - q0)
                 jt = np.clip(jt, tgt - PLAY / 2, tgt + PLAY / 2); tgt = jt
-            if model == "servo-play":
+            if model in ("servo-play", "servo-play-soft"):
                 jt = np.clip(jt, tgt - PLAY / 2, tgt + PLAY / 2); tgt = jt
-            # stiff loop as its equivalent first-order lag 2 zeta / wn (exact discretization)
-            x = x + (tgt - x) * (1 - np.exp(-dt / (2 * np.maximum(ZE, 0.5) / WN)))
+            if model.endswith("-soft"):  # the task's own PD lag Kd / Kp behind the profile
+                x = x + (tgt - x) * (1 - np.exp(-dt / TAU))
+            else:  # stiff loop as its equivalent first-order lag 2 zeta / wn (exact discretization)
+                x = x + (tgt - x) * (1 - np.exp(-dt / (2 * np.maximum(ZE, 0.5) / WN)))
         out[i] = x
     return np.stack([np.interp(t, T, out[:, j]) for j in range(17)], 1)
 
-models = ("sim", "servo-noplay", "servo-play", "servo")
+models = ("sim", "servo-play", "servo-play-soft")
 sq = {m: np.zeros(17) for m in models}; n = 0
 for name in sys.argv[2:]:
     t, q, cmd = load(f"{D}/{name}.csv")
