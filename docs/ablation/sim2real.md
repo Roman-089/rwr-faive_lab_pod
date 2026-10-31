@@ -594,3 +594,11 @@ both runs; 02b: run 1 "ok, no drop", run 2 "quite bad" (21 s), wrist calm in bot
 is the base (it also tops the low-friction Isaac ranking). The 02b servo-profile fine-tune is replaced by a second seed
 of the 07 friction-only fine-tune (`07_wp_rf_ft_seed1_r6k`). Ship rule: beat 07's low-friction eval (9.74 score, 87.5 %
 drop-free) with the wrist at ≤ ~0.1–0.14 rad/s.
+
+**Hand findings report (deploy session, 13:25Z):** on the user's Mac, `~/Desktop/Studium/Master/RWR/2026-10-31_ORCA_v2_hand_findings/`
+(FINDINGS.md, trials_overview.csv with 27 trials, actuator PDF + JSON, measurement log); raw data W&B
+`hand_trials_2026-10-31` (v2; v3 adds the repeat trials). Beyond the items above: start lag 51–88 ms on the hand vs
+2–3 ms in sim with similar 90 % times (160–330 ms); ROS adds 0–7 ms; holding error ≤ 3.6°; noise ~0; **pinky motors
+reach 68–74 °C after ~35 min holding a pose** (keep torque off when idle). Open: the 07 fine-tune on the hand,
+per-collider friction (skin vs PLA skeleton), why the closed-loop servo profile mis-ranks, a higher servo acceleration
+register (untested), the index_mcp / middle collision angle.
