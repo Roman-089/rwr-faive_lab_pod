@@ -546,3 +546,10 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   (`upright_adr`, 2k) started / queued on the pod. Dose: upright500 (stronger) and upright100 (weaker) queued on DTU.
   model_4000 (best nominal + perturbed pair, 94 / 63 %) exported bit-exact: `<run>/exported/policy_history.pt`
   (params from the DTU seed-1 run of the same config, `params/SOURCE.txt`).
+- **Tilt penalty, seed 1 (`abl_B_onedir_droppen_upright_ent1e-4_seed1`, DTU A10, W&B 0p3fbvkd)**, nominal / perturbed:
+  1000 6.76 / 5.86 RPM, 64 / 39 % · 2000 9.26 / 5.71, 73 / 33 % · 3000 9.44 / 5.76, 75 / 41 % · 4000 9.67 / 5.44, 61 / 33 % ·
+  4999 9.63 / 5.39, 88 / 42 %. Last-3 mean **9.6 RPM, 74 % drop-free, perturbed 5.5 RPM / 39 %** vs seed 0 11.4 / 93 % /
+  11.0 / 54 %. Cube motion (model_4999): tilt 7.8° / 15.2° p90, 3.2 face changes / min, wrist 0.31 rad / 0.07 rad/s. The
+  flat rotation and the calm wrist replicate; speed and drop-free rate do not (its rotation reward plateaued at ~55 vs
+  ~78 for seed 0): the tilt penalty makes the problem harder to optimize and seed-dependent, so seed 0 (5oklh054) is
+  a good draw, not the expected result. Replicate of the combined config queued (`upright_pos45` seed 1, A10).
