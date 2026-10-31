@@ -1,40 +1,40 @@
-  warnings.warn(
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
+                               ETA: 02:18:38
+
+################################################################################
+                     [1m Learning iteration 4099/5499 [0m                     
+
+                       Computation: 33093 steps/s (collection: 5.728s, learning 0.213s)
+             Mean action noise std: 0.51
+          Mean value_function loss: 1912.2701
+               Mean surrogate loss: -0.0028
+                 Mean entropy loss: 11.8769
+                       Mean reward: 1995.26
+               Mean episode length: 539.99
+Episode_Reward/object_position_tracking: 19.1644
+Episode_Reward/angular_acceleration: 0.1035
+       Episode_Reward/joint_vel_l2: -0.0013
+          Episode_Reward/action_l2: -0.0172
+     Episode_Reward/action_rate_l2: -1.7733
+  Episode_Reward/rotation_progress: 64.7225
+Episode_Reward/off_axis_angular_velocity: -7.5669
+        Episode_Reward/object_drop: -0.6602
+          Episode_Reward/cube_tilt: -10.3958
+          Episode_Reward/wrist_vel: -3.1775
+Metrics/continuous_rotation/position_error: 0.0502
+Metrics/continuous_rotation/current_angular_speed: 6.3036
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 4.8036
+Metrics/continuous_rotation/angular_velocity_error: 6.0238
+Metrics/continuous_rotation/angular_velocity_alignment: 0.4359
+Metrics/continuous_rotation/consecutive_success: 0.1328
+Metrics/continuous_rotation/total_success: 57.3559
+Metrics/continuous_rotation/vertical_drift: 0.0304
+Metrics/continuous_rotation/linear_speed: 0.3853
+      Episode_Termination/time_out: 0.7908
+Episode_Termination/object_dropped: 0.2094
 --------------------------------------------------------------------------------
-Resolved observation sets: 
-	 policy :  ['policy']
-	 critic :  ['critic']
---------------------------------------------------------------------------------
-Actor MLP: MLP(
-  (0): Linear(in_features=74, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=17, bias=True)
-)
-Critic MLP: MLP(
-  (0): Linear(in_features=81, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
-  (6): Linear(in_features=256, out_features=128, bias=True)
-  (7): ELU(alpha=1.0)
-  (8): Linear(in_features=128, out_features=1, bias=True)
-)
-[INFO]: Loading model checkpoint from: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_00-49-37_abl_B_onedir_droppen_pos45_ent1e-4_r6k/model_3999.pt
-wandb: [wandb.login()] Loaded credentials for https://api.forge.coreweave.com from /home/balazsph/.netrc.
-wandb: Currently logged in as: roman-brummer (rwr-fast) to https://api.forge.coreweave.com. Use `wandb login --relogin` to force relogin
-wandb: setting up run 8pmqhsf2
-wandb: Tracking run with wandb version 0.31.0
-wandb: Run data is saved locally in /home/balazsph/rwr_faive_lab/logs/wandb/run-20261031_154316-8pmqhsf2
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run 2026-10-31_15-42-04_06_wp_rf_ft_r6k
-wandb: ⭐️ View project at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose
-wandb: 🚀 View run at https://forge.coreweave.com/wandb/rwr-fast/orca_v2_repose/runs/8pmqhsf2
+                   Total timesteps: 19857408
+                    Iteration time: 5.94s
+                      Time elapsed: 00:09:59
+                               ETA: 02:18:32
+
