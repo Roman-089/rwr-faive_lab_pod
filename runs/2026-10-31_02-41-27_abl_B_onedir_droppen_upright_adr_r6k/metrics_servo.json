@@ -1,30 +1,32 @@
 {
  "model_6998.pt": {
-  "rpm": 6.770606994628906,
-  "rpm_std": 2.950918436050415,
-  "ra": 39.942216873168945,
-  "dfsr": 6.25,
-  "dc": 5.75,
+  "rpm": 5.938368320465088,
+  "rpm_std": 3.236118793487549,
+  "ra": 27.909964323043823,
+  "dfsr": 0.0,
+  "dc": 9.5625,
   "checkpoint": "model_6998.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0",
   "perturb": false,
-  "servo": true
+  "servo": true,
+  "servo_parts": "delay,profile,play,stiff"
  },
  "model_5500.pt": {
-  "rpm": 5.723428249359131,
-  "rpm_std": 4.5431389808654785,
-  "ra": 33.10736417770386,
-  "dfsr": 4.6875,
-  "dc": 5.765625,
+  "rpm": 4.939670562744141,
+  "rpm_std": 3.65269136428833,
+  "ra": 22.574663162231445,
+  "dfsr": 0.0,
+  "dc": 13.5625,
   "checkpoint": "model_5500.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0",
   "perturb": false,
-  "servo": true
+  "servo": true,
+  "servo_parts": "delay,profile,play,stiff"
  }
 }

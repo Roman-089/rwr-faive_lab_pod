@@ -1,16 +1,17 @@
 {
  "model_3999.pt": {
-  "rpm": 5.536099910736084,
-  "rpm_std": 2.8814737796783447,
-  "ra": 28.90094518661499,
+  "rpm": 2.353332996368408,
+  "rpm_std": 3.3056890964508057,
+  "ra": 14.388155937194824,
   "dfsr": 1.5625,
-  "dc": 7.96875,
+  "dc": 13.90625,
   "checkpoint": "model_3999.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
-  "servo": true
+  "servo": true,
+  "servo_parts": "delay,profile,play,stiff"
  }
 }

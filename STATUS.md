@@ -1,8 +1,10 @@
-# remote queue status (2026-10-31T12:36:47Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 0 %, 5571 MiB)
-# queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k superseded (slope model)
-07_servo_wp_ft_r6k running 
-02b_servo_wp_ft_r6k running 
+# remote queue status (2026-10-31T12:43:10Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 0 %, 74 MiB)
+# queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model)
+07_servo2_wp_ft_r6k running 
+02b_servo2_wp_ft_r6k running 
 02_tilt_adr_servo_ft_r6k superseded 
+02b_servo_wp_ft_r6k superseded 
+07_servo_wp_ft_r6k superseded 
 abl_B_droppen_seed1_r6k moved_resume Learning iteration 2123/5000
 abl_B_droppen_seed1_resume_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen6k_ent5e-3_r6k done Learning iteration 4999/5000
