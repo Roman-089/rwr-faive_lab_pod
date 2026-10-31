@@ -180,6 +180,7 @@ Training rewards, episode lengths and drop rates per run are in the topic files.
 | [action_space.md](action_space.md) | EMA α, relative actions, control frequency |
 | [export.md](export.md) | TorchScript export of history policies (student_pt, RMA s2, hist MLPs, LSTM/GRU) with the history inside the module; deploy contract |
 | [actuator_net.md](actuator_net.md) | Phase 2: learned servo model from chirp recordings (delay, play, τ, residual net); offline results, retraining on v2 chirps |
+| [deployable.md](deployable.md) | **The deployable +z policies (2026-10-31): ranking, files, W&B bundle, how to run them** |
 | [sim2real.md](sim2real.md) | Phase 2 (parked): delay, joint bias, gravity, wrist, DR ranges, actuator models, sanity runs, deploy facts |
 | [literature.md](literature.md) | PT paper takeaways, general literature reviews, paper → run mapping, code availability |
 | [infrastructure.md](infrastructure.md) | DTU LSF queues, limits, quota / pruning, hanging jobs, submit scripts |
