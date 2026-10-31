@@ -647,6 +647,35 @@ hand duration −0.45 (p = 0.26). The sim reproduces *which* policies move the w
 hand: slipping makes them correct harder), not yet *how long* they last (single, user-stopped trials are noisy). The
 other 11 policies are evaluated on DTU (job 29860553) for n = 19.
 
+**All 19 policies (16:20Z, DTU eval11 added: 04, 09–18).** Same setting; hand wrist = mean |wrist speed| over the
+trials (11: the three trials with the offset), hand duration = mean logged seconds (user-stopped, capped at 60 s):
+
+| policy | sim wrist rad/s | hand wrist rad/s | sim drop-free % | hand duration s | sim RPM |
+|---|---|---|---|---|---|
+| 16_droppen | 0.06 | 0.59 | 92.2 | 57.3 | 8.57 |
+| 17_asym_ent5e-3 | 0.08 | 0.39 | 79.7 | 42.9 | 7.59 |
+| 18_student_pt | 0.08 | 0.88 | 89.1 | 40.0 | 7.24 |
+| 04_tilt_wristpen | 0.11 | 0.00 | 70.3 | 53.9 | 5.99 |
+| 11_student_pt_rotlin | 0.12 | 0.79 | 85.9 | 29.9 | 11.67 |
+| 15_rotlin_droppen_ent5e-3 | 0.12 | 1.00 | 81.2 | 57.0 | 9.89 |
+| 12_rotlin_cont10k | 0.44 | 1.28 | 76.6 | 45.7 | 11.40 |
+| 14_rotlin_ent5e-3 | 0.62 | 1.26 | 85.9 | 25.6 | 11.04 |
+| 13_rotlin | 0.72 | 1.16 | 79.7 | 25.9 | 11.01 |
+| 09_onedir_droppen_tumbles | 2.13 | 0.82 | 42.2 | 22.4 | 15.32 |
+| 10_onedir_clip3_tumbles | 2.25 | 1.21 | 26.6 | 25.9 | 14.98 |
+
+(plus the 8 above). Spearman, n = 19: sim wrist vs hand wrist **ρ = 0.61 (p = 0.006)**; **sim wrist vs hand duration
+ρ = −0.63 (p = 0.004)**; sim drop-free vs hand duration 0.40 (p = 0.09); hand wrist vs hand duration −0.43 (p = 0.07).
+Without 04 (its hand wrist barely moved, 0.1 °/s): sim vs hand wrist 0.57 (p = 0.01).
+
+Reading: (1) the sim wrist speed at the measured friction predicts how long a policy lasts on the hand better than any
+other sim number, and better than the hand's own wrist speed. (2) The match is family-dependent: every tilt-penalty
+(`-upright`) policy (02, 02b, 04, 07) is calm in sim *and* on the hand, while the five older calm-in-sim policies
+without the tilt penalty (16, 17, 18, 11, 15: sim 0.06–0.12 rad/s) swing 0.4–1.0 rad/s on the hand. Without the
+penalty, a policy that is calm in sim can still swing the wrist on the real hand, so a calm sim wrist only counts as
+evidence together with the tilt penalty. (3) The two sim tumblers (09, 10) are the only ones the sim rates as worse
+than the hand does. The ship rule (measured-friction eval, wrist ≤ ~0.1 rad/s, tilt-penalty recipe) stands.
+
 **Shipped `orca_v2_zrot_hand_ft:v4` (13:50Z):** `07ft_s1_m4300` (recommended): at the measured friction 10.80 RPM, 93.8 %
 drop-free, 0.06 drops, wrist 0.08 rad/s, score 10.12 vs 07's 9.74: beats the base on every criterion; own task 13.64
 RPM / 84.4 %. Plus `07ft_s1_m4150`, `07ft_s0_m4150`.
@@ -683,6 +712,8 @@ check: cube_region weight 50, σ 10 mm, centre / radius as chosen). Baseline of 
 m4700 (100 it into the term): LOWFRIC 11.77 RPM / 93.8 % drop-free / 0.08 drops, 93.2 % in region; OWN 14.28 / 82.8 / 0.22, 90.4 % in region: no region gain yet. DTU queued two more region fine-tunes: from candidate B (rf2 m5200) and from A with seed 1. Final 07 fine-tune checkpoints (m5400/m5499, all three seeds/variants) decline to 84–91 % drop-free at the measured friction; the shipped m4600 / rf2 m5200 stay best.
 
 m4800 / m4900: LOWFRIC 11.55 / 95.3 % / 0.05, 92.9 % in region; 11.58 / 92.2 % / 0.09, 94.2 % (OWN 91.0 %). The term is active but small: Episode_Reward/cube_region −1.8 per episode vs rotation_progress +67 (~3 %, like the tilt term), and the actor sees no cube pose, so it gets a weak, indirect signal. Next: `-realfric-region200-v0` (weight 200, −126 per second at 10 mm outside, −200 saturated, above the ~90 per second of rotation reward). The weight-50 run stops at m5000 as the control; region200 from 07ft_s0_m4600 on the pod; on DTU from B (rf2 m5200) and from A with seed 1.
+
+Control (weight 50) final m5000: LOWFRIC 11.41 / 93.8 % / 0.06, 93.7 % in region (OWN 13.97 / 87.5 %, 91.0 %): 400 iterations did not move the in-region rate. `07ft_region200_ft_r6k` started 16:18Z on the pod (config: weight 200, r 27.5 mm, σ 10 mm; ~4.8 s/it).
 
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
