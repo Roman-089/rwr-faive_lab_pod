@@ -1,0 +1,3 @@
+[INFO][AppLauncher]: Using device: cuda:0
+[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
+[Info] [carb] Logging to file: /tmp/rwr_kit_07_wp_rf_ft_seed1_r6k/logs/Kit/Isaac-Sim/5.1/kit_20261031_131312.log

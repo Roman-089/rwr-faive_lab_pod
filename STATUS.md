@@ -1,12 +1,13 @@
-# remote queue status (2026-10-31T13:07:39Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 54 %, 10985 MiB)
-# queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated)
-07_wp_rf_ft_r6k running 
-02b_servo_wp_rf_ft_r6k_v2 running Learning iteration 5533/7000
+# remote queue status (2026-10-31T13:13:12Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 39 %, 11089 MiB)
+# queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated); 02b_servo_wp_rf_ft_r6k_v2 superseded (07 is the base)
+07_wp_rf_ft_r6k running Learning iteration 4039/5500
+07_wp_rf_ft_seed1_r6k running 
 02_tilt_adr_servo_ft_r6k superseded 
 02b_servo2_wp_ft_r6k superseded 
 02b_servo_wp_ft_r6k superseded 
 02b_servo_wp_lf_ft_r6k superseded 
 02b_servo_wp_rf_ft_r6k superseded 
+02b_servo_wp_rf_ft_r6k_v2 superseded 
 07_servo2_wp_ft_r6k superseded 
 07_servo_wp_ft_r6k superseded 
 07_servo_wp_lf_ft_r6k superseded 
