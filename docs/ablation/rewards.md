@@ -580,3 +580,8 @@ face changes and wrist motion (`cube_motion.py`), not only RPM.
   0.10 rad/s. Flat like the tilt penalty alone, faster than both tilt seeds and the most robust non-ADR policy so far:
   the wrist penalty adds robustness on top of the tilt penalty, as on the teacher (it is one seed; the tilt penalty's
   seed spread is ~2 RPM / ~20 points). ADR fine-tune queued (new task `-asym-onedir-droppen-upright-wristpen-adr-v0`).
+- **Tilt penalty −500 (`abl_B_onedir_droppen_upright500_ent1e-4`, DTU L40S, W&B q96jruid)**, nominal / perturbed: 1000 9.48 /
+  9.80 RPM, 88 / 50 % · 2000 11.73 / 11.02, 89 / 47 % · 3000 12.22 / 10.50, 80 / 42 % · 4000 12.05 / 10.23, 81 / 42 % · 4999
+  12.17 / 10.14, 84 / 45 %. Last-3 mean 12.2 RPM, 82 % drop-free, perturbed 43 %; tilt 6.0° / 11.9°, 2.4 face changes / min,
+  wrist 0.25 rad / 0.10 rad/s. Slightly flatter than −200 (7.4–7.8°); speed and drop-free rate inside the −200 seed spread
+  (11.4 / 93 / 54 and 9.6 / 74 / 39). The weight is not critical between −200 and −500; −100 (queued) tests the low side.
