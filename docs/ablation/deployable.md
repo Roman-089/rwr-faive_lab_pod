@@ -46,7 +46,7 @@ policies (#1–#3) as `<n>_<name>/policy.pt` + `policy.json`, a README for the p
 
 ## All exported policies
 
-W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 13:07Z): every proprioceptive policy exported
+W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
 so far, 19 checkpoints of 18 runs (+z and bidirectional, incl. the tumbling ones for comparison and both transformer
 students), `manifest.json` with direction, `goal_ang_vel`, history / `reset()` line, Isaac metrics and sha256.
 

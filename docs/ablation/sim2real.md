@@ -441,7 +441,7 @@ continuous formula. Task `-asym-onedir-droppen-upright-servo-v0`: delay 2–14 s
 ×0.5–1.5, slope ×0.9–1.1, encoder offset ±0.08 rad; policy interface unchanged. Eval `eval_policy.py --servo` (same
 DR, outputs `*_servo`).
 
-User instruction (13:30Z, via the deploy session): stop all pod trainings, use the whole GPU to fine-tune the best
+User instruction (12:15Z, via the deploy session): stop all pod trainings, use the whole GPU to fine-tune the best
 speed / robustness mix under the servo model; candidates 07, 02, 02b, 01, 05 scored under `--servo` first (score =
 RPM × drop-free), then the winner (07 if within 10 %) fine-tuned with 32k envs, servo eval every ~150 iterations.
 Real-hand ratings so far: 07_tilt (no ADR) the only full 60 s run ("best till now"), 01 "bad", the others stopped
