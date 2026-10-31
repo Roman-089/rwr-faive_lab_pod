@@ -1,0 +1,67 @@
+{
+ "model_1000.pt": {
+  "rpm": 12.237016677856445,
+  "rpm_std": 2.5276458263397217,
+  "ra": 81.17557764053345,
+  "dfsr": 82.8125,
+  "dc": 0.1875,
+  "checkpoint": "model_1000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false
+ },
+ "model_2000.pt": {
+  "rpm": 11.901749610900879,
+  "rpm_std": 2.7238028049468994,
+  "ra": 81.87711238861084,
+  "dfsr": 90.625,
+  "dc": 0.09375,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false
+ },
+ "model_3000.pt": {
+  "rpm": 11.665562629699707,
+  "rpm_std": 1.7594709396362305,
+  "ra": 82.76510834693909,
+  "dfsr": 95.3125,
+  "dc": 0.046875,
+  "checkpoint": "model_3000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false
+ },
+ "model_4000.pt": {
+  "rpm": 11.208396911621094,
+  "rpm_std": 1.8759161233901978,
+  "ra": 80.10706901550293,
+  "dfsr": 93.75,
+  "dc": 0.0625,
+  "checkpoint": "model_4000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false
+ },
+ "model_4999.pt": {
+  "rpm": 11.24443244934082,
+  "rpm_std": 1.8852907419204712,
+  "ra": 80.13222217559814,
+  "dfsr": 90.625,
+  "dc": 0.09375,
+  "checkpoint": "model_4999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false
+ }
+}
