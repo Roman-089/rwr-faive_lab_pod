@@ -1,0 +1,17 @@
+{
+ "model_1500.pt": {
+  "rpm": 6.9730730056762695,
+  "rpm_std": 2.702524185180664,
+  "ra": 48.622822761535645,
+  "dfsr": 6.25,
+  "dc": 2.9375,
+  "checkpoint": "model_1500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-student-pt-onedir-droppen-upright-v0",
+  "perturb": true,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
