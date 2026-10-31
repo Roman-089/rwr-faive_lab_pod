@@ -570,3 +570,7 @@ average gives palm contacts 0.3–0.55 and finger contacts 0.75–1.25. Task `-u
 (c5a9993); the pod's fine-tunes from 07 and 02b switched to it (`*_servo_wp_rf_ft_r6k`). `--servo` at mid friction
 (hand 0.5–0.8, cube 0.4–0.6): 02 3.79 > 01 2.90 > 02b 2.49 > 05 1.13 > 07 0.41: under the servo model 07 is last at
 every friction level.
+
+**Finger pads measured too (14:10Z):** PLA cube on the silicone pads slips at 30–40° → μ 0.58–0.84. Friction ranges
+set to the measurements (2b253ad): finger links 0.8–1.3 (contacts 0.55–0.9), palm links 0.3–0.5 (contacts 0.3–0.5), cube
+0.3–0.5. The pod restarts the two fine-tunes on it (`*_servo_wp_rf_ft_r6k_v2`).
