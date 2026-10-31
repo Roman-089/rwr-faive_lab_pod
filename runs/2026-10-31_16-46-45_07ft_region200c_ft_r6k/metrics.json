@@ -133,5 +133,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_5599.pt": {
+  "rpm": 13.54328441619873,
+  "rpm_std": 3.673044443130493,
+  "ra": 90.26695489883423,
+  "dfsr": 84.375,
+  "dc": 0.203125,
+  "checkpoint": "model_5599.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-region200c-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
