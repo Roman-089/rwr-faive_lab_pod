@@ -1,40 +1,40 @@
-2026-10-31T20:09:10Z [11,089ms] [Warning] [matplotlib] mkdir -p failed for path /home/balazsph/.config/matplotlib: [Errno 13] Permission denied: '/home/balazsph/.config/matplotlib'
-2026-10-31T20:09:10Z [11,089ms] [Warning] [matplotlib] Matplotlib created a temporary cache directory at /tmp/matplotlib-s03fzmiq because there was an issue with the default path (/home/balazsph/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
-2026-10-31T20:09:11Z [12,612ms] [Warning] [gpu.foundation.plugin] nvidia-smi not found in '/usr/bin/'
+                               ETA: 03:39:29
 
-|---------------------------------------------------------------------------------------------|
-| Driver Version: 580.159.04    | Graphics API: Vulkan
-|=============================================================================================|
-| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
-|     |                                  |        |     |            | Device-ID | UUID       |
-|     |                                  |        |     |            | Bus-ID    |            |
-|---------------------------------------------------------------------------------------------|
-| 0   | NVIDIA RTX PRO 6000 Blackwell .. | Yes: 0 |     | 97887   MB | 10de      | 0          |
-|     |                                  |        |     |            | 2bb5      | c19ab7f3.. |
-|     |                                  |        |     |            | a         |            |
-|=============================================================================================|
-| OS: 24.04.4 LTS (Noble Numbat) ubuntu, Version: 24.04.4, Kernel: 6.12.85+
-| Processor: AMD EPYC 9B45
-| Cores: 192 | Logical Cores: 384
-|---------------------------------------------------------------------------------------------|
-| Total Memory (MB): 163840 | Free Memory: 105154
-| Total Page/Swap (MB): 0 | Free Page/Swap: 0
-|---------------------------------------------------------------------------------------------|
-cat: '/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor': No such file or directory
-2026-10-31T20:09:12Z [13,244ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
-[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.orca_v2_repose_ablation_env_cfg:OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg
-[INFO]: Parsing configuration from: faive_lab.tasks.orca_inhand.agents.rsl_rl_ppo_cfg:PPORunnerCfgOrcaV2
-[INFO] Logging experiment in directory: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose
-Exact experiment name requested from command line: 2026-10-31_20-09-17
+################################################################################
+                     [1m Learning iteration 2071/5000 [0m                     
 
-[36m========================================================================================================================================================================================================[0m
-[36m[1m[INFO][IsaacLab]: Logging to file: /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-09-17_abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k/sim/isaaclab_2026-10-31_20-09-17.log[0m
-[36m========================================================================================================================================================================================================[0m
+                       Computation: 42329 steps/s (collection: 4.478s, learning 0.166s)
+             Mean action noise std: 0.50
+          Mean value_function loss: 979.9447
+               Mean surrogate loss: -0.0047
+                 Mean entropy loss: 11.8615
+                       Mean reward: 1598.76
+               Mean episode length: 568.56
+Episode_Reward/object_position_tracking: 3.0658
+Episode_Reward/angular_acceleration: 0.1896
+       Episode_Reward/joint_vel_l2: -0.0009
+          Episode_Reward/action_l2: -0.0124
+     Episode_Reward/action_rate_l2: -1.3908
+  Episode_Reward/rotation_progress: 54.3303
+Episode_Reward/off_axis_angular_velocity: -5.2428
+        Episode_Reward/object_drop: -0.7220
+          Episode_Reward/cube_tilt: -2.9975
+                    Curriculum/adr: 0.1500
+Metrics/continuous_rotation/position_error: 0.0717
+Metrics/continuous_rotation/current_angular_speed: 6.9423
+Metrics/continuous_rotation/target_angular_speed: 1.5000
+Metrics/continuous_rotation/angular_velocity_magnitude_error: 5.4423
+Metrics/continuous_rotation/angular_velocity_error: 6.9716
+Metrics/continuous_rotation/angular_velocity_alignment: 0.2810
+Metrics/continuous_rotation/consecutive_success: 0.1282
+Metrics/continuous_rotation/total_success: 55.8300
+Metrics/continuous_rotation/vertical_drift: 0.0432
+Metrics/continuous_rotation/linear_speed: 0.4354
+      Episode_Termination/time_out: 0.8215
+Episode_Termination/object_dropped: 0.1787
+--------------------------------------------------------------------------------
+                   Total timesteps: 14155776
+                    Iteration time: 4.64s
+                      Time elapsed: 00:05:23
+                               ETA: 03:39:31
 
-[33m20:09:17 [simulation_context.py] WARNING: The `enable_external_forces_every_iteration` parameter in the PhysxCfg is set to False. If you are experiencing noisy velocities, consider enabling this flag. You may need to slightly increase the number of velocity iterations (setting it to 1 or 2 rather than 0), together with this flag, to improve the accuracy of velocity updates.[0m
-[INFO]: Base environment:
-	Environment device    : cuda:0
-	Environment seed      : 42
-	Physics step-size     : 0.008333333333333333
-	Rendering step-size   : 0.05
-	Environment step-size : 0.05
