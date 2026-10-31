@@ -511,3 +511,17 @@ task's own PD still fits at 8.2° (stiff 7.2°, task PD alone 12.4°). New defau
 the task's PD; training delay 0–8 substeps (0–67 ms), amax ×0.8–1.2, play ×0.5–1.5; eval `--servo` = the measured
 hand: delay 0–6 substeps, nominal values. Validation (07 / 02b above 01 / 05) and the two wrist-penalty fine-tunes
 started together on the pod.
+
+**Validation still fails with the corrected model (13:20Z, `--servo` of 2c18c33, the measured hand):** 01 11.24 RPM /
+35.9 % / 1.58 (score 4.04) > 02 11.11 / 31.2 / 1.61 (3.47) > 02b 8.98 / 17.2 / 3.20 (1.54) > 05 8.03 / 15.6 / 4.14 (1.25)
+> 07 7.52 / 6.2 / 5.66 (0.47). Much milder than before, but the ADR policies win and 07 is last; the hand says 07, 02b
+good, 01, 05 bad. The model now rewards delay robustness, not what fails on the hand.
+
+**The hand trials point at the palm angle (and so at friction).** Wrist command in the policy frame (p5 / p50 / p95):
+the runs that lasted (p7 27.7 / 35.0 / 35.0, p2 14.0 / 35.0 / 35.0, p4 35 throughout) hold the wrist at its +35° limit,
+i.e. keep the palm level (35° against the 30° mounting tilt); the bad ones (p1 −18.5 / 21.2 / 31.1, p3 −19.2 / 18.5 /
+29.6) swing it and tip the palm down by up to ~50°. (The relay's wrist clamp is not involved: < 0.2 % of commands below
+−35°.) Tipping the palm needs friction: the sim's finger–cube friction is 0.55–1.5; printed parts on the real hand are
+likely lower. Test running: `--servo` with contact friction ~0.3–0.55 (hydra overrides of the two material events);
+the deploy session is asked to measure the slip angle (μ ≈ tan θ). The wrist-penalty fine-tunes from 07 / 02b keep
+running meanwhile (12:43Z, 12288 envs, 5.3 s/it).
