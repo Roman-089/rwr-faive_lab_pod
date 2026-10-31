@@ -473,7 +473,7 @@ config. Isaac, +z, 64 envs × 60 s, nominal / perturbed (6–12 substep delay, �
 | DFSR % | 86 / 34 | 80 / 44 | 75 / 50 | 83 / 53 | 88 / 55 | 82 / **53** |
 
 Against the same config without it (qn0pkisu, last-3 mean 17.5 RPM, 76 / 28 % drop-free) it gives up ~1.8 RPM for
-+6 points nominal and **+25 points perturbed** drop-free: like the work penalty and the wrist penalty, a smoother
++6 points nominal and **+25 points perturbed** drop-free (seed 1 of that config, cule0dej: 15.4 RPM, 71 / 27 %, so the seed spread is ~2 RPM and ~5 points): like the work penalty and the wrist penalty, a smoother
 cube motion makes the policy much less sensitive to action delay and encoder offset. It does not fix the tumbling
 (cube_motion at 4999: tilt 40° mean / 48° p90, 200 top-face changes / min, wrist 0.54 rad / 0.90 rad/s). Next:
 `abl_B_onedir_droppen_upright_acc10_ent1e-4` (DTU L40S, 4000 it) adds it to the tilt penalty.
