@@ -45,6 +45,9 @@ parser.add_argument("--cmd", type=float, default=1.5, help="commanded |angular v
 parser.add_argument("--video_envs", type=int, default=4, help="envs whose link poses are saved for the video")
 parser.add_argument("--seed", type=int, default=42)
 parser.add_argument("--perturb", action="store_true", help="test-time action delay + joint obs offset")
+parser.add_argument("--servo", action="store_true",
+                    help="real ORCA v2 servo model with its training DR (17-117 ms delay, per-joint acceleration limit, "
+                         "play, slope; adr.use_orca_v2_servo_model); outputs *_servo")
 cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
@@ -65,6 +68,7 @@ from isaaclab_tasks.utils.hydra import hydra_task_config
 
 import isaaclab_tasks  # noqa: F401
 import faive_lab.tasks  # noqa: F401
+from faive_lab.tasks.orca_inhand import adr as orca_adr
 from faive_lab.tasks.orca_inhand.mdp.sim2real import (
     DelayedEMAJointPositionToLimitsActionCfg,
     joint_pos_limit_normalized_biased,
@@ -137,6 +141,11 @@ def main(env_cfg, agent_cfg):
         )
         env_cfg.observations.policy.joint_pos.func = joint_pos_limit_normalized_biased
         env_cfg.observations.policy.joint_pos.params = {"bias_rad": 0.05}
+    if args_cli.servo:
+        if args_cli.perturb:
+            raise ValueError("--servo and --perturb are exclusive")
+        suffix += "_servo"
+        orca_adr.use_orca_v2_servo_model(env_cfg, delay_substeps_range=(2, 14), adr=False)
 
     env = RslRlVecEnvWrapper(gym.make(args_cli.task, cfg=env_cfg), clip_actions=agent_cfg.clip_actions)
     base = env.unwrapped
@@ -193,7 +202,8 @@ def main(env_cfg, agent_cfg):
         data = {k: np.stack(v).astype(np.float32) for k, v in log.items()}
         m = metrics(data["obj_angvel"][..., 2], cmd_sign.cpu().numpy(), data["done"] > 0, float(base.step_dt))
         m["checkpoint"] = os.path.basename(ckpt)
-        m.update(cmd=args_cli.cmd, steps=args_cli.steps, num_envs=n, task=args_cli.task, perturb=args_cli.perturb)
+        m.update(cmd=args_cli.cmd, steps=args_cli.steps, num_envs=n, task=args_cli.task, perturb=args_cli.perturb,
+                 servo=args_cli.servo)
         print(f"[eval] {ckpt}: {m}")
 
         out_dir = os.path.join(os.path.dirname(ckpt), "eval")
