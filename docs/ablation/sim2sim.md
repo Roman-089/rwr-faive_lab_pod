@@ -18,8 +18,7 @@ jobs:
 2. **Second physics engine.** Policies that exploit PhysX quirks degrade in MuJoCo. Large drops from Isaac to MuJoCo
    are expected. What matters is the ranking and gross failures.
 
-Step 2 (when `rwr_faive_system` is released): wrap the MuJoCo hand as a fake ROS hand driver so the course's policy
-node runs unchanged ([plan below](#plan-fake-ros-hand-driver)).
+Step 2: the course's real-hand policy node runs unchanged against the MuJoCo hand ([software in the loop](#software-in-the-loop-the-course-node-against-mujoco-2026-10-31)).
 
 ## Results (2026-10-29)
 
@@ -388,7 +387,30 @@ python scripts/sim2sim/scene.py --out /tmp/orca_sim2sim.xml && python -m mujoco.
 embedded by `export_history_policy.py` is checked (dims, EMA α 0.2 action term). After a USD change, rerun
 `extract_usd_model.py` (docstring has the pxr environment).
 
-## Plan: fake ROS hand driver
+## Software in the loop: the course node against MuJoCo (2026-10-31)
+
+The deploy repo is `rwr-fast/rwr_system` (private; inspected at f0f8cf6, [export](export.md#the-real-policy-node-rwr_system-inspected-2026-10-31)).
+`scripts/sim2sim/ros_sil/` runs its policy node `experiments/rl_inference/policy_inference_cube_spin_v2.py` **unchanged**
+(imported from a checkout) against the MuJoCo hand:
+
+- `orca_mujoco_driver.py`: a ROS 2 node with `hand_control_node`'s interface for the ORCA v2 (subscribes
+  `/right/hand/policy_output`, 17 targets in rad in config.yaml's joint order; publishes
+  `/right/hand/joint_position_from_motor` / `joint_velocity_from_motor`), around `OrcaHandSim` (120 Hz physics, state
+  after every physics step or at `--state_hz`, e.g. the real driver's 100 Hz). Runs under real rclpy too
+  (`python orca_mujoco_driver.py <rwr_system checkout>` next to the course node on a ROS 2 machine).
+- `fake_ros.py`: in-process stand-in for the parts of rclpy / std_msgs / tf2_ros the two nodes use, with a lock-step
+  simulated clock (ticks of 1/1200 s; physics fires before the policy timer at equal times; optional topic latency).
+  DTU has no ROS 2, and installing it would not fit the home quota.
+- `run_node_sil.py`: trials as `run_sim2sim.py` (same seed → same spawns, nominal physics, +z, 60 s; a drop respawns
+  hand + cube and starts a fresh node instance), metrics as the Isaac eval. `--acceptance` checks the interface.
+
+**Acceptance (tilt penalty + ADR, model_6998).** On the same SIL trajectory, the node's observation (every term) and
+joint commands, recomputed with our `PolicyIO` from the states the node saw (its own CSV log), agree to ≤ 6e-7 over 199
+steps (float32 rounding): the node's joint mapping, limit table, command `[0, 0, −0.05, 0, 0, w]`, observation scales,
+EMA and clipping match the training task. (Two independent runs, node vs `run_sim2sim`, start equal to 6e-8 and diverge
+after ~60 steps: float32 vs float64 arithmetic, amplified by the contacts.)
+
+## Plan: fake ROS hand driver (done 2026-10-31, see above)
 
 When `rwr_faive_system` is released, the course's node `experiments/rl_inference/policy_inference_cube_spin_v2.py`
 should run against MuJoCo unchanged, so its own joint mapping, scaling, EMA, timing and model loading are what gets
