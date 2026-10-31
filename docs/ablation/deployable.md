@@ -13,8 +13,8 @@ MuJoCo is informational ([sim2sim](sim2sim.md)). All are +z only (the user's 202
 |---|---|---|---|---|---|---|---|
 | **1** | **Tilt penalty + ADR** (`abl_B_onedir_droppen_upright_adr_r6k` model_6998, W&B 6rsbkqqm) | 11.6 / 13.5 | **91 / 83** | 0.12 / 0.25 | **7.4°, 2.5** | **0.28 rad / 0.08 rad/s** | 7.1 / 92 (model_5500) |
 | 2 | Position ×3 + ADR (`abl_B_onedir_droppen_pos45_adr_from5e-3_r6k` model_7000, W&B on6yv8hs) | 12.3 / 15.8 | **95 / 84** | 0.05 / 0.19 | 16.5°, 3.5 | 0.34 / 0.52 | 5.7 / 92 |
-| 3 | Tilt + position ×3 (`abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k` model_3999, W&B b0r506gz) | **14.5** / 11.5 | 92 / 45 | 0.09 / 1.03 | 10.4°, 2.3 | 0.31 / 0.29 | pending (job 29859575) |
-| 4 | Position ×3, default entropy (`abl_B_onedir_droppen_pos45_ent1e-4_r6k` model_3999, W&B kfuq4jwb) | **15.5** / 14.4 | 92 / 42 | 0.08 / 1.38 | 16.8°, 3.8 | 0.46 / 0.43 | pending (job 29859575) |
+| 3 | Tilt + position ×3 (`abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k` model_3999, W&B b0r506gz) | **14.5** / 11.5 | 92 / 45 | 0.09 / 1.03 | 10.4°, 2.3 | 0.31 / 0.29 | **7.6** / 86 |
+| 4 | Position ×3, default entropy (`abl_B_onedir_droppen_pos45_ent1e-4_r6k` model_3999, W&B kfuq4jwb) | **15.5** / 14.4 | 92 / 42 | 0.08 / 1.38 | 16.8°, 3.8 | 0.46 / 0.43 | 4.6 / 88 |
 | 5 | Tilt penalty, no ADR (`abl_B_onedir_droppen_upright_ent1e-4_r6k` model_4000, W&B 5oklh054) | 11.2 / 11.3 | 94 / 63 | 0.06 / 0.73 | 7.4°, 2.7 | 0.28 / 0.09 | 7.2 / 84 |
 | fallback | Transformer student, **bidirectional** (`student_pt_rotlin` model_1999, W&B p3dxn5pm) | 10.9 / 9.8 | 86 / 56 | 0.17 / 0.64 | 6.7°, 3.8 | 0.48 / 0.23 | 4.5 / 67 |
 
@@ -28,7 +28,9 @@ moves, and it is the most tolerant of delay and encoder offset among the flat po
 versions are running (`upright_pos45_adr` on the pod, eval ~09:40Z; `pos45_adr_ent1e-4` queued on DTU A40) and will
 replace them here. Caveats: #1 / #5 come from seed 0 of the tilt penalty, a good draw (seed 1: 9.6 RPM / 74 %); the
 seed spread of #3 is being measured (seeds 1 and 2 queued). The +z speed numbers count rotation about world z only;
-all ranked policies keep the cube flat, so they are not inflated by tumbling.
+all ranked policies keep the cube flat, so they are not inflated by tumbling. In MuJoCo (informational) the tilt-penalty
+policies keep the most of their speed (#1 67 %, #3 52 %, #5 64 %) and #4 the least (30 %): of the two fast options, #3
+is the safer bet.
 
 ## Files
 
