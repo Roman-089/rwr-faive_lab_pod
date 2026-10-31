@@ -756,6 +756,19 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegionEnvCfg(
 
 
 @configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200EnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg
+):
+    """-realfric-region with the region penalty ×4 (weight 200): at weight 50 the term is ~3 % of the rotation reward
+    per episode and 300 fine-tune iterations left the in-region rate at the base's 94 %. Same exponential shape, now
+    −126 per second at 10 mm outside and −200 saturated (rotation ~90 per second)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_region_penalty(self, weight=200.0)
+
+
+@configclass
 class OrcaV2ReposeAsymOneDirDropPenUprightWristPenADREnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightADREnvCfg):
     """-onedir-droppen-upright-adr + the wrist velocity penalty: ADR fine-tune of an -onedir-droppen-upright-wristpen
     policy (same obs and critic)."""
