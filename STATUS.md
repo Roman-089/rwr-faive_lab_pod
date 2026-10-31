@@ -1,4 +1,4 @@
-# remote queue status (2026-10-31T15:53:25Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 73469 MiB)
+# remote queue status (2026-10-31T16:03:32Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 77262 MiB)
 # queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated); 02b_servo_wp_rf_ft_r6k_v2 superseded (07 is the base)
 07_wp_rf_ft_r6k TRAIN_EXIT rc=0 Learning iteration 5499/5500
 #   13:24 OWN model_4150 rpm 13.07 dfsr 84.4 dc 0.17 score 11.03 | tilt 7.3 flips 2.8 wrist 0.18/0.08
@@ -59,12 +59,14 @@
 #   15:40 LOWFRIC model_5400 rpm 10.33 dfsr 84.4 dc 0.16 score 8.72 | tilt 5.7 flips 2.2 wrist 0.16/0.08
 #   15:46 OWN model_5499 rpm 13.77 dfsr 79.7 dc 0.22 score 10.97 | tilt 6.0 flips 2.8 wrist 0.24/0.08
 #   15:49 LOWFRIC model_5499 rpm 11.08 dfsr 90.6 dc 0.14 score 10.04 | tilt 5.6 flips 2.1 wrist 0.16/0.07
-07ft_region_ft_r6k running Learning iteration 4800/5600
+07ft_region_ft_r6k running Learning iteration 4908/5600
 #   15:50 OWN model_4700 rpm 14.28 dfsr 82.8 dc 0.22 score 11.82 | tilt 6.4 flips 2.7 wrist 0.19/0.09 region 90.4%
 #   15:52 LOWFRIC model_4700 rpm 11.77 dfsr 93.8 dc 0.08 score 11.03 | tilt 6.0 flips 1.8 wrist 0.16/0.07 region 93.2%
-06_wp_rf_ft_r6k running Learning iteration 4099/5499
-upright_wp_rf_scratch_r6k running Learning iteration 108/5000
-07_wp_rf_roll10_ft_r6k running Learning iteration 4084/5500
+#   15:56 OWN model_4800 rpm 14.26 dfsr 84.4 dc 0.16 score 12.03 | tilt 6.2 flips 2.7 wrist 0.19/0.08 region 90.7%
+#   15:58 LOWFRIC model_4800 rpm 11.55 dfsr 95.3 dc 0.05 score 11.01 | tilt 5.9 flips 1.6 wrist 0.16/0.06 region 92.9%
+06_wp_rf_ft_r6k running Learning iteration 4199/5499
+upright_wp_rf_scratch_r6k running Learning iteration 228/5000
+07_wp_rf_roll10_ft_r6k running Learning iteration 4186/5500
 02_tilt_adr_servo_ft_r6k superseded 
 02b_servo2_wp_ft_r6k superseded 
 02b_servo_wp_ft_r6k superseded 
@@ -120,7 +122,7 @@ abl_B_rotlin_seed1_resume_r6k done Learning iteration 4999/5000
 student_lstm_rotlin_r6k done Learning iteration 1999/2000
 student_mlp_h10_rotlin_r6k done Learning iteration 1999/2000
 student_pt_onedir_droppen_r6k dropped_user 
-student_pt_onedir_droppen_upright_pos45_r6k running Learning iteration 1799/2000
+student_pt_onedir_droppen_upright_pos45_r6k running Learning iteration 1896/2000
 student_pt_rotlin_r6k skipped_dtu 
 student_pt_rotlin_t10k_r6k dropped 
 teacher_onedir_droppen_ent1e-4_r6k dropped_tumbling 
