@@ -642,18 +642,18 @@ ORCA_V2_PALM_BODIES = ["right_forearm", "right_tower", "right_carpals", "right_t
 
 
 def use_real_hand_friction(env_cfg: OrcaV2ReposeEnvCfg):
-    """Friction of the real ORCA v2 + cube (2026-10-31): PLA cube on the TPU palm slips at 18-25 deg (mu = tan ~0.41,
-    0.32-0.47); the finger pads are soft silicone, typically mu ~0.8-1.2 on PLA (not measured). PhysX averages the two
-    materials, so cube 0.3-0.5 with palm links 0.3-0.6 gives palm contacts 0.3-0.55, and finger links 1.2-2.0 give finger
-    contacts 0.75-1.25 (the task had 0.55-1.5 everywhere)."""
+    """Friction of the real ORCA v2 + cube, measured 2026-10-31 by slip angle (mu = tan): PLA cube on the TPU palm
+    18-25 deg (mu 0.32-0.47, n = 5), on the soft silicone finger pads 30-40 deg (mu 0.58-0.84). PhysX averages the two
+    materials, so cube 0.3-0.5 with palm links 0.3-0.5 gives palm contacts 0.3-0.5, and finger links 0.8-1.3 give finger
+    contacts 0.55-0.9 (the task had 0.55-1.5 everywhere)."""
     rng = lambda lo, hi: {"static_friction_range": (lo, hi), "dynamic_friction_range": (lo, hi)}  # noqa: E731
-    env_cfg.events.robot_physics_material.params.update(rng(1.2, 2.0))
+    env_cfg.events.robot_physics_material.params.update(rng(0.8, 1.3))
     env_cfg.events.object_physics_material.params.update(rng(0.3, 0.5))
     # after robot_physics_material (same startup mode, defined later): overrides only the palm links' shapes
     env_cfg.events.palm_physics_material = EventTerm(
         func=mdp.randomize_rigid_body_material,
         mode="startup",
-        params={"asset_cfg": SceneEntityCfg("robot", body_names=ORCA_V2_PALM_BODIES), **rng(0.3, 0.6),
+        params={"asset_cfg": SceneEntityCfg("robot", body_names=ORCA_V2_PALM_BODIES), **rng(0.3, 0.5),
                 "restitution_range": (0.0, 0.0), "num_buckets": 250},
     )
 
