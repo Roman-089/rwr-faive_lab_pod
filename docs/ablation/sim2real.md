@@ -554,3 +554,10 @@ measured yet. Fine-tunes restarted with hand 0.3–0.7, cube 0.3–0.6 (contact 
 material events) + servo model + wrist penalty, from 07 and 02b (pod) and from 07 without the wrist penalty (DTU
 29860492); re-score of the candidates at low friction with and without the servo model running (does friction alone
 reproduce the hand ranking?).
+
+**`--servo` at low friction (hand 0.3–0.6, cube 0.3–0.5; 13:50Z):** 02 3.46 (11.08 RPM / 31.2 %; wrist 0.21 rad /
+0.12 rad/s) > 01 2.26 (9.03 / 25.0; 0.38 / 0.34) > 02b 1.61 (8.58 / 18.8; 0.36 / 0.16) > 05 1.23 (6.58 / 18.8; 0.72 /
+0.68) > 07 0.32 (6.81 / 4.7; 0.66 / 0.46). Low friction costs 01 (4.04 → 2.26) as predicted, but 07 stays last. With
+the wrist criterion added (sim wrist ≤ ~0.15 rad/s) the order is 02 > 02b, 01 / 05 / 07 out: matches the hand except
+07, which in the sim is fragile under the actuator dynamics but ran a clean minute on the real hand (one trial).
+Fine-tunes restarted 12:56Z with low friction + servo model + wrist penalty from 07 and 02b (`*_servo_wp_lf_ft_r6k`).
