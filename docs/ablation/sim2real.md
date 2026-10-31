@@ -446,3 +446,21 @@ speed / robustness mix under the servo model; candidates 07, 02, 02b, 01, 05 sco
 RPM × drop-free), then the winner (07 if within 10 %) fine-tuned with 32k envs, servo eval every ~150 iterations.
 Real-hand ratings so far: 07_tilt (no ADR) the only full 60 s run ("best till now"), 01 "bad", the others stopped
 early after occasional drops.
+
+**First servo-model scores (12:28Z, pod, `--servo`, 64 envs × 60 s, randomized as in training):**
+
+| policy | RPM | drop-free | drops / trial | score RPM × DFSR | on the real hand |
+|---|---|---|---|---|---|
+| 07 tilt, no ADR (model_4000) | 5.38 | 3.1 % | 10.9 | 0.17 | only full 60 s run, rated best |
+| 02 tilt + ADR (6998) | 6.77 | 6.2 % | 5.8 | **0.42** | stopped early |
+| 02b tilt + ADR (5500) | 5.72 | 4.7 % | 5.8 | 0.27 | not run |
+| 01 tilt + position ×3 + ADR (5500) | 6.10 | 4.7 % | 7.8 | 0.29 | rated "bad" |
+| 05 tilt + position ×3 (3999) | 5.54 | 1.6 % | 8.0 | 0.09 | not run |
+
+Every policy collapses (drops every 6–10 s), and the ranking contradicts the hand (07 survived 60 s on the hand,
+here it is second to last): the model as implemented is too harsh or one part is wrong, i.e. **not validated yet**.
+A bug (the helper `_scale` shadowed by `JointAction._scale`, reset crashed) was found by the pod and fixed (now
+`_dr_scale`). Diagnosis: `eval_policy.py --servo_parts` switches delay / profile / slope / play / stiff loop on one at
+a time; with none on it must reproduce the normal eval (sanity check of the class). Running on 07 and 02. Fine-tunes
+under the full model meanwhile: 02 on the pod (32k envs, `02_tilt_adr_servo_ft_r6k`, since 12:28Z), 07 on DTU
+(L40S, 29860426, pending).
