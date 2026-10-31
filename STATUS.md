@@ -1,7 +1,13 @@
-# remote queue status (2026-10-31T13:23:17Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 95 %, 24924 MiB)
+# remote queue status (2026-10-31T13:33:24Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 77 %, 21919 MiB)
 # queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated); 02b_servo_wp_rf_ft_r6k_v2 superseded (07 is the base)
-07_wp_rf_ft_r6k running Learning iteration 4163/5500
-07_wp_rf_ft_seed1_r6k running Learning iteration 4100/5500
+07_wp_rf_ft_r6k running Learning iteration 4284/5500
+#   13:24 OWN model_4150 rpm 13.07 dfsr 84.4 dc 0.17 score 11.03 | tilt 7.3 flips 2.8 wrist 0.18/0.08
+#   13:25 LOWFRIC model_4150 rpm 10.04 dfsr 92.2 dc 0.08 score 9.25 | tilt 5.9 flips 2.2 wrist 0.16/0.08
+#   13:25 PUSHED model_4150 398e699
+07_wp_rf_ft_seed1_r6k running Learning iteration 4225/5500
+#   13:29 OWN model_4150 rpm 13.17 dfsr 81.2 dc 0.23 score 10.70 | tilt 7.6 flips 3.1 wrist 0.19/0.07
+#   13:30 LOWFRIC model_4150 rpm 10.34 dfsr 93.8 dc 0.06 score 9.70 | tilt 6.1 flips 2.1 wrist 0.15/0.08
+#   13:30 PUSHED model_4150 625e5e9
 02_tilt_adr_servo_ft_r6k superseded 
 02b_servo2_wp_ft_r6k superseded 
 02b_servo_wp_ft_r6k superseded 
