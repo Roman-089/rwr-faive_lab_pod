@@ -13,5 +13,35 @@
   "perturb": true,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4500.pt": {
+  "rpm": 9.986376762390137,
+  "rpm_std": 2.2177929878234863,
+  "ra": 55.92237710952759,
+  "dfsr": 29.6875,
+  "dc": 1.921875,
+  "checkpoint": "model_4500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristfix-v0",
+  "perturb": true,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_4999.pt": {
+  "rpm": 10.103843688964844,
+  "rpm_std": 2.2697863578796387,
+  "ra": 55.228209495544434,
+  "dfsr": 37.5,
+  "dc": 1.78125,
+  "checkpoint": "model_4999.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristfix-v0",
+  "perturb": true,
+  "servo": false,
+  "servo_parts": ""
  }
 }

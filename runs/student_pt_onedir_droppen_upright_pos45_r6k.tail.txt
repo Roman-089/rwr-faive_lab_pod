@@ -1,40 +1,5 @@
-                    Iteration time: 5.27s
-                      Time elapsed: 02:11:41
-                               ETA: 00:39:18
-
-################################################################################
-                     [1m Learning iteration 1541/2000 [0m                     
-
-                       Computation: 18229 steps/s (collection: 3.911s, learning 1.481s)
-             Mean action noise std: 0.10
-                Mean behavior loss: 0.1599
-          Mean reconstruction loss: 0.0090
-                       Mean reward: 1823.39
-               Mean episode length: 563.70
-Episode_Reward/object_position_tracking: 15.5898
-Episode_Reward/angular_acceleration: 0.1240
-       Episode_Reward/joint_vel_l2: -0.0010
-          Episode_Reward/action_l2: -0.0239
-     Episode_Reward/action_rate_l2: -1.4686
-  Episode_Reward/rotation_progress: 56.8301
-Episode_Reward/off_axis_angular_velocity: -7.3309
-        Episode_Reward/object_drop: -0.5735
-          Episode_Reward/cube_tilt: -6.8893
-Metrics/continuous_rotation/position_error: 0.0525
-Metrics/continuous_rotation/current_angular_speed: 7.0464
-Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 5.5464
-Metrics/continuous_rotation/angular_velocity_error: 7.1638
-Metrics/continuous_rotation/angular_velocity_alignment: 0.2481
-Metrics/continuous_rotation/consecutive_success: 0.1391
-Metrics/continuous_rotation/total_success: 61.8166
-Metrics/continuous_rotation/vertical_drift: 0.0311
-Metrics/continuous_rotation/linear_speed: 0.3549
-      Episode_Termination/time_out: 0.7754
-Episode_Termination/object_dropped: 0.2246
---------------------------------------------------------------------------------
-                   Total timesteps: 151584768
-                    Iteration time: 5.39s
-                      Time elapsed: 02:11:46
-                               ETA: 00:39:13
-
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+[INFO][AppLauncher]: Using device: cuda:0
+[INFO][AppLauncher]: Loading experience file: /home/balazsph/IsaacLab/apps/isaaclab.python.headless.kit
+Loading user config located at: '/tmp/rwr_kit_student_pt_onedir_droppen_upright_pos45_r6k/data/Kit/Isaac-Sim/5.1/user.config.json'
+[Info] [carb] Logging to file: /tmp/rwr_kit_student_pt_onedir_droppen_upright_pos45_r6k/logs/Kit/Isaac-Sim/5.1/kit_20261031_152221.log
