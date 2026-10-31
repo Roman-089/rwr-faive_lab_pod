@@ -1,40 +1,40 @@
-                      Time elapsed: 03:54:13
-                               ETA: 00:03:29
-
-################################################################################
-                     [1m Learning iteration 7956/7999 [0m                     
-
-                       Computation: 36023 steps/s (collection: 5.239s, learning 0.218s)
-             Mean action noise std: 1.24
-          Mean value_function loss: 1681.2544
-               Mean surrogate loss: 0.0008
-                 Mean entropy loss: 26.7779
-                       Mean reward: 2090.64
-               Mean episode length: 509.53
-Episode_Reward/object_position_tracking: 16.6566
-Episode_Reward/angular_acceleration: 0.0693
-       Episode_Reward/joint_vel_l2: -0.0011
-          Episode_Reward/action_l2: -0.2792
-     Episode_Reward/action_rate_l2: -6.3711
-  Episode_Reward/rotation_progress: 62.0499
-Episode_Reward/off_axis_angular_velocity: -8.1351
-        Episode_Reward/object_drop: -0.8195
-                    Curriculum/adr: 1.0000
-Metrics/continuous_rotation/position_error: 0.0644
-Metrics/continuous_rotation/current_angular_speed: 8.0660
-Metrics/continuous_rotation/target_angular_speed: 1.5000
-Metrics/continuous_rotation/angular_velocity_magnitude_error: 6.5660
-Metrics/continuous_rotation/angular_velocity_error: 7.9296
-Metrics/continuous_rotation/angular_velocity_alignment: 0.2928
-Metrics/continuous_rotation/consecutive_success: 0.0348
-Metrics/continuous_rotation/total_success: 31.6811
-Metrics/continuous_rotation/vertical_drift: 0.0352
-Metrics/continuous_rotation/linear_speed: 0.4941
-      Episode_Termination/time_out: 0.7744
-Episode_Termination/object_dropped: 0.2257
+[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
+[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
+[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
+/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
+  warnings.warn(
+/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
+  warnings.warn(
 --------------------------------------------------------------------------------
-                   Total timesteps: 581566464
-                    Iteration time: 5.46s
-                      Time elapsed: 03:54:18
-                               ETA: 00:03:24
-
+Resolved observation sets: 
+	 policy :  ['policy']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor MLP: MLP(
+  (0): Linear(in_features=74, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=17, bias=True)
+)
+Critic MLP: MLP(
+  (0): Linear(in_features=81, out_features=512, bias=True)
+  (1): ELU(alpha=1.0)
+  (2): Linear(in_features=512, out_features=512, bias=True)
+  (3): ELU(alpha=1.0)
+  (4): Linear(in_features=512, out_features=256, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=256, out_features=128, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=128, out_features=1, bias=True)
+)
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_22-18-44_abl_B_onedir_droppen_pos45_adr_from5e-3_r6k/model_5500.pt: {'rpm': 15.525178909301758, 'rpm_std': 4.079010963439941, 'ra': 81.9074273109436, 'dfsr': 75.0, 'dc': 0.421875, 'checkpoint': 'model_5500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-adr-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_22-18-44_abl_B_onedir_droppen_pos45_adr_from5e-3_r6k/model_6000.pt: {'rpm': 15.031576156616211, 'rpm_std': 3.6305925846099854, 'ra': 83.25674533843994, 'dfsr': 68.75, 'dc': 0.375, 'checkpoint': 'model_6000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-adr-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_22-18-44_abl_B_onedir_droppen_pos45_adr_from5e-3_r6k/model_6500.pt: {'rpm': 15.254796028137207, 'rpm_std': 3.8247311115264893, 'ra': 83.29606056213379, 'dfsr': 78.125, 'dc': 0.296875, 'checkpoint': 'model_6500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-adr-v0', 'perturb': True}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-30_22-18-44_abl_B_onedir_droppen_pos45_adr_from5e-3_r6k/model_7000.pt: {'rpm': 15.796045303344727, 'rpm_std': 4.1674394607543945, 'ra': 83.7752103805542, 'dfsr': 84.375, 'dc': 0.1875, 'checkpoint': 'model_7000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-adr-v0', 'perturb': True}
