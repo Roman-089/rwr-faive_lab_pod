@@ -298,3 +298,14 @@ to be unstable at the start → check existing code / stabilizers first (critic 
   trained with 1e-4. Replaced by a fresh 10k teacher with entropy 5e-3 (`teacher_ent5e-3`, jobs 29842059 L40S /
   29842060 A100 dup). The students queued from the 1e-4 teacher stay queued (they test distillation itself); if the
   new teacher is better, the best student recipe is re-distilled from it.
+
+- **2026-10-31 — +z teacher on the winning reward (`teacher_onedir_droppen_upright_pos45_r6k`, pod, W&B 6p5prsq1)**:
+  privileged teacher, tilt penalty + position ×3, default entropy, 6000 it. Isaac +z, nominal / perturbed: 1000 9.83 /
+  8.55 RPM, 80 / 31 % · 2000 10.04 / 9.53, 83 / 28 % · 3500 9.77 / 9.20, 88 / 39 % · 4500 10.48 / 8.21, 91 / 30 % · 5999
+  10.15 / 7.99, 83 / 17 %. Last-3 mean 10.1 RPM, 87 % drop-free, perturbed 29 %; cube motion (5999) tilt 12.9°, 3.9 face
+  changes / min, wrist 0.45 rad / 0.43 rad/s. Unlike on rotlin (teacher +1.5 RPM over B), this teacher is clearly
+  **worse than the asymmetric PPO policy of the same reward** (14.1 RPM, 92 / 50 %): its privileged cube-state input did
+  not help, and it is the least delay-robust of the flat policies. The user-approved transformer student
+  (`student_pt_onedir_droppen_upright_pos45_r6k`, model_4500 = the best of the last three, 91 % vs 83 %; W&B p82lzd4h,
+  2000 it, 4096 envs) runs anyway: it tests whether the 10-step history adds delay robustness, but it cannot be expected
+  to beat the deployable #1 (`upright_pos45_adr`). Deploying it needs the node's `reset()` line ([deployable](deployable.md)).
