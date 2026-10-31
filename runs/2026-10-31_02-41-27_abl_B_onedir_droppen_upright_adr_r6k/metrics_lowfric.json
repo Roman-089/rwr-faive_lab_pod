@@ -13,11 +13,11 @@
   "perturb": false
  },
  "model_5500.pt": {
-  "rpm": 8.220305442810059,
-  "rpm_std": 4.893142223358154,
-  "ra": 64.95845317840576,
-  "dfsr": 78.125,
-  "dc": 0.25,
+  "rpm": 8.790775299072266,
+  "rpm_std": 4.552886486053467,
+  "ra": 69.4114089012146,
+  "dfsr": 84.375,
+  "dc": 0.21875,
   "checkpoint": "model_5500.pt",
   "cmd": 1.5,
   "steps": 1200,
@@ -54,16 +54,18 @@
   "perturb": false
  },
  "model_6998.pt": {
-  "rpm": 11.594158172607422,
-  "rpm_std": 1.8346366882324219,
-  "ra": 81.88443183898926,
-  "dfsr": 90.625,
-  "dc": 0.125,
+  "rpm": 8.831335067749023,
+  "rpm_std": 4.419417858123779,
+  "ra": 71.72299027442932,
+  "dfsr": 81.25,
+  "dc": 0.25,
   "checkpoint": "model_6998.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
   "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0",
-  "perturb": false
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }

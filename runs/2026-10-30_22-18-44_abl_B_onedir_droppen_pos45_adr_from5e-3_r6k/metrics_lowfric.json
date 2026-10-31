@@ -1,0 +1,17 @@
+{
+ "model_7000.pt": {
+  "rpm": 14.128503799438477,
+  "rpm_std": 2.0133275985717773,
+  "ra": 87.67881393432617,
+  "dfsr": 87.5,
+  "dc": 0.125,
+  "checkpoint": "model_7000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-adr-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
