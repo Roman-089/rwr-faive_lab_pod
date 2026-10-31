@@ -47,6 +47,7 @@ table (64 envs, DR + noise), with per-direction RPM from its rollout. Login node
 | `abl_B_onedir_droppen_upright_adr` (model_5500, +z only, tilt penalty + ADR) | **10.62** | 81 / 94 / 0.06 | **7.08** (64) | 80 / **92** / 0.09 | **5.64** (64) | 70 / 89 / 0.12 | **0.67 / 0.53** |
 | `abl_B_onedir_droppen_upright_pos45_ent1e-4` (model_3999, +z only, tilt + position ×3) | **14.54** | – / 92 / 0.09 | **7.58** (64) | – / 86 / 0.14 | **5.70** (64) | – / 86 / 0.17 | 0.52 / 0.39 |
 | `abl_B_onedir_droppen_pos45_ent1e-4` (model_3999, +z only, position ×3, default entropy) | **15.51** | – / 92 / 0.08 | **4.61** (64) | – / 88 / 0.12 | **4.25** (64) | – / 84 / 0.20 | 0.30 / 0.27 |
+| `abl_B_onedir_droppen_upright_wristpen_ent1e-4` (model_4999, +z only, tilt + wrist penalty) | **13.40** | 85 / 91 / 0.11 | **7.37** (64) | – / 89 / 0.11 | **5.01** (64) | – / 91 / 0.14 | 0.55 / 0.37 |
 
 Rows added 2026-10-29 23:10 (job 29851207, CPU queue `hpc`, 64 trials each; informational, decisions use Isaac). The
 fastest Isaac policy (onedir, 15.2 RPM) keeps only 36 % of its speed and drops most; the drop-penalty run keeps the
