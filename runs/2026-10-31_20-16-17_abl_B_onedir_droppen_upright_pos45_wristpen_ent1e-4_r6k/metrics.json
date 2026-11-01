@@ -1,0 +1,17 @@
+{
+ "model_500.pt": {
+  "rpm": 6.775684356689453,
+  "rpm_std": 3.7882025241851807,
+  "ra": 62.100863456726074,
+  "dfsr": 78.125,
+  "dc": 0.28125,
+  "checkpoint": "model_500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
