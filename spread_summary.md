@@ -1,4 +1,4 @@
-# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T13:54Z)
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T13:55Z)
 
 Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
 
@@ -105,6 +105,7 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | 06_cont_servowide m6100 | (c) full servo x1 | 12.31 | 10.25 | 13.05 | 2.7 | 80.9 | 84.4 | 96.7 |
 | 06_cont_servowide m6200 | (a) no servo | 12.92 | 10.50 | 13.80 | 3.5 | 91.2 | 96.9 | 98.8 |
 | 06_cont_servowide m6200 | (b) profile x1.5 | 14.49 | 12.10 | 15.51 | 3.9 | 87.9 | 93.6 | 98.0 |
+| 06_cont_servowide m6200 | (c) full servo x1 | 12.46 | 10.15 | 13.25 | 3.1 | 80.1 | 84.0 | 96.8 |
 
 ## hist3
 
