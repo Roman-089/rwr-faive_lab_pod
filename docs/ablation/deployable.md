@@ -76,6 +76,18 @@ Rank 1 on the PLA-skeleton friction (`-realfric2-v0`, its own DR: bare PLA links
 Servo-model stress test (512 envs, measured friction + `--servo`: 0–50 ms delay, nominal acceleration limit, play; the model is harsher than the hand, it is a relative check, not a prediction): rank 1 9.95 RPM / 40.8 % / 76.8 % after 2 s / 96.3 % in region; rank 2 (06calmt) 9.59 / 39.1 / 78.5 / 96.4; A 11.09 / 32.0 / 56.4 / 73.1. The calm 06 line loses more speed but holds the cube much better than the 07 line under servo dynamics: the faster gait is not the risk.
 Per part (rank 1 | A, 512 envs; drop-free / after 2 s / in region): delay only 89.8 / 98.2 / 98.9 | 88.5 / 93.9 / 93.3 (both ~2.5 RPM *faster*); play only 89.8 / 99.2 / 98.6 | 92.2 / 98.2 / 88.0; **acceleration profile only 52.3 / 78.5 / 97.0 | 38.9 / 54.5 / 80.2**, rank 1's wrist doubling (0.074 → 0.164). The nominal per-joint acceleration limit does nearly all the damage. It was fitted from hand replays (kinematics only) and ranked 07, the hand's best, last in closed loop, so the servo fine-tunes were dropped. No profile-DR training until the hand tests of rank 1. `eval_policy.py --servo_amax_scale` (33fd4ad) scans how much faster servos would have to be.
 
+Acceleration-limit scan (`--servo --servo_parts profile --servo_amax_scale K`, 512 envs; rank 1 | A, RPM / drop-free / after 2 s / in region):
+
+| amax | rank 1 06oneshot_s0_m5400 | A 07ft_s0_m4600 |
+|---|---|---|
+| no servo | 13.07 / 89.5 / 98.8 / 98.9 | 11.41 / 90.0 / 96.5 / 93.2 |
+| ×1 (fitted) | 10.29 / 52.3 / 78.5 / 97.0 | 11.80 / 38.9 / 54.5 / 80.2 |
+| ×1.5 | 13.19 / 75.0 / 90.8 / 98.3 | 13.42 / 55.7 / 68.2 / 88.5 |
+| ×2 | 14.75 / 81.4 / 94.7 / 98.4 | 13.96 / 70.3 / 79.3 / 91.4 |
+| ×3 | 15.62 / 84.6 / 96.9 / 98.7 | 14.23 / 83.4 / 92.4 / 93.3 |
+
+Rank 1 recovers at ~2× the fitted limit, A only at ~3×; at every scale rank 1 is 12–24 points ahead after 2 s. What to read from the hand: if rank 1 runs close to its sim numbers and A degrades, the real servos sit around 1.5–2× the fitted limit; if both run about equally, the headroom is ≥ 3× (or the profile model is off, as with 07 before). In both cases rank 1 is the better bet.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
