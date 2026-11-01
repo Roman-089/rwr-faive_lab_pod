@@ -28,6 +28,8 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--envs", type=int, nargs="+", default=None,
                     help="recorded envs to offer (default: all the npz has link poses for); a picker switches between them")
+    ap.add_argument("--pick", type=int, default=0,
+                    help="instead of --envs: N recorded envs spread over the per-env RPM distribution (slowest .. fastest)")
     ap.add_argument("--stride", type=int, default=2, help="keep every n-th control step (20 Hz)")
     ap.add_argument("--region", type=float, nargs=3, default=None, metavar=("CX", "CY", "R"))
     ap.add_argument("--title", default="")
@@ -56,6 +58,9 @@ def main():
     w = np.where(alive_all, d["obj_angvel"][..., 2] * np.sign(d["cmd_angvel"][0, :, 2]), 0.0)
     rpm = w.sum(0) / np.maximum(alive_all.sum(0), 1) * 60 / (2 * np.pi)
     mean_rpm = float(rpm.mean())
+    if args.pick:  # N envs at evenly spaced quantiles of the recorded envs' RPM
+        rec = np.argsort(rpm[:n_rec])
+        envs = sorted({int(rec[round(q * (n_rec - 1))]) for q in np.linspace(0, 1, args.pick)})
     env_data = [{
         "id": e, "rpm": round(float(rpm[e]), 2), "rank": int((rpm > rpm[e]).sum()) + 1,
         "link_pos": np.round(d["link_pos"][s, e] * 1000, 2).tolist(),
