@@ -370,6 +370,9 @@
 | 06_servofast_from_base model_4500 | a no servo | 7.40 | 88.7 | 0.135 | 6.56 | 5.0 | 0.089 | 97.8 | 97.1 |
 | 06_servofast_from_base model_4500 | b profile x1.5 | 12.38 | 75.0 | 0.357 | 9.29 | 5.3 | 0.094 | 97.6 | 94.5 |
 | 06_servofast_from_base model_4500 | c full servo x1 | 10.86 | 42.0 | 1.447 | 4.56 | 7.4 | 0.115 | 96.8 | 81.4 |
+| 06_servofast_from_base model_4600 | a no servo | 8.28 | 91.2 | 0.088 | 7.55 | 5.0 | 0.094 | 98.2 | 96.7 |
+| 06_servofast_from_base model_4600 | b profile x1.5 | 13.01 | 75.4 | 0.371 | 9.81 | 4.9 | 0.089 | 98.1 | 95.3 |
+| 06_servofast_from_base model_4600 | c full servo x1 | 11.59 | 42.8 | 1.492 | 4.96 | 6.7 | 0.105 | 96.7 | 81.1 |
 
 ## 06_oneshot_servowide: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
@@ -384,6 +387,9 @@
 | 06_oneshot_servowide model_5700 | a no servo | 12.54 | 88.3 | 0.141 | 11.07 | 4.2 | 0.072 | 98.8 | 98.2 |
 | 06_oneshot_servowide model_5700 | b profile x1.5 | 14.68 | 77.5 | 0.312 | 11.38 | 4.1 | 0.071 | 98.5 | 96.3 |
 | 06_oneshot_servowide model_5700 | c full servo x1 | 12.51 | 43.0 | 1.227 | 5.37 | 5.6 | 0.084 | 97.3 | 83.6 |
+| 06_oneshot_servowide model_5800 | a no servo | 12.75 | 89.6 | 0.123 | 11.43 | 4.1 | 0.067 | 98.9 | 98.8 |
+| 06_oneshot_servowide model_5800 | b profile x1.5 | 14.79 | 76.6 | 0.328 | 11.32 | 4.1 | 0.072 | 98.1 | 94.9 |
+| 06_oneshot_servowide model_5800 | c full servo x1 | 12.62 | 47.7 | 1.139 | 6.01 | 5.5 | 0.078 | 97.5 | 88.3 |
 
 ## hist3_calmt_servo: every checkpoint, 512-env LOWFRIC (a) no servo, (c) full servo model x1, on the hist3 task + friction overrides; wrist speed over all 512 envs
 
