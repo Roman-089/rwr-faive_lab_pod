@@ -328,6 +328,7 @@
 | hist3_calmt model_4600 | 15.84 | 80.7 | 0.230 | 12.77 | 4.6 | 0.092 | 93.7 | 90.6 | n/a | n/a | n/a |
 | hist3_calmt model_4700 | 15.89 | 80.9 | 0.254 | 12.85 | 4.6 | 0.091 | 93.0 | 89.6 | n/a | n/a | n/a |
 | hist3_calmt model_4800 | 15.97 | 78.3 | 0.285 | 12.51 | 4.5 | 0.090 | 93.4 | 89.8 | n/a | n/a | n/a |
+| hist3_calmt model_4900 | 15.94 | 78.7 | 0.291 | 12.55 | 4.6 | 0.091 | 93.3 | 89.3 | n/a | n/a | n/a |
 
 ## placed: 512-env LOWFRIC with a placed spawn (cube starts flat: reset roll = pitch = 0, random yaw), seed 42; wrist speed over all 512 envs
 
