@@ -421,6 +421,8 @@
 | hist3_calmt_servo model_4200 | c full servo x1 | 10.58 | 35.7 | 1.629 | 3.78 | 7.5 | 0.131 | 79.3 | 65.8 |
 | hist3_calmt_servo model_4300 | a no servo | 15.16 | 79.9 | 0.277 | 12.11 | 4.4 | 0.086 | 93.6 | 88.5 |
 | hist3_calmt_servo model_4300 | c full servo x1 | 11.18 | 44.7 | 1.289 | 5.00 | 6.9 | 0.122 | 83.9 | 75.2 |
+| hist3_calmt_servo model_4400 | a no servo | 14.90 | 80.5 | 0.227 | 11.99 | 4.3 | 0.086 | 93.1 | 92.4 |
+| hist3_calmt_servo model_4400 | c full servo x1 | 11.31 | 43.9 | 1.273 | 4.97 | 6.6 | 0.120 | 83.8 | 73.8 |
 
 ## 06_cont_servofast: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
