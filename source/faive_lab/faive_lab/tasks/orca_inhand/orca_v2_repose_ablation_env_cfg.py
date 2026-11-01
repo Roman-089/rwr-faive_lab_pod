@@ -800,6 +800,29 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionMount10EnvCfg(
         pr["pitch"] = [-0.1745, 0.1745]
 
 
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightHist3EnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg):
+    """07's training task (-onedir-droppen-upright) with a 3-step observation history in the actor (222 inputs; the
+    critic keeps its privileged one-step obs). Stage 1 of a history version of the real-hand recipe: at the measured
+    friction all memoryless fine-tunes plateau at 89-92 % drop-free (512 envs); a short history lets the actor infer
+    slip / contact state that one step of joint data cannot show. Deploy: policy_history.pt + the node's reset line."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 3
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionHist3EnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg
+):
+    """-realfric (recipe of 07ft_s0_m4600) with the 3-step actor history: stage 2, fine-tuned from -upright-hist3."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 3
+
+
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
     """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
     (offsets from the default root state), so the command's target and the goal observation stay unchanged."""
