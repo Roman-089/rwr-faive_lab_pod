@@ -118,5 +118,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4900.pt": {
+  "rpm": 14.502018928527832,
+  "rpm_std": 3.9889533519744873,
+  "ra": 92.5956666469574,
+  "dfsr": 89.0625,
+  "dc": 0.125,
+  "checkpoint": "model_4900.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
