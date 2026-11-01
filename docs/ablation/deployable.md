@@ -65,6 +65,8 @@ Replicated (06:40Z): the same recipe with seed 1, m6300 at 512 envs: 12.57 RPM /
 
 Rank 1 is mount-robust as it is: on its own task with the hand base rolled ±10° (instead of ±3°), 512 envs: 15.10 RPM / 83.0 % / 96.7 % after 2 s, vs 15.54 / 85.0 / 97.1 at ±3°: only ~2 points of drop-free lost. (The 07 line lost ~10 points on the ±10° mount10 task.) A ±10° roll fine-tune of rank 1 (`06_calmt_roll10`) is 1–2 points ahead on the tilted mount after 100 iterations, inside the noise.
 
+Third seed (DTU, seed 2, 512 envs, all-env wrist): m6500 12.60 RPM / 88.3 % / 98.2 % after 2 s / 99.1 % in region / tilt 4.6° / wrist 0.08; m6799 13.05 / 89.8 / 98.2 / 99.1 / 4.6° / 0.08 (seed 42 m6799: 12.98 / 87.7 / 98.6 / 99.1 / 4.7° / 0.084). Three seeds of the rank-1 recipe agree within noise.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
