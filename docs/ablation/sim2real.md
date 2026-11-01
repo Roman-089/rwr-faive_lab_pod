@@ -740,6 +740,8 @@ All within ~2 SE of each other. The 64-env numbers we selected on (A 96.9 %, B 9
 
 Drop-free after 2 s for the first 512-env set (overall → t ≥ 2 s): A 90.0 → 96.5, B 89.3 → 94.7, 07ft m5200 91.4 → 95.5, 07ft_s1 m4900 92.2 → **98.0**, region200c m4800 90.0 → 96.9, region200 m5000 90.6 → 96.3, roll10 m4600 91.6 → 96.9, m5000 90.0 → 95.9. SE at ~97 % with 512 envs is ±0.75 %, so the best (s1 m4900) vs A is 1.4 SE: not yet a ship by the > 2 SE rule.
 
+DTU 512-env eval (job 29862900, same setting; overall drop-free / RPM / in region / after 2 s): region200c seed 1 m5500 90.2 / 11.05 / 97.0 / 95.3, **m5599 90.2 / 10.95 / 97.2 / 95.5**; rf2 region200 m6199 88.9 / 11.08 / 96.6 / 95.3; 07_wp_rf seed 2 m5499 90.6 / 11.24 / 90.9 / 96.5; rf2 seed 1 m4500 89.8 / 11.33 / 91.5 / 95.5. The recentred region term reproduces across seeds: +4 points in region at 512 envs (97.2 vs A's 93.2 %) at the same overall drop-free, −0.5 RPM, −1 point after 2 s (n.s.). Still under the 98 % region target.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
