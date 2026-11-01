@@ -329,3 +329,8 @@
 |---|---|---|---|---|---|---|---|---|
 | rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 | 13.09 | 90.2 | 0.109 | 11.81 | 4.0 | 0.072 | 99.0 | 98.2 |
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 | 11.38 | 91.2 | 0.100 | 10.38 | 6.1 | 0.078 | 92.7 | 95.5 |
+
+## 06_oneshot_servofast_s1: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
