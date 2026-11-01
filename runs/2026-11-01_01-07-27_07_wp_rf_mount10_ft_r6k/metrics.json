@@ -193,5 +193,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_5400.pt": {
+  "rpm": 12.950307846069336,
+  "rpm_std": 3.9179296493530273,
+  "ra": 87.7440333366394,
+  "dfsr": 73.4375,
+  "dc": 0.40625,
+  "checkpoint": "model_5400.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-mount10-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
