@@ -1,0 +1,17 @@
+{
+ "model_6300.pt": {
+  "rpm": 13.134108543395996,
+  "rpm_std": 2.8913917541503906,
+  "ra": 90.07771611213684,
+  "dfsr": 87.6953125,
+  "dc": 0.1484375,
+  "checkpoint": "model_6300.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 512,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
