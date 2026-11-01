@@ -67,6 +67,8 @@ Rank 1 is mount-robust as it is: on its own task with the hand base rolled ±10�
 
 Third seed (DTU, seed 2, 512 envs, all-env wrist): m6500 12.60 RPM / 88.3 % / 98.2 % after 2 s / 99.1 % in region / tilt 4.6° / wrist 0.08; m6799 13.05 / 89.8 / 98.2 / 99.1 / 4.6° / 0.08 (seed 42 m6799: 12.98 / 87.7 / 98.6 / 99.1 / 4.7° / 0.084). Three seeds of the rank-1 recipe agree within noise.
 
+Rank 1 on the PLA-skeleton friction (`-realfric2-v0`, its own DR: bare PLA links 0.0–0.2, cube 0.2–0.3; 512 envs): 15.69 RPM / 84.0 % / 97.3 % after 2 s / 98.3 % in region / tilt 4.8° / wrist 0.085, vs B (trained on it) 14.20 / 85.5 / 95.3 / 90.2 / 6.0° / 0.078. The bare-PLA contact does not break rank 1, and B has no advantage there; B's case for rank 4 rests only on the hand.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
