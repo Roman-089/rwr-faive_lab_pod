@@ -282,6 +282,9 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| 06_oneshot_servofast model_5500 | a no servo | 12.94 | 87.9 | 0.131 | 11.37 | 3.9 | 0.070 | 98.9 | 97.9 |
+| 06_oneshot_servofast model_5500 | b profile x1.5 | 14.44 | 75.4 | 0.338 | 10.88 | 4.3 | 0.081 | 98.4 | 94.7 |
+| 06_oneshot_servofast model_5500 | c full servo x1 | 11.64 | 46.5 | 1.184 | 5.41 | 6.2 | 0.101 | 96.9 | 86.7 |
 
 ## hist3_calmt: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-hist3-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
