@@ -13,5 +13,35 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_6400.pt": {
+  "rpm": 13.385047912597656,
+  "rpm_std": 2.4348793029785156,
+  "ra": 91.58549308776855,
+  "dfsr": 95.3125,
+  "dc": 0.078125,
+  "checkpoint": "model_6400.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_6500.pt": {
+  "rpm": 16.635581970214844,
+  "rpm_std": 4.690788269042969,
+  "ra": 93.44568252563477,
+  "dfsr": 81.25,
+  "dc": 0.1875,
+  "checkpoint": "model_6500.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
