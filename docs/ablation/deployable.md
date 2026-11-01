@@ -71,6 +71,8 @@ Rank 1 on the PLA-skeleton friction (`-realfric2-v0`, its own DR: bare PLA links
 
 **Keep `goal_ang_vel` at 1.5 on the hand.** Rank 1 fine-tuned 100 iterations toward a 2.0 rad/s command (`06_calmt_cmd2`, m6400, 512 envs) turns slower at 2.0 than at 1.5: 8.60 RPM / 84.6 % / 93.8 % after 2 s, vs 12.08 / 88.5 / 98.8. A command outside the training range is not a speed knob. Deploy-rwr was told.
 
+**New rank 1 (2026-11-01 08:55Z): `06oneshot_s0_m5400`**, W&B `orca_v2_zrot_hand_ft:v12`, `deploy_policies/` rank 1 (2813933, notes f292ebb; sha256 `f01377bb…`); the rest shift down one. The raw 06 base (pos45 m3999) calmed in **one** fine-tune stage of 1400 iterations with the final recipe (`-realfric-wristl1-v0`, tracking 45, tilt −800, L2 wrist −16, L1 wrist −40). 512 envs at the measured friction: **13.07 RPM** (previous rank 1 12.46) at the same drop-free (89.5 %), 98.8 % after 2 s, 98.9 % in the user's circle, tilt 4.1°, wrist 0.074 rad/s all envs: the calmest so far. Own task 15.69 RPM / 85.2 %.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
