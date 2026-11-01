@@ -175,3 +175,4 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|
 | hist3_stage1 model_2500 | 10.16 | 77.3 | 0.303 | 7.85 | 6.6 | 74.5 | 80.5 |
+| hist3_stage1 model_3500 | 10.53 | 74.2 | 0.365 | 7.81 | 6.3 | 78.5 | 77.1 |
