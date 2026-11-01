@@ -69,6 +69,8 @@ Third seed (DTU, seed 2, 512 envs, all-env wrist): m6500 12.60 RPM / 88.3 % / 98
 
 Rank 1 on the PLA-skeleton friction (`-realfric2-v0`, its own DR: bare PLA links 0.0–0.2, cube 0.2–0.3; 512 envs): 15.69 RPM / 84.0 % / 97.3 % after 2 s / 98.3 % in region / tilt 4.8° / wrist 0.085, vs B (trained on it) 14.20 / 85.5 / 95.3 / 90.2 / 6.0° / 0.078. The bare-PLA contact does not break rank 1, and B has no advantage there; B's case for rank 4 rests only on the hand.
 
+**Keep `goal_ang_vel` at 1.5 on the hand.** Rank 1 fine-tuned 100 iterations toward a 2.0 rad/s command (`06_calmt_cmd2`, m6400, 512 envs) turns slower at 2.0 than at 1.5: 8.60 RPM / 84.6 % / 93.8 % after 2 s, vs 12.08 / 88.5 / 98.8. A command outside the training range is not a speed knob. Deploy-rwr was told.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
