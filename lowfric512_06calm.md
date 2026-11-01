@@ -608,3 +608,8 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+
+## cube A: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
