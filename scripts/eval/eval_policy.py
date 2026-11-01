@@ -51,6 +51,8 @@ parser.add_argument("--servo", action="store_true",
 parser.add_argument("--tag", default="", help="extra output suffix, e.g. _lowfric (keeps the default outputs intact)")
 parser.add_argument("--servo_parts", default="delay,profile,play",
                     help="comma list of servo-model parts to switch on (ablation); outputs *_servo-<parts> if not all")
+parser.add_argument("--servo_amax_scale", type=float, default=1.0,
+                    help="scale of the servo model's acceleration limits (sensitivity scan); outputs *_amax<scale> if != 1")
 cli_args.add_rsl_rl_args(parser)
 AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
@@ -152,6 +154,11 @@ def main(env_cfg, agent_cfg):
         suffix += "_servo" if set(parts) == set(orca_adr.DEFAULT_SERVO_PARTS) else "_servo-" + "-".join(parts or ("none",))
         # the measured hand: pure delay 0-50 ms, nominal per-joint acceleration limits and play (no randomization)
         orca_adr.use_orca_v2_servo_model(env_cfg, delay_substeps_range=(0, 6), adr=False, nominal=True, parts=parts)
+        if args_cli.servo_amax_scale != 1.0:
+            # the profile part alone did nearly all the servo-model damage (2026-11-01); scan how much faster servos help
+            k = args_cli.servo_amax_scale
+            env_cfg.actions.joint_pos.amax_scale_range = (k, k)
+            suffix += f"_amax{k:g}"
 
     env = RslRlVecEnvWrapper(gym.make(args_cli.task, cfg=env_cfg), clip_actions=agent_cfg.clip_actions)
     base = env.unwrapped
