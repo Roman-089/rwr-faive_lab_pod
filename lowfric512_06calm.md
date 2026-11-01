@@ -219,6 +219,7 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 06_oneshot_l1w20 model_4500 | 11.85 | 90.4 | 0.113 | 10.71 | 4.7 | 0.091 | 98.8 | 97.1 | 14.28 | 83.8 | 97.1 |
+| 06_oneshot_l1w20 model_4600 | 12.14 | 89.6 | 0.109 | 10.89 | 4.5 | 0.081 | 98.9 | 98.2 | 14.51 | 85.0 | 96.7 |
 
 ## servo: 512-env LOWFRIC with the ORCA v2 servo model (--servo: delay 0-50 ms, nominal accel limit, play), seed 42; wrist speed over all 512 envs
 
