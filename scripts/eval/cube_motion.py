@@ -11,6 +11,9 @@ it flat. This reports, over the alive steps of the nominal rollout:
 
 Usage (CPU, numpy): python scripts/eval/cube_motion.py <npz or run dir> [...] [--region CX CY R] [--steady]
   --steady         adds drop-free after the spawn catch (share of envs without a drop / reset at t >= 2 s)
+  --spread         adds the per-env speed distribution (each env = one draw of the randomised friction / mass, like one
+                   hand trial): RPM p10 / median over envs, stall rate (envs below 5 RPM) and good-trial rate (envs with
+                   no drop at t >= 2 s that turn at >= 8 RPM, ~60 % of the 1.5 rad/s command)
 (run dir: its last eval/model_*.npz)
 """
 
@@ -87,18 +90,31 @@ def cube_motion(npz_path, region=None):
         # share of envs without a drop / reset once the spawn catch is over (t >= 2 s): most eval drops happen 0.25-0.75 s
         # after the initial spawn (drop_analysis.md, 2026-11-01), which the hand, where the cube is placed by hand, never sees
         "drop_free_after_2s": float((~(d["done"][int(round(2.0 / dt)) :] > 0).any(0)).mean()),
+        **_spread(d, w_cmd, alive, dt),
     }
+
+
+def _spread(d, w_cmd, alive, dt):
+    """Per-env RPM over the alive steps after the spawn catch (t >= 2 s): the mean over envs hides envs that nearly stall."""
+    k = int(round(2.0 / dt))
+    a = alive[k:]
+    rpm = np.where(a, w_cmd[k:], 0.0).sum(0) / np.maximum(a.sum(0), 1) * 60 / (2 * np.pi)
+    no_drop = ~(d["done"][k:] > 0).any(0)
+    return {"rpm_env_p10": float(np.percentile(rpm, 10)), "rpm_env_median": float(np.median(rpm)),
+            "stall_rate": float((rpm < 5.0).mean()), "good_trial_rate": float((no_drop & (rpm >= 8.0)).mean())}
 
 
 if __name__ == "__main__":
     argv, region = sys.argv[1:], None
     steady = "--steady" in argv  # extra last column, opt-in so parsers of the default line keep working
-    argv = [a for a in argv if a != "--steady"]
+    spread = "--spread" in argv
+    argv = [a for a in argv if a not in ("--steady", "--spread")]
     if "--region" in argv:
         i = argv.index("--region")
         region = tuple(float(v) for v in argv[i + 1 : i + 4])
         argv = argv[:i] + argv[i + 4 :]
-    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed" + ("  in region" if region else "") + ("  drop-free t>=2s" if steady else ""))
+    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed" + ("  in region" if region else "") + ("  drop-free t>=2s" if steady else "")
+          + ("  RPM p10 / median  stall  good-trial" if spread else ""))
     for arg in argv:
         path = _resolve(arg)
         m = cube_motion(path, region)
@@ -108,4 +124,6 @@ if __name__ == "__main__":
             f"  {m['flips_per_min']:8.1f}  {m['wrist_range']:5.2f} / {m['wrist_speed']:4.2f}"
             + (f"  {100 * m['in_region']:9.1f} %" if region else "")
             + (f"  {100 * m['drop_free_after_2s']:14.1f} %" if steady else "")
+            + (f"  {m['rpm_env_p10']:7.2f} / {m['rpm_env_median']:5.2f}  {100 * m['stall_rate']:4.1f} %  {100 * m['good_trial_rate']:8.1f} %"
+               if spread else "")
         )
