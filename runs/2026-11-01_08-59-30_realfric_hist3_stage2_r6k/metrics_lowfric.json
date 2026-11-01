@@ -1,0 +1,17 @@
+{
+ "model_2600.pt": {
+  "rpm": 12.689541816711426,
+  "rpm_std": 4.75387716293335,
+  "ra": 79.91576790809631,
+  "dfsr": 67.1875,
+  "dc": 0.40625,
+  "checkpoint": "model_2600.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-hist3-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
