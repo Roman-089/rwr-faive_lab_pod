@@ -88,5 +88,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4700.pt": {
+  "rpm": 11.420364379882812,
+  "rpm_std": 2.919823169708252,
+  "ra": 88.34106922149658,
+  "dfsr": 90.625,
+  "dc": 0.125,
+  "checkpoint": "model_4700.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
