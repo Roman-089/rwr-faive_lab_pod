@@ -67,3 +67,4 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | tilt400 model_5499 (final) | 11.29 | 90.0 | 0.109 | 10.16 | 5.7 | 0.073 | 90.1 | 96.3 |
+| 06_calm3_t800 model_6400 | 12.62 | 88.1 | 0.150 | 11.11 | 4.7 | 0.081 | 99.0 | 98.8 | 15.63 | 85.4 | 98.6 |
