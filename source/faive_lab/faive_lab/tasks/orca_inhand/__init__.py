@@ -228,3 +228,20 @@ for _task_id, _runner_cfg in (
             "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_teacher_student_cfg:{_runner_cfg}",
         },
     )
+
+# Regularized Online Adaptation (ROA), ported from the extreme-parkour rsl_rl in ~/go2-flyball-parkour (roa.py,
+# docs/ablation/roa.md): one-stage privileged encoder + history encoder with the priv_reg / DAgger terms.
+from .roa import register as _register_roa  # noqa: E402
+
+_register_roa()
+
+gym.register(
+    id="orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-servofast-roa-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.orca_v2_repose_ablation_env_cfg:"
+        "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastROAEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_roa_cfg:PPORunnerCfgOrcaV2ROA",
+    },
+)

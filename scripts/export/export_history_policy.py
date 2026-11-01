@@ -14,8 +14,9 @@ docs/ablation/export.md.
 
 Supported (``policy.class_name`` in agent.yaml): ActorCritic and StudentTeacher MLPs on a history (asym-hist3 /
 hist10, student-mlp-h10, the fine-tuned students), StudentTeacherTransformer (student-pt), StudentTeacherRMA
-(rma-student). A policy without history exports too (the module is then stateless). Recurrent policies
-(ActorCriticRecurrent, StudentTeacherRecurrent: asym-lstm, student-lstm) export as LSTM- / GRUPolicy with the same API,
+(rma-student), ActorCriticROA (servofast-roa: history-encoder latent). A policy without history exports too (the
+module is then stateless). Recurrent policies (ActorCriticRecurrent, StudentTeacherRecurrent: asym-lstm, student-lstm)
+export as LSTM- / GRUPolicy with the same API,
 because play.py's export (Isaac Lab exporter) has no working reset() for them.
 
 After writing, the file is re-loaded and checked against the original policy's ``act_inference`` on a random
@@ -60,6 +61,7 @@ GROUP_FIELDS = ("enable_corruption", "concatenate_terms", "history_length", "fla
 TASK_POLICY_MODULES = {
     "StudentTeacherTransformer": "transformer_student",
     "StudentTeacherRMA": "rma",
+    "ActorCriticROA": "roa",
     "ActorCriticFinetune": "student_finetune",
     "ActorCriticResidualFinetune": "student_finetune",
 }
@@ -70,6 +72,7 @@ SET_DIM_KEYS = {
         "teacher_obs_normalizer._mean", "teacher.0.weight", "teacher_actor.0.weight",
         "priv_obs_normalizer._mean", "env_mlp.0.weight",  # StudentTeacherRMA: teacher set = RMA "priv" group
     ),
+    "priv": ("priv_encoder.0.weight",),  # ActorCriticROA: privileged encoder input (not used by the export)
 }
 OUTPUT_NAME = "policy_history"
 
@@ -354,6 +357,23 @@ class RMABody(nn.Module):
         return self.actor(torch.cat([tokens[:, -1], z], dim=-1))
 
 
+class ROABody(nn.Module):
+    """ActorCriticROA.act_inference: tokens = norm(_tokens(flat)); actor([tokens[:, -1], history_encoder(tokens)])."""
+
+    def __init__(self, normalizer: nn.Module, history_encoder: nn.Module, actor: nn.Module, history_length: int,
+                 term_dims: List[int]):
+        super().__init__()
+        self.normalizer = normalizer
+        self.history_encoder = history_encoder
+        self.actor = actor
+        self.history_length = history_length
+        self.term_dims = term_dims
+
+    def forward(self, flat: torch.Tensor) -> torch.Tensor:
+        tokens = self.normalizer(term_major_to_tokens(flat, self.history_length, self.term_dims))
+        return self.actor(torch.cat([tokens[:, -1], self.history_encoder(tokens)], dim=-1))
+
+
 def make_body(policy: nn.Module, layout: dict) -> nn.Module:
     """Scriptable copy of the policy's inference path on the flat (term-major) history."""
     if getattr(policy, "is_recurrent", False):
@@ -361,7 +381,7 @@ def make_body(policy: nn.Module, layout: dict) -> nn.Module:
     term_dims = [t["dim"] for t in layout["terms"]]
     hists = {t["history_length"] for t in layout["terms"]}
     name = type(policy).__name__
-    if name in ("StudentTeacherTransformer", "StudentTeacherRMA"):
+    if name in ("StudentTeacherTransformer", "StudentTeacherRMA", "ActorCriticROA"):
         module = sys.modules[type(policy).__module__]
         if len(hists) != 1 or hists != {policy.history_length}:
             raise ValueError(f"{name}: env history {hists} != policy history_length {policy.history_length}")
@@ -370,6 +390,9 @@ def make_body(policy: nn.Module, layout: dict) -> nn.Module:
         if name == "StudentTeacherTransformer":
             body = TransformerBody(copy.deepcopy(policy.student_obs_normalizer), copy.deepcopy(policy.student),
                                    policy.history_length, term_dims)
+        elif name == "ActorCriticROA":
+            body = ROABody(copy.deepcopy(policy.actor_obs_normalizer), copy.deepcopy(policy.history_encoder),
+                           copy.deepcopy(policy.actor), policy.history_length, term_dims)
         else:
             body = RMABody(copy.deepcopy(policy.actor_obs_normalizer), copy.deepcopy(policy.student),
                            copy.deepcopy(policy.actor), policy.history_length, term_dims)

@@ -61,6 +61,7 @@ from .commands_ablation import FixedDirectionRotationCommandCfg
 from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
 from .orca_v2_repose_env_cfg import ObservationsCfg, OrcaV2ReposeEnvCfg
+from .roa_obs import roa_dr_params
 
 
 @configclass
@@ -884,6 +885,34 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1Hist3ServoF
         super().__post_init__()
         adr.use_orca_v2_servo_model(self, delay_substeps_range=(0, 8), adr=False)
         self.actions.joint_pos.amax_scale_range = (1.5, 3.0)
+
+
+@configclass
+class ROAPrivObsGroupCfg(ObsGroup):
+    """``priv`` input of ROA's privileged encoder (roa.py): the env's randomisation parameters (cube friction / mass,
+    finger and palm friction, joint gain scales, servo model, mount angle), each normalised to [-1, 1]
+    (roa_obs.roa_dr_params, 13 values), noise-free."""
+
+    dr = ObsTerm(
+        func=roa_dr_params,
+        params={"robot_cfg": SceneEntityCfg("robot"), "object_cfg": SceneEntityCfg("object"), "action_name": "joint_pos"},
+    )
+    enable_corruption = False
+    concatenate_terms = True
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastROAEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastEnvCfg
+):
+    """-servofast (calm recipe + servo DR) for ROA (roa.py, docs/ablation/roa.md): the policy group keeps the last 20
+    steps (1 s) for the history encoder, the ``priv`` group feeds the privileged encoder, and the critic sees B's
+    privileged group + ``priv`` (runner cfg rsl_rl_roa_cfg.PPORunnerCfgOrcaV2ROA)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 20
+        self.observations.priv = ROAPrivObsGroupCfg()
 
 
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
