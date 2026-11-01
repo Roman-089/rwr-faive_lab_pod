@@ -9,7 +9,8 @@ it flat. This reports, over the alive steps of the nominal rollout:
 
   in region        share of alive steps whose cube centre (rotation axis) is inside --region CX CY R (metres, env frame)
 
-Usage (CPU, numpy): python scripts/eval/cube_motion.py <npz or run dir> [...] [--region CX CY R]
+Usage (CPU, numpy): python scripts/eval/cube_motion.py <npz or run dir> [...] [--region CX CY R] [--steady]
+  --steady         adds drop-free after the spawn catch (share of envs without a drop / reset at t >= 2 s)
 (run dir: its last eval/model_*.npz)
 """
 
@@ -83,16 +84,21 @@ def cube_motion(npz_path, region=None):
         "flips_per_min": float(flips / (alive.sum() * dt / 60)),
         "wrist_range": float(np.percentile(wrist, 95) - np.percentile(wrist, 5)),
         "wrist_speed": float(np.abs(np.diff(wrist, axis=0) / dt).mean()),
+        # share of envs without a drop / reset once the spawn catch is over (t >= 2 s): most eval drops happen 0.25-0.75 s
+        # after the initial spawn (drop_analysis.md, 2026-11-01), which the hand, where the cube is placed by hand, never sees
+        "drop_free_after_2s": float((~(d["done"][int(round(2.0 / dt)) :] > 0).any(0)).mean()),
     }
 
 
 if __name__ == "__main__":
     argv, region = sys.argv[1:], None
+    steady = "--steady" in argv  # extra last column, opt-in so parsers of the default line keep working
+    argv = [a for a in argv if a != "--steady"]
     if "--region" in argv:
         i = argv.index("--region")
         region = tuple(float(v) for v in argv[i + 1 : i + 4])
         argv = argv[:i] + argv[i + 4 :]
-    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed" + ("  in region" if region else ""))
+    print(f"{'rollout':60s} w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed" + ("  in region" if region else "") + ("  drop-free t>=2s" if steady else ""))
     for arg in argv:
         path = _resolve(arg)
         m = cube_motion(path, region)
@@ -101,4 +107,5 @@ if __name__ == "__main__":
             f"{name:60s} {m['w_cmd']:5.2f} {m['w_xy']:5.2f}  {m['tilt_mean']:5.1f} / {m['tilt_p90']:4.1f}"
             f"  {m['flips_per_min']:8.1f}  {m['wrist_range']:5.2f} / {m['wrist_speed']:4.2f}"
             + (f"  {100 * m['in_region']:9.1f} %" if region else "")
+            + (f"  {100 * m['drop_free_after_2s']:14.1f} %" if steady else "")
         )
