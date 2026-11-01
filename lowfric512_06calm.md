@@ -518,3 +518,14 @@
 | roa_stage2_calm model_4200 | 9.42 | 56.4 | 0.666 | 5.32 | 11.4 | 0.141 | 91.2 | 65.4 | n/a | n/a | n/a |
 | roa_stage2_calm model_4300 | 8.67 | 63.1 | 0.590 | 5.47 | 9.5 | 0.105 | 91.5 | 71.7 | n/a | n/a | n/a |
 | roa_stage2_calm model_4400 | 5.88 | 71.3 | 0.363 | 4.19 | 7.1 | 0.084 | 93.5 | 83.0 | n/a | n/a | n/a |
+
+## 06s4_oneshot_calmt: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 06s4_oneshot_calmt model_4000 | 14.14 | 79.1 | 0.287 | 11.18 | 21.0 | 0.492 | 75.6 | 85.9 | n/a | n/a | n/a |
+
+## lstm_stage2_calm: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-lstm-v0); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
