@@ -531,6 +531,7 @@
 | 06s4_oneshot_calmt model_4500 | 11.30 | 89.8 | 0.123 | 10.15 | 5.4 | 0.101 | 98.3 | 95.7 | n/a | n/a | n/a |
 | 06s4_oneshot_calmt model_4600 | 11.57 | 90.2 | 0.127 | 10.44 | 5.1 | 0.091 | 98.3 | 95.3 | n/a | n/a | n/a |
 | 06s4_oneshot_calmt model_4700 | 11.87 | 89.6 | 0.115 | 10.64 | 5.2 | 0.095 | 98.6 | 96.5 | n/a | n/a | n/a |
+| 06s4_oneshot_calmt model_4800 | 11.81 | 89.5 | 0.123 | 10.56 | 4.8 | 0.084 | 98.6 | 96.3 | n/a | n/a | n/a |
 
 ## lstm_stage2_calm: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-lstm-v0); wrist speed over all 512 envs
 
