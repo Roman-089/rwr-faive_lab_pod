@@ -176,6 +176,7 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 07_calmt_pos45 model_4500 | 11.06 | 88.3 | 0.133 | 9.76 | 5.9 | 0.072 | 94.4 | 94.3 | 13.77 | 85.0 | 95.7 |
+| 07_calmt_pos45 model_4600 | 10.99 | 86.9 | 0.143 | 9.56 | 5.8 | 0.071 | 94.9 | 94.7 | 13.62 | 85.2 | 95.3 |
 
 ## hist3_stage1: 512-env LOWFRIC on -upright-hist3-v0 + low-friction overrides, seed 42 (stage-2 start pick: best t>=2s, ties by rpm)
 
