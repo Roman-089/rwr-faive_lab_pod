@@ -338,8 +338,16 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| 06_oneshot_servofast_s1 model_5500 | a no servo | 12.98 | 91.2 | 0.100 | 11.84 | 4.0 | 0.067 | 99.0 | 99.2 |
+| 06_oneshot_servofast_s1 model_5500 | b profile x1.5 | 14.07 | 77.5 | 0.285 | 10.91 | 4.3 | 0.080 | 98.5 | 95.9 |
+| 06_oneshot_servofast_s1 model_5500 | c full servo x1 | 11.31 | 40.8 | 1.381 | 4.61 | 6.4 | 0.110 | 96.7 | 80.7 |
 
 ## 06_servofast_from_base: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
+
+## 06_oneshot_servowide: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
