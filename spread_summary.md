@@ -1,4 +1,4 @@
-# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T14:39Z)
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T14:46Z)
 
 Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
 
@@ -172,8 +172,10 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | hist3_calmt_servo m5000 | (c) full servo x1 (-wristl1-hist3) | 11.14 | 3.32 | 12.84 | 11.9 | 63.7 | 76.4 | 85.0 |
 | hist3_calmt_servo m5100 | (a) no servo (-wristl1-hist3) | 14.84 | 9.34 | 15.97 | 5.5 | 83.0 | 89.8 | 93.9 |
 | hist3_calmt_servo m5100 | (c) full servo x1 (-wristl1-hist3) | 11.41 | 5.52 | 12.83 | 9.8 | 66.2 | 76.6 | 85.8 |
+| hist3_calmt_servo m5200 | (a) no servo (-wristl1-hist3) | 14.80 | 9.02 | 15.92 | 6.8 | 86.1 | 93.6 | 94.6 |
 | hist3_calmt_cap16 m5500 | LOWFRIC (-wristl1-hist3) | 15.54 | 10.45 | 16.48 | 3.9 | 86.9 | 91.8 | 94.6 |
 | hist3_calmt_cap16 m5600 | LOWFRIC (-wristl1-hist3) | 15.84 | 11.25 | 16.68 | 4.3 | 84.6 | 89.5 | 94.5 |
 | hist3_calmt_cap16 m5700 | LOWFRIC (-wristl1-hist3) | 15.16 | 10.47 | 16.07 | 5.9 | 86.1 | 93.0 | 93.7 |
 | hist3_calmt_cap16 m5800 | LOWFRIC (-wristl1-hist3) | 15.20 | 10.55 | 15.94 | 3.5 | 87.3 | 91.8 | 94.7 |
 | hist3_calmt_cap16 m5900 | LOWFRIC (-wristl1-hist3) | 15.48 | 10.86 | 16.26 | 4.7 | 87.1 | 92.4 | 94.1 |
+| hist3_calmt_cap16 m5999 | LOWFRIC (-wristl1-hist3) | 15.17 | 10.53 | 16.14 | 5.3 | 83.0 | 89.3 | 93.6 |
