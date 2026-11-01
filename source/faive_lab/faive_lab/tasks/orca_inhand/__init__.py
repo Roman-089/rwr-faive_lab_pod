@@ -82,6 +82,8 @@ for _task_id, _cfg in (
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-mount10-v0",
      "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionMount10EnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-hist3-v0", "OrcaV2ReposeAsymOneDirDropPenUprightHist3EnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0",
+     "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-hist3-v0",
      "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionHist3EnvCfg"),
 ):

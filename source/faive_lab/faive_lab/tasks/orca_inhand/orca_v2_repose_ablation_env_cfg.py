@@ -463,6 +463,16 @@ def add_wrist_vel_penalty(env_cfg: OrcaV2ReposeEnvCfg, weight: float = -4.0):
     )
 
 
+def add_wrist_vel_l1_penalty(env_cfg: OrcaV2ReposeEnvCfg, weight: float = -40.0):
+    """L1 penalty on the wrist joint velocity, on top of the L2 one. The L2 term vanishes at small speeds: at the 06_calm
+    wrist (~0.15 rad/s) -16 x qdot^2 costs < 1 per second against ~90 of rotation reward, and doubling it moved the wrist
+    0.152 -> 0.148 rad/s (512 envs). |qdot| keeps a constant pull: -40 costs ~6 per second at 0.15 rad/s, ~3 at the 07
+    line's 0.07."""
+    env_cfg.rewards.wrist_vel_l1 = RewTerm(
+        func=mdp.joint_vel_l1, weight=weight, params={"asset_cfg": SceneEntityCfg("robot", joint_names=["right_wrist"])}
+    )
+
+
 @configclass
 class OrcaV2ReposeAsymOneDirDropPenWristPenEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
     """-onedir-droppen + wrist velocity penalty (deployable PPO version, comparable to the three onedir seeds)."""
@@ -821,6 +831,18 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionHist3EnvCfg(
     def __post_init__(self):
         super().__post_init__()
         self.observations.policy.history_length = 3
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg
+):
+    """-realfric + L1 wrist velocity penalty (``add_wrist_vel_l1_penalty``, -40) for the calm-wrist stage of the fast 06
+    line (06_calm: 13.5 RPM, 98.8 % in region, wrist 0.15 rad/s vs the ~0.1 ship rule)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_wrist_vel_l1_penalty(self)
 
 
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
