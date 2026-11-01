@@ -235,6 +235,21 @@ from .roa import register as _register_roa  # noqa: E402
 
 _register_roa()
 
+for _task_id, _cfg in (
+    ("orca-v2-inhand-repose-asym-onedir-droppen-roa-v0", "OrcaV2ReposeAsymOneDirDropPenROAEnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-roa-v0",
+     "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ROAEnvCfg"),
+):
+    gym.register(
+        id=_task_id,
+        entry_point="isaaclab.envs:ManagerBasedRLEnv",
+        disable_env_checker=True,
+        kwargs={
+            "env_cfg_entry_point": f"{__name__}.orca_v2_repose_ablation_env_cfg:{_cfg}",
+            "rsl_rl_cfg_entry_point": f"{__name__}.rsl_rl_roa_cfg:PPORunnerCfgOrcaV2ROA",
+        },
+    )
+
 gym.register(
     id="orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-servofast-roa-v0",
     entry_point="isaaclab.envs:ManagerBasedRLEnv",

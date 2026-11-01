@@ -915,6 +915,31 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastRO
         self.observations.priv = ROAPrivObsGroupCfg()
 
 
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenROAEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """ROA stage 1: the 06 base task (-onedir-droppen; run with tracking 45) with the 20-step policy history and the
+    ``priv`` group, from scratch. Every good policy came from this base + fine-tunes, while the calm recipe from scratch
+    stayed at 64-84 % drop-free, so ROA follows the same stages (base -> -wristl1 calm -> -servofast)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 20
+        self.observations.priv = ROAPrivObsGroupCfg()
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ROAEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg
+):
+    """ROA stage 2: the calm recipe (-wristl1; run with tracking 45 / tilt -800 / wrist -16), no servo model yet (servo DR
+    during calming made a third of the envs stall, servofast_from_base)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 20
+        self.observations.priv = ROAPrivObsGroupCfg()
+
+
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
     """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
     (offsets from the default root state), so the command's target and the goal observation stay unchanged."""

@@ -117,3 +117,17 @@ Open risks:
   need an ROA variant of `-onedir-droppen` with the same obs groups (not added).
 - **The 20-dim latent may not carry much.** The 13 parameters mostly act through contact, and the hist3 actor has
   already shown that history adds speed.
+
+## Staged runs (2026-11-01 13:50Z)
+
+Every good policy came from the 06 base plus fine-tunes, and the calm recipe from scratch stayed at 64–84 % drop-free.
+Servo randomization during calming made a third of the envs stall (`servofast_from_base`). So ROA follows the shipped
+path in three stages, each a resume of the previous one:
+
+1. `orca-v2-inhand-repose-asym-onedir-droppen-roa-v0`: the 06 base task, `env.rewards.object_position_tracking.weight=45.0`,
+   4000 it from scratch (regularizer ramp 2500 → 4500 as in `rsl_rl_roa_cfg`).
+2. `orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-roa-v0`: the calm recipe (tracking 45,
+   tilt −800, wrist −16), 1400 it. Full regularizer from the start: `agent.algorithm.priv_reg_coef_schedual=[0.1,0.1,0,1]`.
+3. `...-wristl1-servofast-roa-v0`: servo hardening, 400 it, same overrides and schedule.
+
+Seed 42 runs on the pod, seed 1 on DTU.
