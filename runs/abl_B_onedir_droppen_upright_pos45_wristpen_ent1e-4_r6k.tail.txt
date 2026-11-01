@@ -1,27 +1,3 @@
-[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
-[replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
-[replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_pp: 77754 verts, 25918 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_dp: 95154 verts, 31718 tris
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:245: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'policy' key. As an observation group with the name 'policy' was found, this is assumed to be the observation set. Consider adding the 'policy' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
-/home/balazsph/isaac-env/lib/python3.11/site-packages/rsl_rl/utils/utils.py:283: UserWarning: The observation configuration dictionary 'obs_groups' must contain the 'critic' key. As an observation group with the name 'critic' was found, this is assumed to be the observation set. Consider adding the 'critic' key to the 'obs_groups' dictionary for clarity. This behavior will be removed in a future version.
-  warnings.warn(
---------------------------------------------------------------------------------
-Resolved observation sets: 
-	 policy :  ['policy']
-	 critic :  ['critic']
---------------------------------------------------------------------------------
-Actor MLP: MLP(
-  (0): Linear(in_features=74, out_features=512, bias=True)
-  (1): ELU(alpha=1.0)
-  (2): Linear(in_features=512, out_features=512, bias=True)
-  (3): ELU(alpha=1.0)
-  (4): Linear(in_features=512, out_features=256, bias=True)
-  (5): ELU(alpha=1.0)
   (6): Linear(in_features=256, out_features=128, bias=True)
   (7): ELU(alpha=1.0)
   (8): Linear(in_features=128, out_features=17, bias=True)
@@ -38,3 +14,27 @@ Critic MLP: MLP(
   (8): Linear(in_features=128, out_features=1, bias=True)
 )
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/model_500.pt: {'rpm': 4.964426040649414, 'rpm_std': 3.75614333152771, 'ra': 52.577972412109375, 'dfsr': 46.875, 'dc': 1.390625, 'checkpoint': 'model_500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/model_1500.pt: {'rpm': 8.091726303100586, 'rpm_std': 4.707923889160156, 'ra': 62.90050745010376, 'dfsr': 46.875, 'dc': 0.859375, 'checkpoint': 'model_1500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/model_2000.pt: {'rpm': 8.845748901367188, 'rpm_std': 3.506517171859741, 'ra': 66.78743362426758, 'dfsr': 31.25, 'dc': 1.421875, 'checkpoint': 'model_2000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/model_3000.pt: {'rpm': 10.317636489868164, 'rpm_std': 2.3373935222625732, 'ra': 69.91158723831177, 'dfsr': 42.1875, 'dc': 1.078125, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/model_3999.pt: {'rpm': 9.378454208374023, 'rpm_std': 2.1908605098724365, 'ra': 62.107837200164795, 'dfsr': 28.125, 'dc': 1.546875, 'checkpoint': 'model_3999.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] metrics in /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/eval/metrics_perturbed.json
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
+frame 400/600
+frame 500/600
+wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/eval/model_500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
+frame 200/600
+frame 300/600
+frame 400/600
+frame 500/600
+wrote /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-16-17_abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k/eval/model_1500.mp4 (600 frames, 20 fps, envs [0, 1, 2, 3])
+[3gH    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H    H   [INFO] Using python from: /home/balazsph/isaac-env/bin/python
+frame 0/600
+frame 100/600
