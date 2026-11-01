@@ -73,6 +73,8 @@ Rank 1 on the PLA-skeleton friction (`-realfric2-v0`, its own DR: bare PLA links
 
 **New rank 1 (2026-11-01 08:55Z): `06oneshot_s0_m5400`**, W&B `orca_v2_zrot_hand_ft:v12`, `deploy_policies/` rank 1 (2813933, notes f292ebb; sha256 `f01377bb…`); the rest shift down one. The raw 06 base (pos45 m3999) calmed in **one** fine-tune stage of 1400 iterations with the final recipe (`-realfric-wristl1-v0`, tracking 45, tilt −800, L2 wrist −16, L1 wrist −40). 512 envs at the measured friction: **13.07 RPM** (previous rank 1 12.46) at the same drop-free (89.5 %), 98.8 % after 2 s, 98.9 % in the user's circle, tilt 4.1°, wrist 0.074 rad/s all envs: the calmest so far. Own task 15.69 RPM / 85.2 %.
 
+Servo-model stress test (512 envs, measured friction + `--servo`: 0–50 ms delay, nominal acceleration limit, play; the model is harsher than the hand, it is a relative check, not a prediction): rank 1 9.95 RPM / 40.8 % / 76.8 % after 2 s / 96.3 % in region; rank 2 (06calmt) 9.59 / 39.1 / 78.5 / 96.4; A 11.09 / 32.0 / 56.4 / 73.1. The calm 06 line loses more speed but holds the cube much better than the 07 line under servo dynamics: the faster gait is not the risk.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
