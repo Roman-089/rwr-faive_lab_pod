@@ -32,3 +32,38 @@ abl_B_onedir_droppen_pos45_ent5e-3_r6k skipped_dtu
 abl_B_onedir_droppen_ramp_ent5e-3_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_upright500_ent1e-4_r6k skipped_dtu 
 abl_B_onedir_droppen_upright_acc10_ent1e-4_r6k done Learning iteration 3999/4000
+abl_B_onedir_droppen_upright_adr_r6k done Learning iteration 6998/6999
+abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k done Learning iteration 4999/5000
+abl_B_onedir_droppen_upright_ent1e-4_r6k done Learning iteration 4999/5000
+abl_B_onedir_droppen_upright_ent1e-4_seed1_r6k skipped_dtu 
+abl_B_onedir_droppen_upright_pos45_adr_r6k done Learning iteration 5998/5999
+abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k done Learning iteration 3999/4000
+abl_B_onedir_droppen_upright_pos45_ent1e-4_seed1_r6k done Learning iteration 3999/4000
+abl_B_onedir_droppen_upright_pos45_ent1e-4_seed2_r6k done Learning iteration 3999/4000
+abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k done Learning iteration 3999/4000
+abl_B_onedir_droppen_upright_wristfix_ent1e-4_r6k done Learning iteration 4999/5000
+abl_B_onedir_droppen_upright_wristpen_ent1e-4_r6k skipped_dtu 
+abl_B_onedir_droppen_work015_ent5e-3_r6k skipped_dtu 
+abl_B_onedir_droppen_wristfix_ent1e-4_r6k skipped_dtu 
+abl_B_onedir_droppen_wristfix_ent5e-3_r6k dropped_entropy 
+abl_B_onedir_droppen_wristpen_ent1e-4_r6k dropped_tumbling 
+abl_B_onedir_droppen_wristpen_ent5e-3_r6k stopped_entropy Learning iteration 64/5000
+abl_B_rotlin_ent1e-2_r6k skipped_dtu 
+abl_B_rotlin_ent5e-3_alpha05_r6k skipped_dtu 
+abl_B_rotlin_ent5e-3_alpha05_std05_r6k skipped_dtu 
+abl_B_rotlin_ent5e-3_env16k_r6k done Learning iteration 4999/5000
+abl_B_rotlin_ent5e-3_offaxis8_r6k stopped_user Learning iteration 2254/5000
+abl_B_rotlin_ent5e-3_seed1_r6k skipped_coord 
+abl_B_rotlin_seed1_r6k moved_resume Learning iteration 2004/5000
+abl_B_rotlin_seed1_resume_r6k done Learning iteration 4999/5000
+student_lstm_rotlin_r6k done Learning iteration 1999/2000
+student_mlp_h10_rotlin_r6k done Learning iteration 1999/2000
+student_pt_onedir_droppen_r6k dropped_user 
+student_pt_onedir_droppen_upright_pos45_r6k done Learning iteration 1999/2000
+student_pt_rotlin_r6k skipped_dtu 
+student_pt_rotlin_t10k_r6k dropped 
+teacher_onedir_droppen_ent1e-4_r6k dropped_tumbling 
+teacher_onedir_droppen_ent5e-3_r6k skipped_dtu 
+teacher_onedir_droppen_upright_pos45_r6k done Learning iteration 5999/6000
+teacher_onedir_droppen_wristpen_ent5e-3_r6k done Learning iteration 5999/6000
+teacher_rotlin_cont10k_r6k done Learning iteration 9998/9999
