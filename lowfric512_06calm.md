@@ -174,6 +174,7 @@
 | pos45s2_calmt model_5200 | 12.34 | 89.6 | 0.119 | 11.06 | 4.0 | 0.082 | 97.0 | 96.1 | 14.64 | 85.7 | 96.9 |
 | pos45s2_calmt model_5300 | 12.50 | 88.1 | 0.145 | 11.01 | 4.1 | 0.080 | 97.1 | 95.9 | 14.58 | 86.5 | 97.9 |
 | pos45s2_calmt model_5400 | 12.37 | 90.2 | 0.115 | 11.16 | 4.0 | 0.078 | 96.7 | 96.3 | 14.71 | 87.3 | 98.4 |
+| pos45s2_calmt model_5498 | 12.56 | 91.4 | 0.105 | 11.48 | 4.0 | 0.078 | 96.7 | 97.3 | 14.74 | 87.3 | 97.7 |
 
 ## 07_calmt_pos45: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
