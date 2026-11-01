@@ -860,6 +860,19 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastEn
         self.actions.joint_pos.amax_scale_range = (1.5, 3.0)
 
 
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1Hist3EnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg
+):
+    """-realfric-wristl1 (the rank-1 calm recipe) with the 3-step actor history: the history actor after its real-friction
+    stage is the fastest policy so far (15.0 RPM at the measured friction, 512 envs) but unreliable (87.7 % drop-free after
+    2 s vs 98.8 % for rank 1), the state the 06 line was in before the calm recipe."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        self.observations.policy.history_length = 3
+
+
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
     """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
     (offsets from the default root state), so the command's target and the goal observation stay unchanged."""
