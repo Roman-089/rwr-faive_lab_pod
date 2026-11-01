@@ -1,0 +1,17 @@
+{
+ "model_5900.pt": {
+  "rpm": 12.598005294799805,
+  "rpm_std": 3.589934825897217,
+  "ra": 88.37963938713074,
+  "dfsr": 86.9140625,
+  "dc": 0.1484375,
+  "checkpoint": "model_5900.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 512,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
