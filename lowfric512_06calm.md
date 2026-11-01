@@ -398,6 +398,9 @@
 | 06_oneshot_servowide model_5900 | a no servo | 12.73 | 87.7 | 0.156 | 11.17 | 4.2 | 0.070 | 98.8 | 97.3 |
 | 06_oneshot_servowide model_5900 | b profile x1.5 | 14.69 | 76.0 | 0.322 | 11.16 | 4.1 | 0.070 | 98.4 | 95.3 |
 | 06_oneshot_servowide model_5900 | c full servo x1 | 12.54 | 47.5 | 1.127 | 5.95 | 5.5 | 0.079 | 97.5 | 89.1 |
+| 06_oneshot_servowide model_5999 | a no servo | 12.47 | 88.7 | 0.131 | 11.05 | 4.0 | 0.072 | 98.9 | 98.0 |
+| 06_oneshot_servowide model_5999 | b profile x1.5 | 14.66 | 76.4 | 0.338 | 11.20 | 3.9 | 0.071 | 98.2 | 95.3 |
+| 06_oneshot_servowide model_5999 | c full servo x1 | 12.66 | 47.3 | 1.072 | 5.98 | 5.3 | 0.080 | 97.4 | 90.2 |
 
 ## hist3_calmt_servo: every checkpoint, 512-env LOWFRIC (a) no servo, (c) full servo model x1, on the hist3 task + friction overrides; wrist speed over all 512 envs
 
