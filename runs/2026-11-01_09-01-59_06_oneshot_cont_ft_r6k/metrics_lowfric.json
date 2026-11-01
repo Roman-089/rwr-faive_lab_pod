@@ -1,0 +1,17 @@
+{
+ "model_5600.pt": {
+  "rpm": 13.584893226623535,
+  "rpm_std": 2.5629215240478516,
+  "ra": 92.6436722278595,
+  "dfsr": 90.625,
+  "dc": 0.109375,
+  "checkpoint": "model_5600.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ }
+}
