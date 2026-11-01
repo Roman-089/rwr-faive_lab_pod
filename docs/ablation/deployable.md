@@ -63,6 +63,8 @@ RPM, 98 %, 0.02 drops), plus `07ft_s1_m4300`, `07ft_s1_m4150`, `07ft_s0_m4150`. 
 
 Replicated (06:40Z): the same recipe with seed 1, m6300 at 512 envs: 12.57 RPM / 88.1 % / 98.6 % after 2 s / 99.0 % in region / tilt 4.9° / wrist 0.083 (rank 1: 12.46 / 89.5 / 98.4 / 99.0 / 4.8° / 0.086), and it tracks seed 42 checkpoint by checkpoint (tilt within 0.6°, wrist within 0.012). The tilt −800 recipe is seed-robust; the earlier calm3 recipe (rank 2) ran 1–2° tiltier with seed 1. Seed 1's m6300 is on the pod (26e4e46) as a spare.
 
+Rank 1 is mount-robust as it is: on its own task with the hand base rolled ±10° (instead of ±3°), 512 envs: 15.10 RPM / 83.0 % / 96.7 % after 2 s, vs 15.54 / 85.0 / 97.1 at ±3°: only ~2 points of drop-free lost. (The 07 line lost ~10 points on the ±10° mount10 task.) A ±10° roll fine-tune of rank 1 (`06_calmt_roll10`) is 1–2 points ahead on the tilted mount after 100 iterations, inside the noise.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
