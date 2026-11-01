@@ -28,5 +28,35 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_2000.pt": {
+  "rpm": 12.417835235595703,
+  "rpm_std": 2.1032919883728027,
+  "ra": 82.48611688613892,
+  "dfsr": 89.0625,
+  "dc": 0.125,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_3000.pt": {
+  "rpm": 13.075130462646484,
+  "rpm_std": 2.1909501552581787,
+  "ra": 83.15945267677307,
+  "dfsr": 89.0625,
+  "dc": 0.140625,
+  "checkpoint": "model_3000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
