@@ -62,7 +62,7 @@ from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
 from .orca_v2_repose_env_cfg import ObservationsCfg, OrcaV2ReposeEnvCfg
 from .roa_obs import roa_dr_params
-from .tracker_obs import TrackedCubePose
+from .tracker_obs import TRACKER_DEFAULTS, TrackedCubePose
 
 
 @configclass
@@ -1064,10 +1064,13 @@ def add_cube_tracker_obs(env_cfg: OrcaV2ReposeEnvCfg, **params):
     """Subtask 2 (exteroception, docs/ablation/exteroception.md): append the tracked cube pose to the policy group (74 ->
     82: + object position 3, symmetry-canonical quaternion 4, tracked flag 1; position and quaternion in the order of the
     team's -cube-v0 scaffold, the flag last). Tracker lag, noise, calibration offset, smoothing and lost detections are
-    randomised per episode (tracker_obs.TrackedCubePose); ``params`` override its defaults (e.g. force_lost=True)."""
+    randomised per episode (tracker_obs.TrackedCubePose); ``params`` override its defaults (e.g. force_lost=True). All
+    defaults are written into the term's params so that each can be overridden from the command line, e.g.
+    env.observations.policy.cube_tracker.params.force_lost=true (tracker-off eval)."""
     env_cfg.observations.policy.cube_tracker = ObsTerm(
         func=TrackedCubePose,
-        params={"asset_cfg": SceneEntityCfg("object"), "command_name": "continuous_rotation", **params},
+        params={"asset_cfg": SceneEntityCfg("object"), "command_name": "continuous_rotation", **TRACKER_DEFAULTS,
+                **params},
     )
 
 
