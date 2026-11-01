@@ -95,3 +95,8 @@ distilled transformer student (10-step history, perturbed 60 % drop-free), not a
   entropy, robustness from history.
 - History behind a distilled student instead of PPO from scratch: [teacher-student](teacher_student.md), [RMA](rma.md).
 - History must be initialized the same way at reset in sim (Isaac Lab fills the buffer with the first obs) and on deploy.
+
+## hist3 on the calm + servo recipe (2026-11-01)
+
+3-step actor history, staged like the shipped line (06-type base task → real friction → calm recipe → servo DR); 512 envs at the measured friction, history task. Calm: pod seed 42 best m5400 16.24 RPM / good-trial 85.5 % / 91.2 % after 2 s; DTU seed 1 m6997 15.71 / 87.1 / 92.2. Speed cap 1.6 rad/s: −0.4 to −1.1 RPM, good-trial unchanged (drops are not speed-driven). Servo DR (1.5–3×): full-servo good-trial 26 → 69–71 % within 500 it at −1 to −1.5 RPM without servo. Against the memoryless 06 line (rank 1: 12.7 RPM, good-trial 91.2 % / 79.3 % under the full servo model): +2.5–3.5 RPM but 4–9 points fewer good trials without servo and 8–12 under the full servo model. Not shipped. The history buys speed, not reliability; ROA and the LSTM actor (both training, staged) test whether a longer memory with explicit adaptation does better.
+
