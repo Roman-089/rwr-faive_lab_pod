@@ -113,6 +113,7 @@
 | reference: tilt800 model_6300 (rank 1), OWN on the roll ±10° task | 12.46 | 89.5 | 0.121 | 11.15 | 4.8 | 0.086 | 99.0 | 98.4 | 15.10 | 83.0 | 96.7 |
 | 06_calmt_roll10 model_6400 | 12.49 | 89.3 | 0.119 | 11.15 | 4.8 | 0.079 | 99.0 | 97.7 | 15.28 | 84.0 | 98.4 |
 | 06_calmt_roll10 model_6500 | 12.28 | 90.4 | 0.107 | 11.10 | 4.6 | 0.076 | 99.0 | 99.2 | 15.03 | 80.7 | 96.3 |
+| 06_calmt_roll10 model_6600 | 12.39 | 85.4 | 0.168 | 10.57 | 4.6 | 0.080 | 99.0 | 98.0 | 15.14 | 80.5 | 97.7 |
 
 ## 06_oneshot: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
