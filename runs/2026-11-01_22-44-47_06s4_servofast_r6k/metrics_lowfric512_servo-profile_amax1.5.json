@@ -28,5 +28,20 @@
   "perturb": false,
   "servo": true,
   "servo_parts": "profile"
+ },
+ "model_5700.pt": {
+  "rpm": 14.38892936706543,
+  "rpm_std": 3.1969006061553955,
+  "ra": 90.6736969947815,
+  "dfsr": 75.78125,
+  "dc": 0.376953125,
+  "checkpoint": "model_5700.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 512,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": true,
+  "servo_parts": "profile"
  }
 }

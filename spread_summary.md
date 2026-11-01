@@ -1,4 +1,4 @@
-# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T23:01Z)
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T23:09Z)
 
 Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
 
@@ -216,6 +216,9 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | lstm_stage2_calm m5200 | LOWFRIC | 13.81 | 10.03 | 14.20 | 1.0 | 75.8 | 78.9 | 98.5 |
 | lstm_stage2_calm m5300 | LOWFRIC | 13.45 | 9.37 | 13.62 | 1.8 | 74.8 | 79.5 | 98.4 |
 | lstm_stage2_calm m5398 | LOWFRIC | 13.41 | 9.46 | 13.71 | 1.8 | 77.1 | 80.1 | 98.3 |
+| lstm_stage3_servo m5400 | (a) no servo | 13.77 | 9.57 | 13.98 | 1.4 | 79.7 | 82.8 | 98.5 |
+| lstm_stage3_servo m5400 | (b) profile x1.5 | 9.57 | 5.57 | 9.96 | 8.4 | 47.1 | 62.9 | 97.3 |
+| lstm_stage3_servo m5400 | (c) full servo x1 | 5.25 | 2.14 | 5.41 | 44.1 | 4.7 | 36.1 | 93.0 |
 
 ## base s4 chain
 
@@ -244,3 +247,6 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | 06s4_servofast m5600 | (a) no servo | 11.88 | 7.56 | 13.08 | 6.8 | 84.8 | 95.7 | 99.0 |
 | 06s4_servofast m5600 | (b) profile x1.5 | 14.40 | 11.60 | 15.34 | 3.1 | 88.7 | 93.0 | 98.4 |
 | 06s4_servofast m5600 | (c) full servo x1 | 12.07 | 10.05 | 12.88 | 2.5 | 79.5 | 84.6 | 96.8 |
+| 06s4_servofast m5700 | (a) no servo | 11.80 | 6.33 | 13.20 | 8.4 | 84.8 | 96.7 | 98.9 |
+| 06s4_servofast m5700 | (b) profile x1.5 | 14.39 | 11.23 | 15.45 | 3.3 | 91.2 | 96.1 | 98.3 |
+| 06s4_servofast m5700 | (c) full servo x1 | 12.26 | 10.23 | 13.01 | 2.1 | 81.1 | 84.4 | 97.0 |

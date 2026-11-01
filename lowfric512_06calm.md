@@ -577,8 +577,13 @@
 | 06s4_servofast model_5600 | a no servo | 11.88 | 91.0 | 0.102 | 10.81 | 4.3 | 0.073 | 99.0 | 95.7 |
 | 06s4_servofast model_5600 | b profile x1.5 | 14.40 | 74.2 | 0.379 | 10.69 | 4.4 | 0.083 | 98.4 | 93.0 |
 | 06s4_servofast model_5600 | c full servo x1 | 12.07 | 44.1 | 1.285 | 5.33 | 6.1 | 0.101 | 96.8 | 84.6 |
+| 06s4_servofast model_5700 | a no servo | 11.80 | 92.4 | 0.090 | 10.90 | 4.3 | 0.075 | 98.9 | 96.7 |
+| 06s4_servofast model_5700 | b profile x1.5 | 14.39 | 75.8 | 0.377 | 10.90 | 4.3 | 0.083 | 98.3 | 96.1 |
+| 06s4_servofast model_5700 | c full servo x1 | 12.26 | 43.2 | 1.258 | 5.29 | 5.9 | 0.097 | 97.0 | 84.4 |
 
 ## lstm_stage3_servo: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| lstm_stage3_servo model_5400 | a no servo | 13.77 | 72.7 | 0.395 | 10.01 | 9.7 | 0.152 | 98.5 | 82.8 |
+| lstm_stage3_servo model_5400 | b profile x1.5 | 9.57 | 51.8 | 0.945 | 4.96 | 12.6 | 0.257 | 97.3 | 62.9 |
