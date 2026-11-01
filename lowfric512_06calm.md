@@ -287,3 +287,4 @@
 
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| hist3_calmt model_4000 | 15.45 | 74.8 | 0.330 | 11.55 | 5.1 | 0.102 | 89.0 | 84.6 | n/a | n/a | n/a |
