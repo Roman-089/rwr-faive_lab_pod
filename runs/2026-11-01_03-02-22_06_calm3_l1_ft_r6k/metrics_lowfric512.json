@@ -103,5 +103,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_7100.pt": {
+  "rpm": 12.93261432647705,
+  "rpm_std": 3.2003331184387207,
+  "ra": 89.72630500793457,
+  "dfsr": 90.0390625,
+  "dc": 0.107421875,
+  "checkpoint": "model_7100.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 512,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
