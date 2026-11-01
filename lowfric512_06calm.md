@@ -117,6 +117,7 @@
 | 06_calmt_roll10 model_6500 | 12.28 | 90.4 | 0.107 | 11.10 | 4.6 | 0.076 | 99.0 | 99.2 | 15.03 | 80.7 | 96.3 |
 | 06_calmt_roll10 model_6600 | 12.39 | 85.4 | 0.168 | 10.57 | 4.6 | 0.080 | 99.0 | 98.0 | 15.14 | 80.5 | 97.7 |
 | 06_calmt_roll10 model_6700 | 12.50 | 89.8 | 0.117 | 11.23 | 4.5 | 0.078 | 99.1 | 98.6 | 15.15 | 83.4 | 97.5 |
+| 06_calmt_roll10 model_6800 | 12.68 | 86.5 | 0.145 | 10.97 | 4.6 | 0.082 | 99.1 | 98.0 | 15.08 | 81.6 | 98.0 |
 
 ## 06_oneshot: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
