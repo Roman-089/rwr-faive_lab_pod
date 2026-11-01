@@ -224,3 +224,5 @@
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-delay only | 14.11 | 88.5 | 0.141 | 12.49 | 6.0 | 0.079 | 93.3 | 93.9 |
 | rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 servo-profile only | 10.29 | 52.3 | 0.959 | 5.39 | 6.5 | 0.164 | 97.0 | 78.5 |
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-profile only | 11.80 | 38.9 | 1.615 | 4.59 | 7.5 | 0.132 | 80.2 | 54.5 |
+| rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 servo-play only | 12.63 | 89.8 | 0.117 | 11.35 | 5.1 | 0.072 | 98.6 | 99.2 |
+| A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-play only | 11.14 | 92.2 | 0.086 | 10.27 | 7.1 | 0.079 | 88.0 | 98.2 |
