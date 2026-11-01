@@ -1,6 +1,3 @@
-[replay] link /World/envs/env_0/Robot/right_ring_pp: 69762 verts, 23254 tris
-[replay] link /World/envs/env_0/Robot/right_thumb_ap: 69630 verts, 23210 tris
-[replay] link /World/envs/env_0/Robot/right_index_fingertip_assembly: 101802 verts, 33934 tris
 [replay] link /World/envs/env_0/Robot/right_middle_fingertip_assembly: 102270 verts, 34090 tris
 [replay] link /World/envs/env_0/Robot/right_pinky_fingertip_assembly: 118374 verts, 39458 tris
 [replay] link /World/envs/env_0/Robot/right_ring_fingertip_assembly: 102270 verts, 34090 tris
@@ -38,3 +35,6 @@ Critic MLP: MLP(
   (8): Linear(in_features=128, out_features=1, bias=True)
 )
 [eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-09-17_abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k/model_2500.pt: {'rpm': 10.41782283782959, 'rpm_std': 3.510038375854492, 'ra': 74.7426986694336, 'dfsr': 64.0625, 'dc': 0.5, 'checkpoint': 'model_2500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-09-17_abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k/model_3000.pt: {'rpm': 10.855916023254395, 'rpm_std': 3.5790059566497803, 'ra': 75.05325078964233, 'dfsr': 62.5, 'dc': 0.5625, 'checkpoint': 'model_3000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-09-17_abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k/model_3500.pt: {'rpm': 10.981917381286621, 'rpm_std': 4.00816011428833, 'ra': 72.90252447128296, 'dfsr': 62.5, 'dc': 0.6875, 'checkpoint': 'model_3500.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
+[eval] /home/balazsph/rwr_faive_lab/logs/rsl_rl/orca_v2_repose/2026-10-31_20-09-17_abl_B_onedir_droppen_upright_adr_scratch_ent1e-4_r6k/model_4000.pt: {'rpm': 11.500123977661133, 'rpm_std': 3.803457260131836, 'ra': 77.52052545547485, 'dfsr': 71.875, 'dc': 0.421875, 'checkpoint': 'model_4000.pt', 'cmd': 1.5, 'steps': 1200, 'num_envs': 64, 'task': 'orca-v2-inhand-repose-asym-onedir-droppen-upright-adr-v0', 'perturb': True, 'servo': False, 'servo_parts': ''}
