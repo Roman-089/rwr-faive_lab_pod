@@ -92,6 +92,13 @@ for _task_id, _cfg in (
      "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastEnvCfg"),
     ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-hist3-v0",
      "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionHist3EnvCfg"),
+    # Subtask 2 (exteroception): + tracked cube pose (82 policy observations), docs/ablation/exteroception.md
+    ("orca-v2-inhand-repose-asym-onedir-droppen-cube-v0", "OrcaV2ReposeAsymOneDirDropPenCubeEnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-cube-v0", "OrcaV2ReposeAsymOneDirDropPenUprightCubeEnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-cube-v0",
+     "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1CubeEnvCfg"),
+    ("orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-servofast-cube-v0",
+     "OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastCubeEnvCfg"),
 ):
     gym.register(
         id=_task_id,

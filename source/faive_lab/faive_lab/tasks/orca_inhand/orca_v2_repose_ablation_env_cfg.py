@@ -62,6 +62,7 @@ from .mdp.privileged_observations import domain_randomization_params
 from .mdp.sim2real import DelayedEMAJointPositionToLimitsActionCfg, joint_pos_limit_normalized_biased
 from .orca_v2_repose_env_cfg import ObservationsCfg, OrcaV2ReposeEnvCfg
 from .roa_obs import roa_dr_params
+from .tracker_obs import TrackedCubePose
 
 
 @configclass
@@ -1057,3 +1058,57 @@ class OrcaV2ReposeAsymActNetEnvCfg(OrcaV2ReposeAsymEnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.scene.robot.actuators = servo_net_actuators(self.scene.robot.actuators["fingers"])
+
+
+def add_cube_tracker_obs(env_cfg: OrcaV2ReposeEnvCfg, **params):
+    """Subtask 2 (exteroception, docs/ablation/exteroception.md): append the tracked cube pose to the policy group (74 ->
+    82: + object position 3, symmetry-canonical quaternion 4, tracked flag 1; position and quaternion in the order of the
+    team's -cube-v0 scaffold, the flag last). Tracker lag, noise, calibration offset, smoothing and lost detections are
+    randomised per episode (tracker_obs.TrackedCubePose); ``params`` override its defaults (e.g. force_lost=True)."""
+    env_cfg.observations.policy.cube_tracker = ObsTerm(
+        func=TrackedCubePose,
+        params={"asset_cfg": SceneEntityCfg("object"), "command_name": "continuous_rotation", **params},
+    )
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenCubeEnvCfg(OrcaV2ReposeAsymOneDirDropPenEnvCfg):
+    """Subtask 2, stage 1 from scratch: the 06 base task (run with tracking 45) + the tracked cube pose."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tracker_obs(self)
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightCubeEnvCfg(OrcaV2ReposeAsymOneDirDropPenUprightEnvCfg):
+    """Subtask 2 eval task (-upright, as the LOWFRIC evals) + the tracked cube pose; tracker off via
+    env.observations.policy.cube_tracker.params.force_lost=true."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tracker_obs(self)
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1CubeEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg
+):
+    """Subtask 2, calm stage: -realfric-wristl1 (run with tracking 45 / tilt -800 / wrist -16) + the tracked cube pose."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tracker_obs(self)
+
+
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastCubeEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastEnvCfg
+):
+    """Subtask 2, servo stage: -servofast (amax 1.5-3x; servowide via env.actions.joint_pos.amax_scale_range=[1.0,3.0])
+    + the tracked cube pose. Also the fine-tune task of the rank-1 family (checkpoint widened with
+    scripts/export/widen_actor_input.py)."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        add_cube_tracker_obs(self)
