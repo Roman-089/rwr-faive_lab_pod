@@ -1,4 +1,4 @@
-# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T14:14Z)
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T14:19Z)
 
 Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
 
@@ -97,6 +97,9 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | servofast_from_base m5300 | (a) no servo | 11.51 | 3.98 | 13.20 | 11.5 | 78.1 | 96.7 | 98.0 |
 | servofast_from_base m5300 | (b) profile x1.5 | 14.70 | 11.97 | 15.89 | 3.7 | 91.2 | 96.3 | 98.5 |
 | servofast_from_base m5300 | (c) full servo x1 | 12.30 | 10.51 | 12.97 | 1.6 | 82.2 | 85.4 | 97.0 |
+| servofast_from_base m5400 | (a) no servo | 11.42 | 3.80 | 13.17 | 12.1 | 77.0 | 97.5 | 98.0 |
+| servofast_from_base m5400 | (b) profile x1.5 | 14.70 | 12.50 | 15.77 | 3.9 | 92.4 | 97.3 | 98.4 |
+| servofast_from_base m5400 | (c) full servo x1 | 12.22 | 10.69 | 12.91 | 2.5 | 83.2 | 87.1 | 97.1 |
 | 06_cont_servofast m6100 | (a) no servo | 13.29 | 11.29 | 14.05 | 2.9 | 93.8 | 98.6 | 98.9 |
 | 06_cont_servofast m6100 | (b) profile x1.5 | 14.80 | 12.51 | 15.66 | 3.3 | 90.6 | 94.5 | 98.0 |
 | 06_cont_servofast m6100 | (c) full servo x1 | 12.17 | 9.75 | 13.04 | 2.7 | 80.3 | 84.4 | 96.7 |
@@ -160,5 +163,6 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | hist3_calmt_servo m4700 | (c) full servo x1 (-wristl1-hist3) | 11.75 | 7.37 | 13.05 | 7.4 | 68.4 | 76.8 | 85.9 |
 | hist3_calmt_servo m4800 | (a) no servo (-wristl1-hist3) | 14.86 | 10.03 | 15.68 | 4.5 | 82.2 | 88.3 | 95.0 |
 | hist3_calmt_servo m4800 | (c) full servo x1 (-wristl1-hist3) | 11.55 | 7.34 | 12.74 | 7.6 | 64.6 | 74.2 | 85.7 |
+| hist3_calmt_servo m4900 | (a) no servo (-wristl1-hist3) | 14.50 | 8.79 | 15.51 | 6.6 | 81.6 | 89.5 | 95.3 |
 | hist3_calmt_cap16 m5500 | LOWFRIC (-wristl1-hist3) | 15.54 | 10.45 | 16.48 | 3.9 | 86.9 | 91.8 | 94.6 |
 | hist3_calmt_cap16 m5600 | LOWFRIC (-wristl1-hist3) | 15.84 | 11.25 | 16.68 | 4.3 | 84.6 | 89.5 | 94.5 |
