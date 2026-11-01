@@ -583,6 +583,9 @@
 | 06s4_servofast model_5800 | a no servo | 11.67 | 92.2 | 0.084 | 10.76 | 4.2 | 0.075 | 98.9 | 97.7 |
 | 06s4_servofast model_5800 | b profile x1.5 | 14.29 | 76.0 | 0.361 | 10.86 | 4.2 | 0.080 | 98.3 | 95.5 |
 | 06s4_servofast model_5800 | c full servo x1 | 12.25 | 46.1 | 1.230 | 5.64 | 5.8 | 0.097 | 97.0 | 87.1 |
+| 06s4_servofast model_5897 | a no servo | 11.30 | 91.0 | 0.113 | 10.29 | 4.2 | 0.075 | 98.9 | 96.1 |
+| 06s4_servofast model_5897 | b profile x1.5 | 14.45 | 75.6 | 0.330 | 10.92 | 4.2 | 0.080 | 98.4 | 96.5 |
+| 06s4_servofast model_5897 | c full servo x1 | 12.25 | 45.3 | 1.275 | 5.55 | 5.9 | 0.096 | 97.0 | 83.6 |
 
 ## lstm_stage3_servo: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
