@@ -360,3 +360,6 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| 06_oneshot_servowide model_5500 | a no servo | 12.68 | 88.9 | 0.135 | 11.26 | 4.0 | 0.067 | 99.0 | 98.2 |
+| 06_oneshot_servowide model_5500 | b profile x1.5 | 14.29 | 80.1 | 0.279 | 11.45 | 4.3 | 0.078 | 98.5 | 97.5 |
+| 06_oneshot_servowide model_5500 | c full servo x1 | 11.92 | 44.1 | 1.236 | 5.26 | 6.1 | 0.100 | 97.2 | 84.8 |
