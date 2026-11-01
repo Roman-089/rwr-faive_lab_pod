@@ -845,6 +845,21 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg(
         add_wrist_vel_l1_penalty(self)
 
 
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1ServoFastEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1EnvCfg
+):
+    """-realfric-wristl1 (the rank-1 recipe) with the servo model as DR, its acceleration limit randomised over 1.5-3x the
+    fitted value: the profile alone did nearly all of the servo model's damage, rank 1 recovers at ~2x and A at ~3x
+    (512-env scan, 2026-11-01), and the fitted 1x never predicted the hand in closed loop. A hedge toward servos a bit
+    slower than ideal without training against the doubtful 1x. Delay 0-67 ms and play as in -upright-servo."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        adr.use_orca_v2_servo_model(self, delay_substeps_range=(0, 8), adr=False)
+        self.actions.joint_pos.amax_scale_range = (1.5, 3.0)
+
+
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
     """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
     (offsets from the default root state), so the command's target and the goal observation stay unchanged."""
