@@ -208,3 +208,11 @@
 
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+
+## servo: 512-env LOWFRIC with the ORCA v2 servo model (--servo: delay 0-50 ms, nominal accel limit, play), seed 42; wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|
+| rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 | 9.95 | 40.8 | 1.471 | 4.06 | 7.5 | 0.149 | 96.3 | 76.8 |
+| rank2_tilt800 2026-11-01_04-22-55_06_calm3_l1_tilt800_ft_r6k/model_6300 | 9.59 | 39.1 | 1.490 | 3.75 | 8.3 | 0.161 | 96.4 | 78.5 |
+| A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 | 11.09 | 32.0 | 2.180 | 3.55 | 8.7 | 0.143 | 73.1 | 56.4 |
