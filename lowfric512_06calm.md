@@ -355,6 +355,9 @@
 | 06_oneshot_servofast_s1 model_5800 | a no servo | 12.77 | 90.0 | 0.115 | 11.50 | 4.1 | 0.067 | 99.0 | 99.2 |
 | 06_oneshot_servofast_s1 model_5800 | b profile x1.5 | 14.43 | 77.5 | 0.303 | 11.19 | 4.2 | 0.074 | 98.3 | 95.9 |
 | 06_oneshot_servofast_s1 model_5800 | c full servo x1 | 11.90 | 45.3 | 1.201 | 5.39 | 5.9 | 0.091 | 97.1 | 85.2 |
+| 06_oneshot_servofast_s1 model_5900 | a no servo | 12.41 | 88.1 | 0.141 | 10.93 | 4.1 | 0.068 | 98.9 | 98.4 |
+| 06_oneshot_servofast_s1 model_5900 | b profile x1.5 | 14.39 | 78.7 | 0.312 | 11.32 | 4.1 | 0.073 | 98.4 | 96.7 |
+| 06_oneshot_servofast_s1 model_5900 | c full servo x1 | 11.91 | 46.7 | 1.188 | 5.56 | 5.8 | 0.093 | 97.2 | 85.4 |
 
 ## 06_servofast_from_base: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
@@ -371,3 +374,8 @@
 | 06_oneshot_servowide model_5600 | a no servo | 12.27 | 88.1 | 0.139 | 10.81 | 4.0 | 0.068 | 99.1 | 98.2 |
 | 06_oneshot_servowide model_5600 | b profile x1.5 | 14.30 | 79.7 | 0.293 | 11.39 | 4.2 | 0.075 | 98.5 | 96.1 |
 | 06_oneshot_servowide model_5600 | c full servo x1 | 12.21 | 44.5 | 1.197 | 5.44 | 5.6 | 0.085 | 97.3 | 87.3 |
+
+## hist3_calmt_servo: every checkpoint, 512-env LOWFRIC (a) no servo, (c) full servo model x1, on the hist3 task + friction overrides; wrist speed over all 512 envs
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
