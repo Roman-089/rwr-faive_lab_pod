@@ -75,16 +75,16 @@
   "servo_parts": ""
  },
  "model_4600.pt": {
-  "rpm": 12.908952713012695,
-  "rpm_std": 3.5831940174102783,
-  "ra": 88.26037049293518,
-  "dfsr": 76.5625,
-  "dc": 0.265625,
+  "rpm": 11.201839447021484,
+  "rpm_std": 3.0123400688171387,
+  "ra": 86.96566820144653,
+  "dfsr": 89.0625,
+  "dc": 0.109375,
   "checkpoint": "model_4600.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-mount10-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
