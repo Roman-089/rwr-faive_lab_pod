@@ -229,6 +229,7 @@
 | 06_oneshot_l1w20 model_5100 | 12.30 | 92.2 | 0.084 | 11.34 | 4.2 | 0.074 | 98.8 | 98.0 | 14.93 | 85.2 | 98.0 |
 | 06_oneshot_l1w20 model_5200 | 12.46 | 90.6 | 0.098 | 11.29 | 4.1 | 0.072 | 99.0 | 98.4 | 15.01 | 86.7 | 97.9 |
 | 06_oneshot_l1w20 model_5300 | 12.49 | 90.4 | 0.102 | 11.30 | 4.2 | 0.072 | 98.8 | 99.2 | 15.08 | 86.5 | 97.7 |
+| 06_oneshot_l1w20 model_5400 | 12.73 | 89.3 | 0.117 | 11.36 | 4.2 | 0.076 | 98.9 | 98.0 | 15.13 | 85.7 | 98.4 |
 
 ## servo: 512-env LOWFRIC with the ORCA v2 servo model (--servo: delay 0-50 ms, nominal accel limit, play), seed 42; wrist speed over all 512 envs
 
