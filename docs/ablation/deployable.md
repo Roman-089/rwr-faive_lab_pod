@@ -61,6 +61,8 @@ RPM, 98 %, 0.02 drops), plus `07ft_s1_m4300`, `07ft_s1_m4150`, `07ft_s0_m4150`. 
 
 **New rank 1 (2026-11-01 05:20Z): `06calmt_s0_m6300`**, W&B `orca_v2_zrot_hand_ft:v11`, `deploy_policies/` rank 1 (8ab2aa8, notes 2c0b14b; sha256 `9af61ac0…`); `06calm_s0_m7000` → rank 2. 06_calm m5800 fine-tuned with tilt −800 and the L1 wrist term (−40) (`06_calm3_l1_tilt800`, m6300). 512 envs at the measured friction: 12.46 RPM, 89.5 % drop-free (0.121 drops per trial), 98.4 % after 2 s, axis 99.0 % in the user's circle, **tilt 4.8°, wrist 0.086 rad/s all envs**, as calm as the 07 line (A: 6.1°, 0.079). Against m7000: same drop-free / region, −24 % wrist, −2.4° tilt, −0.5 RPM. The hand dropped the cube through wrist motion, so this one goes first.
 
+Replicated (06:40Z): the same recipe with seed 1, m6300 at 512 envs: 12.57 RPM / 88.1 % / 98.6 % after 2 s / 99.0 % in region / tilt 4.9° / wrist 0.083 (rank 1: 12.46 / 89.5 / 98.4 / 99.0 / 4.8° / 0.086), and it tracks seed 42 checkpoint by checkpoint (tilt within 0.6°, wrist within 0.012). The tilt −800 recipe is seed-robust; the earlier calm3 recipe (rank 2) ran 1–2° tiltier with seed 1. Seed 1's m6300 is on the pod (26e4e46) as a spare.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
