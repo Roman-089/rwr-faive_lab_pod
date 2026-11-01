@@ -1,4 +1,4 @@
-# remote queue status (2026-11-01T01:11:18Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 36165 MiB)
+# remote queue status (2026-11-01T01:17:47Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 42330 MiB)
 02_tilt_adr_servo_ft_r6k superseded 
 02b_servo2_wp_ft_r6k superseded 
 02b_servo_wp_ft_r6k superseded 
@@ -39,8 +39,8 @@ abl_B_onedir_droppen_upright_ent1e-4_seed1_r6k skipped_dtu
 abl_B_onedir_droppen_upright_pos45_adr_r6k done Learning iteration 5998/5999
 abl_B_onedir_droppen_upright_pos45_ent1e-4_r6k done Learning iteration 3999/4000
 abl_B_onedir_droppen_upright_pos45_ent1e-4_seed1_r6k done Learning iteration 3999/4000
-abl_B_onedir_droppen_upright_pos45_ent1e-4_seed2_r6k running Learning iteration 2532/4000
-abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k running Learning iteration 3804/4000
+abl_B_onedir_droppen_upright_pos45_ent1e-4_seed2_r6k running Learning iteration 2608/4000
+abl_B_onedir_droppen_upright_pos45_wristpen_ent1e-4_r6k running Learning iteration 3876/4000
 abl_B_onedir_droppen_upright_wristfix_ent1e-4_r6k done Learning iteration 4999/5000
 abl_B_onedir_droppen_upright_wristpen_ent1e-4_r6k skipped_dtu 
 abl_B_onedir_droppen_work015_ent5e-3_r6k skipped_dtu 
