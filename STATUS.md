@@ -63,3 +63,7 @@ student_pt_onedir_droppen_upright_pos45_r6k done Learning iteration 1999/2000
 student_pt_rotlin_r6k skipped_dtu 
 student_pt_rotlin_t10k_r6k dropped 
 teacher_onedir_droppen_ent1e-4_r6k dropped_tumbling 
+teacher_onedir_droppen_ent5e-3_r6k skipped_dtu 
+teacher_onedir_droppen_upright_pos45_r6k done Learning iteration 5999/6000
+teacher_onedir_droppen_wristpen_ent5e-3_r6k done Learning iteration 5999/6000
+teacher_rotlin_cont10k_r6k done Learning iteration 9998/9999
