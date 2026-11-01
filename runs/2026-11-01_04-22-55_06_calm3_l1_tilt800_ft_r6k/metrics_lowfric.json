@@ -103,5 +103,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_6600.pt": {
+  "rpm": 12.470417022705078,
+  "rpm_std": 3.756711721420288,
+  "ra": 89.45478200912476,
+  "dfsr": 85.9375,
+  "dc": 0.15625,
+  "checkpoint": "model_6600.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
