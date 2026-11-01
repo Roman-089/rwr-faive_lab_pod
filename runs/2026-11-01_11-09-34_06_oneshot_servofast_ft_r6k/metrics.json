@@ -60,16 +60,16 @@
   "servo_parts": ""
  },
  "model_5900.pt": {
-  "rpm": 13.456474304199219,
-  "rpm_std": 3.207801580429077,
-  "ra": 90.20816683769226,
-  "dfsr": 70.3125,
-  "dc": 0.328125,
+  "rpm": 12.712907791137695,
+  "rpm_std": 3.2385973930358887,
+  "ra": 90.50667881965637,
+  "dfsr": 87.5,
+  "dc": 0.125,
   "checkpoint": "model_5900.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-servofast-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
