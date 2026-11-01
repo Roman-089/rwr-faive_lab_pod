@@ -367,3 +367,6 @@
 | 06_oneshot_servowide model_5500 | a no servo | 12.68 | 88.9 | 0.135 | 11.26 | 4.0 | 0.067 | 99.0 | 98.2 |
 | 06_oneshot_servowide model_5500 | b profile x1.5 | 14.29 | 80.1 | 0.279 | 11.45 | 4.3 | 0.078 | 98.5 | 97.5 |
 | 06_oneshot_servowide model_5500 | c full servo x1 | 11.92 | 44.1 | 1.236 | 5.26 | 6.1 | 0.100 | 97.2 | 84.8 |
+| 06_oneshot_servowide model_5600 | a no servo | 12.27 | 88.1 | 0.139 | 10.81 | 4.0 | 0.068 | 99.1 | 98.2 |
+| 06_oneshot_servowide model_5600 | b profile x1.5 | 14.30 | 79.7 | 0.293 | 11.39 | 4.2 | 0.075 | 98.5 | 96.1 |
+| 06_oneshot_servowide model_5600 | c full servo x1 | 12.21 | 44.5 | 1.197 | 5.44 | 5.6 | 0.085 | 97.3 | 87.3 |
