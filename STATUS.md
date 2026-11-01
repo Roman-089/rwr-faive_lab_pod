@@ -1,4 +1,4 @@
-# remote queue status (2026-11-01T19:18:16Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 96 %, 41079 MiB)
+# remote queue status (2026-11-01T19:18:21Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 75 %, 41079 MiB)
 02_tilt_adr_servo_ft_r6k superseded 
 02b_servo2_wp_ft_r6k superseded 
 02b_servo_wp_ft_r6k superseded 
