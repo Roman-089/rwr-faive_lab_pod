@@ -209,6 +209,7 @@
 | 06_oneshot_cont model_5800 | 13.25 | 87.7 | 0.137 | 11.62 | 4.1 | 0.072 | 99.0 | 98.6 | 15.77 | 85.2 | 98.0 |
 | 06_oneshot_cont model_5900 | 13.26 | 86.5 | 0.152 | 11.47 | 4.4 | 0.076 | 98.8 | 99.2 | 15.84 | 85.2 | 98.6 |
 | 06_oneshot_cont model_6000 | 13.50 | 90.6 | 0.113 | 12.24 | 4.5 | 0.074 | 98.9 | 98.8 | 16.04 | 84.8 | 98.0 |
+| 06_oneshot_cont model_6100 | 13.26 | 88.3 | 0.141 | 11.70 | 4.3 | 0.073 | 98.9 | 98.8 | 15.99 | 84.0 | 98.4 |
 
 ## 06_oneshot_l1w20: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0 env.rewards.wrist_vel_l1.weight=-20.0); wrist speed over all 512 envs
 
@@ -230,3 +231,8 @@
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-play only | 11.14 | 92.2 | 0.086 | 10.27 | 7.1 | 0.079 | 88.0 | 98.2 |
 | rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 servo-profile amax×1.5 | 13.19 | 75.0 | 0.395 | 9.89 | 5.3 | 0.120 | 98.3 | 90.8 |
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-profile amax×1.5 | 13.42 | 55.7 | 0.916 | 7.47 | 6.8 | 0.107 | 88.5 | 68.2 |
+
+## 06_oneshot_s1: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
