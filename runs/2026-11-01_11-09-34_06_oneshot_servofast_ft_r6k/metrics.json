@@ -45,16 +45,16 @@
   "servo_parts": ""
  },
  "model_5800.pt": {
-  "rpm": 13.585752487182617,
-  "rpm_std": 3.0087335109710693,
-  "ra": 91.6326642036438,
-  "dfsr": 67.1875,
-  "dc": 0.390625,
+  "rpm": 12.035100936889648,
+  "rpm_std": 3.9551756381988525,
+  "ra": 88.04579377174377,
+  "dfsr": 90.625,
+  "dc": 0.09375,
   "checkpoint": "model_5800.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-servofast-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
