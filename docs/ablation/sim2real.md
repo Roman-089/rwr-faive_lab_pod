@@ -754,6 +754,8 @@ DTU 512-env eval (job 29862900, same setting; overall drop-free / RPM / in regio
 
 **Replication and the last calm-line comparisons (2026-11-01 06:30Z, 512 envs, all-env wrist).** 06_calm3_l1 seed 1 m7000: 12.97 RPM / 89.5 % / 99.0 % after 2 s / 99.0 % in region / tilt 8.3° / wrist 0.115, vs seed 42 (shipped as rank 2) 12.93 / 90.0 / 98.2 / 98.8 / 7.2° / 0.113: reproducible, seed 1 tilts 1–2° more. tilt800 seed 1 tracks seed 42 (m6000 12.26 / 86.7 / 5.9° / 0.110 vs 12.30 / 88.9 / 5.6° / 0.108; m6100 12.34 / 88.1 / 5.1° / 0.095 vs 12.25 / 85.4 / 5.2° / 0.099). Combined L1 −80 + tilt −800 (`06_calm3_w80_t800`) m6600–6800: 12.0–12.15 RPM, 88 %, tilt 5.1–5.9°, wrist 0.084–0.088. It is as calm as tilt800 m6300 but 0.3–0.5 RPM slower, so the extra L1 adds no calm beyond tilt −800. The final calm recipe is tilt −800 + L1 −40 (rank 1).
 
+**The calm recipe works in one stage (06_oneshot, 2026-11-01 07:40Z).** tilt −800 + L1 wrist −40 + L2 wrist −16 + tracking 45 on `-realfric-wristl1-v0`, straight from the raw 06 base (pos45 m3999, tilt 18°, wrist 0.49): m4500 (500 it) at 512 envs 12.07 RPM / 91.8 % / 98.4 % after 2 s / 98.6 % in region / tilt 4.7° / wrist 0.081, own task 14.59 / 87.5 / 98.4. That is rank-1 level (12.46 / 89.5 / 98.4 / 99.0 / 4.8° / 0.086) after one stage instead of four. The recipe, not the staged path, does the work.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
