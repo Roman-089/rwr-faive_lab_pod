@@ -287,6 +287,9 @@
 | 06_oneshot_servofast model_5500 | a no servo | 12.94 | 87.9 | 0.131 | 11.37 | 3.9 | 0.070 | 98.9 | 97.9 |
 | 06_oneshot_servofast model_5500 | b profile x1.5 | 14.44 | 75.4 | 0.338 | 10.88 | 4.3 | 0.081 | 98.4 | 94.7 |
 | 06_oneshot_servofast model_5500 | c full servo x1 | 11.64 | 46.5 | 1.184 | 5.41 | 6.2 | 0.101 | 96.9 | 86.7 |
+| 06_oneshot_servofast model_5600 | a no servo | 12.98 | 85.9 | 0.174 | 11.16 | 4.2 | 0.072 | 98.8 | 96.3 |
+| 06_oneshot_servofast model_5600 | b profile x1.5 | 14.51 | 74.2 | 0.365 | 10.77 | 4.3 | 0.078 | 98.3 | 95.3 |
+| 06_oneshot_servofast model_5600 | c full servo x1 | 11.97 | 41.6 | 1.291 | 4.98 | 6.0 | 0.097 | 96.8 | 82.6 |
 
 ## hist3_calmt: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-hist3-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
