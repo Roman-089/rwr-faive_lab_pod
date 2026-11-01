@@ -759,6 +759,8 @@ m4600: 12.49 / 89.6 / 98.0 / 98.7 / 4.5° / 0.080, own task 14.74 / 88.3 / 98.6:
 
 **A higher command re-maps the speed, it does not raise it.** Rank 1 fine-tuned toward 2.0 rad/s: at m6400 it turns slower at 2.0 (8.6 RPM). After adapting (m6500–6600) it reaches 12.5 RPM at 2.0, rank 1's speed at 1.5, while its own speed at 1.5 falls to 11.4. The speed ceiling is the gait, not the reward clip.
 
+**The calm recipe generalises across lineages.** One stage on upright_pos45 seed 2 (13.6 RPM, tilt 11.6°, wrist 0.31, 69 % in region): final m5498 at 512 envs 12.56 RPM / 91.4 % / 97.3 % after 2 s / 96.7 % in region / tilt 4.0° / wrist 0.078, close to rank 1 (13.07 / 89.5 / 98.8 / 98.9 / 4.1° / 0.074). The 06 base still gives the best region and after-2 s numbers. With 3× tracking the 07 base stays at A's speed and region (11.1–11.2 RPM, 94–95 %), so that advantage comes from the 06 base's grasp.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
