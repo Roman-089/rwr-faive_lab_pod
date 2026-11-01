@@ -271,6 +271,7 @@
 | 06_oneshot_track15 model_4500 | 11.38 | 90.6 | 0.100 | 10.31 | 4.6 | 0.087 | 98.7 | 97.7 | 14.08 | 85.0 | 97.7 |
 | 06_oneshot_track15 model_4600 | 11.99 | 92.6 | 0.084 | 11.10 | 4.4 | 0.081 | 98.9 | 98.4 | 14.32 | 84.8 | 97.5 |
 | 06_oneshot_track15 model_4700 | 12.33 | 89.8 | 0.105 | 11.08 | 4.4 | 0.081 | 99.0 | 97.9 | 14.52 | 87.1 | 97.5 |
+| 06_oneshot_track15 model_4800 | 12.38 | 91.6 | 0.088 | 11.34 | 4.4 | 0.081 | 98.9 | 96.5 | 14.51 | 85.9 | 97.7 |
 
 ## hist3_stage2: 512-env LOWFRIC on -upright-hist3-v0 + low-friction overrides (stage 2 = -realfric-hist3 from stage-1 m2500, seed 42); wrist speed over all 512 envs
 
