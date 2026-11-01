@@ -88,5 +88,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4700.pt": {
+  "rpm": 12.364431381225586,
+  "rpm_std": 3.6936376094818115,
+  "ra": 85.18052101135254,
+  "dfsr": 70.3125,
+  "dc": 0.53125,
+  "checkpoint": "model_4700.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-servofast-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
