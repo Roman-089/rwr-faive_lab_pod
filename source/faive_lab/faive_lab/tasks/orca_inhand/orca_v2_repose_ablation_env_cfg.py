@@ -785,6 +785,21 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionRegion200CEnvCfg(
         t.params["target_xy"] = CUBE_AXIS_REGION["center"]
 
 
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionMount10EnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionEnvCfg
+):
+    """-realfric + mount pose DR: hand base roll and pitch ±10 deg per reset (default roll ±2.9 deg, no pitch). Roll ±10
+    deg alone (Hydra override) kept the calm wrist at the same speed; pitch changes the palm's angle to gravity, the main
+    risk of the flat-hand + -30 deg wrist relay. The base cfg has no pitch key, so Hydra cannot add one."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        pr = self.events.reset_robot_base.params["pose_range"]
+        pr["roll"] = [-0.1745, 0.1745]
+        pr["pitch"] = [-0.1745, 0.1745]
+
+
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
     """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
     (offsets from the default root state), so the command's target and the goal observation stay unchanged."""
