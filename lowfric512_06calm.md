@@ -221,6 +221,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 06_oneshot_l1w20 model_4500 | 11.85 | 90.4 | 0.113 | 10.71 | 4.7 | 0.091 | 98.8 | 97.1 | 14.28 | 83.8 | 97.1 |
 | 06_oneshot_l1w20 model_4600 | 12.14 | 89.6 | 0.109 | 10.89 | 4.5 | 0.081 | 98.9 | 98.2 | 14.51 | 85.0 | 96.7 |
+| 06_oneshot_l1w20 model_4700 | 12.23 | 90.2 | 0.109 | 11.04 | 4.6 | 0.084 | 98.7 | 97.9 | 14.58 | 85.0 | 97.5 |
 
 ## servo: 512-env LOWFRIC with the ORCA v2 servo model (--servo: delay 0-50 ms, nominal accel limit, play), seed 42; wrist speed over all 512 envs
 
@@ -243,6 +244,11 @@
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-profile amax×3 | 14.23 | 83.4 | 0.221 | 11.87 | 6.1 | 0.083 | 93.3 | 92.4 |
 
 ## 06_oneshot_s1: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+
+## 06_oneshot_track15: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
