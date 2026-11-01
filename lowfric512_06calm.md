@@ -198,3 +198,4 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 06_oneshot_cont model_5500 | 13.14 | 88.3 | 0.131 | 11.60 | 4.2 | 0.076 | 98.7 | 98.6 | 15.95 | 85.5 | 98.8 |
+| 06_oneshot_cont model_5600 | 13.19 | 89.5 | 0.121 | 11.80 | 4.3 | 0.072 | 98.9 | 98.8 | 15.87 | 86.5 | 98.0 |
