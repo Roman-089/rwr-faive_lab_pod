@@ -73,5 +73,35 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4600.pt": {
+  "rpm": 15.696154594421387,
+  "rpm_std": 4.543045997619629,
+  "ra": 91.79367423057556,
+  "dfsr": 79.6875,
+  "dc": 0.296875,
+  "checkpoint": "model_4600.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-hist3-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_4700.pt": {
+  "rpm": 15.45875358581543,
+  "rpm_std": 3.8158681392669678,
+  "ra": 90.92313647270203,
+  "dfsr": 79.6875,
+  "dc": 0.25,
+  "checkpoint": "model_4700.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-hist3-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
