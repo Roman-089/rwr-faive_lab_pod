@@ -28,5 +28,35 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_4900.pt": {
+  "rpm": 11.162235260009766,
+  "rpm_std": 3.1295220851898193,
+  "ra": 85.95235347747803,
+  "dfsr": 93.75,
+  "dc": 0.0625,
+  "checkpoint": "model_4900.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
+ },
+ "model_5000.pt": {
+  "rpm": 13.947328567504883,
+  "rpm_std": 3.8772823810577393,
+  "ra": 90.75943231582642,
+  "dfsr": 82.8125,
+  "dc": 0.1875,
+  "checkpoint": "model_5000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-region200c-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
