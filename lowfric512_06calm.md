@@ -112,3 +112,4 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 06_calm3_t800_s1 model_6400 | 12.27 | 87.7 | 0.137 | 10.76 | 4.7 | 0.086 | 99.0 | 97.3 | 15.48 | 84.8 | 97.9 |
+| 06_calm3_w80t800 model_7199 | 12.68 | 88.5 | 0.123 | 11.22 | 5.6 | 0.087 | 99.2 | 98.2 | 15.88 | 86.1 | 98.2 |
