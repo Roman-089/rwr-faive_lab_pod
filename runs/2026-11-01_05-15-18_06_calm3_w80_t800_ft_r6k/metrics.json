@@ -120,16 +120,16 @@
   "servo_parts": ""
  },
  "model_7100.pt": {
-  "rpm": 16.138504028320312,
-  "rpm_std": 4.758697986602783,
-  "ra": 93.11552047729492,
+  "rpm": 13.025362014770508,
+  "rpm_std": 3.1204097270965576,
+  "ra": 90.22386074066162,
   "dfsr": 90.625,
-  "dc": 0.109375,
+  "dc": 0.171875,
   "checkpoint": "model_7100.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
