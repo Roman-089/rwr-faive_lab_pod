@@ -873,6 +873,19 @@ class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1Hist3EnvCfg
         self.observations.policy.history_length = 3
 
 
+@configclass
+class OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1Hist3ServoFastEnvCfg(
+    OrcaV2ReposeAsymOneDirDropPenUprightWristPenRealFrictionWristL1Hist3EnvCfg
+):
+    """-realfric-wristl1-hist3 with the servo model as DR (acceleration limit 1.5-3x, as in -servofast): the history actor
+    is the fastest line (15.8 RPM calmed, 512 envs) and the shipped rank 1 is servo-hardened."""
+
+    def __post_init__(self):
+        super().__post_init__()
+        adr.use_orca_v2_servo_model(self, delay_substeps_range=(0, 8), adr=False)
+        self.actions.joint_pos.amax_scale_range = (1.5, 3.0)
+
+
 def center_cube_spawn(env_cfg: OrcaV2ReposeEnvCfg, center: tuple[float, float] = CUBE_AXIS_REGION["center"]):
     """Spawn the cube around ``center`` (env frame, the same ±5 mm) instead of (0, 0) through the reset event's pose range
     (offsets from the default root state), so the command's target and the goal observation stay unchanged."""
