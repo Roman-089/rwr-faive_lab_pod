@@ -26,7 +26,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("npz")
     ap.add_argument("out")
-    ap.add_argument("--env", type=int, default=0)
+    ap.add_argument("--envs", type=int, nargs="+", default=None,
+                    help="recorded envs to offer (default: all the npz has link poses for); a picker switches between them")
     ap.add_argument("--stride", type=int, default=2, help="keep every n-th control step (20 Hz)")
     ap.add_argument("--region", type=float, nargs=3, default=None, metavar=("CX", "CY", "R"))
     ap.add_argument("--title", default="")
@@ -47,25 +48,36 @@ def main():
             kind = "skin" if h["name"].endswith("_Skin") else "palm" if link in PALM else "pla"
             hulls.append({"link": li, "name": h["name"], "kind": kind,
                           "v": np.round(v * 1000, 2).ravel().tolist(), "f": tri.ravel().tolist()})
-    s, e = slice(None, None, args.stride), args.env
-    alive = ~(d["done"][s, e] > 0)
+    s = slice(None, None, args.stride)
+    n_rec = d["link_pos"].shape[1]
+    envs = args.envs if args.envs is not None else list(range(n_rec))
+    # per-env speed over the whole rollout (all envs), so the picker can say where each recorded env stands
+    alive_all = ~(d["done"] > 0)
+    w = np.where(alive_all, d["obj_angvel"][..., 2] * np.sign(d["cmd_angvel"][0, :, 2]), 0.0)
+    rpm = w.sum(0) / np.maximum(alive_all.sum(0), 1) * 60 / (2 * np.pi)
+    mean_rpm = float(rpm.mean())
+    env_data = [{
+        "id": e, "rpm": round(float(rpm[e]), 2), "rank": int((rpm > rpm[e]).sum()) + 1,
+        "link_pos": np.round(d["link_pos"][s, e] * 1000, 2).tolist(),
+        "link_quat": np.round(d["link_quat"][s, e], 5).tolist(),
+        "obj_pos": np.round(d["obj_pos"][s, e] * 1000, 2).tolist(),
+        "obj_quat": np.round(d["obj_quat"][s, e], 5).tolist(),
+        "alive": (~(d["done"][s, e] > 0)).astype(int).tolist(),
+    } for e in envs]
+    default = int(np.argmin([abs(x["rpm"] - mean_rpm) for x in env_data]))  # the recorded env closest to the mean
     data = {
         "title": args.title or Path(args.npz).name,
         "links": [n.removeprefix("right_") for n in names],
         "hulls": hulls,
         "dt": float(d["dt"]) * args.stride,
-        "link_pos": np.round(d["link_pos"][s, e] * 1000, 2).tolist(),
-        "link_quat": np.round(d["link_quat"][s, e], 5).tolist(),
-        "obj_pos": np.round(d["obj_pos"][s, e] * 1000, 2).tolist(),
-        "obj_quat": np.round(d["obj_quat"][s, e], 5).tolist(),
-        "alive": alive.astype(int).tolist(),
+        "envs": env_data, "default_env": default, "n_envs": int(len(rpm)), "mean_rpm": round(mean_rpm, 2),
         "cube_mm": float(d["object_size"]) * 1000,
         "region": None if args.region is None else [args.region[0] * 1000, args.region[1] * 1000, args.region[2] * 1000],
     }
     html = TEMPLATE.replace("__DATA__", json.dumps(data, separators=(",", ":")))
     Path(args.out).write_text(html)
     n_by = {k: sum(h["kind"] == k for h in hulls) for k in ("skin", "palm", "pla")}
-    print(f"wrote {args.out} ({len(html) / 1e3:.0f} kB): {len(hulls)} hulls {n_by}, {len(data['link_pos'])} frames")
+    print(f"wrote {args.out} ({len(html) / 1e3:.0f} kB): {len(hulls)} hulls {n_by}, {len(env_data[0]['link_pos'])} frames, envs {envs} (default {envs[default]})")
 
 
 TEMPLATE = r"""<!doctype html>
@@ -117,6 +129,7 @@ input[type=range] { width: 100%; } button { padding: 5px 10px; background: var(-
     <div style="margin-top:10px">Time <span id="tlabel"></span></div>
     <input type="range" id="t" min="0" step="1" value="0">
     <div style="display:flex; gap:6px; margin-top:6px"><button id="play">Play</button><button id="top">Top view</button><button id="side">Side view</button><button id="theme">Theme</button></div>
+    <label style="margin-top:10px">Env <select id="env" style="flex:1"></select></label>
     <p class="hint" id="info"></p>
   </div>
 </div>
@@ -178,16 +191,21 @@ function colors() {
 }
 colors();
 
-const T = D.link_pos.length, slider = document.getElementById("t"); slider.max = T - 1;
+let E = D.envs[D.default_env];
+const sel = document.getElementById("env");
+D.envs.forEach((x, k) => { const o = document.createElement("option"); o.value = k;
+  o.textContent = `env ${x.id}: ${x.rpm.toFixed(1)} RPM (rank ${x.rank} of ${D.n_envs}${k === D.default_env ? ", closest to the mean" : ""})`; sel.appendChild(o); });
+sel.value = D.default_env;
+const T = E.link_pos.length, slider = document.getElementById("t"); slider.max = T - 1;
 function setFrame(i) {
   for (let l = 0; l < D.links.length; l++) {
-    const p = D.link_pos[i][l], q = D.link_quat[i][l];
+    const p = E.link_pos[i][l], q = E.link_quat[i][l];
     linkGroups[l].position.set(p[0], p[1], p[2]); linkGroups[l].quaternion.set(q[1], q[2], q[3], q[0]);
   }
-  const p = D.obj_pos[i], q = D.obj_quat[i];
+  const p = E.obj_pos[i], q = E.obj_quat[i];
   cube.position.set(p[0], p[1], p[2]); cube.quaternion.set(q[1], q[2], q[3], q[0]);
   if (region) region.position.z = p[2];
-  document.getElementById("tlabel").textContent = `${(i * D.dt).toFixed(2)} s${D.alive[i] ? "" : " (cube dropped, respawn)"}`;
+  document.getElementById("tlabel").textContent = `${(i * D.dt).toFixed(2)} s${E.alive[i] ? "" : " (cube dropped, respawn)"}`;
 }
 // camera framing from the hand's bounding box at frame 0
 setFrame(0);
@@ -225,7 +243,8 @@ renderer.domElement.addEventListener("pointermove", ev => {
 });
 function resize() { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(host); resize();
-document.getElementById("info").textContent = `${D.hulls.length} hulls, ${T} frames at ${(1 / D.dt).toFixed(0)} Hz.`;
+sel.onchange = () => { E = D.envs[+sel.value]; setFrame(frame); };
+document.getElementById("info").textContent = `${D.hulls.length} hulls, ${T} frames at ${(1 / D.dt).toFixed(0)} Hz, real time. Mean over all ${D.n_envs} envs: ${D.mean_rpm.toFixed(1)} RPM; speed differs a lot between envs (randomised friction / mass).`;
 renderer.setAnimationLoop(t => {
   if (playing && t - last > D.dt * 1000) { frame = (frame + 1) % T; slider.value = frame; setFrame(frame); last = t; }
   controls.update(); renderer.render(scene, camera);
