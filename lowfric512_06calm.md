@@ -160,6 +160,7 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | pos45s2_calmt model_4500 | 10.42 | 89.3 | 0.123 | 9.30 | 3.9 | 0.077 | 97.1 | 94.9 | 13.52 | 86.9 | 95.7 |
+| pos45s2_calmt model_4600 | 10.62 | 90.8 | 0.105 | 9.64 | 4.0 | 0.079 | 97.1 | 95.7 | 13.81 | 85.4 | 94.3 |
 
 ## 07_calmt_pos45: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
