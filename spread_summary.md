@@ -214,6 +214,7 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | lstm_stage2_calm m5000 | LOWFRIC | 12.85 | 8.08 | 13.42 | 2.9 | 70.9 | 76.8 | 98.0 |
 | lstm_stage2_calm m5100 | LOWFRIC | 13.41 | 9.27 | 13.91 | 3.1 | 72.7 | 77.5 | 98.1 |
 | lstm_stage2_calm m5200 | LOWFRIC | 13.81 | 10.03 | 14.20 | 1.0 | 75.8 | 78.9 | 98.5 |
+| lstm_stage2_calm m5300 | LOWFRIC | 13.45 | 9.37 | 13.62 | 1.8 | 74.8 | 79.5 | 98.4 |
 
 ## base s4 chain
 
