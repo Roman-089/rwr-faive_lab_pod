@@ -423,6 +423,9 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| 06_cont_servofast model_6100 | a no servo | 13.29 | 88.5 | 0.137 | 11.76 | 4.3 | 0.071 | 98.9 | 98.6 |
+| 06_cont_servofast model_6100 | b profile x1.5 | 14.80 | 76.2 | 0.336 | 11.27 | 4.5 | 0.080 | 98.0 | 94.5 |
+| 06_cont_servofast model_6100 | c full servo x1 | 12.17 | 44.5 | 1.297 | 5.42 | 6.3 | 0.098 | 96.7 | 84.4 |
 
 ## 06_cont_servowide: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
