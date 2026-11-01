@@ -464,6 +464,9 @@
 | 06_cont_servowide model_6200 | a no servo | 12.92 | 86.3 | 0.150 | 11.16 | 4.2 | 0.069 | 98.8 | 96.9 |
 | 06_cont_servowide model_6200 | b profile x1.5 | 14.49 | 77.0 | 0.320 | 11.15 | 4.3 | 0.071 | 98.0 | 93.6 |
 | 06_cont_servowide model_6200 | c full servo x1 | 12.46 | 46.5 | 1.266 | 5.79 | 5.8 | 0.085 | 96.8 | 84.0 |
+| 06_cont_servowide model_6300 | a no servo | 12.76 | 86.3 | 0.162 | 11.02 | 4.2 | 0.073 | 98.8 | 97.3 |
+| 06_cont_servowide model_6300 | b profile x1.5 | 14.60 | 77.7 | 0.326 | 11.35 | 4.2 | 0.073 | 98.1 | 95.1 |
+| 06_cont_servowide model_6300 | c full servo x1 | 12.54 | 47.7 | 1.172 | 5.98 | 5.7 | 0.081 | 97.1 | 88.1 |
 
 ## hist3_calmt_cap16: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-hist3-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0 env.rewards.rotation_progress.params.max_vel=1.6); wrist speed over all 512 envs
 
