@@ -234,6 +234,8 @@
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-profile amax×1.5 | 13.42 | 55.7 | 0.916 | 7.47 | 6.8 | 0.107 | 88.5 | 68.2 |
 | rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 servo-profile amax×2 | 14.75 | 81.4 | 0.244 | 12.01 | 4.6 | 0.097 | 98.4 | 94.7 |
 | A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-profile amax×2 | 13.96 | 70.3 | 0.494 | 9.82 | 6.4 | 0.094 | 91.4 | 79.3 |
+| rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 servo-profile amax×3 | 15.62 | 84.6 | 0.178 | 13.21 | 4.2 | 0.082 | 98.7 | 96.9 |
+| A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 servo-profile amax×3 | 14.23 | 83.4 | 0.221 | 11.87 | 6.1 | 0.083 | 93.3 | 92.4 |
 
 ## 06_oneshot_s1: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
