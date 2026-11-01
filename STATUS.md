@@ -1,4 +1,4 @@
-# remote queue status (2026-11-01T20:28:09Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 46021 MiB)
+# remote queue status (2026-11-01T20:38:18Z, NVIDIA RTX PRO 6000 Blackwell Server Edition, 100 %, 42708 MiB)
 # queue loops stopped 12:22Z (user: servo fine-tunes have the whole GPU); 02_tilt_adr_servo_ft_r6k, 07_servo_wp_ft_r6k, 02b_servo_wp_ft_r6k superseded (harsh servo model); 07_servo2_wp_ft_r6k, 02b_servo2_wp_ft_r6k superseded (friction); 07_servo_wp_lf_ft_r6k, 02b_servo_wp_lf_ft_r6k superseded (per-link friction); 07_servo_wp_rf_ft_r6k, 02b_servo_wp_rf_ft_r6k superseded (friction v2); 07_servo_wp_rf_ft_r6k_v2 superseded (servo profile not validated); 02b_servo_wp_rf_ft_r6k_v2 superseded (07 is the base)
 07_wp_rf_ft_r6k TRAIN_EXIT rc=0 Learning iteration 5499/5500
 #   13:24 OWN model_4150 rpm 13.07 dfsr 84.4 dc 0.17 score 11.03 | tilt 7.3 flips 2.8 wrist 0.18/0.08
