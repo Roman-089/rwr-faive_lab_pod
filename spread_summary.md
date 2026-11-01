@@ -1,4 +1,4 @@
-# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T13:28Z)
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T13:32Z)
 
 Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
 
@@ -82,6 +82,9 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | servofast_from_base m4800 | (a) no servo | 9.90 | 1.63 | 10.55 | 18.4 | 66.8 | 98.2 | 98.2 |
 | servofast_from_base m4800 | (b) profile x1.5 | 13.90 | 8.39 | 15.61 | 6.1 | 85.9 | 94.5 | 98.2 |
 | servofast_from_base m4800 | (c) full servo x1 | 11.96 | 9.72 | 12.79 | 3.7 | 77.1 | 82.0 | 97.1 |
+| servofast_from_base m4900 | (a) no servo | 10.17 | 2.00 | 11.13 | 16.0 | 68.0 | 98.4 | 98.3 |
+| 06_cont_servofast m6100 | (a) no servo | 13.29 | 11.29 | 14.05 | 2.9 | 93.8 | 98.6 | 98.9 |
+| 06_cont_servofast m6100 | (b) profile x1.5 | 14.80 | 12.51 | 15.66 | 3.3 | 90.6 | 94.5 | 98.0 |
 
 ## hist3
 
@@ -102,9 +105,12 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | hist3_calmt m5200 | LOWFRIC (-wristl1-hist3) | 15.95 | 10.40 | 17.06 | 5.5 | 83.8 | 89.8 | 94.7 |
 | hist3_calmt m5300 | LOWFRIC (-wristl1-hist3) | 15.80 | 10.33 | 16.84 | 6.1 | 83.8 | 91.4 | 93.7 |
 | hist3_calmt m5400 | LOWFRIC (-wristl1-hist3) | 16.24 | 11.01 | 17.33 | 5.1 | 85.5 | 91.2 | 94.7 |
+| hist3_calmt m5498 | LOWFRIC (-wristl1-hist3) | 16.06 | 10.87 | 17.17 | 6.4 | 82.8 | 89.5 | 93.3 |
 | hist3_calmt_servo m4000 | (a) no servo (-wristl1-hist3) | 15.86 | 10.71 | 16.82 | 4.7 | 81.6 | 86.5 | 90.0 |
 | hist3_calmt_servo m4000 | (c) full servo x1 (-wristl1-hist3) | 8.30 | 2.04 | 9.09 | 20.5 | 26.4 | 44.7 | 64.8 |
 | hist3_calmt_servo m4100 | (a) no servo (-wristl1-hist3) | 15.68 | 10.80 | 16.46 | 3.1 | 84.6 | 87.9 | 92.1 |
 | hist3_calmt_servo m4100 | (c) full servo x1 (-wristl1-hist3) | 9.63 | 3.28 | 10.52 | 13.3 | 44.7 | 59.4 | 73.0 |
 | hist3_calmt_servo m4200 | (a) no servo (-wristl1-hist3) | 15.30 | 9.54 | 16.34 | 5.1 | 82.6 | 88.5 | 92.3 |
 | hist3_calmt_servo m4200 | (c) full servo x1 (-wristl1-hist3) | 10.58 | 3.42 | 11.90 | 12.9 | 53.7 | 65.8 | 79.3 |
+| hist3_calmt_servo m4300 | (a) no servo (-wristl1-hist3) | 15.16 | 9.63 | 16.15 | 4.3 | 83.4 | 88.5 | 93.6 |
+| hist3_calmt_servo m4300 | (c) full servo x1 (-wristl1-hist3) | 11.18 | 5.78 | 12.50 | 9.6 | 63.7 | 75.2 | 83.9 |
