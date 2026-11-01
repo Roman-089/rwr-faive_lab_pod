@@ -266,6 +266,7 @@
 | 06_oneshot_s1 model_5200 | 12.75 | 90.4 | 0.100 | 11.53 | 4.2 | 0.073 | 99.1 | 97.9 | 15.30 | 85.0 | 98.2 |
 | 06_oneshot_s1 model_5300 | 12.72 | 90.6 | 0.107 | 11.53 | 4.1 | 0.073 | 99.0 | 98.4 | 15.28 | 85.7 | 98.2 |
 | 06_oneshot_s1 model_5400 | 12.81 | 90.2 | 0.100 | 11.56 | 4.1 | 0.074 | 99.1 | 98.6 | 15.27 | 85.9 | 98.0 |
+| 06_oneshot_s1 model_5498 | 12.90 | 89.8 | 0.117 | 11.59 | 4.2 | 0.072 | 99.0 | 98.2 | 15.38 | 83.4 | 97.5 |
 
 ## 06_oneshot_track15: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0); wrist speed over all 512 envs
 
