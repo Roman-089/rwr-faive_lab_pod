@@ -43,5 +43,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_2000.pt": {
+  "rpm": 12.393613815307617,
+  "rpm_std": 2.4281270503997803,
+  "ra": 79.87000942230225,
+  "dfsr": 76.5625,
+  "dc": 0.28125,
+  "checkpoint": "model_2000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 64,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-roa-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
