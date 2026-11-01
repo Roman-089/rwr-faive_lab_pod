@@ -761,6 +761,8 @@ m4600: 12.49 / 89.6 / 98.0 / 98.7 / 4.5° / 0.080, own task 14.74 / 88.3 / 98.6:
 
 **The calm recipe generalises across lineages.** One stage on upright_pos45 seed 2 (13.6 RPM, tilt 11.6°, wrist 0.31, 69 % in region): final m5498 at 512 envs 12.56 RPM / 91.4 % / 97.3 % after 2 s / 96.7 % in region / tilt 4.0° / wrist 0.078, close to rank 1 (13.07 / 89.5 / 98.8 / 98.9 / 4.1° / 0.074). The 06 base still gives the best region and after-2 s numbers. With 3× tracking the 07 base stays at A's speed and region (11.1–11.2 RPM, 94–95 %), so that advantage comes from the 06 base's grasp.
 
+**What bounds the speed of the calm line (~13 RPM).** Not the wrist term: L1 −20 instead of −40 (`06_oneshot_l1w20`) ends 0.3–0.8 RPM *slower* at the same wrist speed (m5498 12.81 / 89.6 / 99.4 % after 2 s / 0.076). Not the reward cap: a 2.0 rad/s command only re-maps the speed. Not the tilt term: tilt −800 is as fast as −400 (13.07 vs 12.93 RPM). Not the 3× tracking: with 1× tracking the 06 grasp keeps 98.9 % in region. The ceiling is the memoryless 06 gait itself. The only policies above it are the history actors (14.3–15.0 RPM, but 88 % after 2 s): `hist3_calmt` (calm recipe on the history actor, pod and DTU) tests whether that speed survives calming.
+
 **Deploy branch (user's standing instruction, ~15:35Z):** every new policy that passes the ship rule also goes to
 `rwr-fast/rwr_system`, branch `deploy-policies-2026-10-31`, folder `deploy_policies/` (policy.pt in Git LFS, SPEC.md,
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
