@@ -129,6 +129,8 @@
 
 | checkpoint | cmd | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 06_calmt_cmd2 model_6400 | 2.0 | 8.60 | 84.6 | 0.197 | 7.27 | 5.5 | 0.089 | 97.7 | 93.8 | 11.29 | 79.7 | 91.0 |
+| 06_calmt_cmd2 model_6400 | 1.5 | 12.08 | 88.5 | 0.127 | 10.69 | 4.8 | 0.076 | 98.8 | 98.8 | - | - | - |
 
 ## rf2: 512-env eval on the PLA-skeleton friction (-realfric2-v0, its default DR), seed 42; wrist speed over all 512 envs
 
