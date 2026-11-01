@@ -105,16 +105,16 @@
   "servo_parts": ""
  },
  "model_4800.pt": {
-  "rpm": 14.516571998596191,
-  "rpm_std": 4.185556411743164,
-  "ra": 91.06545448303223,
-  "dfsr": 84.375,
-  "dc": 0.234375,
+  "rpm": 12.426525115966797,
+  "rpm_std": 3.337459087371826,
+  "ra": 90.57994484901428,
+  "dfsr": 92.1875,
+  "dc": 0.078125,
   "checkpoint": "model_4800.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
