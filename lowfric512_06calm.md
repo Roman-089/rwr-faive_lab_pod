@@ -514,3 +514,4 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | roa_stage2_calm model_4000 | 13.12 | 25.2 | 2.555 | 3.31 | 23.2 | 0.612 | 81.7 | 27.7 | n/a | n/a | n/a |
+| roa_stage2_calm model_4100 | 7.77 | 52.0 | 0.807 | 4.03 | 13.9 | 0.165 | 91.2 | 60.4 | n/a | n/a | n/a |
