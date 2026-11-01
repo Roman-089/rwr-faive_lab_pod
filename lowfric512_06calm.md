@@ -291,3 +291,10 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | hist3_calmt model_4000 | 15.45 | 74.8 | 0.330 | 11.55 | 5.1 | 0.102 | 89.0 | 84.6 | n/a | n/a | n/a |
+
+## placed: 512-env LOWFRIC with a placed spawn (cube starts flat: reset roll = pitch = 0, random yaw), seed 42; wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|
+| rank1_06_oneshot 2026-11-01_06-38-47_06_oneshot_calmt_ft_r6k/model_5400 | 13.09 | 90.2 | 0.109 | 11.81 | 4.0 | 0.072 | 99.0 | 98.2 |
+| A_07_wp_rf_ft 2026-10-31_13-07-57_07_wp_rf_ft_r6k/model_4600 | 11.38 | 91.2 | 0.100 | 10.38 | 6.1 | 0.078 | 92.7 | 95.5 |
