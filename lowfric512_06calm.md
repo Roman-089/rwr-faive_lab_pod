@@ -538,6 +538,7 @@
 | 06s4_oneshot_calmt model_5200 | 12.04 | 92.0 | 0.088 | 11.07 | 4.4 | 0.075 | 98.9 | 97.7 | n/a | n/a | n/a |
 | 06s4_oneshot_calmt model_5300 | 12.05 | 90.8 | 0.104 | 10.94 | 4.3 | 0.073 | 98.8 | 97.7 | n/a | n/a | n/a |
 | 06s4_oneshot_calmt model_5400 | 12.21 | 92.0 | 0.092 | 11.23 | 4.3 | 0.070 | 99.0 | 97.3 | n/a | n/a | n/a |
+| 06s4_oneshot_calmt model_5498 | 12.12 | 90.6 | 0.115 | 10.98 | 4.4 | 0.074 | 98.9 | 96.9 | n/a | n/a | n/a |
 
 ## lstm_stage2_calm: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-lstm-v0); wrist speed over all 512 envs
 
@@ -556,3 +557,13 @@
 | lstm_stage2_calm model_5000 | 12.85 | 66.4 | 0.498 | 8.54 | 10.7 | 0.159 | 98.0 | 76.8 | n/a | n/a | n/a |
 | lstm_stage2_calm model_5100 | 13.41 | 67.4 | 0.473 | 9.04 | 10.6 | 0.143 | 98.1 | 77.5 | n/a | n/a | n/a |
 | lstm_stage2_calm model_5200 | 13.81 | 67.0 | 0.463 | 9.25 | 10.5 | 0.139 | 98.5 | 78.9 | n/a | n/a | n/a |
+
+## 06s4_oneshot_calmt_final: every checkpoint, 512-env LOWFRIC (a) no servo, (c) full servo model x1, final checkpoint; wrist speed over all 512 envs
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
+
+## 06s4_servofast: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
