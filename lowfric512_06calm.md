@@ -386,3 +386,5 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| hist3_calmt_servo model_4000 | a no servo | 15.86 | 77.1 | 0.311 | 12.23 | 4.9 | 0.103 | 90.0 | 86.5 |
+| hist3_calmt_servo model_4000 | c full servo x1 | 8.30 | 26.6 | 2.506 | 2.20 | 9.8 | 0.153 | 64.8 | 44.7 |
