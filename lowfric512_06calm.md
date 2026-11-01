@@ -124,6 +124,7 @@
 
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| 06_oneshot model_4500 | 12.07 | 91.8 | 0.090 | 11.08 | 4.7 | 0.081 | 98.6 | 98.4 | 14.59 | 87.5 | 98.4 |
 
 ## 06_calmt_cmd2: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0 env.commands.continuous_rotation.angular_vel_range=[0.0,0.0,2.0]); wrist speed over all 512 envs
 
