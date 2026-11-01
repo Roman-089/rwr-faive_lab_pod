@@ -98,3 +98,9 @@
 | 06_calm3_t800_s1 model_6200 | 12.43 | 87.7 | 0.135 | 10.90 | 5.0 | 0.089 | 99.1 | 97.7 | 15.49 | 86.5 | 98.8 |
 | 06_calm3_s1 model_7100 | 13.08 | 89.3 | 0.125 | 11.68 | 8.5 | 0.116 | 98.7 | 98.2 | 16.27 | 85.2 | 98.0 |
 | 06_calm3_w80t800 model_7000 | 12.50 | 89.1 | 0.117 | 11.13 | 5.3 | 0.088 | 99.1 | 98.4 | 15.80 | 87.1 | 97.9 |
+
+## 06_calmt_roll10: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0 env.events.reset_robot_base.params.pose_range.roll=[-0.1745,0.1745]); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 06_calm3_t800_s1 model_6300 | 12.57 | 88.1 | 0.137 | 11.07 | 4.9 | 0.083 | 99.0 | 98.6 | 15.69 | 85.4 | 97.9 |
