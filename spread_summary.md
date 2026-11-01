@@ -1,0 +1,75 @@
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T12:57Z)
+
+Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
+
+
+## rank 1
+
+| checkpoint | eval | mean RPM | RPM p10 | RPM median | stall % | good-trial % | drop-free t>=2s % | in region % |
+|---|---|---|---|---|---|---|---|---|
+| servofast m5800 | (a) no servo | 12.68 | 8.88 | 13.74 | 5.9 | 91.2 | 99.2 | 99.0 |
+| servofast m5800 | (b) profile x1.5 | 14.56 | 11.96 | 15.56 | 2.7 | 90.6 | 95.7 | 98.2 |
+| servofast m5800 | (c) full servo x1 | 12.23 | 10.21 | 13.09 | 3.7 | 79.3 | 84.4 | 96.9 |
+
+## references
+
+| checkpoint | eval | mean RPM | RPM p10 | RPM median | stall % | good-trial % | drop-free t>=2s % | in region % |
+|---|---|---|---|---|---|---|---|---|
+| rank 2 06_oneshot m5400 | LOWFRIC | 13.07 | 8.54 | 14.33 | 6.4 | 89.6 | 98.8 | 98.9 |
+| 06_oneshot m5400 | (b) profile x1.5 | 13.19 | 7.94 | 14.67 | 6.6 | 82.2 | 90.8 | 98.3 |
+| 06_oneshot m5400 | (c) full servo x1 | 9.95 | 5.66 | 10.71 | 7.8 | 64.1 | 76.8 | 96.3 |
+| tilt800 m6300 | LOWFRIC | 12.46 | 7.74 | 13.86 | 7.2 | 87.5 | 98.4 | 99.0 |
+| calm3 m7000 | LOWFRIC | 12.93 | 9.78 | 13.85 | 3.9 | 92.2 | 98.2 | 98.8 |
+| A 07_wp_rf_ft m4600 | LOWFRIC | 11.41 | 7.61 | 12.42 | 4.3 | 84.8 | 96.5 | 93.2 |
+| 07ft seed1 m4900 | LOWFRIC | 11.39 | 7.25 | 12.40 | 4.1 | 85.2 | 98.0 | 94.2 |
+| region200c m4800 | LOWFRIC | 11.48 | 7.84 | 12.42 | 3.3 | 86.9 | 96.9 | 94.7 |
+
+## others
+
+| checkpoint | eval | mean RPM | RPM p10 | RPM median | stall % | good-trial % | drop-free t>=2s % | in region % |
+|---|---|---|---|---|---|---|---|---|
+| oneshot_cont m6000 | LOWFRIC | 13.50 | 11.28 | 14.25 | 3.5 | 94.5 | 98.8 | 98.9 |
+
+## servo DR runs
+
+| checkpoint | eval | mean RPM | RPM p10 | RPM median | stall % | good-trial % | drop-free t>=2s % | in region % |
+|---|---|---|---|---|---|---|---|---|
+| servofast_s1 m5500 | (a) no servo | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5500 | (b) profile x1.5 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5500 | (c) full servo x1 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5600 | (a) no servo | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5600 | (b) profile x1.5 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5600 | (c) full servo x1 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5700 | (a) no servo | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5700 | (b) profile x1.5 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5700 | (c) full servo x1 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5800 | (a) no servo | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5800 | (b) profile x1.5 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5800 | (c) full servo x1 | n/a (512 npz deleted) | | | | | | |
+| servofast_s1 m5900 | (a) no servo | 12.41 | 7.76 | 13.60 | 6.8 | 87.9 | 98.4 | 98.9 |
+| servofast_s1 m5900 | (b) profile x1.5 | 14.39 | 12.12 | 15.49 | 3.5 | 90.6 | 96.7 | 98.4 |
+| servowide m5500 | (a) no servo | n/a (512 npz deleted) | | | | | | |
+| servowide m5500 | (b) profile x1.5 | n/a (512 npz deleted) | | | | | | |
+| servowide m5500 | (c) full servo x1 | n/a (512 npz deleted) | | | | | | |
+| servowide m5600 | (a) no servo | n/a (512 npz deleted) | | | | | | |
+| servowide m5600 | (b) profile x1.5 | n/a (512 npz deleted) | | | | | | |
+| servowide m5600 | (c) full servo x1 | n/a (512 npz deleted) | | | | | | |
+| servowide m5700 | (a) no servo | 12.54 | 8.32 | 13.83 | 6.2 | 88.3 | 98.2 | 98.8 |
+| servofast_from_base m4500 | (a) no servo | 7.40 | 0.43 | 7.69 | 36.7 | 46.1 | 97.1 | 97.8 |
+
+## hist3
+
+| checkpoint | eval | mean RPM | RPM p10 | RPM median | stall % | good-trial % | drop-free t>=2s % | in region % |
+|---|---|---|---|---|---|---|---|---|
+| hist3_calmt m4000 | LOWFRIC (-wristl1-hist3) | 15.45 | 9.66 | 16.49 | 5.5 | 78.9 | 84.6 | 89.0 |
+| hist3_calmt m4100 | LOWFRIC (-wristl1-hist3) | 15.89 | 10.36 | 17.11 | 4.9 | 81.6 | 87.5 | 90.6 |
+| hist3_calmt m4200 | LOWFRIC (-wristl1-hist3) | 15.48 | 8.74 | 16.76 | 6.1 | 79.7 | 86.7 | 90.6 |
+| hist3_calmt m4300 | LOWFRIC (-wristl1-hist3) | 15.48 | 8.92 | 16.88 | 6.8 | 80.5 | 88.1 | 91.6 |
+| hist3_calmt m4400 | LOWFRIC (-wristl1-hist3) | 15.82 | 10.36 | 16.88 | 4.5 | 80.7 | 86.9 | 92.4 |
+| hist3_calmt m4500 | LOWFRIC (-wristl1-hist3) | 15.84 | 10.10 | 17.34 | 6.8 | 81.8 | 89.1 | 93.7 |
+| hist3_calmt m4600 | LOWFRIC (-wristl1-hist3) | 15.84 | 10.19 | 17.30 | 7.0 | 82.8 | 90.6 | 93.7 |
+| hist3_calmt m4700 | LOWFRIC (-wristl1-hist3) | 15.89 | 9.90 | 17.22 | 7.4 | 81.6 | 89.6 | 93.0 |
+| hist3_calmt m4800 | LOWFRIC (-wristl1-hist3) | 15.97 | 10.14 | 16.92 | 5.3 | 83.4 | 89.8 | 93.4 |
+| hist3_calmt m4900 | LOWFRIC (-wristl1-hist3) | 15.94 | 10.64 | 17.30 | 6.1 | 82.6 | 89.3 | 93.3 |
+| hist3_calmt m5000 | LOWFRIC (-wristl1-hist3) | 16.20 | 10.80 | 17.51 | 4.5 | 84.0 | 88.9 | 94.6 |
+| hist3_calmt m5100 | LOWFRIC (-wristl1-hist3) | 15.84 | 10.84 | 16.98 | 4.9 | 85.2 | 90.8 | 92.6 |
