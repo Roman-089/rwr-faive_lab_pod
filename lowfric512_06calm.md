@@ -184,6 +184,7 @@
 | 07_calmt_pos45 model_4700 | 11.15 | 87.9 | 0.143 | 9.80 | 5.9 | 0.072 | 94.0 | 94.1 | 13.54 | 85.4 | 96.9 |
 | 07_calmt_pos45 model_4800 | 11.24 | 86.7 | 0.162 | 9.74 | 5.8 | 0.072 | 94.6 | 93.2 | 13.64 | 84.0 | 95.3 |
 | 07_calmt_pos45 model_4900 | 11.08 | 88.3 | 0.137 | 9.79 | 5.6 | 0.071 | 95.2 | 94.1 | 13.55 | 84.0 | 95.7 |
+| 07_calmt_pos45 model_5000 | 11.22 | 87.7 | 0.135 | 9.84 | 5.7 | 0.070 | 95.0 | 94.5 | 13.47 | 83.2 | 94.7 |
 
 ## hist3_stage1: 512-env LOWFRIC on -upright-hist3-v0 + low-friction overrides, seed 42 (stage-2 start pick: best t>=2s, ties by rpm)
 
@@ -199,3 +200,8 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 06_oneshot_cont model_5500 | 13.14 | 88.3 | 0.131 | 11.60 | 4.2 | 0.076 | 98.7 | 98.6 | 15.95 | 85.5 | 98.8 |
 | 06_oneshot_cont model_5600 | 13.19 | 89.5 | 0.121 | 11.80 | 4.3 | 0.072 | 98.9 | 98.8 | 15.87 | 86.5 | 98.0 |
+
+## 06_oneshot_l1w20: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-v0, env.rewards.object_position_tracking.weight=45.0 env.rewards.cube_tilt.weight=-800.0 env.rewards.wrist_vel.weight=-16.0 env.rewards.wrist_vel_l1.weight=-20.0); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
