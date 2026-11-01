@@ -439,6 +439,9 @@
 | 06_cont_servofast model_6200 | a no servo | 13.05 | 90.2 | 0.113 | 11.77 | 4.1 | 0.068 | 98.8 | 98.2 |
 | 06_cont_servofast model_6200 | b profile x1.5 | 14.82 | 78.7 | 0.305 | 11.66 | 4.2 | 0.075 | 98.2 | 96.1 |
 | 06_cont_servofast model_6200 | c full servo x1 | 12.46 | 45.3 | 1.162 | 5.64 | 5.9 | 0.090 | 96.8 | 87.9 |
+| 06_cont_servofast model_6300 | a no servo | 13.08 | 89.3 | 0.119 | 11.67 | 4.1 | 0.071 | 98.9 | 98.2 |
+| 06_cont_servofast model_6300 | b profile x1.5 | 14.88 | 78.7 | 0.289 | 11.71 | 4.2 | 0.073 | 98.2 | 94.3 |
+| 06_cont_servofast model_6300 | c full servo x1 | 12.58 | 46.5 | 1.191 | 5.85 | 5.8 | 0.090 | 96.7 | 87.7 |
 
 ## 06_cont_servowide: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 

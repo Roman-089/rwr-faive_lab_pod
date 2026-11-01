@@ -1,4 +1,4 @@
-# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T13:48Z)
+# Per-env RPM spread, 512-env LOWFRIC (2026-11-01T13:52Z)
 
 Each env is one draw of the randomised friction / mass, like one hand trial. Per-env RPM over the alive steps at t >= 2 s (cube_motion --spread). stall = envs below 5 RPM; good trial = no drop at t >= 2 s and >= 8 RPM. Seed 42, 512 envs, -upright-v0 + low-friction overrides (hist3 rows: -wristl1-hist3 task). Rank-1 servofast rows were re-run for this (--tag _lowfric512spr) because the 3-way watcher had deleted its npz.
 
@@ -89,6 +89,7 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | servofast_from_base m5000 | (b) profile x1.5 | 14.33 | 10.48 | 15.74 | 4.9 | 87.5 | 95.1 | 98.3 |
 | servofast_from_base m5000 | (c) full servo x1 | 12.11 | 10.62 | 12.84 | 2.0 | 78.3 | 82.2 | 97.2 |
 | servofast_from_base m5100 | (a) no servo | 10.54 | 2.53 | 12.00 | 14.8 | 71.1 | 97.1 | 98.3 |
+| servofast_from_base m5100 | (b) profile x1.5 | 14.15 | 9.81 | 15.66 | 5.9 | 87.1 | 94.9 | 98.5 |
 | 06_cont_servofast m6100 | (a) no servo | 13.29 | 11.29 | 14.05 | 2.9 | 93.8 | 98.6 | 98.9 |
 | 06_cont_servofast m6100 | (b) profile x1.5 | 14.80 | 12.51 | 15.66 | 3.3 | 90.6 | 94.5 | 98.0 |
 | 06_cont_servofast m6100 | (c) full servo x1 | 12.17 | 9.75 | 13.04 | 2.7 | 80.3 | 84.4 | 96.7 |
@@ -96,9 +97,13 @@ Each env is one draw of the randomised friction / mass, like one hand trial. Per
 | 06_cont_servofast m6200 | (b) profile x1.5 | 14.82 | 12.10 | 15.83 | 2.9 | 91.8 | 96.1 | 98.2 |
 | 06_cont_servofast m6200 | (c) full servo x1 | 12.46 | 10.25 | 13.30 | 2.9 | 84.0 | 87.9 | 96.8 |
 | 06_cont_servofast m6300 | (a) no servo | 13.08 | 9.68 | 14.06 | 4.9 | 90.4 | 98.2 | 98.9 |
+| 06_cont_servofast m6300 | (b) profile x1.5 | 14.88 | 12.74 | 15.81 | 3.5 | 89.6 | 94.3 | 98.2 |
+| 06_cont_servofast m6300 | (c) full servo x1 | 12.58 | 10.72 | 13.31 | 1.8 | 83.6 | 87.7 | 96.7 |
 | 06_cont_servowide m6100 | (a) no servo | 13.27 | 11.47 | 13.97 | 3.5 | 93.9 | 98.0 | 98.9 |
 | 06_cont_servowide m6100 | (b) profile x1.5 | 14.90 | 13.12 | 15.67 | 1.6 | 92.6 | 95.3 | 98.1 |
 | 06_cont_servowide m6100 | (c) full servo x1 | 12.31 | 10.25 | 13.05 | 2.7 | 80.9 | 84.4 | 96.7 |
+| 06_cont_servowide m6200 | (a) no servo | 12.92 | 10.50 | 13.80 | 3.5 | 91.2 | 96.9 | 98.8 |
+| 06_cont_servowide m6200 | (b) profile x1.5 | 14.49 | 12.10 | 15.51 | 3.9 | 87.9 | 93.6 | 98.0 |
 
 ## hist3
 
