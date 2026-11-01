@@ -15,16 +15,16 @@
   "servo_parts": ""
  },
  "model_1000.pt": {
-  "rpm": 11.67693042755127,
-  "rpm_std": 2.4075539112091064,
-  "ra": 65.27091264724731,
-  "dfsr": 50.0,
-  "dc": 0.828125,
+  "rpm": 12.0595703125,
+  "rpm_std": 3.3630151748657227,
+  "ra": 70.10003328323364,
+  "dfsr": 64.0625,
+  "dc": 0.53125,
   "checkpoint": "model_1000.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
