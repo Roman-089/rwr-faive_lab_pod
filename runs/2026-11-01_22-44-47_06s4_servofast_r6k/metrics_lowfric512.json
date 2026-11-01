@@ -58,5 +58,20 @@
   "perturb": false,
   "servo": false,
   "servo_parts": ""
+ },
+ "model_5897.pt": {
+  "rpm": 11.303604125976562,
+  "rpm_std": 3.8302254676818848,
+  "ra": 86.7812991142273,
+  "dfsr": 91.015625,
+  "dc": 0.11328125,
+  "checkpoint": "model_5897.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 512,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
+  "perturb": false,
+  "servo": false,
+  "servo_parts": ""
  }
 }
