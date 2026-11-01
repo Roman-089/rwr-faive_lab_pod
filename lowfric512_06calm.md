@@ -391,6 +391,9 @@
 | 06_servofast_from_base model_5100 | a no servo | 10.54 | 89.1 | 0.121 | 9.39 | 4.5 | 0.087 | 98.3 | 97.1 |
 | 06_servofast_from_base model_5100 | b profile x1.5 | 14.15 | 73.0 | 0.400 | 10.34 | 4.1 | 0.077 | 98.5 | 94.9 |
 | 06_servofast_from_base model_5100 | c full servo x1 | 12.18 | 44.5 | 1.219 | 5.42 | 6.0 | 0.094 | 97.4 | 86.3 |
+| 06_servofast_from_base model_5200 | a no servo | 11.27 | 90.2 | 0.117 | 10.17 | 4.4 | 0.083 | 98.4 | 96.5 |
+| 06_servofast_from_base model_5200 | b profile x1.5 | 14.37 | 76.8 | 0.326 | 11.03 | 4.0 | 0.074 | 98.3 | 96.7 |
+| 06_servofast_from_base model_5200 | c full servo x1 | 12.26 | 45.7 | 1.246 | 5.60 | 5.9 | 0.090 | 97.3 | 87.1 |
 
 ## 06_oneshot_servowide: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
