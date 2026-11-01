@@ -558,6 +558,7 @@
 | lstm_stage2_calm model_5100 | 13.41 | 67.4 | 0.473 | 9.04 | 10.6 | 0.143 | 98.1 | 77.5 | n/a | n/a | n/a |
 | lstm_stage2_calm model_5200 | 13.81 | 67.0 | 0.463 | 9.25 | 10.5 | 0.139 | 98.5 | 78.9 | n/a | n/a | n/a |
 | lstm_stage2_calm model_5300 | 13.45 | 70.3 | 0.443 | 9.46 | 9.8 | 0.142 | 98.4 | 79.5 | n/a | n/a | n/a |
+| lstm_stage2_calm model_5398 | 13.41 | 69.9 | 0.436 | 9.37 | 9.7 | 0.147 | 98.3 | 80.1 | n/a | n/a | n/a |
 
 ## 06s4_oneshot_calmt_final: every checkpoint, 512-env LOWFRIC (a) no servo, (c) full servo model x1, final checkpoint; wrist speed over all 512 envs
 
