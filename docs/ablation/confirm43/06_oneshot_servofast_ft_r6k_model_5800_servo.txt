@@ -1,0 +1,2 @@
+rollout                                                      w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed  in region  drop-free t>=2s  RPM p10 / median  stall  good-trial
+_oneshot_servofast_ft_r6k/eval/model_5800_s43n2048_servo.npz  1.29  1.09    5.7 / 10.5       6.6   0.29 / 0.10       97.3 %            88.8 %    10.38 / 13.11   2.3 %      85.2 %

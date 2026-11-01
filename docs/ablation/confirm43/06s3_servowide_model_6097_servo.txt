@@ -1,0 +1,2 @@
+rollout                                                      w_cmd |w_xy|  tilt mean/p90 flips/min  wrist range/speed  in region  drop-free t>=2s  RPM p10 / median  stall  good-trial
+1_19-31-34_06s3_servowide/eval/model_6097_s43n2048_servo.npz  1.28  1.04    5.6 / 10.0       7.0   0.23 / 0.07       97.2 %            88.6 %     9.39 / 13.25   4.1 %      82.7 %
