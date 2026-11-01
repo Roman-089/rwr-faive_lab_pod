@@ -529,3 +529,4 @@
 
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| lstm_stage2_calm model_4000 | 9.85 | 15.8 | 3.029 | 1.56 | 26.5 | 0.667 | 84.8 | 18.2 | n/a | n/a | n/a |
