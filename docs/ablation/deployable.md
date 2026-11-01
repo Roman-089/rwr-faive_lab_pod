@@ -59,6 +59,8 @@ RPM, 98 %, 0.02 drops), plus `07ft_s1_m4300`, `07ft_s1_m4150`, `07ft_s0_m4150`. 
 
 **New rank 1 (2026-11-01 04:30Z): `06calm_s0_m7000`**, W&B `orca_v2_zrot_hand_ft:v10`, `deploy_policies/` rank 1 (1290aca, notes a537fc0; sha256 `ae005253…`). The fast 06 line made calm in four fine-tune stages (06_pos45 m3999 → 06_wp_rf: real friction + wrist penalty → 06_calm: tilt −400 / wrist −8 → 06_calm2: wrist −16 → 06_calm3_l1: + L1 wrist −40, m7000). 512 envs at the measured friction: **12.93 RPM** vs 11.41 for 07ft_s0_m4600 at the same drop-free (90.0 %, 0.109 drops per trial), 98.2 % after 2 s (96.5), axis **98.8 % in the user's circle** (93.2), tilt 7.2° (6.1), wrist 0.113 rad/s all envs (0.079); own task 16.0 RPM. Calmer than the original 07 (~0.18 all-env equivalent), which ran the full 60 s on the hand. New lineage: its ancestor 06_pos45 swung the wrist on the hand, so watch it on the first run (rank 2 is the calm fallback).
 
+**New rank 1 (2026-11-01 05:20Z): `06calmt_s0_m6300`**, W&B `orca_v2_zrot_hand_ft:v11`, `deploy_policies/` rank 1 (8ab2aa8, notes 2c0b14b; sha256 `9af61ac0…`); `06calm_s0_m7000` → rank 2. 06_calm m5800 fine-tuned with tilt −800 and the L1 wrist term (−40) (`06_calm3_l1_tilt800`, m6300). 512 envs at the measured friction: 12.46 RPM, 89.5 % drop-free (0.121 drops per trial), 98.4 % after 2 s, axis 99.0 % in the user's circle, **tilt 4.8°, wrist 0.086 rad/s all envs**, as calm as the 07 line (A: 6.1°, 0.079). Against m7000: same drop-free / region, −24 % wrist, −2.4° tilt, −0.5 RPM. The hand dropped the cube through wrist motion, so this one goes first.
+
 ## All exported policies
 
 W&B artifact **`rwr-fast/orca_v2_repose/orca_v2_all_policies`** (v0, 12:07Z): every proprioceptive policy exported
