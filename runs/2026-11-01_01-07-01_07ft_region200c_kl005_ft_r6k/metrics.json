@@ -255,16 +255,16 @@
   "servo_parts": ""
  },
  "model_6400.pt": {
-  "rpm": 13.436986923217773,
-  "rpm_std": 3.8041903972625732,
-  "ra": 90.00346660614014,
-  "dfsr": 84.375,
-  "dc": 0.15625,
+  "rpm": 10.521689414978027,
+  "rpm_std": 3.20648455619812,
+  "ra": 85.65940856933594,
+  "dfsr": 93.75,
+  "dc": 0.0625,
   "checkpoint": "model_6400.pt",
   "cmd": 1.5,
   "steps": 1200,
   "num_envs": 64,
-  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-region200c-v0",
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-v0",
   "perturb": false,
   "servo": false,
   "servo_parts": ""
