@@ -563,6 +563,8 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| 06s4_oneshot_calmt_final model_5498 | a no servo | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |
+| 06s4_oneshot_calmt_final model_5498 | c full servo x1 | 11.62 | 39.1 | 1.396 | 4.54 | 6.6 | 0.116 | 96.2 | 79.7 |
 
 ## 06s4_servofast: every checkpoint, 512-env LOWFRIC (a) no servo, (b) servo profile only at amax x1.5, (c) full servo model x1; wrist speed over all 512 envs
 
