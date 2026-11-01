@@ -508,3 +508,8 @@
 | hist3_calmt_cap16 model_5800 | 15.20 | 82.4 | 0.229 | 12.53 | 4.2 | 0.084 | 94.7 | 91.8 | n/a | n/a | n/a |
 | hist3_calmt_cap16 model_5900 | 15.48 | 84.0 | 0.203 | 13.00 | 4.2 | 0.082 | 94.1 | 92.4 | n/a | n/a | n/a |
 | hist3_calmt_cap16 model_5999 | 15.17 | 79.3 | 0.258 | 12.03 | 4.3 | 0.080 | 93.6 | 89.3 | n/a | n/a | n/a |
+
+## roa_stage2_calm: every checkpoint, 512-env LOWFRIC + 512-env OWN (orca-v2-inhand-repose-asym-onedir-droppen-upright-wristpen-realfric-wristl1-roa-v0); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|---|---|
