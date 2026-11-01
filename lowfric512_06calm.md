@@ -481,3 +481,4 @@
 | checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % | OWN512 rpm | OWN512 drop-free % | OWN512 t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | hist3_calmt_cap16 model_5500 | 15.54 | 82.0 | 0.225 | 12.74 | 4.4 | 0.086 | 94.6 | 91.8 | n/a | n/a | n/a |
+| hist3_calmt_cap16 model_5600 | 15.84 | 79.5 | 0.254 | 12.59 | 4.3 | 0.087 | 94.5 | 89.5 | n/a | n/a | n/a |
