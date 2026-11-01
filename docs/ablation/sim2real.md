@@ -768,3 +768,19 @@ m4600: 12.49 / 89.6 / 98.0 / 98.7 / 4.5° / 0.080, own task 14.74 / 88.3 / 98.6:
 manifest.json entry, README rank), pushed with `scripts/export/deploy_to_rwr_system.py spec.json --push` (dry run
 without `--push`; verified: LFS pointer, re-ranking, commit identity). Already there: 07ft_s0_m4600 (rank 1),
 07rf2_s0_m5200 (2), 07_tilt, 02b_tilt_adr_m5500, 17_asym_ent5e-3, 12_rotlin_cont10k.
+
+## Learned actuator model, offline fit (2026-11-01 13:10Z)
+
+User question: can a network learn the actuator dynamics from hardware runs (Hwangbo et al. 2019)? Offline fit on the 27 closed-loop trial logs (20 Hz, cube in hand; scratchpad `actnet/actnet.py`). Per joint, Δq from the last 6 steps of (u − q, q̇, Δu), one shared MLP (35 inputs, 128-128 ELU, joint one-hot), one-step then 1 s rollout training, whole trials held out. Alignment: cmd[t] acts from q[t+1]; the logged velocity is the backward difference of q. Pooled RMSE per joint (mean of 17), same metric as `replay_hand_trial.py` (its baselines reproduce 12.4 / 7.2 / 8.2°):
+
+| model | fold A (documented replay set) | fold B |
+|---|---|---|
+| net, one step | 1.30° | 1.16° |
+| net, 2 s free windows | 4.84° | 4.29° |
+| net, whole-trial free replay | **5.61°** | **4.62°** |
+| parametric servo + stiff loop, whole trial | 7.17° | 6.82° |
+| parametric servo + task PD, whole trial | 8.23° | 7.69° |
+| sim default, whole trial | 12.39° | 11.78° |
+
+The gain is on the loaded joints (index_mcp 7.4 vs 12.0°, thumb_mcp 7.9 vs 13.0°, thumb_cmc 8.3 vs 10.9°, wrist 3.2 vs 4.7°) and is not a static offset (5.39 vs 6.94° after removing per-trial means). On unseen free-air chirps the net is no better than the sim default (2.87 vs 2.84°; the parametric model, fitted on them, 2.08°). It learned actuator and contact together, so as a position-level action term it would double-count the load Isaac already simulates: **not integrated**. Next step: a torque-level actuator net (Isaac Lab `ActuatorNetMLP` / `ActuatorNetLSTM`) from a dedicated hardware session at ~190 Hz with present current, temperature and write/read timestamps (per joint: multisine / chirp 0.1–8 Hz at ±5 / ±15 / ±30°, random steps over the range, slow ramps; free and in hand, plus policy runs with injected disturbances; ~3–5 min per joint group). Its validation is the closed-loop ranking of the hand-tested policies (07 and 02b good; 01, 05 and 12 bad), which the parametric model failed. The 20 Hz net is usable now as a replay scorer for candidate command streams.
+
