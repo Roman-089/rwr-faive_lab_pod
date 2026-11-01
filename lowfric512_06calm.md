@@ -43,3 +43,11 @@
 | 06_calm3_w80 model_6900 | 13.46 | 91.4 | 0.098 | 12.30 | 10.9 | 0.109 | 98.8 | 99.2 | 16.40 | 85.2 | 98.6 |
 | 06_calm3_t800 model_6100 | 12.25 | 85.4 | 0.172 | 10.45 | 5.2 | 0.099 | 98.9 | 96.3 | 15.30 | 86.3 | 97.9 |
 | 06_calm3_w80 model_7000 | 13.57 | 87.9 | 0.141 | 11.93 | 12.0 | 0.102 | 98.5 | 98.4 | 16.60 | 84.4 | 98.0 |
+
+## tilt400: all-env 512-env LOWFRIC (07 line, kl 0.005, cube_tilt -400); wrist speed over all 512 envs
+
+| checkpoint | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|
+| reference: A_07_wp_rf_ft model_4600 | 11.41 | 90.0 | 0.109 | 10.27 | 6.1 | 0.079 | 93.2 | 96.5 |
+| reference: 07_wp_rf_ft_seed1 model_4900 | 11.31 | 90.4 | 0.104 | 10.23 | 5.8 | 0.075 | 94.4 | 96.9 |
+| tilt400 model_4600 (candidate) | 11.52 | 90.2 | 0.100 | 10.40 | 6.1 | 0.075 | 92.2 | 96.7 |
