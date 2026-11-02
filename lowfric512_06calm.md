@@ -625,6 +625,7 @@
 | cube A model_7000 | a no servo | 12.65 | 88.9 | 0.127 | 11.24 | 4.2 | 0.073 | 98.8 | 97.5 |
 | cube A model_7000 | a tracker off | 11.13 | 87.1 | 0.150 | 9.69 | 4.8 | 0.101 | 98.2 | 97.3 |
 | cube A model_7000 | c full servo x1 | 12.85 | 50.4 | 1.031 | 6.48 | 5.2 | 0.072 | 97.8 | 91.2 |
+| cube A model_7000 | c tracker off | 12.79 | 48.8 | 0.945 | 6.25 | 5.2 | 0.073 | 97.6 | 91.4 |
 
 ## cube B base: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
 
