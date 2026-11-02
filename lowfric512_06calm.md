@@ -630,6 +630,7 @@
 | cube A model_7498 | a tracker off | 11.73 | 89.3 | 0.127 | 10.47 | 4.5 | 0.089 | 97.5 | 97.5 |
 | cube A model_7498 | c full servo x1 | 12.90 | 52.9 | 0.934 | 6.83 | 5.3 | 0.073 | 97.7 | 91.4 |
 | cube A model_7498 | c tracker off | 12.64 | 50.4 | 1.055 | 6.37 | 5.4 | 0.078 | 97.3 | 89.3 |
+| cube A model_7498 | a tracker noise x2 | 12.82 | 89.3 | 0.129 | 11.44 | 4.1 | 0.075 | 98.5 | 97.7 |
 
 ## cube B base: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
 
