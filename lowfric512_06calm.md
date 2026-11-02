@@ -618,6 +618,8 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| cube A model_6500 | a no servo | 12.38 | 89.5 | 0.113 | 11.07 | 4.0 | 0.068 | 98.9 | 98.2 |
+| cube A model_6500 | a tracker off | 11.62 | 88.9 | 0.129 | 10.33 | 4.2 | 0.082 | 98.6 | 97.5 |
 
 ## cube B base: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
 
