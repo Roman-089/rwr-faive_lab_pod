@@ -13,5 +13,20 @@
   "perturb": false,
   "servo": true,
   "servo_parts": "delay,profile,play"
+ },
+ "model_7000.pt": {
+  "rpm": 12.853827476501465,
+  "rpm_std": 2.1502206325531006,
+  "ra": 89.48402404785156,
+  "dfsr": 50.390625,
+  "dc": 1.03125,
+  "checkpoint": "model_7000.pt",
+  "cmd": 1.5,
+  "steps": 1200,
+  "num_envs": 512,
+  "task": "orca-v2-inhand-repose-asym-onedir-droppen-upright-cube-v0",
+  "perturb": false,
+  "servo": true,
+  "servo_parts": "delay,profile,play"
  }
 }
