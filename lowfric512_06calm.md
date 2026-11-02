@@ -626,8 +626,17 @@
 | cube A model_7000 | a tracker off | 11.13 | 87.1 | 0.150 | 9.69 | 4.8 | 0.101 | 98.2 | 97.3 |
 | cube A model_7000 | c full servo x1 | 12.85 | 50.4 | 1.031 | 6.48 | 5.2 | 0.072 | 97.8 | 91.2 |
 | cube A model_7000 | c tracker off | 12.79 | 48.8 | 0.945 | 6.25 | 5.2 | 0.073 | 97.6 | 91.4 |
+| cube A model_7498 | a no servo | 12.90 | 89.8 | 0.117 | 11.59 | 4.1 | 0.074 | 98.5 | 98.4 |
+| cube A model_7498 | a tracker off | 11.73 | 89.3 | 0.127 | 10.47 | 4.5 | 0.089 | 97.5 | 97.5 |
+| cube A model_7498 | c full servo x1 | 12.90 | 52.9 | 0.934 | 6.83 | 5.3 | 0.073 | 97.7 | 91.4 |
+| cube A model_7498 | c tracker off | 12.64 | 50.4 | 1.055 | 6.37 | 5.4 | 0.078 | 97.3 | 89.3 |
 
 ## cube B base: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
+
+## 06s7_oneshot_calmt: every checkpoint, 512-env LOWFRIC (a) no servo, (c) full servo model x1, final checkpoint; wrist speed over all 512 envs
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
