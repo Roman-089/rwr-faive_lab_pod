@@ -611,8 +611,15 @@
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
+| 06s4_servowide model_6097 | a no servo | 12.12 | 91.2 | 0.104 | 11.05 | 4.2 | 0.072 | 98.9 | 97.7 |
+| 06s4_servowide model_6097 | c full servo x1 | 12.39 | 49.6 | 1.066 | 6.15 | 5.5 | 0.087 | 97.3 | 90.4 |
 
 ## cube A: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
+
+| checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
+|---|---|---|---|---|---|---|---|---|---|
+
+## cube B base: 512-env LOWFRIC on -upright-cube-v0, (a) no servo / (c) full servo x1, each with the tracker on and off (force_lost)
 
 | checkpoint | eval | rpm | drop-free % | drops/min | score | tilt deg | wrist speed | in region % | drop-free t>=2s % |
 |---|---|---|---|---|---|---|---|---|---|
